@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Michael Hulet - Agentic Builder. Conception d'applications avec l'intelligence artificielle et setup d'assistants IA personnels.">
+    <meta name="author" content="Michael Hulet">
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Michael Hulet - Agentic Builder">
+    <meta property="og:description"
+        content="Je conçois des applications avec l'intelligence artificielle. Early adopter des architectures agentic depuis 2023.">
+    <meta property="og:url" content="https://hulet.eu">
+
+    <title>Michael Hulet - Agentic Builder</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #ffffff;
+            --text-primary: #171717;
+            --text-secondary: #737373;
+            --link-underline: #a3a3a3;
+            --link-hover: #000000;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #0a0a0a;
+                --text-primary: #ededed;
+                --text-secondary: #a3a3a3;
+                --link-underline: #525252;
+                --link-hover: #ffffff;
+            }
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        main {
+            max-width: 650px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            main {
+                margin-top: 4rem;
+                padding: 0 1.5rem;
+            }
+
+            body {
+                font-size: 18px;
+            }
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (min-width: 768px) {
+            h1 {
+                font-size: 40px;
+            }
+        }
+
+        .subtitle {
+            font-size: 20px;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .subtitle {
+                font-size: 24px;
+            }
+        }
+
+        .intro {
+            font-size: 16px;
+            margin-bottom: 0.75rem;
+        }
+
+        @media (min-width: 768px) {
+            .intro {
+                font-size: 18px;
+            }
+        }
+
+        .credential {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 3rem;
+        }
+
+        @media (min-width: 768px) {
+            .credential {
+                font-size: 15px;
+            }
+        }
+
+        p {
+            margin: 1.5rem 0;
+        }
+
+        section {
+            margin-bottom: 3rem;
+        }
+
+        .contact {
+            margin-top: 4rem;
+        }
+
+        .contact p {
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        a {
+            color: var(--text-primary);
+            text-decoration: underline;
+            text-decoration-color: var(--link-underline);
+            text-underline-offset: 3px;
+            transition: all 0.2s ease;
+        }
+
+        a:hover {
+            color: var(--link-hover);
+            text-decoration-color: var(--link-hover);
+        }
+
+        .arrow {
+            display: inline-block;
+            margin-right: 0.5rem;
+        }
+
+        .parcours {
+            background-color: #f5f5f5;
+            margin: 0 -1.5rem;
+            padding: 3rem 1.5rem;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .parcours {
+                background-color: #141414;
+            }
+        }
+
+        .parcours-inner {
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .parcours h2 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        .parcours ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .parcours li {
+            color: var(--text-primary);
+            font-size: 15px;
+        }
+
+        @media (min-width: 768px) {
+            .parcours {
+                margin: 0;
+                margin-left: calc(-50vw + 325px);
+                margin-right: calc(-50vw + 325px);
+                padding: 3rem calc(50vw - 325px);
+            }
+
+            .parcours li {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <header>
+            <h1>Michael Hulet 🇪🇺</h1>
+            <div class="subtitle">Agentic Builder</div>
+            <p class="intro">Je conçois des applications avec des agents IA.</p>
+            <p class="credential">Early adopter des assistants IA personnels</p>
+        </header>
+
+        <section>
+            <p>
+                Les agents IA transforment la conception d'applications, permettant de créer des systèmes qui s'adaptent
+                et évoluent en continu.
+            </p>
+
+            <p>
+                Je conçois des applications agentic-first : systèmes multi-agents intelligents, workflows automatisés,
+                assistants IA sur-mesure. Architecture, implémentation, déploiement.
+            </p>
+        </section>
+
+        <section class="contact">
+            <p>Prêt.e à construire quelque chose d'extraordinaire ensemble ?</p>
+            <div class="contact-links">
+                <div><span class="arrow">→</span><a href="mailto:michael@hulet.eu">michael@hulet.eu</a></div>
+                <div><span class="arrow">→</span><a href="https://t.me/jah_mali" target="_blank"
+                        rel="noopener noreferrer">Telegram: @jah_mali</a></div>
+                <div><span class="arrow">→</span><a href="https://www.linkedin.com/in/michaelhulet/" target="_blank"
+                        rel="noopener noreferrer">LinkedIn</a></div>
+                <div><span class="arrow">→</span><a href="https://github.com/mhulet" target="_blank"
+                        rel="noopener noreferrer">GitHub</a></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="parcours">
+        <div class="parcours-inner">
+            <h2>25 ans résumés en 5 lignes</h2>
+            <ul>
+                <li>Analyste-programmeur freelance depuis 2000</li>
+                <li>Co-fondateur d'une agence web</li>
+                <li>Co-fondateur d'e-commerces</li>
+                <li>Fondateur de l'association <a href="https://semisto.org" target="_blank" rel="noopener noreferrer">Semisto</a></li>
+                <li>Co-fondateur du tiers-lieu <a href="https://www.les4sources.be" target="_blank" rel="noopener noreferrer">Les 4 Sources</a> 🇧🇪</li>
+            </ul>
+        </div>
+    </footer>
+</body>
+
+</html>
