@@ -17,6 +17,11 @@
 
     <title>Michael Hulet - Agentic Builder</title>
 
+    <!-- Google Font for distinctive typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
     <style>
         * {
             margin: 0;
@@ -30,6 +35,9 @@
             --text-secondary: #737373;
             --link-underline: #a3a3a3;
             --link-hover: #000000;
+            --accent-1: #6366f1;
+            --accent-2: #8b5cf6;
+            --glow: rgba(99, 102, 241, 0.15);
         }
 
         @media (prefers-color-scheme: dark) {
@@ -39,11 +47,26 @@
                 --text-secondary: #a3a3a3;
                 --link-underline: #525252;
                 --link-hover: #ffffff;
+                --glow: rgba(139, 92, 246, 0.1);
             }
         }
 
+        /* Grain texture overlay */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.03;
+            z-index: 1000;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
             background-color: var(--bg);
             color: var(--text-primary);
             line-height: 1.6;
@@ -52,10 +75,68 @@
             -moz-osx-font-smoothing: grayscale;
         }
 
+        /* Entrance animations */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes subtitleIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            animation: fadeUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+        .delay-6 { animation-delay: 0.6s; }
+
         main {
             max-width: 650px;
             margin: 0 auto;
             padding: 3rem 1.5rem;
+            position: relative;
+        }
+
+        /* Cursor glow effect */
+        .cursor-glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle at center, var(--glow) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: -1;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .cursor-glow.visible {
+            opacity: 1;
         }
 
         @media (min-width: 768px) {
@@ -73,6 +154,7 @@
             font-size: 32px;
             font-weight: 600;
             margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
         }
 
         @media (min-width: 768px) {
@@ -83,8 +165,16 @@
 
         .subtitle {
             font-size: 20px;
-            color: var(--text-secondary);
             margin-bottom: 2rem;
+            font-weight: 500;
+            color: var(--accent-1);
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2), var(--accent-1));
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0;
+            animation: subtitleIn 0.8s ease-out 0.2s forwards, gradientShift 4s ease 0.2s infinite;
         }
 
         @media (min-width: 768px) {
@@ -137,6 +227,14 @@
             font-size: 15px;
         }
 
+        .references-list span {
+            transition: transform 0.2s ease;
+        }
+
+        .references-list span:hover {
+            transform: translateY(-1px);
+        }
+
         .references-list a {
             color: var(--text-primary);
         }
@@ -156,22 +254,51 @@
             gap: 0.5rem;
         }
 
+        .contact-links > div {
+            padding: 0.25rem 0;
+            transition: padding-left 0.2s ease;
+        }
+
+        .contact-links > div:hover {
+            padding-left: 0.25rem;
+        }
+
         a {
             color: var(--text-primary);
-            text-decoration: underline;
-            text-decoration-color: var(--link-underline);
-            text-underline-offset: 3px;
-            transition: all 0.2s ease;
+            text-decoration: none;
+            position: relative;
+            transition: color 0.2s ease;
+        }
+
+        a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--link-underline);
+            transition: background 0.2s ease, transform 0.3s ease;
+            transform-origin: left;
         }
 
         a:hover {
             color: var(--link-hover);
-            text-decoration-color: var(--link-hover);
+        }
+
+        a:hover::after {
+            background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+            transform: scaleX(1.05);
         }
 
         .arrow {
             display: inline-block;
             margin-right: 0.5rem;
+            transition: transform 0.2s ease;
+        }
+
+        .contact-links > div:hover .arrow {
+            transform: translateX(4px);
         }
 
         .parcours {
@@ -227,15 +354,16 @@
 </head>
 
 <body>
+    <div class="cursor-glow" id="cursorGlow"></div>
     <main>
         <header>
-            <h1>Michael Hulet 🇪🇺</h1>
+            <h1 class="animate delay-1">Michael Hulet 🇪🇺</h1>
             <div class="subtitle">Agentic Builder</div>
-            <p class="intro">Je conçois des applications avec des agents IA.</p>
-            <p class="credential">Applications web - Workflows autonomes - Assistants IA personnels</p>
+            <p class="intro animate delay-3">Je conçois des applications avec des agents IA.</p>
+            <p class="credential animate delay-3">Applications web - Workflows autonomes - Assistants IA personnels</p>
         </header>
 
-        <section>
+        <section class="animate delay-4">
             <p>
                 Je pense en systèmes. 25 ans à naviguer des contextes variés—startups, e-commerce, associatif—m'ont
                 appris à voir les connexions que d'autres ne voient pas.
@@ -246,7 +374,7 @@
             </p>
         </section>
 
-        <section class="references">
+        <section class="references animate delay-5">
             <p>Quelques références</p>
             <div class="references-list">
                 <span><a href="https://www.upcyclinarium.com" target="_blank" rel="noopener noreferrer">Upcyclinarium</a></span>
@@ -259,7 +387,7 @@
             </div>
         </section>
 
-        <section class="contact">
+        <section class="contact animate delay-6">
             <p>Envie d'explorer des pistes ensemble ?</p>
             <div class="contact-links">
                 <div><span class="arrow">→</span><a href="mailto:michael@hulet.eu">michael@hulet.eu</a></div>
@@ -286,6 +414,31 @@
             </ul>
         </div>
     </footer>
+    <script>
+        const glow = document.getElementById('cursorGlow');
+        let mouseX = 0, mouseY = 0;
+        let glowX = 0, glowY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            glow.classList.add('visible');
+        });
+
+        document.addEventListener('mouseleave', () => {
+            glow.classList.remove('visible');
+        });
+
+        // Smooth follow effect
+        function animate() {
+            glowX += (mouseX - glowX) * 0.1;
+            glowY += (mouseY - glowY) * 0.1;
+            glow.style.left = glowX + 'px';
+            glow.style.top = glowY + 'px';
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
 </body>
 
 </html>
