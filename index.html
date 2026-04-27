@@ -239,6 +239,49 @@
             color: var(--text-primary);
         }
 
+        .references-list .new-ref {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+        }
+
+        .new-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.1rem 0.5rem 0.12rem;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #ffffff;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            border-radius: 999px;
+            line-height: 1.4;
+            transform: translateY(-1px);
+            box-shadow: 0 0 0 0 var(--accent-1);
+            animation: newPulse 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+            user-select: none;
+        }
+
+        .new-badge::after {
+            display: none;
+        }
+
+        @keyframes newPulse {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.45);
+            }
+            50% {
+                box-shadow: 0 0 0 6px rgba(99, 102, 241, 0);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .new-badge {
+                animation: none;
+            }
+        }
+
         .contact {
             margin-top: 4rem;
         }
@@ -365,7 +408,7 @@
 
         <section class="animate delay-4">
             <p>
-                Je pense en systèmes. 25 ans à naviguer des contextes variés—startups, e-commerce, associatif—m'ont
+                Je pense en systèmes. 25 ans à naviguer des contextes variés — startups, e-commerce, associatif — m'ont
                 appris à voir les connexions que d'autres ne voient pas.
             </p>
 
@@ -377,13 +420,13 @@
         <section class="references animate delay-5">
             <p>Quelques références</p>
             <div class="references-list">
+                <span class="new-ref"><a href="https://www.silvea.org" target="_blank" rel="noopener noreferrer">Silvéa</a><span class="new-badge" aria-label="Nouvelle référence">Nouveau</span></span>
                 <span><a href="https://www.upcyclinarium.com" target="_blank" rel="noopener noreferrer">Upcyclinarium</a></span>
                 <span><a href="https://www.novabirra.com" target="_blank" rel="noopener noreferrer">Novabirra</a></span>
                 <span><a href="https://www.petitkiwi.be" target="_blank" rel="noopener noreferrer">Petit Kiwi</a></span>
                 <span><a href="https://www.notranet.net" target="_blank" rel="noopener noreferrer">Notranet</a></span>
                 <span><a href="https://www.semisto.org" target="_blank" rel="noopener noreferrer">Semisto</a></span>
                 <span><a href="https://www.les4sources.be" target="_blank" rel="noopener noreferrer">Les 4 Sources</a></span>
-                <span><a href="https://www.webmiche.com" target="_blank" rel="noopener noreferrer">Webmiche</a></span>
                 <span><a href="https://terranova.semisto.org" target="_blank" rel="noopener noreferrer">Terranova</a></span>
             </div>
         </section>
@@ -392,8 +435,8 @@
             <p>Envie d'explorer des pistes ensemble ?</p>
             <div class="contact-links">
                 <div><span class="arrow">→</span><a href="mailto:michael@hulet.eu">michael@hulet.eu</a></div>
-                <div><span class="arrow">→</span><a href="https://t.me/jah_mali" target="_blank"
-                        rel="noopener noreferrer">Telegram: @jah_mali</a></div>
+                <div><span class="arrow">→</span><a href="https://t.me/supergenialdotbe" target="_blank"
+                        rel="noopener noreferrer">Telegram: @supergenialdotbe</a></div>
                 <div><span class="arrow">→</span><a href="https://www.linkedin.com/in/michaelhulet/" target="_blank"
                         rel="noopener noreferrer">LinkedIn</a></div>
                 <div><span class="arrow">→</span><a href="https://github.com/mhulet" target="_blank"
