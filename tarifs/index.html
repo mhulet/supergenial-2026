@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarifs — Michael Hulet, Agentic Builder</title>
+    <meta name="author" content="Michael Hulet">
+    <meta name="description" content="Grille tarifaire de Super Génial. On ne vend pas des heures, on vend des résultats. Forfait de lancement, abonnement de maintenance et forfaits feature à prix fixe.">
+    <meta property="og:title" content="Tarifs — Michael Hulet, Agentic Builder">
+    <meta property="og:description" content="On ne vend pas des heures, on vend des résultats. Forfait de lancement, abonnement de maintenance, forfaits feature à prix fixe.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.supergenial.be/tarifs">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #ffffff;
+            --text-primary: #171717;
+            --text-secondary: #737373;
+            --link-underline: #a3a3a3;
+            --link-hover: #000000;
+            --accent-1: #6366f1;
+            --accent-2: #8b5cf6;
+            --glow: rgba(99, 102, 241, 0.15);
+            --card-bg: #ffffff;
+            --card-border: #e5e5e5;
+            --card-border-featured: #6366f1;
+            --soft-bg: #f5f5f5;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #0a0a0a;
+                --text-primary: #ededed;
+                --text-secondary: #a3a3a3;
+                --link-underline: #525252;
+                --link-hover: #ffffff;
+                --glow: rgba(139, 92, 246, 0.1);
+                --card-bg: #111111;
+                --card-border: #262626;
+                --card-border-featured: #8b5cf6;
+                --soft-bg: #141414;
+            }
+        }
+
+        /* Grain texture overlay */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.03;
+            z-index: 1000;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes subtitleIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate {
+            animation: fadeUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+        .delay-6 { animation-delay: 0.6s; }
+        .delay-7 { animation-delay: 0.7s; }
+
+        main {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+            position: relative;
+        }
+
+        .cursor-glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle at center, var(--glow) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: -1;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .cursor-glow.visible { opacity: 1; }
+
+        @media (min-width: 768px) {
+            main { margin-top: 4rem; padding: 0 1.5rem 5rem; }
+            body { font-size: 18px; }
+        }
+
+        .back-link {
+            display: inline-block;
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        @media (min-width: 768px) {
+            h1 { font-size: 40px; }
+        }
+
+        .subtitle {
+            font-size: 20px;
+            margin-bottom: 2rem;
+            font-weight: 500;
+            color: var(--accent-1);
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2), var(--accent-1));
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0;
+            animation: subtitleIn 0.8s ease-out 0.2s forwards, gradientShift 4s ease 0.2s infinite;
+        }
+
+        @media (min-width: 768px) {
+            .subtitle { font-size: 24px; }
+        }
+
+        .intro {
+            font-size: 16px;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+            max-width: 38rem;
+        }
+
+        @media (min-width: 768px) {
+            .intro { font-size: 18px; }
+        }
+
+        section {
+            margin-bottom: 4rem;
+        }
+
+        .section-label {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 0.4rem;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (min-width: 768px) {
+            h2 { font-size: 28px; }
+        }
+
+        .section-desc {
+            color: var(--text-secondary);
+            font-size: 15px;
+            margin-bottom: 1.75rem;
+            max-width: 40rem;
+        }
+
+        /* ── Principe (manifesto strip) ── */
+        .principle {
+            background-color: var(--soft-bg);
+            margin: 0 -1.5rem 4rem;
+            padding: 2.5rem 1.5rem;
+        }
+
+        .principle-inner {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .principle p {
+            font-size: 20px;
+            font-weight: 500;
+            line-height: 1.5;
+            letter-spacing: -0.01em;
+        }
+
+        .principle .em {
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .principle .sub {
+            font-size: 15px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            margin-top: 0.85rem;
+        }
+
+        @media (min-width: 768px) {
+            .principle {
+                margin-left: calc(-50vw + 360px);
+                margin-right: calc(-50vw + 360px);
+                padding: 3rem calc(50vw - 360px);
+            }
+            .principle p { font-size: 24px; }
+        }
+
+        /* ── Lancement (single feature card) ── */
+        .launch-card {
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 1.75rem;
+            background-color: var(--card-bg);
+        }
+
+        .launch-card .price {
+            font-size: 26px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.25rem;
+        }
+
+        .launch-card .price small {
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--text-secondary);
+        }
+
+        .steps {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            margin-top: 1.25rem;
+        }
+
+        .steps li {
+            display: flex;
+            align-items: baseline;
+            gap: 0.7rem;
+            font-size: 15px;
+        }
+
+        .steps .num {
+            flex-shrink: 0;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--accent-1);
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* ── Plans grid ── */
+        .plans {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .plans { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        .plan {
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 1.5rem 1.35rem;
+            background-color: var(--card-bg);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .plan:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px -12px var(--glow);
+        }
+
+        .plan.featured {
+            border-color: var(--card-border-featured);
+            box-shadow: 0 0 0 1px var(--card-border-featured);
+        }
+
+        .plan-badge {
+            display: inline-flex;
+            align-items: center;
+            align-self: flex-start;
+            padding: 0.1rem 0.5rem 0.12rem;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #ffffff;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            border-radius: 999px;
+            line-height: 1.4;
+            margin-bottom: 0.85rem;
+            animation: newPulse 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+            user-select: none;
+        }
+
+        @keyframes newPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.45); }
+            50% { box-shadow: 0 0 0 6px rgba(99, 102, 241, 0); }
+        }
+
+        .plan-name {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .plan-price {
+            font-size: 28px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        .plan-price span {
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--text-secondary);
+        }
+
+        .plan-tagline {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin: 0.6rem 0 1.1rem;
+            min-height: 2.4em;
+        }
+
+        .plan ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.55rem;
+            margin-top: auto;
+        }
+
+        .plan li {
+            display: flex;
+            align-items: baseline;
+            gap: 0.55rem;
+            font-size: 14px;
+            line-height: 1.45;
+        }
+
+        .plan li::before {
+            content: "→";
+            color: var(--accent-1);
+            flex-shrink: 0;
+            font-size: 13px;
+        }
+
+        /* Info icon → scroll to points explainer */
+        .info-dot {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 15px;
+            height: 15px;
+            margin-left: 0.3rem;
+            border-radius: 50%;
+            border: 1px solid var(--accent-1);
+            color: var(--accent-1);
+            font-size: 10px;
+            font-weight: 600;
+            font-style: normal;
+            line-height: 1;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+            user-select: none;
+        }
+
+        .info-dot::after { display: none; }
+
+        .info-dot:hover {
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            border-color: transparent;
+            color: #ffffff;
+            transform: translateY(-1px);
+        }
+
+        .plan li .info-dot::before { content: none; }
+
+        @keyframes noteFlash {
+            0% { box-shadow: 0 0 0 0 var(--accent-1); }
+            100% { box-shadow: 0 0 0 8px rgba(99, 102, 241, 0); }
+        }
+
+        .note.flash {
+            animation: noteFlash 1.2s ease-out;
+        }
+
+        /* ── Feature pricing table ── */
+        .feature-table {
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            overflow: hidden;
+            background-color: var(--card-bg);
+        }
+
+        .feature-row {
+            display: grid;
+            grid-template-columns: 56px 1fr auto;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.1rem 1.35rem;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .feature-row:last-child { border-bottom: none; }
+
+        .feature-row { transition: background-color 0.2s ease; }
+        .feature-row:hover { background-color: var(--soft-bg); }
+
+        .feature-size {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--accent-1);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .feature-label { font-size: 15px; }
+        .feature-label small {
+            display: block;
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .feature-price {
+            font-size: 17px;
+            font-weight: 600;
+            white-space: nowrap;
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* ── Points explainer ── */
+        .note {
+            margin-top: 1.5rem;
+            padding: 1.25rem 1.35rem;
+            border-left: 2px solid var(--accent-1);
+            background-color: var(--soft-bg);
+            border-radius: 0 12px 12px 0;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .note strong { color: var(--text-primary); font-weight: 600; }
+
+        .points-scale {
+            list-style: none;
+            margin: 1rem 0 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .points-scale li {
+            display: flex;
+            align-items: baseline;
+            gap: 0.7rem;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .points-scale .pt {
+            flex-shrink: 0;
+            min-width: 3.2rem;
+            font-weight: 600;
+            color: var(--accent-1);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .points-example {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--card-border);
+            font-size: 14px;
+        }
+
+        /* ── FAQ ── */
+        .faq-item { margin-bottom: 1.5rem; }
+        .faq-q { font-size: 16px; font-weight: 600; margin-bottom: 0.35rem; }
+        .faq-a { font-size: 15px; color: var(--text-secondary); }
+
+        /* ── Contact ── */
+        .contact { margin-top: 4rem; }
+        .contact p { margin-bottom: 1rem; font-weight: 500; }
+        .contact-links { display: flex; flex-direction: column; gap: 0.5rem; }
+        .contact-links > div { padding: 0.25rem 0; transition: padding-left 0.2s ease; }
+        .contact-links > div:hover { padding-left: 0.25rem; }
+
+        a {
+            color: var(--text-primary);
+            text-decoration: none;
+            position: relative;
+            transition: color 0.2s ease;
+        }
+
+        a.plain::after { display: none; }
+
+        a:not(.plain)::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--link-underline);
+            transition: background 0.2s ease, transform 0.3s ease;
+            transform-origin: left;
+        }
+
+        a:hover { color: var(--link-hover); }
+
+        a:not(.plain):hover::after {
+            background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+            transform: scaleX(1.05);
+        }
+
+        .arrow {
+            display: inline-block;
+            margin-right: 0.5rem;
+            transition: transform 0.2s ease;
+        }
+
+        .contact-links > div:hover .arrow { transform: translateX(4px); }
+
+        .footnote {
+            margin-top: 3rem;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .animate, .subtitle, .plan-badge { animation: none; opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <main>
+        <a href="/" class="back-link plain">← Super Génial</a>
+
+        <h1 class="animate delay-1">Tarifs</h1>
+        <p class="subtitle">On ne vend pas des heures, on vend des résultats.</p>
+
+        <p class="intro animate delay-3">
+            L'IA a cassé le lien entre le temps passé et la valeur produite. Une feature qui
+            prenait une semaine se construit aujourd'hui en une journée. Voici donc une logique simple :
+            un forfait pour lancer, un abonnement pour faire vivre, des prix fixes pour faire évoluer.
+        </p>
+    </main>
+
+    <div class="principle animate delay-4">
+        <div class="principle-inner">
+            <p>Vous savez toujours <span class="em">ce que vous payez</span> et <span class="em">ce que vous obtenez</span>.</p>
+            <p class="sub">Aucune surprise sur la facture. Aucun compteur d'heures. Le périmètre est écrit, le prix est annoncé d'avance.</p>
+        </div>
+    </div>
+
+    <main>
+        <!-- ÉTAGE 1 — LANCEMENT -->
+        <section class="animate delay-5">
+            <div class="section-label">Étage 1 — Le projet</div>
+            <h2>Forfait de lancement</h2>
+            <p class="section-desc">
+                La conception de votre application, de l'idée au déploiement. Un prix unique
+                pour un produit livré, documenté et en ligne — pas un décompte d'heures.
+            </p>
+
+            <div class="launch-card">
+                <div class="price">à partir de 3 750 € <small>· sur devis selon l'ampleur</small></div>
+                <ol class="steps">
+                    <li><span class="num">01</span> Cadrage des besoins et rédaction d'une spécification précise du produit</li>
+                    <li><span class="num">02</span> Conception et développement avec des agents IA</li>
+                    <li><span class="num">03</span> Vérification, tests et validation de chaque livraison</li>
+                    <li><span class="num">04</span> Déploiement en production</li>
+                    <li><span class="num">05</span> Documentation et prise en main</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- ÉTAGE 2 — ABONNEMENT -->
+        <section class="animate delay-5">
+            <div class="section-label">Étage 2 — La vie du produit</div>
+            <h2>Abonnement mensuel</h2>
+            <p class="section-desc">
+                Une fois en ligne, votre application a besoin d'être surveillée, maintenue et
+                de continuer à évoluer. L'abonnement remplace les « packs d'heures » : un montant
+                fixe, un périmètre clair, et un flux de petites évolutions sans renégocier à chaque fois.
+            </p>
+
+            <div class="plans">
+                <div class="plan">
+                    <div class="plan-name">Essentiel</div>
+                    <div class="plan-price">290 €<span> / mois</span></div>
+                    <div class="plan-tagline">Garder l'application saine et en ligne.</div>
+                    <ul>
+                        <li>Monitoring et alertes</li>
+                        <li>Maintenance technique et mises à jour</li>
+                        <li>Correction des bugs</li>
+                        <li>Documentation tenue à jour</li>
+                        <li>Support sous 72 h</li>
+                    </ul>
+                </div>
+
+                <div class="plan featured">
+                    <div class="plan-name">Évolution</div>
+                    <div class="plan-price">690 €<span> / mois</span></div>
+                    <div class="plan-tagline">Maintenir + faire évoluer en continu.</div>
+                    <ul>
+                        <li>Tout l'Essentiel, plus :</li>
+                        <li>Petites évolutions incluses (jusqu'à 5 points / mois)<a href="#points" class="info-dot plain" role="button" aria-label="Qu'est-ce qu'un point ? Voir l'explication plus bas">i</a></li>
+                        <li>Support sous 48 h</li>
+                        <li>Point d'avancement trimestriel</li>
+                    </ul>
+                </div>
+
+                <div class="plan">
+                    <div class="plan-name">Partenaire</div>
+                    <div class="plan-price">1 490 €<span> / mois</span></div>
+                    <div class="plan-tagline">Un copilote produit au quotidien.</div>
+                    <ul>
+                        <li>Tout l'Évolution, plus :</li>
+                        <li>Quota élargi (jusqu'à 12 points / mois)<a href="#points" class="info-dot plain" role="button" aria-label="Qu'est-ce qu'un point ? Voir l'explication plus bas">i</a></li>
+                        <li>Traitement prioritaire</li>
+                        <li>Support sous 24 h</li>
+                        <li>Roadmap copilotée</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ÉTAGE 3 — FEATURES -->
+        <section class="animate delay-6">
+            <div class="section-label">Étage 3 — Les grandes évolutions</div>
+            <h2>Forfaits feature</h2>
+            <p class="section-desc">
+                Pour tout ce qui dépasse le quota mensuel : une nouvelle fonctionnalité d'ampleur,
+                une intégration, un module. Le prix dépend de la complexité — annoncé avant de
+                commencer, jamais à l'heure.
+            </p>
+
+            <div class="feature-table">
+                <div class="feature-row">
+                    <div class="feature-size">S</div>
+                    <div class="feature-label">Petite feature<small>Un ajout simple, isolé</small></div>
+                    <div class="feature-price">450 €</div>
+                </div>
+                <div class="feature-row">
+                    <div class="feature-size">M</div>
+                    <div class="feature-label">Feature standard<small>Une fonctionnalité complète</small></div>
+                    <div class="feature-price">1 200 €</div>
+                </div>
+                <div class="feature-row">
+                    <div class="feature-size">L</div>
+                    <div class="feature-label">Module / intégration<small>Un bloc connecté à des services tiers</small></div>
+                    <div class="feature-price">2 900 €</div>
+                </div>
+                <div class="feature-row">
+                    <div class="feature-size">XL</div>
+                    <div class="feature-label">Chantier<small>Un sous-projet à part entière</small></div>
+                    <div class="feature-price">sur devis</div>
+                </div>
+            </div>
+
+            <div class="note" id="points">
+                <strong>C'est quoi un « point » ?</strong> Plutôt que des heures, j'utilise des points
+                de complexité comme unité de valeur. Votre abonnement inclut un quota mensuel de points ;
+                au-delà, on bascule sur un forfait feature. Vous payez la valeur livrée, pas le
+                temps que ça m'a pris.
+
+                <ul class="points-scale">
+                    <li><span class="pt">1 pt</span> Petit ajustement — un champ, un libellé, une couleur</li>
+                    <li><span class="pt">2 pts</span> Petite évolution — un filtre, un tri, un email automatique</li>
+                    <li><span class="pt">~5 pts</span> Feature standard — un écran complet</li>
+                </ul>
+
+                <p class="points-example"><strong>Un mois type sur l'offre Évolution (5 points) :</strong> rafraîchir votre charte graphique (1 pt) + ajouter un filtre de recherche à une liste (2 pts) + une relance email automatique (2 pts) = <strong>5 points, inclus</strong>.</p>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="animate delay-6">
+            <div class="section-label">Bon à savoir</div>
+            <h2>Questions fréquentes</h2>
+
+            <div class="faq-item" style="margin-top:1.5rem">
+                <div class="faq-q">Pourquoi pas une facturation à l'heure ?</div>
+                <div class="faq-a">Parce qu'avec l'IA, la même fonctionnalité peut prendre dix fois moins de
+                temps qu'avant. Facturer à l'heure reviendrait à récompenser la lenteur et à pénaliser la
+                rapidité — l'inverse de ce qui vous sert. Vous payez un résultat à un prix connu d'avance.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-q">Les points non utilisés sont-ils reportés ?</div>
+                <div class="faq-a">Le quota se renouvelle chaque mois et n'est pas cumulable. Si vos besoins
+                grandissent durablement, on ajuste le palier plutôt que d'accumuler.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-q">Puis-je changer de palier ou résilier ?</div>
+                <div class="faq-a">Oui. L'abonnement est sans engagement, modifiable ou résiliable d'un mois
+                à l'autre. L'objectif est qu'il vous serve, pas qu'il vous enferme.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-q">L'abonnement est-il obligatoire après le lancement ?</div>
+                <div class="faq-a">Non, mais vivement conseillé : une application en production a besoin d'être
+                surveillée et maintenue. Sans abonnement, les interventions se font au forfait feature, au cas par cas.</div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section class="contact animate delay-7">
+            <p>Envie d'en discuter ?</p>
+            <div class="contact-links">
+                <div><span class="arrow">→</span><a href="mailto:team@supergenial.be">team@supergenial.be</a></div>
+                <div><span class="arrow">→</span><a href="https://t.me/supergenialdotbe" target="_blank" rel="noopener noreferrer">Telegram : @supergenialdotbe</a></div>
+                <div><span class="arrow">→</span><a href="https://www.linkedin.com/in/michaelhulet/" target="_blank" rel="noopener noreferrer">LinkedIn</a></div>
+            </div>
+            <p class="footnote">Tarifs hors TVA, exprimés en euros. Grille indicative — chaque projet
+            fait l'objet d'une proposition adaptée.</p>
+        </section>
+    </main>
+
+    <script>
+        const glow = document.getElementById('cursorGlow');
+        let mouseX = 0, mouseY = 0, glowX = 0, glowY = 0;
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            glow.classList.add('visible');
+        });
+        window.addEventListener('mouseleave', () => {
+            glow.classList.remove('visible');
+        });
+        (function animateGlow() {
+            glowX += (mouseX - glowX) * 0.1;
+            glowY += (mouseY - glowY) * 0.1;
+            glow.style.left = glowX + 'px';
+            glow.style.top = glowY + 'px';
+            requestAnimationFrame(animateGlow);
+        })();
+
+        document.querySelectorAll('.info-dot').forEach((dot) => {
+            dot.addEventListener('click', (e) => {
+                e.preventDefault();
+                const note = document.getElementById('points');
+                note.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                note.classList.remove('flash');
+                void note.offsetWidth;
+                note.classList.add('flash');
+            });
+        });
+    </script>
+</body>
+</html>

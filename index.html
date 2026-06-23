@@ -13,7 +13,7 @@
     <meta property="og:title" content="Michael Hulet - Agentic Builder">
     <meta property="og:description"
         content="Je conçois des applications avec l'intelligence artificielle. Early adopter des architectures agentic depuis 2023.">
-    <meta property="og:url" content="https://hulet.eu">
+    <meta property="og:url" content="https://www.supergenial.be">
 
     <title>Michael Hulet - Agentic Builder</title>
 
@@ -197,13 +197,49 @@
         .credential {
             color: var(--text-secondary);
             font-size: 14px;
-            margin-bottom: 3rem;
+            margin-bottom: 1.5rem;
         }
 
         @media (min-width: 768px) {
             .credential {
                 font-size: 15px;
             }
+        }
+
+        .hero-cta {
+            margin-bottom: 3rem;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.7rem 1.4rem;
+            border-radius: 999px;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            background-size: 200% 200%;
+            color: #ffffff;
+            font-weight: 500;
+            font-size: 15px;
+            box-shadow: 0 6px 18px -6px rgba(99, 102, 241, 0.5);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-position 0.4s ease;
+        }
+
+        .cta-btn::after { display: none; }
+
+        .cta-btn:hover {
+            color: #ffffff;
+            transform: translateY(-2px);
+            background-position: 100% 50%;
+            box-shadow: 0 12px 26px -8px rgba(99, 102, 241, 0.55);
+        }
+
+        .cta-arrow {
+            transition: transform 0.2s ease;
+        }
+
+        .cta-btn:hover .cta-arrow {
+            transform: translateX(4px);
         }
 
         p {
@@ -404,6 +440,9 @@
             <div class="subtitle">Agentic Builder</div>
             <p class="intro animate delay-3">Je conçois des applications avec des agents IA.</p>
             <p class="credential animate delay-3">Applications web - Workflows autonomes - Assistants IA personnels</p>
+            <div class="hero-cta animate delay-3">
+                <a href="tarifs/" class="cta-btn">Voir mes tarifs <span class="cta-arrow">→</span></a>
+            </div>
         </header>
 
         <section class="animate delay-4">
