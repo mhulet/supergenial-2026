@@ -242,6 +242,33 @@
             transform: translateX(4px);
         }
 
+        .hero-cta {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.75rem 1.25rem;
+        }
+
+        .cta-ghost {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.7rem 0.2rem;
+            font-weight: 500;
+            font-size: 15px;
+            color: var(--text-secondary);
+        }
+
+        .cta-ghost::after { display: none; }
+
+        .cta-ghost:hover {
+            color: var(--link-hover);
+        }
+
+        .cta-ghost:hover .cta-arrow {
+            transform: translateX(4px);
+        }
+
         p {
             margin: 1.5rem 0;
         }
@@ -442,6 +469,7 @@
             <p class="credential animate delay-3">Applications web - Workflows autonomes - Assistants IA personnels</p>
             <div class="hero-cta animate delay-3">
                 <a href="tarifs/" class="cta-btn">Voir mes tarifs <span class="cta-arrow">→</span></a>
+                <a href="maintenance/" class="cta-ghost">Reprendre une app existante <span class="cta-arrow">→</span></a>
             </div>
         </header>
 

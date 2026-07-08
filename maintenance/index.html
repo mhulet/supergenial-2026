@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maintenance & mises à jour — Michael Hulet, Agentic Builder</title>
+    <meta name="author" content="Michael Hulet">
+    <meta name="description" content="Reprise d'applications web vieillissantes : mise à niveau Rails, mises à jour de serveurs Ubuntu, maintenance à prix fixe. Votre application et son serveur restent vivants.">
+    <meta property="og:title" content="Maintenance & mises à jour — Michael Hulet, Agentic Builder">
+    <meta property="og:description" content="Votre application tourne encore, mais plus personne n'ose y toucher ? Je reprends les applications web vieillissantes et leurs serveurs, et je les garde vivantes.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.supergenial.be/maintenance">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #ffffff;
+            --text-primary: #171717;
+            --text-secondary: #737373;
+            --link-underline: #a3a3a3;
+            --link-hover: #000000;
+            --accent-1: #6366f1;
+            --accent-2: #8b5cf6;
+            --glow: rgba(99, 102, 241, 0.15);
+            --card-bg: #ffffff;
+            --card-border: #e5e5e5;
+            --card-border-featured: #6366f1;
+            --soft-bg: #f5f5f5;
+            --danger: #dc2626;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #0a0a0a;
+                --text-primary: #ededed;
+                --text-secondary: #a3a3a3;
+                --link-underline: #525252;
+                --link-hover: #ffffff;
+                --glow: rgba(139, 92, 246, 0.1);
+                --card-bg: #111111;
+                --card-border: #262626;
+                --card-border-featured: #8b5cf6;
+                --soft-bg: #141414;
+                --danger: #f87171;
+            }
+        }
+
+        /* Grain texture overlay */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.03;
+            z-index: 1000;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes subtitleIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate {
+            animation: fadeUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+        .delay-6 { animation-delay: 0.6s; }
+        .delay-7 { animation-delay: 0.7s; }
+
+        main {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+            position: relative;
+        }
+
+        .cursor-glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle at center, var(--glow) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: -1;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .cursor-glow.visible { opacity: 1; }
+
+        @media (min-width: 768px) {
+            main { margin-top: 4rem; padding: 0 1.5rem 5rem; }
+            body { font-size: 18px; }
+        }
+
+        .back-link {
+            display: inline-block;
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        @media (min-width: 768px) {
+            h1 { font-size: 40px; }
+        }
+
+        .subtitle {
+            font-size: 20px;
+            margin-bottom: 2rem;
+            font-weight: 500;
+            color: var(--accent-1);
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2), var(--accent-1));
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0;
+            animation: subtitleIn 0.8s ease-out 0.2s forwards, gradientShift 4s ease 0.2s infinite;
+        }
+
+        @media (min-width: 768px) {
+            .subtitle { font-size: 24px; }
+        }
+
+        .intro {
+            font-size: 16px;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+            max-width: 40rem;
+        }
+
+        @media (min-width: 768px) {
+            .intro { font-size: 18px; }
+        }
+
+        section {
+            margin-bottom: 4rem;
+        }
+
+        .section-label {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 0.4rem;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (min-width: 768px) {
+            h2 { font-size: 28px; }
+        }
+
+        .section-desc {
+            color: var(--text-secondary);
+            font-size: 15px;
+            margin-bottom: 1.75rem;
+            max-width: 40rem;
+        }
+
+        /* ── Principe (manifesto strip) ── */
+        .principle {
+            background-color: var(--soft-bg);
+            margin: 0 -1.5rem 4rem;
+            padding: 2.5rem 1.5rem;
+        }
+
+        .principle-inner {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .principle p {
+            font-size: 20px;
+            font-weight: 500;
+            line-height: 1.5;
+            letter-spacing: -0.01em;
+        }
+
+        .principle .em {
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .principle .sub {
+            font-size: 15px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            margin-top: 0.85rem;
+        }
+
+        @media (min-width: 768px) {
+            .principle {
+                margin-left: calc(-50vw + 360px);
+                margin-right: calc(-50vw + 360px);
+                padding: 3rem calc(50vw - 360px);
+            }
+            .principle p { font-size: 24px; }
+        }
+
+        /* ── EOL clocks table ── */
+        .eol-table {
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            overflow: hidden;
+            background-color: var(--card-bg);
+        }
+
+        .eol-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.1rem 1.35rem;
+            border-bottom: 1px solid var(--card-border);
+            transition: background-color 0.2s ease;
+        }
+
+        .eol-row:last-child { border-bottom: none; }
+        .eol-row:hover { background-color: var(--soft-bg); }
+
+        .eol-label { font-size: 15px; font-weight: 500; }
+        .eol-label small {
+            display: block;
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .eol-date {
+            font-size: 14px;
+            font-weight: 600;
+            white-space: nowrap;
+            color: var(--danger);
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* ── Étages (cards) ── */
+        .launch-card {
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 1.75rem;
+            background-color: var(--card-bg);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .launch-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px -12px var(--glow);
+        }
+
+        .launch-card + .launch-card { margin-top: 1rem; }
+
+        .launch-card .step-label {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent-1);
+            margin-bottom: 0.4rem;
+        }
+
+        .launch-card h3 {
+            font-size: 19px;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .launch-card .price {
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin: 0.5rem 0 0.25rem;
+        }
+
+        .launch-card .price small {
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--text-secondary);
+        }
+
+        .launch-card .card-desc {
+            font-size: 15px;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        .steps {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            margin-top: 1.25rem;
+        }
+
+        .steps li {
+            display: flex;
+            align-items: baseline;
+            gap: 0.7rem;
+            font-size: 15px;
+        }
+
+        .steps li::before {
+            content: "→";
+            color: var(--accent-1);
+            flex-shrink: 0;
+            font-size: 13px;
+        }
+
+        /* ── Note ── */
+        .note {
+            margin-top: 1.5rem;
+            padding: 1.25rem 1.35rem;
+            border-left: 2px solid var(--accent-1);
+            background-color: var(--soft-bg);
+            border-radius: 0 12px 12px 0;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .note strong { color: var(--text-primary); font-weight: 600; }
+
+        /* ── FAQ ── */
+        .faq-item { margin-bottom: 1.5rem; }
+        .faq-q { font-size: 16px; font-weight: 600; margin-bottom: 0.35rem; }
+        .faq-a { font-size: 15px; color: var(--text-secondary); }
+
+        /* ── Contact ── */
+        .contact { margin-top: 4rem; }
+        .contact p { margin-bottom: 1rem; font-weight: 500; }
+        .contact-links { display: flex; flex-direction: column; gap: 0.5rem; }
+        .contact-links > div { padding: 0.25rem 0; transition: padding-left 0.2s ease; }
+        .contact-links > div:hover { padding-left: 0.25rem; }
+
+        a {
+            color: var(--text-primary);
+            text-decoration: none;
+            position: relative;
+            transition: color 0.2s ease;
+        }
+
+        a.plain::after { display: none; }
+
+        a:not(.plain)::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--link-underline);
+            transition: background 0.2s ease, transform 0.3s ease;
+            transform-origin: left;
+        }
+
+        a:hover { color: var(--link-hover); }
+
+        a:not(.plain):hover::after {
+            background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+            transform: scaleX(1.05);
+        }
+
+        .arrow {
+            display: inline-block;
+            margin-right: 0.5rem;
+            transition: transform 0.2s ease;
+        }
+
+        .contact-links > div:hover .arrow { transform: translateX(4px); }
+
+        .footnote {
+            margin-top: 3rem;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .animate, .subtitle { animation: none; opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <main>
+        <a href="/" class="back-link plain">← Super Génial</a>
+
+        <h1 class="animate delay-1">Maintenance &amp; mises à jour</h1>
+        <p class="subtitle">Redonnez dix ans d'avenir à votre application.</p>
+
+        <p class="intro animate delay-3">
+            Vous avez une application web qui tourne depuis des années. Elle fait le boulot —
+            mais le framework a trois versions de retard, le serveur n'est plus supporté, et
+            la personne qui l'a construite n'est plus là. Plus personne n'ose y toucher.
+            C'est exactement le genre d'applications que je reprends.
+        </p>
+    </main>
+
+    <div class="principle animate delay-4">
+        <div class="principle-inner">
+            <p>Une application à jour est <span class="em">un actif</span>. Une application figée est <span class="em">un compte à rebours</span>.</p>
+            <p class="sub">Sans mises à jour, plus de correctifs de sécurité. Chaque mois qui passe rend la remise à niveau plus coûteuse — et l'incident plus probable.</p>
+        </div>
+    </div>
+
+    <main>
+        <!-- LES HORLOGES -->
+        <section class="animate delay-5">
+            <div class="section-label">Pourquoi maintenant</div>
+            <h2>Les horloges tournent déjà</h2>
+            <p class="section-desc">
+                Si votre application repose sur l'une de ces versions, elle ne reçoit
+                plus aucun correctif de sécurité aujourd'hui :
+            </p>
+
+            <div class="eol-table">
+                <div class="eol-row">
+                    <div class="eol-label">Ruby on Rails 7.1 et antérieurs<small>Le framework de milliers d'applications métier</small></div>
+                    <div class="eol-date">fin de support · octobre 2025</div>
+                </div>
+                <div class="eol-row">
+                    <div class="eol-label">Ruby 3.2 et antérieurs<small>Le langage sous le framework</small></div>
+                    <div class="eol-date">fin de support · mars 2026</div>
+                </div>
+                <div class="eol-row">
+                    <div class="eol-label">Ubuntu 20.04 LTS<small>Le système d'exploitation de très nombreux serveurs</small></div>
+                    <div class="eol-date">fin de support · mai 2025</div>
+                </div>
+            </div>
+
+            <div class="note">
+                <strong>Et ce n'est pas propre à Rails.</strong> Node, PHP, Python, Django, Laravel :
+                tous les écosystèmes ont leur calendrier de fin de support. Si votre application web
+                tourne sur un VPS, la question n'est pas <em>si</em> elle devra être mise à niveau,
+                mais <em>quand</em> — et à quel prix.
+            </div>
+        </section>
+
+        <!-- CE QUE JE REPRENDS -->
+        <section class="animate delay-5">
+            <div class="section-label">Le périmètre</div>
+            <h2>L'application <em>et</em> son serveur</h2>
+            <p class="section-desc">
+                La plupart des prestataires font l'un ou l'autre. Une application vit sur une
+                machine — je m'occupe des deux, ensemble.
+            </p>
+
+            <ul class="steps">
+                <li>Mise à niveau d'applications <strong>Ruby on Rails</strong> — version par version, jusqu'à la version courante</li>
+                <li>Toute application web sur VPS : Node, PHP, Python, et autres écosystèmes</li>
+                <li>Mise à jour de serveurs <strong>Ubuntu</strong> : montée de version LTS, durcissement, sauvegardes</li>
+                <li>Dépendances, gems et bibliothèques remises au propre — vulnérabilités connues éliminées</li>
+                <li>Documentation de ce qui a été fait, pour que plus personne ne redoute d'y toucher</li>
+            </ul>
+        </section>
+
+        <!-- COMMENT ÇA SE PASSE -->
+        <section class="animate delay-6">
+            <div class="section-label">Comment ça se passe</div>
+            <h2>Trois étapes, prix connus d'avance</h2>
+            <p class="section-desc">
+                Comme pour tout ce que je fais : pas de compteur d'heures.
+                Un périmètre écrit, un prix annoncé, un résultat vérifiable.
+            </p>
+
+            <div class="launch-card">
+                <div class="step-label">Étape 1</div>
+                <h3>L'audit</h3>
+                <div class="price">490 € <small>· prix fixe, déduit de la suite si on continue</small></div>
+                <p class="card-desc">
+                    J'examine votre application et son serveur : versions, dépendances, vulnérabilités,
+                    état des sauvegardes. Vous recevez un rapport lisible par un humain normal, avec
+                    un plan de mise à niveau chiffré. Vous savez exactement où vous en êtes — même si
+                    vous décidez de ne pas continuer avec moi.
+                </p>
+            </div>
+
+            <div class="launch-card">
+                <div class="step-label">Étape 2</div>
+                <h3>La mise à niveau</h3>
+                <div class="price">sur devis <small>· forfait fixe selon l'écart à combler</small></div>
+                <p class="card-desc">
+                    Montée de version par étapes, testée à chaque palier sur un environnement de
+                    répétition — jamais directement en production. Application, dépendances et serveur
+                    remis à niveau, parcours critiques vérifiés, bascule quand tout est vert.
+                </p>
+            </div>
+
+            <div class="launch-card">
+                <div class="step-label">Étape 3</div>
+                <h3>La suite</h3>
+                <div class="price">dès 290 € / mois <small>· <a href="/tarifs/">l'abonnement de maintenance</a></small></div>
+                <p class="card-desc">
+                    Pour que ça ne se reproduise plus : monitoring, mises à jour continues,
+                    correction des bugs. Votre application ne prendra plus jamais dix ans de retard
+                    d'un coup. Les détails sont sur la <a href="/tarifs/">page tarifs</a>.
+                </p>
+            </div>
+
+            <div class="note">
+                <strong>Pourquoi c'est abordable chez moi.</strong> Les agences spécialisées facturent
+                ce travail des dizaines de milliers d'euros, parce qu'elles y mettent des équipes entières.
+                Mes agents IA lisent l'intégralité de votre code, testent chaque étape et travaillent sous
+                ma supervision — le même résultat, à un prix accessible à une PME.
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="animate delay-6">
+            <div class="section-label">Bon à savoir</div>
+            <h2>Questions fréquentes</h2>
+
+            <div class="faq-item" style="margin-top:1.5rem">
+                <div class="faq-q">Mon application n'est pas en Rails, c'est possible quand même ?</div>
+                <div class="faq-a">Oui. Rails est ma spécialité, mais le principe est le même pour toute
+                application web hébergée sur un VPS : Node, PHP, Python… L'audit dira précisément ce qui
+                est faisable et à quel prix.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-q">Mon application n'a aucun test automatisé. C'est grave ?</div>
+                <div class="faq-a">C'est le cas de la plupart des applications que je reprends. Avant de
+                toucher quoi que ce soit, je pose des tests de non-régression sur vos parcours critiques —
+                ils servent de filet de sécurité pendant toute la mise à niveau, et ils restent à vous après.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-q">Qu'est-ce qui peut casser pendant la mise à niveau ?</div>
+                <div class="faq-a">Rien en production : tout se passe d'abord sur un environnement de
+                répétition, version par version. La bascule n'a lieu que quand chaque étape est validée —
+                et on peut revenir en arrière à tout moment.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-q">Est-ce que vous hébergez mon application ?</div>
+                <div class="faq-a">Non — votre serveur reste le vôtre, chez votre hébergeur. Je le remets
+                à niveau et je peux le surveiller via l'abonnement, mais vous gardez le contrôle et la
+                propriété de votre infrastructure.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-q">Le développeur d'origine n'est plus joignable et il n'y a pas de documentation.</div>
+                <div class="faq-a">Situation classique. Il me faut seulement l'accès au code et au serveur —
+                mes agents IA reconstituent le fonctionnement de l'application en lisant l'intégralité du code.
+                La documentation, c'est moi qui la produis en sortie.</div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section class="contact animate delay-7">
+            <p>Votre application mérite un avenir. Parlons-en.</p>
+            <div class="contact-links">
+                <div><span class="arrow">→</span><a href="mailto:team@supergenial.be">team@supergenial.be</a></div>
+                <div><span class="arrow">→</span><a href="https://t.me/supergenialdotbe" target="_blank" rel="noopener noreferrer">Telegram : @supergenialdotbe</a></div>
+                <div><span class="arrow">→</span><a href="https://www.linkedin.com/in/michaelhulet/" target="_blank" rel="noopener noreferrer">LinkedIn</a></div>
+            </div>
+            <p class="footnote">Tarifs hors TVA, exprimés en euros. Chaque application est un cas
+            particulier — l'audit sert précisément à établir un devis honnête.</p>
+        </section>
+    </main>
+
+    <script>
+        const glow = document.getElementById('cursorGlow');
+        let mouseX = 0, mouseY = 0, glowX = 0, glowY = 0;
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            glow.classList.add('visible');
+        });
+        window.addEventListener('mouseleave', () => {
+            glow.classList.remove('visible');
+        });
+        (function animateGlow() {
+            glowX += (mouseX - glowX) * 0.1;
+            glowY += (mouseY - glowY) * 0.1;
+            glow.style.left = glowX + 'px';
+            glow.style.top = glowY + 'px';
+            requestAnimationFrame(animateGlow);
+        })();
+    </script>
+</body>
+</html>
