@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rails 7.1 est en fin de support : qu'est-ce que ça change pour vous ? — Super Génial</title>
+    <meta name="author" content="Michael Hulet">
+    <meta name="description" content="Rails 7.1 ne reçoit plus de correctifs de sécurité depuis octobre 2025. Ce que ça implique concrètement, et comment remettre votre application à niveau sans tout casser.">
+    <meta name="keywords" content="rails 7.1 fin de support, mise à jour rails, sécurité rails, migration rails">
+    <meta property="og:title" content="Rails 7.1 est en fin de support : qu'est-ce que ça change pour vous ? — Super Génial">
+    <meta property="og:description" content="Rails 7.1 ne reçoit plus de correctifs de sécurité depuis octobre 2025. Ce que ça implique concrètement, et comment remettre votre application à niveau sans tout casser.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.supergenial.be/ressources/rails-7-1-fin-de-support/">
+    <link rel="canonical" href="https://www.supergenial.be/ressources/rails-7-1-fin-de-support/">
+    <meta property="article:published_time" content="2026-05-05">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+    --bg: #ffffff; --text-primary: #171717; --text-secondary: #737373;
+    --link-underline: #a3a3a3; --link-hover: #000000;
+    --accent-1: #6366f1; --accent-2: #8b5cf6; --glow: rgba(99, 102, 241, 0.15);
+    --card-bg: #ffffff; --card-border: #e5e5e5; --soft-bg: #f5f5f5;
+}
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #0a0a0a; --text-primary: #ededed; --text-secondary: #a3a3a3;
+        --link-underline: #525252; --link-hover: #ffffff; --glow: rgba(139, 92, 246, 0.1);
+        --card-bg: #111111; --card-border: #262626; --soft-bg: #141414;
+    }
+}
+body::before {
+    content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; opacity: 0.03; z-index: 1000;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--bg); color: var(--text-primary); line-height: 1.6; font-size: 16px;
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+}
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes gradientShift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+@keyframes subtitleIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.animate { animation: fadeUp 0.8s ease-out forwards; opacity: 0; }
+.delay-1 { animation-delay: 0.1s; } .delay-2 { animation-delay: 0.2s; } .delay-3 { animation-delay: 0.3s; }
+main { max-width: 720px; margin: 0 auto; padding: 3rem 1.5rem; position: relative; }
+.cursor-glow {
+    position: fixed; width: 600px; height: 600px;
+    background: radial-gradient(circle at center, var(--glow) 0%, transparent 60%);
+    pointer-events: none; z-index: -1; transform: translate(-50%, -50%);
+    transition: opacity 0.3s ease; opacity: 0;
+}
+.cursor-glow.visible { opacity: 1; }
+@media (min-width: 768px) { main { margin-top: 4rem; padding: 0 1.5rem 5rem; } body { font-size: 18px; } }
+.back-link { display: inline-block; font-size: 14px; color: var(--text-secondary); margin-bottom: 2.5rem; }
+h1 { font-size: 32px; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: -0.02em; line-height: 1.2; }
+@media (min-width: 768px) { h1 { font-size: 40px; } }
+.subtitle {
+    font-size: 20px; margin-bottom: 2rem; font-weight: 500; color: var(--accent-1);
+    background: linear-gradient(135deg, var(--accent-1), var(--accent-2), var(--accent-1));
+    background-size: 200% 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text; opacity: 0;
+    animation: subtitleIn 0.8s ease-out 0.2s forwards, gradientShift 4s ease 0.2s infinite;
+}
+@media (min-width: 768px) { .subtitle { font-size: 24px; } }
+.intro { font-size: 16px; margin-bottom: 0.75rem; color: var(--text-secondary); max-width: 40rem; }
+@media (min-width: 768px) { .intro { font-size: 18px; } }
+.meta-date { font-size: 14px; color: var(--text-secondary); margin-bottom: 2.5rem; }
+/* Article body */
+.article-body { max-width: 40rem; }
+.article-body h2 { font-size: 22px; font-weight: 600; letter-spacing: -0.01em; margin: 2.5rem 0 0.75rem; }
+@media (min-width: 768px) { .article-body h2 { font-size: 26px; } }
+.article-body h3 { font-size: 18px; font-weight: 600; margin: 1.75rem 0 0.5rem; }
+.article-body p { margin: 1rem 0; }
+.article-body ul { margin: 1rem 0 1rem 1.25rem; display: flex; flex-direction: column; gap: 0.4rem; }
+.article-body li { line-height: 1.55; }
+.article-body strong { font-weight: 600; }
+/* CTA box */
+.cta-box {
+    margin-top: 3rem; padding: 1.5rem 1.35rem; border: 1px solid var(--card-border);
+    border-radius: 16px; background-color: var(--card-bg);
+}
+.cta-box p { margin: 0 0 0.75rem; font-weight: 500; }
+.cta-box .cta-btn {
+    display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.7rem 1.4rem;
+    border-radius: 999px; background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+    color: #fff; font-weight: 500; font-size: 15px;
+    box-shadow: 0 6px 18px -6px rgba(99, 102, 241, 0.5); transition: transform 0.2s ease;
+}
+.cta-box .cta-btn::after { display: none; }
+.cta-box .cta-btn:hover { color: #fff; transform: translateY(-2px); }
+/* Resources index */
+.article-list { display: flex; flex-direction: column; gap: 0; margin-top: 1rem; }
+.article-item {
+    display: block; padding: 1.5rem 0; border-bottom: 1px solid var(--card-border);
+    transition: padding-left 0.2s ease;
+}
+.article-item:hover { padding-left: 0.4rem; }
+.article-item .a-date { font-size: 13px; color: var(--text-secondary); font-variant-numeric: tabular-nums; }
+.article-item .a-title { font-size: 19px; font-weight: 600; margin: 0.3rem 0; letter-spacing: -0.01em; }
+.article-item .a-desc { font-size: 15px; color: var(--text-secondary); }
+a { color: var(--text-primary); text-decoration: none; position: relative; transition: color 0.2s ease; }
+a.plain::after, .article-item::after { display: none; }
+.article-body a:not(.plain), .intro a { color: var(--text-primary); }
+.article-body a::after, .intro a::after {
+    content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 1px;
+    background: var(--link-underline); transition: background 0.2s ease, transform 0.3s ease; transform-origin: left;
+}
+a:hover { color: var(--link-hover); }
+.article-body a:hover::after, .intro a:hover::after { background: linear-gradient(90deg, var(--accent-1), var(--accent-2)); transform: scaleX(1.05); }
+.article-item .a-title, .article-item .a-date, .article-item .a-desc { color: inherit; }
+.article-item:hover .a-title { color: var(--link-hover); }
+.footnote { margin-top: 3rem; font-size: 13px; color: var(--text-secondary); }
+@media (prefers-reduced-motion: reduce) { .animate, .subtitle { animation: none; opacity: 1; } }
+</style>
+</head>
+<body>
+    
+<div class="cursor-glow" id="cursorGlow"></div>
+<script>
+const glow = document.getElementById('cursorGlow');
+let mx=0,my=0,gx=0,gy=0;
+window.addEventListener('mousemove',(e)=>{mx=e.clientX;my=e.clientY;glow.classList.add('visible');});
+window.addEventListener('mouseleave',()=>glow.classList.remove('visible'));
+(function a(){gx+=(mx-gx)*0.1;gy+=(my-gy)*0.1;glow.style.left=gx+'px';glow.style.top=gy+'px';requestAnimationFrame(a);})();
+</script>
+    <main>
+        <a href="/ressources/" class="back-link plain">← Toutes les ressources</a>
+        <article>
+            <h1 class="animate delay-1">Rails 7.1 est en fin de support : qu'est-ce que ça change pour vous ?</h1>
+            <p class="meta-date animate delay-2"><time datetime="2026-05-05">5 mai 2026</time> · Super Génial</p>
+            <div class="article-body animate delay-3">
+                <p>Si votre application tourne sous <strong>Rails 7.1</strong>, il y a une échéance qui vous concerne directement : depuis <strong>octobre 2025</strong>, cette version est en fin de support. Concrètement, l'équipe Rails ne publie plus aucun correctif pour elle — y compris pour les failles de sécurité. Votre app continue de fonctionner, bien sûr. Mais elle a cessé de recevoir les rustines qui la protègent. C'est une différence discrète, et c'est justement ce qui la rend dangereuse : rien ne casse le jour J, le risque s'accumule en silence.</p><h2>Fin de support, ça veut dire quoi exactement ?</h2><p>Rails suit une politique de maintenance par versions. Tant qu'une version est "supportée", chaque faille découverte donne lieu à un correctif que vous n'avez qu'à installer. Une fois la version sortie du support, ce robinet se ferme. Les chercheurs en sécurité, eux, continuent de trouver des vulnérabilités — dans Rails comme dans les bibliothèques qui l'entourent. La différence, c'est que pour la 7.1, plus personne ne les corrige côté framework.</p><p>Ces failles portent un nom : les <strong>CVE</strong> (les vulnérabilités publiquement répertoriées). Quand une CVE touche une version encore supportée, vous recevez un correctif. Quand elle touche la 7.1, vous restez exposé — et comme les CVE sont publiques, les personnes mal intentionnées savent précisément où chercher. Une application non patchée devient une cible documentée, pas une hypothèse théorique.</p><h2>Le vrai risque, en langage clair</h2><p>Le danger n'est pas qu'un pirate isolé s'acharne sur votre site. Le scénario le plus courant est beaucoup plus banal : des robots scannent le web en continu, repèrent les versions vulnérables connues, et exploitent automatiquement ce qui traîne. Une injection, un contournement d'authentification, une fuite de données clients — ce sont des choses qui arrivent à des applications tout à fait ordinaires, simplement parce qu'elles ont pris du retard.</p><p>À ça s'ajoute un effet moins visible mais bien réel. Plus vous restez sur une version obsolète, plus l'écart avec les versions actuelles se creuse, et plus la remise à niveau devient lourde. Vos dépendances (les <em>gems</em>) finissent elles aussi par ne plus être compatibles. Attendre ne fige pas le problème : il grossit. C'est le genre de dette qui coûte peu à traiter aujourd'hui et cher à traiter dans deux ans.</p><h2>Que faire concrètement ?</h2><p>La bonne nouvelle, c'est que le chemin est balisé. Depuis la 7.1, la marche à suivre consiste à monter vers <strong>Rails 7.2</strong> puis, idéalement, vers <strong>Rails 8.0</strong>, qui bénéficie du support actif et des correctifs de sécurité. Ce sont des versions matures, bien documentées, et la communauté Rails a énormément soigné la continuité entre elles.</p><p>Le point important — et c'est là qu'on rassure les équipes échaudées par de mauvaises expériences — c'est que <strong>ça ne se fait pas d'un bloc</strong>. Une migration sérieuse avance <strong>par paliers testés</strong> : on monte d'une version mineure, on fait tourner la suite de tests, on vérifie l'application en conditions réelles, on corrige les avertissements de dépréciation, puis on passe au palier suivant. À chaque étape, l'application reste fonctionnelle et déployable. On ne se retrouve jamais avec un chantier ouvert pendant des semaines sans filet.</p><p>Cette approche demande une chose : une base de tests suffisante pour valider chaque palier. Si votre couverture est faible, la première étape consiste souvent à sécuriser les parcours critiques avant de bouger la version. C'est du temps bien investi — c'est ce qui transforme une migration risquée en une opération routinière.</p><h2>Comment on s'en occupe chez Super Génial</h2><p>C'est exactement le type de travail pour lequel <strong>Super Génial</strong> existe. On reprend des applications web qui prennent de l'âge — Rails et autres — et on les remet à niveau, framework comme serveur Ubuntu, <strong>à prix fixe</strong>. Pas de compteur qui tourne, pas de mauvaise surprise sur la facture : vous savez ce que vous payez avant qu'on commence.</p><p>Concrètement, on audite d'abord l'existant (version, dépendances, couverture de tests, état du serveur), on trace le chemin de migration palier par palier, et on exécute en gardant votre application vivante à chaque étape. L'objectif n'est pas seulement de sortir de la 7.1 : c'est de vous rendre une base saine, à jour, et facile à maintenir ensuite.</p><p>Si votre application tourne encore sous Rails 7.1 — ou sur une version plus ancienne encore — le meilleur moment pour en parler, c'est maintenant, tant que l'écart reste raisonnable. Vous pouvez jeter un œil à notre <a href="/maintenance/">offre de maintenance</a> pour voir comment on procède, ou parcourir nos <a href="/ressources/">autres ressources</a> si vous voulez d'abord creuser le sujet. Sans engagement, et sans discours alarmiste : juste une app qui redevient sûre.</p>
+            </div>
+            <div class="cta-box animate delay-3">
+                <p>Votre application est concernée ?</p>
+                <a href="/maintenance/" class="cta-btn">Faire le point sur votre app <span>→</span></a>
+            </div>
+        </article>
+    </main>
+</body>
+</html>

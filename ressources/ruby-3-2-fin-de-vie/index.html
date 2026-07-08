@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruby 3.2 en fin de vie : pourquoi passer à Ruby 3.3 sans attendre — Super Génial</title>
+    <meta name="author" content="Michael Hulet">
+    <meta name="description" content="Ruby 3.2 n'est plus maintenu depuis mars 2026. Ce que ça change pour la sécurité et les performances de votre application, et comment migrer proprement.">
+    <meta name="keywords" content="ruby 3.2 fin de vie, mettre à jour ruby, migration ruby 3.3, version ruby supportée">
+    <meta property="og:title" content="Ruby 3.2 en fin de vie : pourquoi passer à Ruby 3.3 sans attendre — Super Génial">
+    <meta property="og:description" content="Ruby 3.2 n'est plus maintenu depuis mars 2026. Ce que ça change pour la sécurité et les performances de votre application, et comment migrer proprement.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.supergenial.be/ressources/ruby-3-2-fin-de-vie/">
+    <link rel="canonical" href="https://www.supergenial.be/ressources/ruby-3-2-fin-de-vie/">
+    <meta property="article:published_time" content="2026-05-13">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+    --bg: #ffffff; --text-primary: #171717; --text-secondary: #737373;
+    --link-underline: #a3a3a3; --link-hover: #000000;
+    --accent-1: #6366f1; --accent-2: #8b5cf6; --glow: rgba(99, 102, 241, 0.15);
+    --card-bg: #ffffff; --card-border: #e5e5e5; --soft-bg: #f5f5f5;
+}
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #0a0a0a; --text-primary: #ededed; --text-secondary: #a3a3a3;
+        --link-underline: #525252; --link-hover: #ffffff; --glow: rgba(139, 92, 246, 0.1);
+        --card-bg: #111111; --card-border: #262626; --soft-bg: #141414;
+    }
+}
+body::before {
+    content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; opacity: 0.03; z-index: 1000;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--bg); color: var(--text-primary); line-height: 1.6; font-size: 16px;
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+}
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes gradientShift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+@keyframes subtitleIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.animate { animation: fadeUp 0.8s ease-out forwards; opacity: 0; }
+.delay-1 { animation-delay: 0.1s; } .delay-2 { animation-delay: 0.2s; } .delay-3 { animation-delay: 0.3s; }
+main { max-width: 720px; margin: 0 auto; padding: 3rem 1.5rem; position: relative; }
+.cursor-glow {
+    position: fixed; width: 600px; height: 600px;
+    background: radial-gradient(circle at center, var(--glow) 0%, transparent 60%);
+    pointer-events: none; z-index: -1; transform: translate(-50%, -50%);
+    transition: opacity 0.3s ease; opacity: 0;
+}
+.cursor-glow.visible { opacity: 1; }
+@media (min-width: 768px) { main { margin-top: 4rem; padding: 0 1.5rem 5rem; } body { font-size: 18px; } }
+.back-link { display: inline-block; font-size: 14px; color: var(--text-secondary); margin-bottom: 2.5rem; }
+h1 { font-size: 32px; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: -0.02em; line-height: 1.2; }
+@media (min-width: 768px) { h1 { font-size: 40px; } }
+.subtitle {
+    font-size: 20px; margin-bottom: 2rem; font-weight: 500; color: var(--accent-1);
+    background: linear-gradient(135deg, var(--accent-1), var(--accent-2), var(--accent-1));
+    background-size: 200% 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text; opacity: 0;
+    animation: subtitleIn 0.8s ease-out 0.2s forwards, gradientShift 4s ease 0.2s infinite;
+}
+@media (min-width: 768px) { .subtitle { font-size: 24px; } }
+.intro { font-size: 16px; margin-bottom: 0.75rem; color: var(--text-secondary); max-width: 40rem; }
+@media (min-width: 768px) { .intro { font-size: 18px; } }
+.meta-date { font-size: 14px; color: var(--text-secondary); margin-bottom: 2.5rem; }
+/* Article body */
+.article-body { max-width: 40rem; }
+.article-body h2 { font-size: 22px; font-weight: 600; letter-spacing: -0.01em; margin: 2.5rem 0 0.75rem; }
+@media (min-width: 768px) { .article-body h2 { font-size: 26px; } }
+.article-body h3 { font-size: 18px; font-weight: 600; margin: 1.75rem 0 0.5rem; }
+.article-body p { margin: 1rem 0; }
+.article-body ul { margin: 1rem 0 1rem 1.25rem; display: flex; flex-direction: column; gap: 0.4rem; }
+.article-body li { line-height: 1.55; }
+.article-body strong { font-weight: 600; }
+/* CTA box */
+.cta-box {
+    margin-top: 3rem; padding: 1.5rem 1.35rem; border: 1px solid var(--card-border);
+    border-radius: 16px; background-color: var(--card-bg);
+}
+.cta-box p { margin: 0 0 0.75rem; font-weight: 500; }
+.cta-box .cta-btn {
+    display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.7rem 1.4rem;
+    border-radius: 999px; background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+    color: #fff; font-weight: 500; font-size: 15px;
+    box-shadow: 0 6px 18px -6px rgba(99, 102, 241, 0.5); transition: transform 0.2s ease;
+}
+.cta-box .cta-btn::after { display: none; }
+.cta-box .cta-btn:hover { color: #fff; transform: translateY(-2px); }
+/* Resources index */
+.article-list { display: flex; flex-direction: column; gap: 0; margin-top: 1rem; }
+.article-item {
+    display: block; padding: 1.5rem 0; border-bottom: 1px solid var(--card-border);
+    transition: padding-left 0.2s ease;
+}
+.article-item:hover { padding-left: 0.4rem; }
+.article-item .a-date { font-size: 13px; color: var(--text-secondary); font-variant-numeric: tabular-nums; }
+.article-item .a-title { font-size: 19px; font-weight: 600; margin: 0.3rem 0; letter-spacing: -0.01em; }
+.article-item .a-desc { font-size: 15px; color: var(--text-secondary); }
+a { color: var(--text-primary); text-decoration: none; position: relative; transition: color 0.2s ease; }
+a.plain::after, .article-item::after { display: none; }
+.article-body a:not(.plain), .intro a { color: var(--text-primary); }
+.article-body a::after, .intro a::after {
+    content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 1px;
+    background: var(--link-underline); transition: background 0.2s ease, transform 0.3s ease; transform-origin: left;
+}
+a:hover { color: var(--link-hover); }
+.article-body a:hover::after, .intro a:hover::after { background: linear-gradient(90deg, var(--accent-1), var(--accent-2)); transform: scaleX(1.05); }
+.article-item .a-title, .article-item .a-date, .article-item .a-desc { color: inherit; }
+.article-item:hover .a-title { color: var(--link-hover); }
+.footnote { margin-top: 3rem; font-size: 13px; color: var(--text-secondary); }
+@media (prefers-reduced-motion: reduce) { .animate, .subtitle { animation: none; opacity: 1; } }
+</style>
+</head>
+<body>
+    
+<div class="cursor-glow" id="cursorGlow"></div>
+<script>
+const glow = document.getElementById('cursorGlow');
+let mx=0,my=0,gx=0,gy=0;
+window.addEventListener('mousemove',(e)=>{mx=e.clientX;my=e.clientY;glow.classList.add('visible');});
+window.addEventListener('mouseleave',()=>glow.classList.remove('visible'));
+(function a(){gx+=(mx-gx)*0.1;gy+=(my-gy)*0.1;glow.style.left=gx+'px';glow.style.top=gy+'px';requestAnimationFrame(a);})();
+</script>
+    <main>
+        <a href="/ressources/" class="back-link plain">← Toutes les ressources</a>
+        <article>
+            <h1 class="animate delay-1">Ruby 3.2 en fin de vie : pourquoi passer à Ruby 3.3 sans attendre</h1>
+            <p class="meta-date animate delay-2"><time datetime="2026-05-13">13 mai 2026</time> · Super Génial</p>
+            <div class="article-body animate delay-3">
+                <p>Depuis le <strong>31 mars 2026</strong>, Ruby 3.2 est officiellement en fin de vie. L'équipe Ruby a cessé de le maintenir : plus de correctifs, plus de patchs de sécurité, plus rien. Si votre application web tourne encore sur cette version, elle continue de fonctionner, bien sûr — mais elle avance désormais sur une route dont plus personne n'entretient le revêtement. Ce n'est pas une urgence à traiter dans la panique, c'est une échéance à planifier sereinement. Voici pourquoi, et comment on s'y prend.</p><h2>Ruby, c'est le moteur sous votre framework</h2><p>On parle souvent de Rails, de Sinatra ou de Hanami, et on oublie la couche du dessous : <strong>Ruby, le langage lui-même</strong>. C'est lui qui exécute réellement votre code, gère la mémoire, et sur lequel repose tout le reste. Votre framework a beau être à jour, s'il repose sur une version de Ruby abandonnée, c'est comme une voiture récente équipée d'un vieux moteur que le constructeur ne répare plus. Chaque version de Ruby suit un cycle de vie d'environ trois ans et demi. Après quoi elle passe en fin de vie (<em>End of Life</em>, ou EOL) et l'équipe cesse tout support.</p><p>Concrètement, les versions encore <strong>supportées</strong> aujourd'hui sont Ruby 3.3 et Ruby 3.4 (la plus récente). Ruby 3.2 a rejoint 3.1 et les précédentes dans la catégorie des versions non maintenues. C'est cette liste, mise à jour par l'équipe Ruby, qui définit ce qu'est une « version supportée » — et c'est elle qui doit guider vos décisions.</p><h2>Deux risques concrets qui montent avec le temps</h2><p>Le premier risque est celui de la <strong>sécurité</strong>. Tant qu'une version est maintenue, la moindre faille découverte dans l'interpréteur Ruby donne lieu à un correctif publié rapidement. Après l'EOL, ce filet disparaît. Si une vulnérabilité sérieuse est trouvée dans Ruby 3.2 en 2026 ou 2027, il n'y aura pas de patch officiel. Votre application reste exposée, sans recours propre. Pour une plateforme qui manipule des données clients, des paiements ou des comptes utilisateurs, ce n'est pas un détail.</p><p>Le second risque est plus insidieux : <strong>l'écosystème décroche</strong>. Ruby vit grâce à des milliers de <em>gems</em>, ces bibliothèques que votre application assemble. Leurs auteurs cessent progressivement de tester leurs nouvelles versions sur les Ruby non supportés. Petit à petit, mettre à jour une gem pour corriger un bug ou une faille devient impossible sans casser le reste. Vous vous retrouvez coincé : figé sur d'anciennes gems parce que Ruby est trop vieux, et incapable de moderniser quoi que ce soit. Plus on attend, plus l'écart à combler s'agrandit, et plus la migration finit par coûter cher.</p><h2>Le bon côté : Ruby récent est nettement plus rapide</h2><p>Migrer, ce n'est pas seulement se mettre en règle — c'est aussi <strong>gagner en performance</strong>. Depuis Ruby 3.1, l'interpréteur embarque <strong>YJIT</strong>, un compilateur à la volée qui traduit le code Ruby le plus sollicité en instructions machine optimisées. Version après version, YJIT est devenu plus mûr et plus efficace : sur Ruby 3.3 et 3.4, il accélère sensiblement les applications web réelles, avec des gains couramment observés entre <strong>15 et 30 %</strong> selon la charge, pour une consommation mémoire mieux maîtrisée que sur les premières versions.</p><p>Traduit en clair : des pages qui se chargent plus vite, des serveurs qui encaissent davantage de trafic sans monter en gamme, et parfois une facture d'hébergement allégée. Une simple mise à jour de version peut ainsi payer une partie de son propre coût, sans que vous touchiez à une seule ligne de votre code métier.</p><h2>Comment on migre proprement : par paliers, testé à chaque étape</h2><p>Une migration Ruby réussie n'est jamais un grand saut dans le vide. C'est une progression <strong>par paliers</strong>, une version à la fois. On passe de 3.2 à 3.3, on stabilise, puis on envisage 3.4. À chaque étape, on s'appuie sur la <strong>suite de tests</strong> de l'application : c'est elle qui confirme, noir sur blanc, que le comportement n'a pas changé. Si les tests sont insuffisants, on commence par les renforcer sur les parcours critiques — c'est le vrai socle d'une migration sans mauvaise surprise.</p><p>Le déroulé type ressemble à ceci : on met à jour la version de Ruby dans un environnement isolé, on relance toute la suite de tests, on corrige les quelques avertissements ou incompatibilités de gems qui remontent, on vérifie l'application dans un environnement de préproduction identique à la production, puis on déploie. Rien ne part en production tant que chaque palier n'a pas été validé. C'est méthodique, prévisible, et sans interruption de service pour vos utilisateurs.</p><p>C'est exactement ce type de travail que nous prenons en charge à prix fixe : reprendre une application vieillissante, remettre son moteur Ruby sur une version supportée, et repartir sur des bases saines. Si vous vous demandez sur quelle version tourne votre plateforme aujourd'hui — et ce qu'il faudrait pour la remettre à niveau — jetez un œil à notre offre de <a href="/maintenance/">maintenance et mise à niveau</a>, ou parcourez nos <a href="/ressources/">ressources</a> pour approfondir le sujet. Un moteur à jour, c'est une plateforme plus sûre, plus rapide, et sur laquelle on peut construire les années à venir.</p>
+            </div>
+            <div class="cta-box animate delay-3">
+                <p>Votre application est concernée ?</p>
+                <a href="/maintenance/" class="cta-btn">Faire le point sur votre app <span>→</span></a>
+            </div>
+        </article>
+    </main>
+</body>
+</html>

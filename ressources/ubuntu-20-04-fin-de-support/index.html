@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ubuntu 20.04 en fin de support : faut-il migrer votre serveur ? — Super Génial</title>
+    <meta name="author" content="Michael Hulet">
+    <meta name="description" content="Ubuntu 20.04 LTS n'est plus dans le support standard depuis mai 2025. Ce que ça implique pour votre serveur web, et comment migrer sans interruption.">
+    <meta name="keywords" content="ubuntu 20.04 fin de support, migrer serveur ubuntu, mise à jour vps, sécurité serveur web">
+    <meta property="og:title" content="Ubuntu 20.04 en fin de support : faut-il migrer votre serveur ? — Super Génial">
+    <meta property="og:description" content="Ubuntu 20.04 LTS n'est plus dans le support standard depuis mai 2025. Ce que ça implique pour votre serveur web, et comment migrer sans interruption.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.supergenial.be/ressources/ubuntu-20-04-fin-de-support/">
+    <link rel="canonical" href="https://www.supergenial.be/ressources/ubuntu-20-04-fin-de-support/">
+    <meta property="article:published_time" content="2026-05-20">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+    --bg: #ffffff; --text-primary: #171717; --text-secondary: #737373;
+    --link-underline: #a3a3a3; --link-hover: #000000;
+    --accent-1: #6366f1; --accent-2: #8b5cf6; --glow: rgba(99, 102, 241, 0.15);
+    --card-bg: #ffffff; --card-border: #e5e5e5; --soft-bg: #f5f5f5;
+}
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #0a0a0a; --text-primary: #ededed; --text-secondary: #a3a3a3;
+        --link-underline: #525252; --link-hover: #ffffff; --glow: rgba(139, 92, 246, 0.1);
+        --card-bg: #111111; --card-border: #262626; --soft-bg: #141414;
+    }
+}
+body::before {
+    content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; opacity: 0.03; z-index: 1000;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--bg); color: var(--text-primary); line-height: 1.6; font-size: 16px;
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+}
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes gradientShift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+@keyframes subtitleIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.animate { animation: fadeUp 0.8s ease-out forwards; opacity: 0; }
+.delay-1 { animation-delay: 0.1s; } .delay-2 { animation-delay: 0.2s; } .delay-3 { animation-delay: 0.3s; }
+main { max-width: 720px; margin: 0 auto; padding: 3rem 1.5rem; position: relative; }
+.cursor-glow {
+    position: fixed; width: 600px; height: 600px;
+    background: radial-gradient(circle at center, var(--glow) 0%, transparent 60%);
+    pointer-events: none; z-index: -1; transform: translate(-50%, -50%);
+    transition: opacity 0.3s ease; opacity: 0;
+}
+.cursor-glow.visible { opacity: 1; }
+@media (min-width: 768px) { main { margin-top: 4rem; padding: 0 1.5rem 5rem; } body { font-size: 18px; } }
+.back-link { display: inline-block; font-size: 14px; color: var(--text-secondary); margin-bottom: 2.5rem; }
+h1 { font-size: 32px; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: -0.02em; line-height: 1.2; }
+@media (min-width: 768px) { h1 { font-size: 40px; } }
+.subtitle {
+    font-size: 20px; margin-bottom: 2rem; font-weight: 500; color: var(--accent-1);
+    background: linear-gradient(135deg, var(--accent-1), var(--accent-2), var(--accent-1));
+    background-size: 200% 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text; opacity: 0;
+    animation: subtitleIn 0.8s ease-out 0.2s forwards, gradientShift 4s ease 0.2s infinite;
+}
+@media (min-width: 768px) { .subtitle { font-size: 24px; } }
+.intro { font-size: 16px; margin-bottom: 0.75rem; color: var(--text-secondary); max-width: 40rem; }
+@media (min-width: 768px) { .intro { font-size: 18px; } }
+.meta-date { font-size: 14px; color: var(--text-secondary); margin-bottom: 2.5rem; }
+/* Article body */
+.article-body { max-width: 40rem; }
+.article-body h2 { font-size: 22px; font-weight: 600; letter-spacing: -0.01em; margin: 2.5rem 0 0.75rem; }
+@media (min-width: 768px) { .article-body h2 { font-size: 26px; } }
+.article-body h3 { font-size: 18px; font-weight: 600; margin: 1.75rem 0 0.5rem; }
+.article-body p { margin: 1rem 0; }
+.article-body ul { margin: 1rem 0 1rem 1.25rem; display: flex; flex-direction: column; gap: 0.4rem; }
+.article-body li { line-height: 1.55; }
+.article-body strong { font-weight: 600; }
+/* CTA box */
+.cta-box {
+    margin-top: 3rem; padding: 1.5rem 1.35rem; border: 1px solid var(--card-border);
+    border-radius: 16px; background-color: var(--card-bg);
+}
+.cta-box p { margin: 0 0 0.75rem; font-weight: 500; }
+.cta-box .cta-btn {
+    display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.7rem 1.4rem;
+    border-radius: 999px; background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+    color: #fff; font-weight: 500; font-size: 15px;
+    box-shadow: 0 6px 18px -6px rgba(99, 102, 241, 0.5); transition: transform 0.2s ease;
+}
+.cta-box .cta-btn::after { display: none; }
+.cta-box .cta-btn:hover { color: #fff; transform: translateY(-2px); }
+/* Resources index */
+.article-list { display: flex; flex-direction: column; gap: 0; margin-top: 1rem; }
+.article-item {
+    display: block; padding: 1.5rem 0; border-bottom: 1px solid var(--card-border);
+    transition: padding-left 0.2s ease;
+}
+.article-item:hover { padding-left: 0.4rem; }
+.article-item .a-date { font-size: 13px; color: var(--text-secondary); font-variant-numeric: tabular-nums; }
+.article-item .a-title { font-size: 19px; font-weight: 600; margin: 0.3rem 0; letter-spacing: -0.01em; }
+.article-item .a-desc { font-size: 15px; color: var(--text-secondary); }
+a { color: var(--text-primary); text-decoration: none; position: relative; transition: color 0.2s ease; }
+a.plain::after, .article-item::after { display: none; }
+.article-body a:not(.plain), .intro a { color: var(--text-primary); }
+.article-body a::after, .intro a::after {
+    content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 1px;
+    background: var(--link-underline); transition: background 0.2s ease, transform 0.3s ease; transform-origin: left;
+}
+a:hover { color: var(--link-hover); }
+.article-body a:hover::after, .intro a:hover::after { background: linear-gradient(90deg, var(--accent-1), var(--accent-2)); transform: scaleX(1.05); }
+.article-item .a-title, .article-item .a-date, .article-item .a-desc { color: inherit; }
+.article-item:hover .a-title { color: var(--link-hover); }
+.footnote { margin-top: 3rem; font-size: 13px; color: var(--text-secondary); }
+@media (prefers-reduced-motion: reduce) { .animate, .subtitle { animation: none; opacity: 1; } }
+</style>
+</head>
+<body>
+    
+<div class="cursor-glow" id="cursorGlow"></div>
+<script>
+const glow = document.getElementById('cursorGlow');
+let mx=0,my=0,gx=0,gy=0;
+window.addEventListener('mousemove',(e)=>{mx=e.clientX;my=e.clientY;glow.classList.add('visible');});
+window.addEventListener('mouseleave',()=>glow.classList.remove('visible'));
+(function a(){gx+=(mx-gx)*0.1;gy+=(my-gy)*0.1;glow.style.left=gx+'px';glow.style.top=gy+'px';requestAnimationFrame(a);})();
+</script>
+    <main>
+        <a href="/ressources/" class="back-link plain">← Toutes les ressources</a>
+        <article>
+            <h1 class="animate delay-1">Ubuntu 20.04 en fin de support : faut-il migrer votre serveur ?</h1>
+            <p class="meta-date animate delay-2"><time datetime="2026-05-20">20 mai 2026</time> · Super Génial</p>
+            <div class="article-body animate delay-3">
+                <p>Si votre application tourne sur un VPS, il y a de bonnes chances qu'elle repose sur <strong>Ubuntu 20.04 LTS</strong>. C'était le choix par défaut pendant des années, et il a bien fait son travail. Mais depuis <strong>mai 2025</strong>, cette version est sortie du support standard de Canonical. Concrètement, votre serveur ne reçoit plus les correctifs de sécurité de base pour son système. Ce n'est pas une urgence à gérer dans la panique, mais c'est une échéance qu'il vaut mieux traiter avant qu'elle ne vous rattrape.</p><p>Voici de quoi décider en connaissance de cause : ce que la fin de support change vraiment, quelles sont vos options, et comment se déroule une migration serveur bien menée.</p><h2>Ce que « fin de support » veut dire pour votre serveur</h2><p>Ubuntu 20.04 a bénéficié de cinq ans de support standard, d'avril 2020 à avril 2025. Passé cette date, Canonical cesse de publier les mises à jour de sécurité gratuites pour l'immense majorité des paquets du système. Votre serveur continue de fonctionner — rien ne s'éteint du jour au lendemain — mais il n'est plus <em>entretenu</em>.</p><p>Le risque n'est pas théorique. Chaque mois, de nouvelles failles sont découvertes dans les briques qui font tourner un serveur web : le noyau Linux, OpenSSL, les bibliothèques système, les services réseau. Sur une version supportée, un correctif arrive et vous l'appliquez. Sur une version hors support, la faille reste ouverte indéfiniment. Un serveur qui héberge une application accessible sur Internet devient alors une cible dont la surface d'attaque ne fait que grandir avec le temps.</p><p>À cela s'ajoute un effet d'entraînement : les logiciels récents cessent d'être testés sur une base aussi ancienne. Vous finissez coincé sur de vieilles versions de votre langage, de votre base de données ou de votre serveur applicatif, ce qui complique chaque évolution future de l'application.</p><h2>Vos deux options : migrer, ou gagner du temps proprement</h2><p>Face à cette échéance, deux chemins raisonnables s'offrent à vous.</p><p><strong>La montée vers Ubuntu 24.04 LTS.</strong> C'est la solution de fond. La 24.04 est la version LTS actuelle, supportée jusqu'en 2029 côté standard, avec des composants à jour et une sécurité maintenue. C'est le bon investissement quand on veut repartir sur une base saine pour plusieurs années plutôt que de repousser le problème.</p><p><strong>ESM / Ubuntu Pro comme sursis.</strong> Canonical propose un programme, <em>Expanded Security Maintenance</em>, inclus dans l'abonnement Ubuntu Pro. Il prolonge les correctifs de sécurité de la 20.04 bien au-delà de la date standard. C'est un excellent filet de sécurité : il vous couvre pendant que vous préparez la vraie migration, ou si un calendrier serré vous empêche de basculer tout de suite. À voir comme un pont, pas comme une destination — le système reste vieillissant, seuls les trous de sécurité sont bouchés.</p><p>Le bon réflexe est souvent de combiner les deux : activer ESM pour être immédiatement protégé, puis planifier sereinement la montée vers 24.04.</p><h2>Comment se passe une migration serveur bien menée</h2><p>Migrer un serveur, ce n'est pas lancer une commande de mise à jour et croiser les doigts. Une bascule propre suit toujours la même logique, celle qui évite les mauvaises surprises.</p><p>Tout commence par une <strong>sauvegarde complète et vérifiée</strong> : l'application, ses données, sa configuration serveur. Une sauvegarde qu'on n'a jamais testée n'est pas une sauvegarde. Ensuite, on ne touche pas à la production directement. On monte un <strong>environnement de répétition</strong> — une copie du serveur sur la version cible — où l'on rejoue l'installation de l'application et où l'on déroule tous les parcours importants. C'est là qu'on débusque les incompatibilités : une bibliothèque qui a changé de comportement, une dépendance abandonnée, un réglage à adapter.</p><p>Une fois la répétition validée, la <strong>bascule</strong> se prépare comme une opération courte et réversible : fenêtre de maintenance annoncée, procédure de retour arrière prête si quoi que ce soit résiste. L'objectif est simple : que vos utilisateurs ne voient qu'une brève interruption, voire aucune, et que vous puissiez revenir en arrière à tout instant.</p><h2>App et serveur : le duo qu'on ne devrait jamais séparer</h2><p>C'est précisément là que beaucoup de projets coincent. L'équipe qui a écrit l'application ne connaît pas forcément le serveur, et l'infogéreur qui gère le serveur ne connaît pas l'application. Résultat : personne ne veut appuyer sur le bouton, et la migration traîne des années.</p><p>Chez Super Génial, on reprend justement les deux ensemble — l'application web vieillissante <em>et</em> son serveur Ubuntu — à prix fixe. On sait faire dialoguer le code et la machine parce qu'on tient les deux bouts. Pas de renvoi de balle entre prestataires, pas de mauvaise surprise au moment de la bascule.</p><p>Si vous tournez encore sur Ubuntu 20.04 et que vous préférez traiter le sujet avant qu'il ne devienne un incident, jetez un œil à ce qu'on propose en <a href="/maintenance/">maintenance et reprise de serveurs</a>, ou aux <a href="/tarifs/">tarifs</a> pour situer le budget. Vous trouverez aussi d'autres repères sur nos <a href="/ressources/">ressources</a> pour garder une application web en bonne santé dans la durée.</p>
+            </div>
+            <div class="cta-box animate delay-3">
+                <p>Votre application est concernée ?</p>
+                <a href="/maintenance/" class="cta-btn">Faire le point sur votre app <span>→</span></a>
+            </div>
+        </article>
+    </main>
+</body>
+</html>

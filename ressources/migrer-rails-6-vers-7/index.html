@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Migrer de Rails 6 à Rails 7 : le guide pour ne rien casser — Super Génial</title>
+    <meta name="author" content="Michael Hulet">
+    <meta name="description" content="Passer de Rails 6 à Rails 7 se fait par paliers testés, jamais d'un bloc. Les étapes, les pièges (Turbo, Zeitwerk) et comment sécuriser la migration.">
+    <meta name="keywords" content="migrer rails 6 vers 7, mise à niveau rails, upgrade rails, turbolinks turbo">
+    <meta property="og:title" content="Migrer de Rails 6 à Rails 7 : le guide pour ne rien casser — Super Génial">
+    <meta property="og:description" content="Passer de Rails 6 à Rails 7 se fait par paliers testés, jamais d'un bloc. Les étapes, les pièges (Turbo, Zeitwerk) et comment sécuriser la migration.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.supergenial.be/ressources/migrer-rails-6-vers-7/">
+    <link rel="canonical" href="https://www.supergenial.be/ressources/migrer-rails-6-vers-7/">
+    <meta property="article:published_time" content="2026-05-27">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+    --bg: #ffffff; --text-primary: #171717; --text-secondary: #737373;
+    --link-underline: #a3a3a3; --link-hover: #000000;
+    --accent-1: #6366f1; --accent-2: #8b5cf6; --glow: rgba(99, 102, 241, 0.15);
+    --card-bg: #ffffff; --card-border: #e5e5e5; --soft-bg: #f5f5f5;
+}
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #0a0a0a; --text-primary: #ededed; --text-secondary: #a3a3a3;
+        --link-underline: #525252; --link-hover: #ffffff; --glow: rgba(139, 92, 246, 0.1);
+        --card-bg: #111111; --card-border: #262626; --soft-bg: #141414;
+    }
+}
+body::before {
+    content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; opacity: 0.03; z-index: 1000;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--bg); color: var(--text-primary); line-height: 1.6; font-size: 16px;
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+}
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes gradientShift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+@keyframes subtitleIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.animate { animation: fadeUp 0.8s ease-out forwards; opacity: 0; }
+.delay-1 { animation-delay: 0.1s; } .delay-2 { animation-delay: 0.2s; } .delay-3 { animation-delay: 0.3s; }
+main { max-width: 720px; margin: 0 auto; padding: 3rem 1.5rem; position: relative; }
+.cursor-glow {
+    position: fixed; width: 600px; height: 600px;
+    background: radial-gradient(circle at center, var(--glow) 0%, transparent 60%);
+    pointer-events: none; z-index: -1; transform: translate(-50%, -50%);
+    transition: opacity 0.3s ease; opacity: 0;
+}
+.cursor-glow.visible { opacity: 1; }
+@media (min-width: 768px) { main { margin-top: 4rem; padding: 0 1.5rem 5rem; } body { font-size: 18px; } }
+.back-link { display: inline-block; font-size: 14px; color: var(--text-secondary); margin-bottom: 2.5rem; }
+h1 { font-size: 32px; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: -0.02em; line-height: 1.2; }
+@media (min-width: 768px) { h1 { font-size: 40px; } }
+.subtitle {
+    font-size: 20px; margin-bottom: 2rem; font-weight: 500; color: var(--accent-1);
+    background: linear-gradient(135deg, var(--accent-1), var(--accent-2), var(--accent-1));
+    background-size: 200% 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text; opacity: 0;
+    animation: subtitleIn 0.8s ease-out 0.2s forwards, gradientShift 4s ease 0.2s infinite;
+}
+@media (min-width: 768px) { .subtitle { font-size: 24px; } }
+.intro { font-size: 16px; margin-bottom: 0.75rem; color: var(--text-secondary); max-width: 40rem; }
+@media (min-width: 768px) { .intro { font-size: 18px; } }
+.meta-date { font-size: 14px; color: var(--text-secondary); margin-bottom: 2.5rem; }
+/* Article body */
+.article-body { max-width: 40rem; }
+.article-body h2 { font-size: 22px; font-weight: 600; letter-spacing: -0.01em; margin: 2.5rem 0 0.75rem; }
+@media (min-width: 768px) { .article-body h2 { font-size: 26px; } }
+.article-body h3 { font-size: 18px; font-weight: 600; margin: 1.75rem 0 0.5rem; }
+.article-body p { margin: 1rem 0; }
+.article-body ul { margin: 1rem 0 1rem 1.25rem; display: flex; flex-direction: column; gap: 0.4rem; }
+.article-body li { line-height: 1.55; }
+.article-body strong { font-weight: 600; }
+/* CTA box */
+.cta-box {
+    margin-top: 3rem; padding: 1.5rem 1.35rem; border: 1px solid var(--card-border);
+    border-radius: 16px; background-color: var(--card-bg);
+}
+.cta-box p { margin: 0 0 0.75rem; font-weight: 500; }
+.cta-box .cta-btn {
+    display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.7rem 1.4rem;
+    border-radius: 999px; background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+    color: #fff; font-weight: 500; font-size: 15px;
+    box-shadow: 0 6px 18px -6px rgba(99, 102, 241, 0.5); transition: transform 0.2s ease;
+}
+.cta-box .cta-btn::after { display: none; }
+.cta-box .cta-btn:hover { color: #fff; transform: translateY(-2px); }
+/* Resources index */
+.article-list { display: flex; flex-direction: column; gap: 0; margin-top: 1rem; }
+.article-item {
+    display: block; padding: 1.5rem 0; border-bottom: 1px solid var(--card-border);
+    transition: padding-left 0.2s ease;
+}
+.article-item:hover { padding-left: 0.4rem; }
+.article-item .a-date { font-size: 13px; color: var(--text-secondary); font-variant-numeric: tabular-nums; }
+.article-item .a-title { font-size: 19px; font-weight: 600; margin: 0.3rem 0; letter-spacing: -0.01em; }
+.article-item .a-desc { font-size: 15px; color: var(--text-secondary); }
+a { color: var(--text-primary); text-decoration: none; position: relative; transition: color 0.2s ease; }
+a.plain::after, .article-item::after { display: none; }
+.article-body a:not(.plain), .intro a { color: var(--text-primary); }
+.article-body a::after, .intro a::after {
+    content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 1px;
+    background: var(--link-underline); transition: background 0.2s ease, transform 0.3s ease; transform-origin: left;
+}
+a:hover { color: var(--link-hover); }
+.article-body a:hover::after, .intro a:hover::after { background: linear-gradient(90deg, var(--accent-1), var(--accent-2)); transform: scaleX(1.05); }
+.article-item .a-title, .article-item .a-date, .article-item .a-desc { color: inherit; }
+.article-item:hover .a-title { color: var(--link-hover); }
+.footnote { margin-top: 3rem; font-size: 13px; color: var(--text-secondary); }
+@media (prefers-reduced-motion: reduce) { .animate, .subtitle { animation: none; opacity: 1; } }
+</style>
+</head>
+<body>
+    
+<div class="cursor-glow" id="cursorGlow"></div>
+<script>
+const glow = document.getElementById('cursorGlow');
+let mx=0,my=0,gx=0,gy=0;
+window.addEventListener('mousemove',(e)=>{mx=e.clientX;my=e.clientY;glow.classList.add('visible');});
+window.addEventListener('mouseleave',()=>glow.classList.remove('visible'));
+(function a(){gx+=(mx-gx)*0.1;gy+=(my-gy)*0.1;glow.style.left=gx+'px';glow.style.top=gy+'px';requestAnimationFrame(a);})();
+</script>
+    <main>
+        <a href="/ressources/" class="back-link plain">← Toutes les ressources</a>
+        <article>
+            <h1 class="animate delay-1">Migrer de Rails 6 à Rails 7 : le guide pour ne rien casser</h1>
+            <p class="meta-date animate delay-2"><time datetime="2026-05-27">27 mai 2026</time> · Super Génial</p>
+            <div class="article-body animate delay-3">
+                <p>Votre application tourne en Rails 6 depuis des années. Elle fonctionne, elle rapporte, mais le framework n'est plus maintenu : plus de correctifs de sécurité, des gems qui refusent de s'installer, des développeurs qui grimacent devant le code. Tôt ou tard, il faut <strong>migrer de Rails 6 vers 7</strong>. La bonne nouvelle : ce n'est pas un big bang risqué. C'est un chemin par paliers, où chaque marche est testée avant de passer à la suivante.</p><p>Voici comment on procède chez Super Génial pour faire cette mise à niveau sans casser ce qui marche, et pourquoi la méthode compte plus que la vitesse.</p><h2>Pourquoi on ne saute jamais plusieurs versions d'un coup</h2><p>La tentation est réelle : partir de Rails 6.0 et viser directement Rails 7.1, en une seule bascule. C'est la meilleure façon de se retrouver avec une application qui ne démarre plus et une pile d'erreurs impossibles à démêler. Quand cent choses changent en même temps, vous ne savez plus <em>laquelle</em> a provoqué la panne.</p><p>Rails est conçu pour une montée progressive. Chaque version mineure introduit son lot de dépréciations : le framework vous <strong>prévient</strong> qu'un comportement va disparaître, avant de le supprimer réellement à la version suivante. Ces avertissements sont votre carte routière. En avançant palier par palier — <strong>6.0 vers 6.1, puis 6.1 vers 7.0, puis 7.0 vers 7.1</strong> — vous traitez les dépréciations une par une, pendant qu'elles ne sont que des messages dans les logs, pas des erreurs bloquantes.</p><p>Chaque palier suit le même rituel : on met à jour la version, on lance <em>rails app:update</em> pour régénérer les fichiers de configuration, on lit chaque diff proposé, et on ne passe au suivant qu'une fois la suite de tests entièrement verte. Un palier peut prendre une heure ou une journée. Mais on sait toujours exactement où on en est.</p><h2>Le filet de tests : la condition avant de toucher au code</h2><p>C'est le point non négociable. On ne migre pas une application sans filet de tests. Sans lui, chaque changement est un pari : vous modifiez la configuration, l'appli semble tourner, et trois semaines plus tard un client découvre que le tunnel de paiement est cassé depuis la migration.</p><p>Les tests automatisés transforment ce pari en certitude. Avant chaque palier, ils sont verts. Après, s'ils restent verts, vous savez que le comportement observable n'a pas changé. S'ils passent au rouge, ils pointent précisément la régression — dans le bon fichier, sur la bonne ligne.</p><p>Beaucoup d'applications héritées n'ont aucun test, ou si peu qu'ils ne couvrent rien d'utile. Dans ce cas, on ne fonce pas quand même : on <strong>pose d'abord des tests de non-régression</strong> sur les parcours critiques — connexion, paiement, formulaires clés, pages qui rapportent de l'argent. Pas une couverture exhaustive, mais un filet solide là où une panne coûterait cher. Ce travail préalable est souvent ce qui distingue une migration sereine d'un cauchemar. Nous l'intégrons systématiquement dans nos missions de <a href="/maintenance/">reprise et maintenance</a>.</p><h2>Les changements notables entre Rails 6 et Rails 7</h2><p>Trois évolutions demandent une attention particulière lors de cette mise à niveau.</p><p><strong>Zeitwerk, le chargement des classes.</strong> Rails 6 tolérait encore l'ancien mode de chargement (<em>classic</em>). Rails 7 impose Zeitwerk, qui exige une correspondance stricte entre le nom de vos fichiers et celui de vos classes. Le moindre écart — un <em>API</em> là où Zeitwerk attend <em>Api</em> — bloque le démarrage. C'est justement pour cela qu'on active Zeitwerk dès le palier 6.x, quand il est encore optionnel : on règle le problème pendant qu'il n'est pas encore fatal.</p><p><strong>Turbolinks devient Turbo.</strong> C'est le changement le plus visible côté front. Rails 7 remplace Turbolinks par <strong>Turbo</strong>, la brique centrale de Hotwire. Turbo ne se contente pas d'accélérer la navigation : il introduit les Turbo Frames et Turbo Streams, une nouvelle façon de mettre à jour des morceaux de page sans JavaScript maison. La migration <em>turbolinks vers turbo</em> n'est pas un simple renommage : certains comportements JavaScript existants doivent être réécrits, et il faut vérifier chaque interaction. On avance page par page, jamais en aveugle.</p><p><strong>Les credentials chiffrés.</strong> Rails 7 consolide la gestion des secrets par environnement. Si votre application traîne encore d'anciens <em>secrets.yml</em> ou des variables éparpillées, c'est le moment de tout ranger dans les credentials chiffrés, versionnables sans exposer un seul mot de passe.</p><h2>Une migration, ce n'est pas une réécriture</h2><p>Le piège classique, quand on ouvre le capot d'une vieille application, c'est de vouloir tout refaire au passage : le design, l'architecture, cette partie du code qu'on trouve moche. On mélange alors deux chantiers, et on perd la seule chose qui rend une migration sûre : la capacité de dire « rien n'a changé sauf la version de Rails ».</p><p>La discipline, c'est de migrer d'abord, refactorer ensuite. Un palier ne doit changer <em>que</em> ce que la montée de version impose. Le reste — les améliorations, les nouvelles fonctionnalités — vient après, sur une base à jour et de nouveau maintenue.</p><p>C'est exactement le genre de chantier que nous menons à prix fixe : un diagnostic clair, un chemin par paliers, un filet de tests posé là où il manque, et une application qui repart sur une version soutenue. Si votre app est bloquée en Rails 6, parlons-en — commencez par notre offre de <a href="/maintenance/">maintenance et remise à niveau</a>, ou jetez un œil à nos <a href="/tarifs/">tarifs</a> et à d'autres <a href="/ressources/">ressources</a>.</p>
+            </div>
+            <div class="cta-box animate delay-3">
+                <p>Votre application est concernée ?</p>
+                <a href="/maintenance/" class="cta-btn">Faire le point sur votre app <span>→</span></a>
+            </div>
+        </article>
+    </main>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emoji cassés, caractères perdus : le problème utf8mb3 dans MySQL — Super Génial</title>
+    <meta name="author" content="Michael Hulet">
+    <meta name="description" content="Une vieille base MySQL en utf8mb3 ne stocke pas les emoji ni certains caractères. Pourquoi, et comment migrer vers utf8mb4 sans perdre de données.">
+    <meta name="keywords" content="utf8mb3 utf8mb4, emoji mysql, encodage base de données, migration utf8mb4">
+    <meta property="og:title" content="Emoji cassés, caractères perdus : le problème utf8mb3 dans MySQL — Super Génial">
+    <meta property="og:description" content="Une vieille base MySQL en utf8mb3 ne stocke pas les emoji ni certains caractères. Pourquoi, et comment migrer vers utf8mb4 sans perdre de données.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.supergenial.be/ressources/utf8mb3-vers-utf8mb4-mysql/">
+    <link rel="canonical" href="https://www.supergenial.be/ressources/utf8mb3-vers-utf8mb4-mysql/">
+    <meta property="article:published_time" content="2026-06-17">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+    --bg: #ffffff; --text-primary: #171717; --text-secondary: #737373;
+    --link-underline: #a3a3a3; --link-hover: #000000;
+    --accent-1: #6366f1; --accent-2: #8b5cf6; --glow: rgba(99, 102, 241, 0.15);
+    --card-bg: #ffffff; --card-border: #e5e5e5; --soft-bg: #f5f5f5;
+}
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #0a0a0a; --text-primary: #ededed; --text-secondary: #a3a3a3;
+        --link-underline: #525252; --link-hover: #ffffff; --glow: rgba(139, 92, 246, 0.1);
+        --card-bg: #111111; --card-border: #262626; --soft-bg: #141414;
+    }
+}
+body::before {
+    content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; opacity: 0.03; z-index: 1000;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--bg); color: var(--text-primary); line-height: 1.6; font-size: 16px;
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+}
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes gradientShift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+@keyframes subtitleIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.animate { animation: fadeUp 0.8s ease-out forwards; opacity: 0; }
+.delay-1 { animation-delay: 0.1s; } .delay-2 { animation-delay: 0.2s; } .delay-3 { animation-delay: 0.3s; }
+main { max-width: 720px; margin: 0 auto; padding: 3rem 1.5rem; position: relative; }
+.cursor-glow {
+    position: fixed; width: 600px; height: 600px;
+    background: radial-gradient(circle at center, var(--glow) 0%, transparent 60%);
+    pointer-events: none; z-index: -1; transform: translate(-50%, -50%);
+    transition: opacity 0.3s ease; opacity: 0;
+}
+.cursor-glow.visible { opacity: 1; }
+@media (min-width: 768px) { main { margin-top: 4rem; padding: 0 1.5rem 5rem; } body { font-size: 18px; } }
+.back-link { display: inline-block; font-size: 14px; color: var(--text-secondary); margin-bottom: 2.5rem; }
+h1 { font-size: 32px; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: -0.02em; line-height: 1.2; }
+@media (min-width: 768px) { h1 { font-size: 40px; } }
+.subtitle {
+    font-size: 20px; margin-bottom: 2rem; font-weight: 500; color: var(--accent-1);
+    background: linear-gradient(135deg, var(--accent-1), var(--accent-2), var(--accent-1));
+    background-size: 200% 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text; opacity: 0;
+    animation: subtitleIn 0.8s ease-out 0.2s forwards, gradientShift 4s ease 0.2s infinite;
+}
+@media (min-width: 768px) { .subtitle { font-size: 24px; } }
+.intro { font-size: 16px; margin-bottom: 0.75rem; color: var(--text-secondary); max-width: 40rem; }
+@media (min-width: 768px) { .intro { font-size: 18px; } }
+.meta-date { font-size: 14px; color: var(--text-secondary); margin-bottom: 2.5rem; }
+/* Article body */
+.article-body { max-width: 40rem; }
+.article-body h2 { font-size: 22px; font-weight: 600; letter-spacing: -0.01em; margin: 2.5rem 0 0.75rem; }
+@media (min-width: 768px) { .article-body h2 { font-size: 26px; } }
+.article-body h3 { font-size: 18px; font-weight: 600; margin: 1.75rem 0 0.5rem; }
+.article-body p { margin: 1rem 0; }
+.article-body ul { margin: 1rem 0 1rem 1.25rem; display: flex; flex-direction: column; gap: 0.4rem; }
+.article-body li { line-height: 1.55; }
+.article-body strong { font-weight: 600; }
+/* CTA box */
+.cta-box {
+    margin-top: 3rem; padding: 1.5rem 1.35rem; border: 1px solid var(--card-border);
+    border-radius: 16px; background-color: var(--card-bg);
+}
+.cta-box p { margin: 0 0 0.75rem; font-weight: 500; }
+.cta-box .cta-btn {
+    display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.7rem 1.4rem;
+    border-radius: 999px; background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+    color: #fff; font-weight: 500; font-size: 15px;
+    box-shadow: 0 6px 18px -6px rgba(99, 102, 241, 0.5); transition: transform 0.2s ease;
+}
+.cta-box .cta-btn::after { display: none; }
+.cta-box .cta-btn:hover { color: #fff; transform: translateY(-2px); }
+/* Resources index */
+.article-list { display: flex; flex-direction: column; gap: 0; margin-top: 1rem; }
+.article-item {
+    display: block; padding: 1.5rem 0; border-bottom: 1px solid var(--card-border);
+    transition: padding-left 0.2s ease;
+}
+.article-item:hover { padding-left: 0.4rem; }
+.article-item .a-date { font-size: 13px; color: var(--text-secondary); font-variant-numeric: tabular-nums; }
+.article-item .a-title { font-size: 19px; font-weight: 600; margin: 0.3rem 0; letter-spacing: -0.01em; }
+.article-item .a-desc { font-size: 15px; color: var(--text-secondary); }
+a { color: var(--text-primary); text-decoration: none; position: relative; transition: color 0.2s ease; }
+a.plain::after, .article-item::after { display: none; }
+.article-body a:not(.plain), .intro a { color: var(--text-primary); }
+.article-body a::after, .intro a::after {
+    content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 1px;
+    background: var(--link-underline); transition: background 0.2s ease, transform 0.3s ease; transform-origin: left;
+}
+a:hover { color: var(--link-hover); }
+.article-body a:hover::after, .intro a:hover::after { background: linear-gradient(90deg, var(--accent-1), var(--accent-2)); transform: scaleX(1.05); }
+.article-item .a-title, .article-item .a-date, .article-item .a-desc { color: inherit; }
+.article-item:hover .a-title { color: var(--link-hover); }
+.footnote { margin-top: 3rem; font-size: 13px; color: var(--text-secondary); }
+@media (prefers-reduced-motion: reduce) { .animate, .subtitle { animation: none; opacity: 1; } }
+</style>
+</head>
+<body>
+    
+<div class="cursor-glow" id="cursorGlow"></div>
+<script>
+const glow = document.getElementById('cursorGlow');
+let mx=0,my=0,gx=0,gy=0;
+window.addEventListener('mousemove',(e)=>{mx=e.clientX;my=e.clientY;glow.classList.add('visible');});
+window.addEventListener('mouseleave',()=>glow.classList.remove('visible'));
+(function a(){gx+=(mx-gx)*0.1;gy+=(my-gy)*0.1;glow.style.left=gx+'px';glow.style.top=gy+'px';requestAnimationFrame(a);})();
+</script>
+    <main>
+        <a href="/ressources/" class="back-link plain">← Toutes les ressources</a>
+        <article>
+            <h1 class="animate delay-1">Emoji cassés, caractères perdus : le problème utf8mb3 dans MySQL</h1>
+            <p class="meta-date animate delay-2"><time datetime="2026-06-17">17 juin 2026</time> · Super Génial</p>
+            <div class="article-body animate delay-3">
+                <p>Un utilisateur écrit un message parfaitement normal — « Bravo pour le lancement 🎉 » — et au moment de l'enregistrer, l'application affiche une erreur, ou pire : le texte est stocké tronqué, tout ce qui suivait l'emoji a disparu. Le bug est déroutant parce qu'il semble aléatoire : la plupart des textes passent sans problème, et puis certains cassent sans raison apparente. La cause, dans une grande partie des cas, tient en un mot technique un peu obscur : <strong>utf8mb3</strong>. C'est un vestige historique de MySQL, et il se cache dans énormément de bases anciennes. Voyons ce qu'il fait, pourquoi il pose problème, et comment on s'en débarrasse proprement.</p><h2>Le symptôme : un caractère qui fait tout planter</h2><p>Le signe le plus visible, c'est l'emoji. Votre application accepte sans broncher les accents, les caractères français, l'immense majorité de ce qu'on tape au clavier. Puis un utilisateur colle un 🎉, un 😀 ou un 🚀 dans un commentaire, un nom de profil, un message — et selon la configuration, deux choses peuvent arriver. Soit la base <strong>refuse net</strong> d'enregistrer et l'application renvoie une erreur (« Incorrect string value »), soit, dans les réglages plus permissifs, elle <strong>tronque silencieusement</strong> le texte à l'endroit du caractère fautif. Tout ce qui venait après est perdu, sans le moindre avertissement.</p><p>Et ça ne concerne pas que les emoji. Certains <strong>caractères chinois, japonais ou coréens</strong> rares, des symboles mathématiques, des caractères anciens : eux aussi tombent dans le même piège. Le point commun de tous ces caractères, c'est qu'ils ont besoin de quatre octets pour être encodés — et c'est précisément ce que la vieille base ne sait pas faire.</p><h2>Pourquoi c'est un vestige de l'histoire de MySQL</h2><p>Pour comprendre, il faut remonter un peu. Quand MySQL a introduit le support de l'Unicode, il a créé un jeu de caractères qu'il a appelé <strong>utf8</strong>. Mais pour des raisons de l'époque, cet <em>utf8</em> de MySQL n'implémentait qu'une version <strong>incomplète</strong> de la norme : il plafonnait à <strong>trois octets par caractère</strong>. Or l'UTF-8 véritable va jusqu'à quatre octets, et c'est justement dans ce quatrième octet que vivent les emoji et une partie des caractères asiatiques et symboliques.</p><p>Autrement dit, le <em>utf8</em> de MySQL n'a jamais été du vrai UTF-8 complet. Quand l'erreur a été reconnue, il était trop tard pour la corriger sans casser les bases existantes. MySQL a donc renommé l'ancien jeu bancal en <strong>utf8mb3</strong> (« mb3 » pour <em>maximum 3 bytes</em>) et introduit le vrai, complet, sous le nom <strong>utf8mb4</strong> (« 4 bytes »). Le piège, c'est que pendant des années le mot <em>utf8</em> a continué de désigner l'ancienne version tronquée. Des milliers d'applications ont donc été créées, en toute bonne foi, sur une base qui ne stockait qu'une partie de l'Unicode — sans que personne s'en rende compte, jusqu'au jour où le premier emoji arrive.</p><h2>La solution : migrer vers utf8mb4</h2><p>La bonne nouvelle, c'est que la réparation est bien connue et sans surprise. Il s'agit de convertir la base, ses tables et ses colonnes texte de <strong>utf8mb3 vers utf8mb4</strong>. Une fois la bascule faite, la base stocke l'intégralité de l'Unicode : les emoji passent, les caractères asiatiques rares passent, et le bug disparaît définitivement. Il n'y a rien à changer dans la logique métier de votre application — c'est une opération sur la couche de stockage, pas une réécriture.</p><p>Il faut aussi vérifier un réglage autour de la base : la <strong>connexion</strong> entre l'application et MySQL doit elle aussi être configurée en utf8mb4, sans quoi le problème se rejoue au moment de l'échange. Un point technique mérite attention au passage : utf8mb4 consomme un peu plus d'espace pour les index, ce qui peut buter sur d'anciennes limites de longueur de clé. Sur les versions récentes de MySQL ce n'est plus un souci ; sur les plus anciennes, cela demande une vérification préalable. C'est le genre de détail qui distingue une migration propre d'une migration qui casse en production.</p><h2>Comment on procède sans jamais risquer vos données</h2><p>La règle d'or, c'est qu'on <strong>ne touche jamais directement à la base de production</strong>. On commence toujours par en faire une <strong>copie fidèle</strong> — une réplique complète de vos vraies données — et c'est sur cette copie qu'on exécute et qu'on rejoue la migration. On y mesure la durée réelle de la conversion, on repère les colonnes qui posent problème, on ajuste, et on ne planifie l'opération sur la vraie base qu'une fois le déroulé validé de bout en bout sur la copie.</p><p>La vérification, elle, est concrète et chiffrée. Avant la migration, on relève le <strong>nombre de lignes de chaque table</strong> ; après, on le relève à nouveau et on confirme que les compteurs sont strictement identiques. Aucune ligne ne doit avoir disparu en chemin. On contrôle également, sur des échantillons de textes contenant justement des emoji et des caractères spéciaux, que le contenu ressort intact après conversion. C'est cette double vérification — compteurs de lignes et relecture d'échantillons — qui garantit une bascule sans perte.</p><p>C'est exactement ce type de reprise que nous prenons en charge à prix fixe : diagnostiquer l'encodage réel de votre base, migrer proprement de utf8mb3 vers utf8mb4 sur une copie testée, puis appliquer l'opération vérifiée sur la production. Si vos utilisateurs se plaignent de messages qui disparaissent ou d'emoji qui font planter les formulaires, jetez un œil à notre offre de <a href="/maintenance/">maintenance et mise à niveau</a>, ou parcourez nos <a href="/ressources/">ressources</a> pour approfondir. Une base qui accepte enfin tout ce que vos utilisateurs tapent, c'est une source de bugs en moins et une plateforme sur laquelle on peut compter.</p>
+            </div>
+            <div class="cta-box animate delay-3">
+                <p>Votre application est concernée ?</p>
+                <a href="/maintenance/" class="cta-btn">Faire le point sur votre app <span>→</span></a>
+            </div>
+        </article>
+    </main>
+</body>
+</html>
