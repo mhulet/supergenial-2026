@@ -1,0 +1,27 @@
+# Super Génial
+
+> Super Génial (Marco & Vespucci SRL) est l'activité de Michael Hulet, « agentic builder » belge. Spécialité : reprendre, mettre à niveau et maintenir des applications web vieillissantes — Ruby on Rails en priorité, mais aussi toute application web hébergée sur un VPS — ainsi que leurs serveurs Ubuntu, à prix fixe.
+
+Michael conçoit des applications avec des agents IA et remet à niveau les applications existantes (mise à jour de framework, migration de version, durcissement serveur) sans tout casser, par paliers testés. Zone : Europe. Contact : team@supergenial.be.
+
+## Services
+- [Maintenance & mises à jour](https://www.supergenial.be/maintenance/) : reprise d'applications Rails et web vieillissantes + serveurs Ubuntu. Audit à prix fixe (490 €), mise à niveau au forfait, abonnement de maintenance dès 290 €/mois.
+- [Tarifs](https://www.supergenial.be/tarifs/) : forfait de lancement, abonnement mensuel, forfaits feature — prix annoncés d'avance, jamais à l'heure.
+
+## Ressources (guides sur les fins de support et migrations)
+- [Rails 8 : quoi de neuf et pourquoi ça vaut la mise à niveau](https://www.supergenial.be/ressources/rails-8-nouveautes/) — Rails 8 supprime des dépendances (Redis) et simplifie le déploiement. Les nouveautés qui comptent pour le propriétaire d'une application, et quand migrer.
+- [Reprendre une application web sans documentation ni développeur d'origine](https://www.supergenial.be/ressources/reprendre-application-sans-documentation/) — L'app tourne mais personne n'ose y toucher, le développeur est parti et il n'y a aucune doc. Pourquoi ce n'est pas un mur, et comment on reprend la main.
+- [Combien coûte la mise à niveau d'une application Rails ?](https://www.supergenial.be/ressources/cout-mise-a-niveau-rails/) — Le prix d'une mise à niveau Rails dépend de l'écart de versions, de la taille de l'app et des tests existants. Comment on chiffre, et pourquoi à prix fixe.
+- [Emoji cassés, caractères perdus : le problème utf8mb3 dans MySQL](https://www.supergenial.be/ressources/utf8mb3-vers-utf8mb4-mysql/) — Une vieille base MySQL en utf8mb3 ne stocke pas les emoji ni certains caractères. Pourquoi, et comment migrer vers utf8mb4 sans perdre de données.
+- [DelayedJob a fait son temps : passer à Solid Queue](https://www.supergenial.be/ressources/delayedjob-vers-solid-queue/) — Solid Queue, livré avec Rails 8, remplace DelayedJob sans dépendance externe. Pourquoi moderniser vos tâches de fond, et comment se passe la migration.
+- [Webpacker est abandonné : comment migrer vers esbuild](https://www.supergenial.be/ressources/webpacker-vers-esbuild/) — Webpacker n'est plus maintenu. Migrer vers jsbundling-rails et esbuild allège votre application et fiabilise vos déploiements. Ce que ça change, concrètement.
+- [Migrer de Rails 6 à Rails 7 : le guide pour ne rien casser](https://www.supergenial.be/ressources/migrer-rails-6-vers-7/) — Passer de Rails 6 à Rails 7 se fait par paliers testés, jamais d'un bloc. Les étapes, les pièges (Turbo, Zeitwerk) et comment sécuriser la migration.
+- [Ubuntu 20.04 en fin de support : faut-il migrer votre serveur ?](https://www.supergenial.be/ressources/ubuntu-20-04-fin-de-support/) — Ubuntu 20.04 LTS n'est plus dans le support standard depuis mai 2025. Ce que ça implique pour votre serveur web, et comment migrer sans interruption.
+- [Ruby 3.2 en fin de vie : pourquoi passer à Ruby 3.3 sans attendre](https://www.supergenial.be/ressources/ruby-3-2-fin-de-vie/) — Ruby 3.2 n'est plus maintenu depuis mars 2026. Ce que ça change pour la sécurité et les performances de votre application, et comment migrer proprement.
+- [Rails 7.1 est en fin de support : qu'est-ce que ça change pour vous ?](https://www.supergenial.be/ressources/rails-7-1-fin-de-support/) — Rails 7.1 ne reçoit plus de correctifs de sécurité depuis octobre 2025. Ce que ça implique concrètement, et comment remettre votre application à niveau sans tout casser.
+
+## À propos
+- Entité : Marco & Vespucci SRL (BCE BE 0523.920.556), Eghezée, Belgique.
+- Fondateur : Michael Hulet.
+- Site : https://www.supergenial.be/ · Version anglaise : https://www.supergenial.be/en/
+- Contact : team@supergenial.be · LinkedIn : https://www.linkedin.com/in/michaelhulet/
