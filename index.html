@@ -407,6 +407,24 @@
             transform: translateX(4px);
         }
 
+        .illu {
+            display: block;
+            margin: 2.5rem auto 0;
+            max-width: min(420px, 80%);
+            height: auto;
+        }
+
+        .illu--small {
+            max-width: min(300px, 60%);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            /* Trait noir → blanc ; hue-rotate ramène l'accent violet près de sa teinte d'origine */
+            .illu {
+                filter: invert(1) hue-rotate(180deg);
+            }
+        }
+
         .parcours {
             background-color: #f5f5f5;
             margin: 0 -1.5rem;
@@ -503,6 +521,7 @@
             <p>
                 Aujourd'hui, je conçois des applications avec des agents IA, de l'architecture au déploiement.
             </p>
+            <img class="illu" src="assets/illustrations/laptop-mug.png" decoding="async" alt="Illustration au trait : un ordinateur portable ouvert à côté d'un mug" width="800" height="800">
         </section>
 
         <section class="references animate delay-5">
@@ -518,6 +537,7 @@
                 <span><a href="https://www.les4sources.be" target="_blank" rel="noopener noreferrer">Les 4 Sources</a></span>
                 <span><a href="https://terranova.semisto.org" target="_blank" rel="noopener noreferrer">Terranova</a></span>
             </div>
+            <img class="illu" src="assets/illustrations/lampe-mug.png" decoding="async" alt="Illustration au trait : une lampe de bureau articulée éclairant un mug, abat-jour dégradé indigo-violet" width="800" height="800">
         </section>
 
         <section class="contact animate delay-6">

@@ -137,6 +137,8 @@ a:hover { color: var(--link-hover); }
 .article-item .a-title, .article-item .a-date, .article-item .a-desc { color: inherit; }
 .article-item:hover .a-title { color: var(--link-hover); }
 .footnote { margin-top: 3rem; font-size: 13px; color: var(--text-secondary); }
+.illu-article { display: block; margin: 1.5rem auto 2rem; max-width: min(340px, 75%); height: auto; }
+@media (prefers-color-scheme: dark) { .illu-article { filter: invert(1) hue-rotate(180deg); } }
 @media (prefers-reduced-motion: reduce) { .animate, .subtitle { animation: none; opacity: 1; } }
 `;
 
@@ -161,6 +163,7 @@ function articlePage(a: Article): string {
         <article>
             <h1 class="animate delay-1">${a.title}</h1>
             <p class="meta-date animate delay-2"><time datetime="${a.date}">${a.date_fr}</time> · Super Génial</p>
+            <img class="illu-article" src="/assets/illustrations/ressources/${a.slug}.png" decoding="async" alt="Illustration de l'article" width="800" height="800">
             <div class="article-body animate delay-3">
                 ${a.body_html}
             </div>
