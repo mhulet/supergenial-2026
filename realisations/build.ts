@@ -25,6 +25,11 @@ export type CaseStudy = {
   url_live?: string;
   stack: string[];
   images: CaseImage[];
+  carousel?: {
+    title: string; title_en: string;
+    intro: string; intro_en: string;
+    images: CaseImage[];
+  };
   body_html: string; body_html_en: string;
 };
 
@@ -43,6 +48,36 @@ export const EXTRA_CSS = `
     border: 1px solid var(--card-border); border-radius: 16px;
 }
 .case-figure figcaption { font-size: 13.5px; color: var(--text-secondary); margin-top: 0.6rem; }
+/* Carousel de screenshots */
+.case-carousel { margin: 1.5rem 0 0.5rem; }
+.case-carousel-track {
+    display: flex; gap: 1rem; overflow-x: auto;
+    scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; border-radius: 16px;
+}
+.case-carousel-track::-webkit-scrollbar { display: none; }
+.case-carousel-slide { flex: 0 0 100%; scroll-snap-align: start; }
+.case-carousel-slide img {
+    display: block; width: 100%; height: auto;
+    border: 1px solid var(--card-border); border-radius: 16px;
+}
+.case-carousel-slide figcaption { font-size: 13.5px; color: var(--text-secondary); margin-top: 0.6rem; }
+.case-carousel-nav { display: flex; align-items: center; gap: 0.9rem; margin-top: 0.9rem; }
+.case-carousel-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 38px; height: 38px; border-radius: 999px;
+    border: 1px solid var(--card-border); background: var(--soft-bg);
+    color: var(--text-primary); font-size: 19px; line-height: 1;
+    cursor: pointer; transition: transform 0.15s ease, border-color 0.15s ease;
+}
+.case-carousel-btn:hover { transform: translateY(-1px); border-color: var(--text-secondary); }
+.case-carousel-count { font-size: 13.5px; color: var(--text-secondary); min-width: 3.2em; text-align: center; font-variant-numeric: tabular-nums; }
+.case-carousel-dots { display: flex; gap: 0.45rem; margin-left: auto; flex-wrap: wrap; }
+.case-carousel-dot {
+    width: 8px; height: 8px; border-radius: 999px; padding: 0; border: none;
+    background: var(--card-border); cursor: pointer; transition: background 0.15s ease, transform 0.15s ease;
+}
+.case-carousel-dot[aria-current="true"] { background: var(--accent-1); transform: scale(1.25); }
 /* Index des réalisations */
 .case-item { display: block; padding: 1.75rem 0; border-bottom: 1px solid var(--card-border); transition: padding-left 0.2s ease; }
 .case-item:hover { padding-left: 0.4rem; }
@@ -96,6 +131,64 @@ export function loadCases(): CaseStudy[] {
     .sort((a, b) => b.year.localeCompare(a.year));
 }
 
+// Carousel de screenshots — vanilla JS inline, aucune dépendance (CSP stricte).
+// lang: "fr" | "en" — choisit alt/caption. Rendu uniquement si c.carousel existe.
+export function carouselSection(c: CaseStudy, lang: "fr" | "en"): string {
+  if (!c.carousel) return "";
+  const t = lang === "fr" ? c.carousel.title : c.carousel.title_en;
+  const intro = lang === "fr" ? c.carousel.intro : c.carousel.intro_en;
+  const prev = lang === "fr" ? "Image précédente" : "Previous image";
+  const next = lang === "fr" ? "Image suivante" : "Next image";
+  const goTo = lang === "fr" ? "Aller à l'image" : "Go to image";
+  const slides = c.carousel.images.map((img, i) => `                    <figure class="case-carousel-slide">
+                        <img src="${img.src}" alt="${lang === "fr" ? img.alt : img.alt_en}" loading="lazy">
+                        <figcaption>${lang === "fr" ? img.caption : img.caption_en}</figcaption>
+                    </figure>`).join("\n");
+  const dots = c.carousel.images.map((_, i) =>
+    `<button class="case-carousel-dot" data-index="${i}" aria-label="${goTo} ${i + 1}"${i === 0 ? ' aria-current="true"' : ""}></button>`
+  ).join("");
+  return `
+            <section class="case-carousel animate delay-3" role="region" aria-label="${t}">
+                <h2>${t}</h2>
+                <p>${intro}</p>
+                <div class="case-carousel-track" id="carouselTrack" tabindex="0">
+${slides}
+                </div>
+                <div class="case-carousel-nav">
+                    <button class="case-carousel-btn" id="carouselPrev" aria-label="${prev}">‹</button>
+                    <span class="case-carousel-count" id="carouselCount">1 / ${c.carousel.images.length}</span>
+                    <button class="case-carousel-btn" id="carouselNext" aria-label="${next}">›</button>
+                    <div class="case-carousel-dots" id="carouselDots">${dots}</div>
+                </div>
+            </section>
+            <script>
+            (function () {
+                const track = document.getElementById('carouselTrack');
+                const count = document.getElementById('carouselCount');
+                const dots = Array.from(document.getElementById('carouselDots').children);
+                const total = dots.length;
+                let current = 0;
+                function slideWidth() { return track.firstElementChild ? track.firstElementChild.getBoundingClientRect().width + 16 : track.clientWidth; }
+                function goTo(i) { track.scrollTo({ left: Math.max(0, Math.min(i, total - 1)) * slideWidth(), behavior: 'smooth' }); }
+                function sync() {
+                    const i = Math.round(track.scrollLeft / slideWidth());
+                    if (i === current || i < 0 || i >= total) return;
+                    current = i;
+                    count.textContent = (i + 1) + ' / ' + total;
+                    dots.forEach((d, j) => j === i ? d.setAttribute('aria-current', 'true') : d.removeAttribute('aria-current'));
+                }
+                track.addEventListener('scroll', () => requestAnimationFrame(sync), { passive: true });
+                document.getElementById('carouselPrev').addEventListener('click', () => goTo(current - 1));
+                document.getElementById('carouselNext').addEventListener('click', () => goTo(current + 1));
+                dots.forEach((d, i) => d.addEventListener('click', () => goTo(i)));
+                track.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(current - 1); }
+                    if (e.key === 'ArrowRight') { e.preventDefault(); goTo(current + 1); }
+                });
+            })();
+            </script>`;
+}
+
 function figures(c: CaseStudy): string {
   return c.images.map((img) => `            <figure class="case-figure animate delay-3">
                 <img src="${img.src}" alt="${img.alt}" loading="lazy">
@@ -118,7 +211,7 @@ function casePage(c: CaseStudy): string {
 ${figures(c)}
             <div class="article-body animate delay-3">
                 ${c.body_html}
-            </div>
+            </div>${carouselSection(c, "fr")}
             <div class="cta-box animate delay-3">
                 <p>Un projet similaire en tête ?</p>
                 <a href="/tarifs/" class="cta-btn">Voir mes tarifs <span>→</span></a>

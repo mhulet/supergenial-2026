@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tranches de Vie — la boulangerie artisanale qui vend son pain en ligne — Super Génial</title>
+    <meta name="author" content="Michael Hulet">
+    <meta name="description" content="L'application e-commerce complète d'une boulangerie au feu de bois : pré-commandes par jour de cuisson, paiement Bancontact, portefeuille prépayé, SMS automatiques et un back-office qui planifie la production au gramme près.">
+    <meta name="keywords" content="étude de cas, e-commerce boulangerie, Ruby on Rails, Hotwire, Stripe, Bancontact, agents IA, application web">
+    <meta property="og:title" content="Tranches de Vie — la boulangerie artisanale qui vend son pain en ligne — Super Génial">
+    <meta property="og:description" content="L'application e-commerce complète d'une boulangerie au feu de bois : pré-commandes par jour de cuisson, paiement Bancontact, portefeuille prépayé, SMS automatiques et un back-office qui planifie la production au gramme près.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.supergenial.be/realisations/tranches-de-vie/">
+    <link rel="canonical" href="https://www.supergenial.be/realisations/tranches-de-vie/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+    --bg: #ffffff; --text-primary: #171717; --text-secondary: #737373;
+    --link-underline: #a3a3a3; --link-hover: #000000;
+    --accent-1: #6366f1; --accent-2: #8b5cf6; --glow: rgba(99, 102, 241, 0.15);
+    --card-bg: #ffffff; --card-border: #e5e5e5; --soft-bg: #f5f5f5;
+}
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #0a0a0a; --text-primary: #ededed; --text-secondary: #a3a3a3;
+        --link-underline: #525252; --link-hover: #ffffff; --glow: rgba(139, 92, 246, 0.1);
+        --card-bg: #111111; --card-border: #262626; --soft-bg: #141414;
+    }
+}
+body::before {
+    content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; opacity: 0.03; z-index: 1000;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--bg); color: var(--text-primary); line-height: 1.6; font-size: 16px;
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+}
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes gradientShift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+@keyframes subtitleIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.animate { animation: fadeUp 0.8s ease-out forwards; opacity: 0; }
+.delay-1 { animation-delay: 0.1s; } .delay-2 { animation-delay: 0.2s; } .delay-3 { animation-delay: 0.3s; }
+main { max-width: 720px; margin: 0 auto; padding: 3rem 1.5rem; position: relative; }
+.cursor-glow {
+    position: fixed; width: 600px; height: 600px;
+    background: radial-gradient(circle at center, var(--glow) 0%, transparent 60%);
+    pointer-events: none; z-index: -1; transform: translate(-50%, -50%);
+    transition: opacity 0.3s ease; opacity: 0;
+}
+.cursor-glow.visible { opacity: 1; }
+@media (min-width: 768px) { main { margin-top: 4rem; padding: 0 1.5rem 5rem; } body { font-size: 18px; } }
+.back-link { display: inline-block; font-size: 14px; color: var(--text-secondary); margin-bottom: 2.5rem; }
+h1 { font-size: 32px; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: -0.02em; line-height: 1.2; }
+@media (min-width: 768px) { h1 { font-size: 40px; } }
+.subtitle {
+    font-size: 20px; margin-bottom: 2rem; font-weight: 500; color: var(--accent-1);
+    background: linear-gradient(135deg, var(--accent-1), var(--accent-2), var(--accent-1));
+    background-size: 200% 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text; opacity: 0;
+    animation: subtitleIn 0.8s ease-out 0.2s forwards, gradientShift 4s ease 0.2s infinite;
+}
+@media (min-width: 768px) { .subtitle { font-size: 24px; } }
+.intro { font-size: 16px; margin-bottom: 0.75rem; color: var(--text-secondary); max-width: 40rem; }
+@media (min-width: 768px) { .intro { font-size: 18px; } }
+.meta-date { font-size: 14px; color: var(--text-secondary); margin-bottom: 2.5rem; }
+/* Article body */
+.article-body { max-width: 40rem; }
+.article-body h2 { font-size: 22px; font-weight: 600; letter-spacing: -0.01em; margin: 2.5rem 0 0.75rem; }
+@media (min-width: 768px) { .article-body h2 { font-size: 26px; } }
+.article-body h3 { font-size: 18px; font-weight: 600; margin: 1.75rem 0 0.5rem; }
+.article-body p { margin: 1rem 0; }
+.article-body ul { margin: 1rem 0 1rem 1.25rem; display: flex; flex-direction: column; gap: 0.4rem; }
+.article-body li { line-height: 1.55; }
+.article-body strong { font-weight: 600; }
+/* CTA box */
+.cta-box {
+    margin-top: 3rem; padding: 1.5rem 1.35rem; border: 1px solid var(--card-border);
+    border-radius: 16px; background-color: var(--card-bg);
+}
+.cta-box p { margin: 0 0 0.75rem; font-weight: 500; }
+.cta-box .cta-btn {
+    display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.7rem 1.4rem;
+    border-radius: 999px; background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+    color: #fff; font-weight: 500; font-size: 15px;
+    box-shadow: 0 6px 18px -6px rgba(99, 102, 241, 0.5); transition: transform 0.2s ease;
+}
+.cta-box .cta-btn::after { display: none; }
+.cta-box .cta-btn:hover { color: #fff; transform: translateY(-2px); }
+/* Resources index */
+.article-list { display: flex; flex-direction: column; gap: 0; margin-top: 1rem; }
+.article-item {
+    display: block; padding: 1.5rem 0; border-bottom: 1px solid var(--card-border);
+    transition: padding-left 0.2s ease;
+}
+.article-item:hover { padding-left: 0.4rem; }
+.article-item .a-date { font-size: 13px; color: var(--text-secondary); font-variant-numeric: tabular-nums; }
+.article-item .a-title { font-size: 19px; font-weight: 600; margin: 0.3rem 0; letter-spacing: -0.01em; }
+.article-item .a-desc { font-size: 15px; color: var(--text-secondary); }
+a { color: var(--text-primary); text-decoration: none; position: relative; transition: color 0.2s ease; }
+a.plain::after, .article-item::after { display: none; }
+.article-body a:not(.plain), .intro a { color: var(--text-primary); }
+.article-body a::after, .intro a::after {
+    content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 1px;
+    background: var(--link-underline); transition: background 0.2s ease, transform 0.3s ease; transform-origin: left;
+}
+a:hover { color: var(--link-hover); }
+.article-body a:hover::after, .intro a:hover::after { background: linear-gradient(90deg, var(--accent-1), var(--accent-2)); transform: scaleX(1.05); }
+.article-item .a-title, .article-item .a-date, .article-item .a-desc { color: inherit; }
+.article-item:hover .a-title { color: var(--link-hover); }
+.footnote { margin-top: 3rem; font-size: 13px; color: var(--text-secondary); }
+@media (prefers-reduced-motion: reduce) { .animate, .subtitle { animation: none; opacity: 1; } }
+
+/* Réalisations */
+.case-meta { display: flex; flex-wrap: wrap; gap: 0.4rem 1.2rem; font-size: 14px; color: var(--text-secondary); margin-bottom: 2.5rem; }
+.case-meta .stack-tag {
+    display: inline-flex; padding: 0.1rem 0.6rem; border-radius: 999px;
+    border: 1px solid var(--card-border); background: var(--soft-bg); font-size: 12.5px;
+}
+.case-figure { margin: 2rem 0; }
+.case-figure img {
+    display: block; width: 100%; max-width: 100%; height: auto;
+    border: 1px solid var(--card-border); border-radius: 16px;
+}
+.case-figure figcaption { font-size: 13.5px; color: var(--text-secondary); margin-top: 0.6rem; }
+/* Carousel de screenshots */
+.case-carousel { margin: 1.5rem 0 0.5rem; }
+.case-carousel-track {
+    display: flex; gap: 1rem; overflow-x: auto;
+    scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; border-radius: 16px;
+}
+.case-carousel-track::-webkit-scrollbar { display: none; }
+.case-carousel-slide { flex: 0 0 100%; scroll-snap-align: start; }
+.case-carousel-slide img {
+    display: block; width: 100%; height: auto;
+    border: 1px solid var(--card-border); border-radius: 16px;
+}
+.case-carousel-slide figcaption { font-size: 13.5px; color: var(--text-secondary); margin-top: 0.6rem; }
+.case-carousel-nav { display: flex; align-items: center; gap: 0.9rem; margin-top: 0.9rem; }
+.case-carousel-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 38px; height: 38px; border-radius: 999px;
+    border: 1px solid var(--card-border); background: var(--soft-bg);
+    color: var(--text-primary); font-size: 19px; line-height: 1;
+    cursor: pointer; transition: transform 0.15s ease, border-color 0.15s ease;
+}
+.case-carousel-btn:hover { transform: translateY(-1px); border-color: var(--text-secondary); }
+.case-carousel-count { font-size: 13.5px; color: var(--text-secondary); min-width: 3.2em; text-align: center; font-variant-numeric: tabular-nums; }
+.case-carousel-dots { display: flex; gap: 0.45rem; margin-left: auto; flex-wrap: wrap; }
+.case-carousel-dot {
+    width: 8px; height: 8px; border-radius: 999px; padding: 0; border: none;
+    background: var(--card-border); cursor: pointer; transition: background 0.15s ease, transform 0.15s ease;
+}
+.case-carousel-dot[aria-current="true"] { background: var(--accent-1); transform: scale(1.25); }
+/* Index des réalisations */
+.case-item { display: block; padding: 1.75rem 0; border-bottom: 1px solid var(--card-border); transition: padding-left 0.2s ease; }
+.case-item:hover { padding-left: 0.4rem; }
+.case-item:hover .a-title { color: var(--link-hover); }
+.case-thumb {
+    display: block; width: 100%; height: auto; margin-bottom: 1rem;
+    border: 1px solid var(--card-border); border-radius: 16px;
+}
+.case-item .a-type { font-size: 13px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.06em; }
+.case-item .a-title { font-size: 19px; font-weight: 600; margin: 0.3rem 0; letter-spacing: -0.01em; color: inherit; }
+.case-item .a-desc { font-size: 15px; color: var(--text-secondary); }
+</style>
+</head>
+<body>
+    
+<div class="cursor-glow" id="cursorGlow"></div>
+<script>
+const glow = document.getElementById('cursorGlow');
+let mx=0,my=0,gx=0,gy=0;
+window.addEventListener('mousemove',(e)=>{mx=e.clientX;my=e.clientY;glow.classList.add('visible');});
+window.addEventListener('mouseleave',()=>glow.classList.remove('visible'));
+(function a(){gx+=(mx-gx)*0.1;gy+=(my-gy)*0.1;glow.style.left=gx+'px';glow.style.top=gy+'px';requestAnimationFrame(a);})();
+</script>
+    <main>
+        <a href="/realisations/" class="back-link plain">← Toutes les réalisations</a>
+        <article>
+            <h1 class="animate delay-1">Tranches de Vie — la boulangerie artisanale qui vend son pain en ligne</h1>
+            <p class="case-meta animate delay-2"><span>Application e-commerce</span><span>Tranches de Vie · Les 4 Sources · 2026 · <a href="https://tranchesdevie.les4sources.be" target="_blank" rel="noopener noreferrer">Voir le site</a></span><span><span class="stack-tag">Rails 8</span> <span class="stack-tag">Hotwire</span> <span class="stack-tag">Tailwind CSS</span> <span class="stack-tag">Stripe</span> <span class="stack-tag">PostgreSQL</span> <span class="stack-tag">SMS</span></span></p>
+            <figure class="case-figure animate delay-3">
+                <img src="/assets/realisations/tranches-de-vie/hero.webp" alt="Page d'accueil de Tranches de Vie — pains au feu de bois et prochaine fournée" loading="lazy">
+                <figcaption>La page d'accueil : le pain, le feu de bois, et la prochaine fournée annoncée en temps réel.</figcaption>
+            </figure>
+            <figure class="case-figure animate delay-3">
+                <img src="/assets/realisations/tranches-de-vie/catalogue.webp" alt="Catalogue des pains avec photos, variantes et prix" loading="lazy">
+                <figcaption>Le catalogue vivant : chaque pain, ses formats et ses prix — ajouté au panier en un clic.</figcaption>
+            </figure>
+            <figure class="case-figure animate delay-3">
+                <img src="/assets/realisations/tranches-de-vie/panier.webp" alt="Panier avec choix du jour de cuisson et jauges de capacité de production" loading="lazy">
+                <figcaption>Le panier fait choisir son jour de cuisson — avec la capacité restante du four, en direct.</figcaption>
+            </figure>
+            <figure class="case-figure animate delay-3">
+                <img src="/assets/realisations/tranches-de-vie/mon-compte.webp" alt="Espace « Mon compte » : commandes, portefeuille et statistiques du client" loading="lazy">
+                <figcaption>L'espace client, sans mot de passe : connexion par code SMS ou e-mail, historique complet des fournées.</figcaption>
+            </figure>
+            <figure class="case-figure animate delay-3">
+                <img src="/assets/realisations/tranches-de-vie/compte-sms.webp" alt="Portefeuille prépayé et interrupteur des notifications SMS" loading="lazy">
+                <figcaption>Portefeuille prépayé et notifications SMS activables d'un geste — « ta fournée est prête ».</figcaption>
+            </figure>
+            <figure class="case-figure animate delay-3">
+                <img src="/assets/realisations/tranches-de-vie/portefeuille.webp" alt="Page portefeuille : solde, rechargement Bancontact et historique des transactions" loading="lazy">
+                <figcaption>La cagnotte à pain : on recharge par Bancontact, chaque commande se déduit toute seule.</figcaption>
+            </figure>
+            <figure class="case-figure animate delay-3">
+                <img src="/assets/realisations/tranches-de-vie/calendrier.webp" alt="Calendrier de commandes planifiées avec produits glissés sur les dates de cuisson" loading="lazy">
+                <figcaption>Le calendrier : les habitués planifient leurs fournées à l'avance, validées automatiquement au cut-off.</figcaption>
+            </figure>
+            <div class="article-body animate delay-3">
+                <h2>Le contexte</h2>
+<p>Tranches de Vie est la boulangerie artisanale des 4 Sources, dans la vallée du Bocq : farines locales, levain naturel, longues fermentations, et un four à bois qui cuit deux fois par semaine, le mardi et le vendredi.</p>
+<h2>Le besoin</h2>
+<p>Prendre les pré-commandes à la main ne passait plus à l'échelle : impossible de respecter les limites réelles du fournil (four, pétrin, moules), de gérer les habitués qui veulent leur pain chaque semaine, ou de courir après les paiements. Il fallait une boutique en ligne qui parle le langage du métier : la fournée.</p>
+<h2>La solution</h2>
+<p>Une application complète, conçue avec des agents IA de l'architecture au déploiement. Côté client : un catalogue vivant, un panier par jour de cuisson qui affiche la capacité restante du four, le paiement en ligne (Bancontact, carte, Apple Pay), une connexion sans mot de passe par code SMS ou e-mail, un portefeuille prépayé rechargeable et un calendrier de commandes planifiées pour les habitués. Côté fournil : un back-office qui planifie la production au gramme de pâte près, refuse ce que le four ne peut pas tenir, envoie les SMS « ta fournée est prête », et va jusqu'au reporting financier — commissions Stripe, factures PDF et répartition des revenus entre boulangers.</p>
+<h2>Le résultat</h2>
+<p>La boulangerie encaisse en ligne, les habitués planifient leurs fournées tout seuls, et la boulangère ouvre son admin le matin pour savoir exactement combien de pâte pétrir. Le tout en production, utilisé chaque semaine, cuit au feu de bois.</p>
+            </div>
+            <section class="case-carousel animate delay-3" role="region" aria-label="Le back-office de la boulangère">
+                <h2>Le back-office de la boulangère</h2>
+                <p>De la prise de commande au versement des boulangers, tout le métier est dans l'admin. Les captures ci-dessous tournent sur une instance de démonstration remplie de données fictives.</p>
+                <div class="case-carousel-track" id="carouselTrack" tabindex="0">
+                    <figure class="case-carousel-slide">
+                        <img src="/assets/realisations/tranches-de-vie/admin-fournee.webp" alt="Fiche d'une fournée : consignes du jour, statuts des commandes, boulangers du jour" loading="lazy">
+                        <figcaption>Chaque fournée a sa fiche : consignes, statuts des commandes, et qui boulange aujourd'hui.</figcaption>
+                    </figure>
+                    <figure class="case-carousel-slide">
+                        <img src="/assets/realisations/tranches-de-vie/admin-capacite.webp" alt="Jauges de capacité : moules, pétrin et four en kilos de pâte" loading="lazy">
+                        <figcaption>Moules, pétrin, four : l'app refuse toute commande que le fournil ne peut pas tenir.</figcaption>
+                    </figure>
+                    <figure class="case-carousel-slide">
+                        <img src="/assets/realisations/tranches-de-vie/admin-pate.webp" alt="Quantités de pâte requises par type de farine, calculées automatiquement" loading="lazy">
+                        <figcaption>La feuille de production calcule la pâte au gramme près, farine par farine.</figcaption>
+                    </figure>
+                    <figure class="case-carousel-slide">
+                        <img src="/assets/realisations/tranches-de-vie/admin-commandes.webp" alt="Liste des commandes avec statuts logistiques et de paiement" loading="lazy">
+                        <figcaption>Les commandes, avec leur double statut : logistique (prête, récupérée…) et paiement.</figcaption>
+                    </figure>
+                    <figure class="case-carousel-slide">
+                        <img src="/assets/realisations/tranches-de-vie/admin-jours-cuisson.webp" alt="Liste des jours de cuisson avec commandes et pourcentage de capacité" loading="lazy">
+                        <figcaption>Les jours de cuisson à venir et passés, avec leur taux de remplissage.</figcaption>
+                    </figure>
+                    <figure class="case-carousel-slide">
+                        <img src="/assets/realisations/tranches-de-vie/admin-mangeurs.webp" alt="Liste des clients avec préférences SMS, groupes et soldes de portefeuille" loading="lazy">
+                        <figcaption>Les « mangeurs » : préférences SMS, groupes à tarif réduit, soldes de portefeuille.</figcaption>
+                    </figure>
+                    <figure class="case-carousel-slide">
+                        <img src="/assets/realisations/tranches-de-vie/admin-produits.webp" alt="Gestion des produits et de leurs variantes avec prix" loading="lazy">
+                        <figcaption>Les produits et leurs variantes — formats, prix, disponibilité par saison.</figcaption>
+                    </figure>
+                    <figure class="case-carousel-slide">
+                        <img src="/assets/realisations/tranches-de-vie/admin-reporting.webp" alt="Reporting : chiffre d'affaires, panier moyen, commissions Stripe et CA net" loading="lazy">
+                        <figcaption>Le reporting : CA, panier moyen, commissions Stripe déduites au centime.</figcaption>
+                    </figure>
+                    <figure class="case-carousel-slide">
+                        <img src="/assets/realisations/tranches-de-vie/admin-ventes.webp" alt="Ventes par produit et top 10 des clients" loading="lazy">
+                        <figcaption>Ventes par produit et top clients — la boulangère sait ce qui sort du four et pour qui.</figcaption>
+                    </figure>
+                    <figure class="case-carousel-slide">
+                        <img src="/assets/realisations/tranches-de-vie/admin-revenus-boulangers.webp" alt="Rapport des revenus des boulangers : marge brute, part du lieu, pool des boulangers" loading="lazy">
+                        <figcaption>Jusqu'à la répartition des revenus : marge brute, part du lieu, pool des boulangers.</figcaption>
+                    </figure>
+                </div>
+                <div class="case-carousel-nav">
+                    <button class="case-carousel-btn" id="carouselPrev" aria-label="Image précédente">‹</button>
+                    <span class="case-carousel-count" id="carouselCount">1 / 10</span>
+                    <button class="case-carousel-btn" id="carouselNext" aria-label="Image suivante">›</button>
+                    <div class="case-carousel-dots" id="carouselDots"><button class="case-carousel-dot" data-index="0" aria-label="Aller à l'image 1" aria-current="true"></button><button class="case-carousel-dot" data-index="1" aria-label="Aller à l'image 2"></button><button class="case-carousel-dot" data-index="2" aria-label="Aller à l'image 3"></button><button class="case-carousel-dot" data-index="3" aria-label="Aller à l'image 4"></button><button class="case-carousel-dot" data-index="4" aria-label="Aller à l'image 5"></button><button class="case-carousel-dot" data-index="5" aria-label="Aller à l'image 6"></button><button class="case-carousel-dot" data-index="6" aria-label="Aller à l'image 7"></button><button class="case-carousel-dot" data-index="7" aria-label="Aller à l'image 8"></button><button class="case-carousel-dot" data-index="8" aria-label="Aller à l'image 9"></button><button class="case-carousel-dot" data-index="9" aria-label="Aller à l'image 10"></button></div>
+                </div>
+            </section>
+            <script>
+            (function () {
+                const track = document.getElementById('carouselTrack');
+                const count = document.getElementById('carouselCount');
+                const dots = Array.from(document.getElementById('carouselDots').children);
+                const total = dots.length;
+                let current = 0;
+                function slideWidth() { return track.firstElementChild ? track.firstElementChild.getBoundingClientRect().width + 16 : track.clientWidth; }
+                function goTo(i) { track.scrollTo({ left: Math.max(0, Math.min(i, total - 1)) * slideWidth(), behavior: 'smooth' }); }
+                function sync() {
+                    const i = Math.round(track.scrollLeft / slideWidth());
+                    if (i === current || i < 0 || i >= total) return;
+                    current = i;
+                    count.textContent = (i + 1) + ' / ' + total;
+                    dots.forEach((d, j) => j === i ? d.setAttribute('aria-current', 'true') : d.removeAttribute('aria-current'));
+                }
+                track.addEventListener('scroll', () => requestAnimationFrame(sync), { passive: true });
+                document.getElementById('carouselPrev').addEventListener('click', () => goTo(current - 1));
+                document.getElementById('carouselNext').addEventListener('click', () => goTo(current + 1));
+                dots.forEach((d, i) => d.addEventListener('click', () => goTo(i)));
+                track.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(current - 1); }
+                    if (e.key === 'ArrowRight') { e.preventDefault(); goTo(current + 1); }
+                });
+            })();
+            </script>
+            <div class="cta-box animate delay-3">
+                <p>Un projet similaire en tête ?</p>
+                <a href="/tarifs/" class="cta-btn">Voir mes tarifs <span>→</span></a>
+            </div>
+        </article>
+    </main>
+</body>
+</html>

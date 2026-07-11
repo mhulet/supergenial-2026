@@ -127,6 +127,36 @@ a:hover { color: var(--link-hover); }
     border: 1px solid var(--card-border); border-radius: 16px;
 }
 .case-figure figcaption { font-size: 13.5px; color: var(--text-secondary); margin-top: 0.6rem; }
+/* Carousel de screenshots */
+.case-carousel { margin: 1.5rem 0 0.5rem; }
+.case-carousel-track {
+    display: flex; gap: 1rem; overflow-x: auto;
+    scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; border-radius: 16px;
+}
+.case-carousel-track::-webkit-scrollbar { display: none; }
+.case-carousel-slide { flex: 0 0 100%; scroll-snap-align: start; }
+.case-carousel-slide img {
+    display: block; width: 100%; height: auto;
+    border: 1px solid var(--card-border); border-radius: 16px;
+}
+.case-carousel-slide figcaption { font-size: 13.5px; color: var(--text-secondary); margin-top: 0.6rem; }
+.case-carousel-nav { display: flex; align-items: center; gap: 0.9rem; margin-top: 0.9rem; }
+.case-carousel-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 38px; height: 38px; border-radius: 999px;
+    border: 1px solid var(--card-border); background: var(--soft-bg);
+    color: var(--text-primary); font-size: 19px; line-height: 1;
+    cursor: pointer; transition: transform 0.15s ease, border-color 0.15s ease;
+}
+.case-carousel-btn:hover { transform: translateY(-1px); border-color: var(--text-secondary); }
+.case-carousel-count { font-size: 13.5px; color: var(--text-secondary); min-width: 3.2em; text-align: center; font-variant-numeric: tabular-nums; }
+.case-carousel-dots { display: flex; gap: 0.45rem; margin-left: auto; flex-wrap: wrap; }
+.case-carousel-dot {
+    width: 8px; height: 8px; border-radius: 999px; padding: 0; border: none;
+    background: var(--card-border); cursor: pointer; transition: background 0.15s ease, transform 0.15s ease;
+}
+.case-carousel-dot[aria-current="true"] { background: var(--accent-1); transform: scale(1.25); }
 /* Index des réalisations */
 .case-item { display: block; padding: 1.75rem 0; border-bottom: 1px solid var(--card-border); transition: padding-left 0.2s ease; }
 .case-item:hover { padding-left: 0.4rem; }
@@ -170,6 +200,12 @@ window.addEventListener('mouseleave',()=>glow.classList.remove('visible'));
             Want yours? <a href="/en/pricing/">Have a look at the pricing</a>.
         </p>
         <div class="article-list animate delay-3">
+                <a href="/en/case-studies/tranches-de-vie/" class="case-item plain">
+                    <img class="case-thumb" src="/assets/realisations/tranches-de-vie/hero.webp" alt="Tranches de Vie homepage — wood-fired breads and the next bake day" loading="lazy">
+                    <div class="a-type">E-commerce application · 2026</div>
+                    <div class="a-title">Tranches de Vie — an artisan bakery selling its bread online</div>
+                    <div class="a-desc">The complete e-commerce application of a wood-fired bakery: pre-orders per bake day, Bancontact payments, a prepaid wallet, automated SMS and a back office that plans production to the gram.</div>
+                </a>
                 <a href="/en/case-studies/silvea/" class="case-item plain">
                     <img class="case-thumb" src="/assets/realisations/silvea/home.webp" alt="silvea.org homepage — full-screen forest hero" loading="lazy">
                     <div class="a-type">Website · 2026</div>

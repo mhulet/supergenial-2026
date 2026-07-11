@@ -5,7 +5,7 @@
 
 import { writeFileSync, mkdirSync } from "node:fs";
 import { join, dirname } from "node:path";
-import { HEAD, GLOW, loadCases, type CaseStudy } from "./build.ts";
+import { HEAD, GLOW, loadCases, carouselSection, type CaseStudy } from "./build.ts";
 
 const ROOT = dirname(new URL(import.meta.url).pathname);      // .../realisations
 const SITE = dirname(ROOT);                                   // repo root
@@ -33,7 +33,7 @@ function casePage(c: CaseStudy): string {
 ${figures(c)}
             <div class="article-body animate delay-3">
                 ${c.body_html_en}
-            </div>
+            </div>${carouselSection(c, "en")}
             <div class="cta-box animate delay-3">
                 <p>Have a similar project in mind?</p>
                 <a href="/en/pricing/" class="cta-btn">See my pricing <span>→</span></a>

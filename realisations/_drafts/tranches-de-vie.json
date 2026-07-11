@@ -1,0 +1,147 @@
+{
+  "slug": "tranches-de-vie",
+  "slug_en": "tranches-de-vie",
+  "type": "Application e-commerce",
+  "type_en": "E-commerce application",
+  "client": "Tranches de Vie · Les 4 Sources",
+  "year": "2026",
+  "title": "Tranches de Vie — la boulangerie artisanale qui vend son pain en ligne",
+  "title_en": "Tranches de Vie — an artisan bakery selling its bread online",
+  "description": "L'application e-commerce complète d'une boulangerie au feu de bois : pré-commandes par jour de cuisson, paiement Bancontact, portefeuille prépayé, SMS automatiques et un back-office qui planifie la production au gramme près.",
+  "description_en": "The complete e-commerce application of a wood-fired bakery: pre-orders per bake day, Bancontact payments, a prepaid wallet, automated SMS and a back office that plans production to the gram.",
+  "keywords": "étude de cas, e-commerce boulangerie, Ruby on Rails, Hotwire, Stripe, Bancontact, agents IA, application web",
+  "keywords_en": "case study, bakery e-commerce, Ruby on Rails, Hotwire, Stripe, Bancontact, AI agents, web application",
+  "url_live": "https://tranchesdevie.les4sources.be",
+  "stack": ["Rails 8", "Hotwire", "Tailwind CSS", "Stripe", "PostgreSQL", "SMS"],
+  "images": [
+    {
+      "src": "/assets/realisations/tranches-de-vie/hero.webp",
+      "alt": "Page d'accueil de Tranches de Vie — pains au feu de bois et prochaine fournée",
+      "alt_en": "Tranches de Vie homepage — wood-fired breads and the next bake day",
+      "caption": "La page d'accueil : le pain, le feu de bois, et la prochaine fournée annoncée en temps réel.",
+      "caption_en": "The homepage: bread, the wood fire, and the next bake announced in real time."
+    },
+    {
+      "src": "/assets/realisations/tranches-de-vie/catalogue.webp",
+      "alt": "Catalogue des pains avec photos, variantes et prix",
+      "alt_en": "Bread catalogue with photos, variants and prices",
+      "caption": "Le catalogue vivant : chaque pain, ses formats et ses prix — ajouté au panier en un clic.",
+      "caption_en": "The living catalogue: every bread, its sizes and prices — added to the basket in one click."
+    },
+    {
+      "src": "/assets/realisations/tranches-de-vie/panier.webp",
+      "alt": "Panier avec choix du jour de cuisson et jauges de capacité de production",
+      "alt_en": "Basket with bake-day selection and production capacity gauges",
+      "caption": "Le panier fait choisir son jour de cuisson — avec la capacité restante du four, en direct.",
+      "caption_en": "The basket asks you to pick a bake day — showing the oven's remaining capacity, live."
+    },
+    {
+      "src": "/assets/realisations/tranches-de-vie/mon-compte.webp",
+      "alt": "Espace « Mon compte » : commandes, portefeuille et statistiques du client",
+      "alt_en": "Customer account page: orders, wallet and stats",
+      "caption": "L'espace client, sans mot de passe : connexion par code SMS ou e-mail, historique complet des fournées.",
+      "caption_en": "The customer area, passwordless: sign-in by SMS or e-mail code, full bake-day history."
+    },
+    {
+      "src": "/assets/realisations/tranches-de-vie/compte-sms.webp",
+      "alt": "Portefeuille prépayé et interrupteur des notifications SMS",
+      "alt_en": "Prepaid wallet and SMS notifications toggle",
+      "caption": "Portefeuille prépayé et notifications SMS activables d'un geste — « ta fournée est prête ».",
+      "caption_en": "Prepaid wallet and SMS notifications toggled in one tap — “your bake is ready”."
+    },
+    {
+      "src": "/assets/realisations/tranches-de-vie/portefeuille.webp",
+      "alt": "Page portefeuille : solde, rechargement Bancontact et historique des transactions",
+      "alt_en": "Wallet page: balance, Bancontact top-up and transaction history",
+      "caption": "La cagnotte à pain : on recharge par Bancontact, chaque commande se déduit toute seule.",
+      "caption_en": "The bread wallet: top up with Bancontact, every order deducts itself."
+    },
+    {
+      "src": "/assets/realisations/tranches-de-vie/calendrier.webp",
+      "alt": "Calendrier de commandes planifiées avec produits glissés sur les dates de cuisson",
+      "alt_en": "Planned-orders calendar with products dragged onto bake dates",
+      "caption": "Le calendrier : les habitués planifient leurs fournées à l'avance, validées automatiquement au cut-off.",
+      "caption_en": "The calendar: regulars plan their bakes ahead, confirmed automatically at cut-off."
+    }
+  ],
+  "carousel": {
+    "title": "Le back-office de la boulangère",
+    "title_en": "The baker's back office",
+    "intro": "De la prise de commande au versement des boulangers, tout le métier est dans l'admin. Les captures ci-dessous tournent sur une instance de démonstration remplie de données fictives.",
+    "intro_en": "From order intake to baker payouts, the whole trade lives in the admin. The screenshots below run on a demo instance filled with fictional data.",
+    "images": [
+      {
+        "src": "/assets/realisations/tranches-de-vie/admin-fournee.webp",
+        "alt": "Fiche d'une fournée : consignes du jour, statuts des commandes, boulangers du jour",
+        "alt_en": "A bake day sheet: day notes, order statuses, bakers on duty",
+        "caption": "Chaque fournée a sa fiche : consignes, statuts des commandes, et qui boulange aujourd'hui.",
+        "caption_en": "Each bake day has its sheet: notes, order statuses, and who's baking today."
+      },
+      {
+        "src": "/assets/realisations/tranches-de-vie/admin-capacite.webp",
+        "alt": "Jauges de capacité : moules, pétrin et four en kilos de pâte",
+        "alt_en": "Capacity gauges: molds, kneader and oven in kilos of dough",
+        "caption": "Moules, pétrin, four : l'app refuse toute commande que le fournil ne peut pas tenir.",
+        "caption_en": "Molds, kneader, oven: the app refuses any order the bakehouse can't hold."
+      },
+      {
+        "src": "/assets/realisations/tranches-de-vie/admin-pate.webp",
+        "alt": "Quantités de pâte requises par type de farine, calculées automatiquement",
+        "alt_en": "Dough quantities required per flour type, computed automatically",
+        "caption": "La feuille de production calcule la pâte au gramme près, farine par farine.",
+        "caption_en": "The production sheet computes dough to the gram, flour by flour."
+      },
+      {
+        "src": "/assets/realisations/tranches-de-vie/admin-commandes.webp",
+        "alt": "Liste des commandes avec statuts logistiques et de paiement",
+        "alt_en": "Orders list with fulfilment and payment statuses",
+        "caption": "Les commandes, avec leur double statut : logistique (prête, récupérée…) et paiement.",
+        "caption_en": "Orders with their dual status: fulfilment (ready, picked up…) and payment."
+      },
+      {
+        "src": "/assets/realisations/tranches-de-vie/admin-jours-cuisson.webp",
+        "alt": "Liste des jours de cuisson avec commandes et pourcentage de capacité",
+        "alt_en": "Bake days list with orders and capacity percentage",
+        "caption": "Les jours de cuisson à venir et passés, avec leur taux de remplissage.",
+        "caption_en": "Upcoming and past bake days, with their fill rate."
+      },
+      {
+        "src": "/assets/realisations/tranches-de-vie/admin-mangeurs.webp",
+        "alt": "Liste des clients avec préférences SMS, groupes et soldes de portefeuille",
+        "alt_en": "Customers list with SMS preferences, groups and wallet balances",
+        "caption": "Les « mangeurs » : préférences SMS, groupes à tarif réduit, soldes de portefeuille.",
+        "caption_en": "The “eaters”: SMS preferences, discounted groups, wallet balances."
+      },
+      {
+        "src": "/assets/realisations/tranches-de-vie/admin-produits.webp",
+        "alt": "Gestion des produits et de leurs variantes avec prix",
+        "alt_en": "Products and variants management with prices",
+        "caption": "Les produits et leurs variantes — formats, prix, disponibilité par saison.",
+        "caption_en": "Products and their variants — sizes, prices, seasonal availability."
+      },
+      {
+        "src": "/assets/realisations/tranches-de-vie/admin-reporting.webp",
+        "alt": "Reporting : chiffre d'affaires, panier moyen, commissions Stripe et CA net",
+        "alt_en": "Reporting: revenue, average basket, Stripe fees and net revenue",
+        "caption": "Le reporting : CA, panier moyen, commissions Stripe déduites au centime.",
+        "caption_en": "Reporting: revenue, average basket, Stripe fees deducted to the cent."
+      },
+      {
+        "src": "/assets/realisations/tranches-de-vie/admin-ventes.webp",
+        "alt": "Ventes par produit et top 10 des clients",
+        "alt_en": "Sales per product and top 10 customers",
+        "caption": "Ventes par produit et top clients — la boulangère sait ce qui sort du four et pour qui.",
+        "caption_en": "Sales per product and top customers — the baker knows what leaves the oven, and for whom."
+      },
+      {
+        "src": "/assets/realisations/tranches-de-vie/admin-revenus-boulangers.webp",
+        "alt": "Rapport des revenus des boulangers : marge brute, part du lieu, pool des boulangers",
+        "alt_en": "Baker revenue report: gross margin, venue share, bakers' pool",
+        "caption": "Jusqu'à la répartition des revenus : marge brute, part du lieu, pool des boulangers.",
+        "caption_en": "All the way to revenue sharing: gross margin, venue share, the bakers' pool."
+      }
+    ]
+  },
+  "body_html": "<h2>Le contexte</h2>\n<p>Tranches de Vie est la boulangerie artisanale des 4 Sources, dans la vallée du Bocq : farines locales, levain naturel, longues fermentations, et un four à bois qui cuit deux fois par semaine, le mardi et le vendredi.</p>\n<h2>Le besoin</h2>\n<p>Prendre les pré-commandes à la main ne passait plus à l'échelle : impossible de respecter les limites réelles du fournil (four, pétrin, moules), de gérer les habitués qui veulent leur pain chaque semaine, ou de courir après les paiements. Il fallait une boutique en ligne qui parle le langage du métier : la fournée.</p>\n<h2>La solution</h2>\n<p>Une application complète, conçue avec des agents IA de l'architecture au déploiement. Côté client : un catalogue vivant, un panier par jour de cuisson qui affiche la capacité restante du four, le paiement en ligne (Bancontact, carte, Apple Pay), une connexion sans mot de passe par code SMS ou e-mail, un portefeuille prépayé rechargeable et un calendrier de commandes planifiées pour les habitués. Côté fournil : un back-office qui planifie la production au gramme de pâte près, refuse ce que le four ne peut pas tenir, envoie les SMS « ta fournée est prête », et va jusqu'au reporting financier — commissions Stripe, factures PDF et répartition des revenus entre boulangers.</p>\n<h2>Le résultat</h2>\n<p>La boulangerie encaisse en ligne, les habitués planifient leurs fournées tout seuls, et la boulangère ouvre son admin le matin pour savoir exactement combien de pâte pétrir. Le tout en production, utilisé chaque semaine, cuit au feu de bois.</p>",
+  "body_html_en": "<h2>The context</h2>\n<p>Tranches de Vie is the artisan bakery of Les 4 Sources, in Belgium's Bocq valley: local flours, natural sourdough, long fermentations, and a wood-fired oven baking twice a week, on Tuesdays and Fridays.</p>\n<h2>The need</h2>\n<p>Taking pre-orders by hand no longer scaled: impossible to respect the bakehouse's real limits (oven, kneader, molds), to serve regulars who want their bread every week, or to chase payments. They needed an online shop that speaks the trade's language: the bake day.</p>\n<h2>The solution</h2>\n<p>A complete application, built with AI agents from architecture to deployment. Customer side: a living catalogue, a per-bake-day basket showing the oven's remaining capacity, online payment (Bancontact, card, Apple Pay), passwordless sign-in by SMS or e-mail code, a rechargeable prepaid wallet and a planned-orders calendar for regulars. Bakehouse side: a back office that plans production to the gram of dough, refuses what the oven can't hold, sends “your bake is ready” text messages, and goes all the way to financial reporting — Stripe fees, PDF invoices and revenue sharing between bakers.</p>\n<h2>The result</h2>\n<p>The bakery gets paid online, regulars plan their own bakes, and the baker opens the admin in the morning to know exactly how much dough to knead. All in production, used every week, baked over a wood fire.</p>"
+}
