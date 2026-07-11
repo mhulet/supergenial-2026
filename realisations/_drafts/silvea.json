@@ -1,0 +1,41 @@
+{
+  "slug": "silvea",
+  "slug_en": "silvea",
+  "type": "Site web",
+  "type_en": "Website",
+  "client": "Silvéa ASBL",
+  "year": "2026",
+  "title": "Silvéa — santé et connexion au vivant",
+  "title_en": "Silvéa — health and connection to the living world",
+  "description": "Le site d'une ASBL wallonne active en santé-nature : agenda d'activités, inscriptions avec paiement en ligne, blog et administration complète.",
+  "description_en": "The website of a Walloon non-profit working on nature and health: activity calendar, online registration and payment, blog and full admin panel.",
+  "keywords": "étude de cas, site web ASBL, Ruby on Rails, Inertia, React, Stripe, agents IA",
+  "keywords_en": "case study, non-profit website, Ruby on Rails, Inertia, React, Stripe, AI agents",
+  "url_live": "https://www.silvea.org",
+  "stack": ["Rails 8", "Inertia + React", "TypeScript", "Tailwind CSS", "Stripe"],
+  "images": [
+    {
+      "src": "/assets/realisations/silvea/home.webp",
+      "alt": "Page d'accueil de silvea.org — hero plein écran en forêt",
+      "alt_en": "silvea.org homepage — full-screen forest hero",
+      "caption": "La page d'accueil : une identité visuelle chaleureuse, ancrée dans la forêt.",
+      "caption_en": "The homepage: a warm visual identity, rooted in the forest."
+    },
+    {
+      "src": "/assets/realisations/silvea/propositions.webp",
+      "alt": "Section « Nos propositions » du site Silvéa",
+      "alt_en": "The “Our offerings” section of the Silvéa website",
+      "caption": "Les propositions de l'association, présentées par cartes.",
+      "caption_en": "The organisation's offerings, presented as cards."
+    },
+    {
+      "src": "/assets/realisations/silvea/galerie.webp",
+      "alt": "Galerie photo « Silvéa en images » sur la page d'accueil",
+      "alt_en": "“Silvéa in pictures” photo gallery on the homepage",
+      "caption": "La galerie photo, alimentée depuis l'administration.",
+      "caption_en": "The photo gallery, managed from the admin panel."
+    }
+  ],
+  "body_html": "<h2>Le contexte</h2>\n<p>Silvéa est une ASBL wallonne qui propose des activités à la croisée de la santé humaine et de la connexion à la nature — immersions en forêt, sylvothérapie, accompagnements sur mesure — pour les particuliers, les collectifs et les professionnels de la santé.</p>\n<h2>Le besoin</h2>\n<p>L'association avait besoin d'un vrai site : présenter ses propositions, publier son agenda d'activités, prendre les inscriptions et les paiements en ligne, tenir un blog de ressources, et gérer tout ça en autonomie — sans dépendre d'un développeur pour chaque mise à jour.</p>\n<h2>La solution</h2>\n<p>Une application web complète, conçue avec des agents IA de l'architecture au déploiement : cinq pages de contenu, un agenda avec inscriptions et paiement Stripe (codes promo et remboursements compris), un blog, une newsletter avec consentement RGPD, et quatre panneaux d'administration pour que l'équipe gère elle-même activités, contenus et inscriptions.</p>\n<h2>Le résultat</h2>\n<p>Un site rapide, accessible et pensé pour le référencement (URLs en français, données structurées, HTML sémantique), fidèle au pixel près aux maquettes, que l'association fait vivre au quotidien sans intervention technique.</p>",
+  "body_html_en": "<h2>The context</h2>\n<p>Silvéa is a Walloon non-profit offering activities at the intersection of human health and nature connection — forest immersions, forest therapy, tailor-made programmes — for individuals, groups and healthcare professionals.</p>\n<h2>The need</h2>\n<p>The organisation needed a real website: presenting its offerings, publishing its activity calendar, taking registrations and payments online, running a resources blog, and managing all of it autonomously — without depending on a developer for every update.</p>\n<h2>The solution</h2>\n<p>A complete web application, built with AI agents from architecture to deployment: five content pages, a calendar with registration and Stripe payments (promo codes and refunds included), a blog, a GDPR-compliant newsletter, and four admin panels so the team manages activities, content and registrations themselves.</p>\n<h2>The result</h2>\n<p>A fast, accessible, SEO-minded website (structured data, semantic HTML), pixel-faithful to the designs, that the organisation keeps alive day to day without technical help.</p>"
+}

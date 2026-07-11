@@ -21,15 +21,24 @@ const SLUGS: Record<string, string> = {
   "rails-8-nouveautes": "rails-8-whats-new",
 };
 
+// Correspondance FR slug → EN slug (études de cas / réalisations).
+const CASE_SLUGS: Record<string, string> = {
+  "silvea": "silvea",
+};
+
 // Paires d'URL { fr, en } par "clé de page".
 const PAIRS: Record<string, { fr: string; en: string }> = {
   home: { fr: "/", en: "/en/" },
   maintenance: { fr: "/maintenance/", en: "/en/maintenance/" },
   pricing: { fr: "/tarifs/", en: "/en/pricing/" },
   resources: { fr: "/ressources/", en: "/en/resources/" },
+  cases: { fr: "/realisations/", en: "/en/case-studies/" },
 };
 for (const [fr, en] of Object.entries(SLUGS)) {
   PAIRS["art:" + fr] = { fr: `/ressources/${fr}/`, en: `/en/resources/${en}/` };
+}
+for (const [fr, en] of Object.entries(CASE_SLUGS)) {
+  PAIRS["case:" + fr] = { fr: `/realisations/${fr}/`, en: `/en/case-studies/${en}/` };
 }
 
 const CSS = `/*langswitch*/
@@ -72,6 +81,12 @@ const pages: Page[] = [
 for (const [fr, en] of Object.entries(SLUGS)) {
   pages.push({ path: `ressources/${fr}/index.html`, key: "art:" + fr, active: "fr" });
   pages.push({ path: `en/resources/${en}/index.html`, key: "art:" + fr, active: "en" });
+}
+pages.push({ path: "realisations/index.html", key: "cases", active: "fr" });
+pages.push({ path: "en/case-studies/index.html", key: "cases", active: "en" });
+for (const [fr, en] of Object.entries(CASE_SLUGS)) {
+  pages.push({ path: `realisations/${fr}/index.html`, key: "case:" + fr, active: "fr" });
+  pages.push({ path: `en/case-studies/${en}/index.html`, key: "case:" + fr, active: "en" });
 }
 
 let done = 0;
