@@ -40,6 +40,16 @@ for (const [fr, en] of Object.entries(SLUGS)) {
   pages.push({ file: `en/resources/${en}/index.html`, fr: `/ressources/${fr}/`, en: `/en/resources/${en}/`, lang: "en", type: "article" });
 }
 
+// Réalisations / case studies — découvertes depuis les drafts JSON (source versionnée).
+import { readdirSync } from "node:fs";
+pages.push({ file: "realisations/index.html", fr: "/realisations/", en: "/en/case-studies/", lang: "fr", type: "page" });
+pages.push({ file: "en/case-studies/index.html", fr: "/realisations/", en: "/en/case-studies/", lang: "en", type: "page" });
+for (const f of readdirSync(join(ROOT, "realisations", "_drafts")).filter((f) => f.endsWith(".json"))) {
+  const d = JSON.parse(readFileSync(join(ROOT, "realisations", "_drafts", f), "utf8"));
+  pages.push({ file: `realisations/${d.slug}/index.html`, fr: `/realisations/${d.slug}/`, en: `/en/case-studies/${d.slug_en}/`, lang: "fr", type: "article" });
+  pages.push({ file: `en/case-studies/${d.slug_en}/index.html`, fr: `/realisations/${d.slug}/`, en: `/en/case-studies/${d.slug_en}/`, lang: "en", type: "article" });
+}
+
 const grab = (h: string, re: RegExp) => (h.match(re)?.[1] ?? "").trim();
 
 const orgLd = (lang: "fr" | "en", url: string) => ({

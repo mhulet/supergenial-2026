@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Silvéa — health and connection to the living world — Super Génial</title>
+    <title>semisto.org — the new website of the food forest association — Super Génial</title>
     <meta name="author" content="Michael Hulet">
-    <meta name="description" content="The website of a Walloon non-profit working on nature and health: activity calendar, online registration and payment, blog and full admin panel.">
-    <meta name="keywords" content="case study, non-profit website, Ruby on Rails, Inertia, React, Stripe, AI agents">
-    <meta property="og:title" content="Silvéa — health and connection to the living world — Super Génial">
-    <meta property="og:description" content="The website of a Walloon non-profit working on nature and health: activity calendar, online registration and payment, blog and full admin panel.">
+    <meta name="description" content="Semisto's public website, rebuilt with Astro: fully static, bilingual by construction, a custom design system, SEO migrated intact and team-editable content — designed and built by AI agents.">
+    <meta name="keywords" content="case study, website, Astro, static site, design system, SEO, i18n, AI agents, food forests">
+    <meta property="og:title" content="semisto.org — the new website of the food forest association — Super Génial">
+    <meta property="og:description" content="Semisto's public website, rebuilt with Astro: fully static, bilingual by construction, a custom design system, SEO migrated intact and team-editable content — designed and built by AI agents.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.supergenial.be/en/case-studies/silvea/">
-    <link rel="canonical" href="https://www.supergenial.be/en/case-studies/silvea/">
+    <meta property="og:url" content="https://www.supergenial.be/en/case-studies/site-semisto/">
+    <link rel="canonical" href="https://www.supergenial.be/en/case-studies/site-semisto/">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -168,20 +168,10 @@ a:hover { color: var(--link-hover); }
 .case-item .a-type { font-size: 13px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.06em; }
 .case-item .a-title { font-size: 19px; font-weight: 600; margin: 0.3rem 0; letter-spacing: -0.01em; color: inherit; }
 .case-item .a-desc { font-size: 15px; color: var(--text-secondary); }
-/*langswitch*/
-.topbar{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:2.5rem;flex-wrap:wrap}
-.topbar--end{justify-content:flex-end}
-.topbar .back-link{margin-bottom:0}
-.lang-switch{display:inline-flex;align-items:center;padding:3px 3px 3px 1px;border-radius:999px;background:rgba(128,128,128,.10);border:1px solid rgba(128,128,128,.22);font-size:12px;font-weight:600;letter-spacing:.04em;flex-shrink:0}
-.lang-switch .lang-globe{color:var(--text-secondary);margin:0 .4rem 0 .48rem;flex-shrink:0;display:block}
-.lang-switch a{text-decoration:none;color:var(--text-secondary);padding:.28rem .62rem;border-radius:999px;line-height:1;transition:color .2s ease,background .2s ease,box-shadow .2s ease}
-.lang-switch a::after{display:none!important}
-.lang-switch a:hover{color:var(--text-primary)}
-.lang-switch a.is-active,.lang-switch a.is-active:hover{color:#fff;background:linear-gradient(135deg,var(--accent-1),var(--accent-2));box-shadow:0 2px 10px -3px rgba(99,102,241,.45)}
 </style>
-    <link rel="alternate" hreflang="fr" href="https://www.supergenial.be/realisations/silvea/">
-    <link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/case-studies/silvea/">
-    <link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/realisations/silvea/">
+    <link rel="alternate" hreflang="fr" href="https://www.supergenial.be/realisations/site-semisto/">
+    <link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/case-studies/site-semisto/">
+    <link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/realisations/site-semisto/">
 </head>
 <body>
     
@@ -194,31 +184,39 @@ window.addEventListener('mouseleave',()=>glow.classList.remove('visible'));
 (function a(){gx+=(mx-gx)*0.1;gy+=(my-gy)*0.1;glow.style.left=gx+'px';glow.style.top=gy+'px';requestAnimationFrame(a);})();
 </script>
     <main>
-        <div class="topbar"><a href="/en/case-studies/" class="back-link plain">← All case studies</a><div class="lang-switch" aria-label="Language / Langue"><svg class="lang-globe" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><ellipse cx="12" cy="12" rx="4.2" ry="9"/></svg><a href="/realisations/silvea/">FR</a><a href="/en/case-studies/silvea/" class="is-active">EN</a></div></div>
+        <a href="/en/case-studies/" class="back-link plain">← All case studies</a>
         <article>
-            <h1 class="animate delay-1">Silvéa — health and connection to the living world</h1>
-            <p class="case-meta animate delay-2"><span>Website</span><span>Silvéa ASBL · 2026 · <a href="https://www.silvea.org" target="_blank" rel="noopener noreferrer">Visit the site</a></span><span><span class="stack-tag">Rails 8</span> <span class="stack-tag">Inertia + React</span> <span class="stack-tag">TypeScript</span> <span class="stack-tag">Tailwind CSS</span> <span class="stack-tag">Stripe</span></span></p>
+            <h1 class="animate delay-1">semisto.org — the new website of the food forest association</h1>
+            <p class="case-meta animate delay-2"><span>Website</span><span>Semisto · 2026 · <a href="https://www.semisto.org" target="_blank" rel="noopener noreferrer">Visit the site</a></span><span><span class="stack-tag">Astro 5</span> <span class="stack-tag">Tailwind CSS 4</span> <span class="stack-tag">Content Collections</span> <span class="stack-tag">Sveltia CMS</span> <span class="stack-tag">Docker</span> <span class="stack-tag">nginx</span></span></p>
             <figure class="case-figure animate delay-3">
-                <img src="/assets/realisations/silvea/home.webp" alt="silvea.org homepage — full-screen forest hero" loading="lazy">
-                <figcaption>The homepage: a warm visual identity, rooted in the forest.</figcaption>
+                <img src="/assets/realisations/semisto-website/home.webp" alt="semisto.org homepage: towards the era of food forests" loading="lazy">
+                <figcaption>The homepage: the mission first, photos of real work sites second.</figcaption>
             </figure>
             <figure class="case-figure animate delay-3">
-                <img src="/assets/realisations/silvea/propositions.webp" alt="The “Our offerings” section of the Silvéa website" loading="lazy">
-                <figcaption>The organisation's offerings, presented as cards.</figcaption>
+                <img src="/assets/realisations/semisto-website/formations.webp" alt="Academy page: learn to grow your own forest garden" loading="lazy">
+                <figcaption>The Academy: the whole training catalogue, from discovery weekends to the long course.</figcaption>
             </figure>
             <figure class="case-figure animate delay-3">
-                <img src="/assets/realisations/silvea/galerie.webp" alt="“Silvéa in pictures” photo gallery on the homepage" loading="lazy">
-                <figcaption>The photo gallery, managed from the admin panel.</figcaption>
+                <img src="/assets/realisations/semisto-website/cursus.webp" alt="The food forest designer course page, with video" loading="lazy">
+                <figcaption>The flagship 2026-2027 course page — 18 weekends to learn a new trade.</figcaption>
+            </figure>
+            <figure class="case-figure animate delay-3">
+                <img src="/assets/realisations/semisto-website/realisations.webp" alt="Portfolio page: living food forest projects" loading="lazy">
+                <figcaption>The portfolio: every food forest designed by the studio, told and illustrated.</figcaption>
+            </figure>
+            <figure class="case-figure animate delay-3">
+                <img src="/assets/realisations/semisto-website/pepiniere.webp" alt="Nursery school page: first and foremost, a nursery school" loading="lazy">
+                <figcaption>The nursery school, the model's heart: plants fit for tomorrow's climate, and the people who know how to propagate them.</figcaption>
             </figure>
             <div class="article-body animate delay-3">
                 <h2>The context</h2>
-<p>Silvéa is a Walloon non-profit offering activities at the intersection of human health and nature connection — forest immersions, forest therapy, tailor-made programmes — for individuals, groups and healthcare professionals.</p>
+<p>Semisto trains food forest designers, designs forest gardens and propagates rare plants in its nursery school. Its previous website, built on a no-code service, couldn't keep up: slow, single-language, hard to edit, and invisible to search engines.</p>
 <h2>The need</h2>
-<p>The organisation needed a real website: presenting its offerings, publishing its activity calendar, taking registrations and payments online, running a resources blog, and managing all of it autonomously — without depending on a developer for every update.</p>
+<p>A fast, beautiful, bilingual website the non-technical team can edit themselves — without losing accumulated SEO: 171 URLs from the old site to redirect cleanly.</p>
 <h2>The solution</h2>
-<p>A complete web application, built with AI agents from architecture to deployment: five content pages, a calendar with registration and Stripe payments (promo codes and refunds included), a blog, a GDPR-compliant newsletter, and four admin panels so the team manages activities, content and registrations themselves.</p>
+<p>A fully static Astro 5 site, generated from typed content collections: courses, projects, articles, team, events — editable in Markdown or through a visual CMS. The custom design system declines about forty components in Semisto's colours. French and English are bilingual by construction, every page in both languages. On the SEO side: JSON-LD structured data, a 301 redirect table from the old site, and even a build-time llms.txt for AI search engines. Everything is verified in CI on every commit and deployed automatically to the association's VPS.</p>
 <h2>The result</h2>
-<p>A fast, accessible, SEO-minded website (structured data, semantic HTML), pixel-faithful to the designs, that the organisation keeps alive day to day without technical help.</p>
+<p>A site that loads instantly, reads in two languages, updates without a developer — and finally tells Semisto's mission at the scale it deserves: turning Europe into food forests.</p>
             </div>
             <div class="cta-box animate delay-3">
                 <p>Have a similar project in mind?</p>

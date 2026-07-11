@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Silvéa — health and connection to the living world — Super Génial</title>
+    <title>Claudy — the app that runs a 15-hectare community estate — Super Génial</title>
     <meta name="author" content="Michael Hulet">
-    <meta name="description" content="The website of a Walloon non-profit working on nature and health: activity calendar, online registration and payment, blog and full admin panel.">
-    <meta name="keywords" content="case study, non-profit website, Ruby on Rails, Inertia, React, Stripe, AI agents">
-    <meta property="og:title" content="Silvéa — health and connection to the living world — Super Génial">
-    <meta property="og:description" content="The website of a Walloon non-profit working on nature and health: activity calendar, online registration and payment, blog and full admin panel.">
+    <meta name="description" content="The in-house application of the Les 4 Sources collective: lodge and venue bookings, passwordless guest pages, financial reporting, gathering governance and member workload — the whole estate in one app.">
+    <meta name="keywords" content="case study, management application, community estate, bookings, Ruby on Rails, Hotwire, AI agents, collective governance">
+    <meta property="og:title" content="Claudy — the app that runs a 15-hectare community estate — Super Génial">
+    <meta property="og:description" content="The in-house application of the Les 4 Sources collective: lodge and venue bookings, passwordless guest pages, financial reporting, gathering governance and member workload — the whole estate in one app.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.supergenial.be/en/case-studies/silvea/">
-    <link rel="canonical" href="https://www.supergenial.be/en/case-studies/silvea/">
+    <meta property="og:url" content="https://www.supergenial.be/en/case-studies/claudy/">
+    <link rel="canonical" href="https://www.supergenial.be/en/case-studies/claudy/">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -168,20 +168,10 @@ a:hover { color: var(--link-hover); }
 .case-item .a-type { font-size: 13px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.06em; }
 .case-item .a-title { font-size: 19px; font-weight: 600; margin: 0.3rem 0; letter-spacing: -0.01em; color: inherit; }
 .case-item .a-desc { font-size: 15px; color: var(--text-secondary); }
-/*langswitch*/
-.topbar{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:2.5rem;flex-wrap:wrap}
-.topbar--end{justify-content:flex-end}
-.topbar .back-link{margin-bottom:0}
-.lang-switch{display:inline-flex;align-items:center;padding:3px 3px 3px 1px;border-radius:999px;background:rgba(128,128,128,.10);border:1px solid rgba(128,128,128,.22);font-size:12px;font-weight:600;letter-spacing:.04em;flex-shrink:0}
-.lang-switch .lang-globe{color:var(--text-secondary);margin:0 .4rem 0 .48rem;flex-shrink:0;display:block}
-.lang-switch a{text-decoration:none;color:var(--text-secondary);padding:.28rem .62rem;border-radius:999px;line-height:1;transition:color .2s ease,background .2s ease,box-shadow .2s ease}
-.lang-switch a::after{display:none!important}
-.lang-switch a:hover{color:var(--text-primary)}
-.lang-switch a.is-active,.lang-switch a.is-active:hover{color:#fff;background:linear-gradient(135deg,var(--accent-1),var(--accent-2));box-shadow:0 2px 10px -3px rgba(99,102,241,.45)}
 </style>
-    <link rel="alternate" hreflang="fr" href="https://www.supergenial.be/realisations/silvea/">
-    <link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/case-studies/silvea/">
-    <link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/realisations/silvea/">
+    <link rel="alternate" hreflang="fr" href="https://www.supergenial.be/realisations/claudy/">
+    <link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/case-studies/claudy/">
+    <link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/realisations/claudy/">
 </head>
 <body>
     
@@ -194,31 +184,43 @@ window.addEventListener('mouseleave',()=>glow.classList.remove('visible'));
 (function a(){gx+=(mx-gx)*0.1;gy+=(my-gy)*0.1;glow.style.left=gx+'px';glow.style.top=gy+'px';requestAnimationFrame(a);})();
 </script>
     <main>
-        <div class="topbar"><a href="/en/case-studies/" class="back-link plain">← All case studies</a><div class="lang-switch" aria-label="Language / Langue"><svg class="lang-globe" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><ellipse cx="12" cy="12" rx="4.2" ry="9"/></svg><a href="/realisations/silvea/">FR</a><a href="/en/case-studies/silvea/" class="is-active">EN</a></div></div>
+        <a href="/en/case-studies/" class="back-link plain">← All case studies</a>
         <article>
-            <h1 class="animate delay-1">Silvéa — health and connection to the living world</h1>
-            <p class="case-meta animate delay-2"><span>Website</span><span>Silvéa ASBL · 2026 · <a href="https://www.silvea.org" target="_blank" rel="noopener noreferrer">Visit the site</a></span><span><span class="stack-tag">Rails 8</span> <span class="stack-tag">Inertia + React</span> <span class="stack-tag">TypeScript</span> <span class="stack-tag">Tailwind CSS</span> <span class="stack-tag">Stripe</span></span></p>
+            <h1 class="animate delay-1">Claudy — the app that runs a 15-hectare community estate</h1>
+            <p class="case-meta animate delay-2"><span>Management application</span><span>Les 4 Sources · 2026</span><span><span class="stack-tag">Rails 7</span> <span class="stack-tag">Hotwire</span> <span class="stack-tag">Vite</span> <span class="stack-tag">Tailwind CSS</span> <span class="stack-tag">Stripe</span> <span class="stack-tag">PostgreSQL</span></span></p>
             <figure class="case-figure animate delay-3">
-                <img src="/assets/realisations/silvea/home.webp" alt="silvea.org homepage — full-screen forest hero" loading="lazy">
-                <figcaption>The homepage: a warm visual identity, rooted in the forest.</figcaption>
+                <img src="/assets/realisations/claudy/calendrier.webp" alt="Occupancy calendar of the Les 4 Sources lodges and venues" loading="lazy">
+                <figcaption>The central calendar: lodges, venues and events in one view, with a toggle to collective life. (Fictional data.)</figcaption>
             </figure>
             <figure class="case-figure animate delay-3">
-                <img src="/assets/realisations/silvea/propositions.webp" alt="The “Our offerings” section of the Silvéa website" loading="lazy">
-                <figcaption>The organisation's offerings, presented as cards.</figcaption>
+                <img src="/assets/realisations/claudy/reservation-client.webp" alt="Public page of a lodging booking, reached via a secret link" loading="lazy">
+                <figcaption>Each group gets its own stay page — no account, no password, just a secret link. (Fictional data.)</figcaption>
             </figure>
             <figure class="case-figure animate delay-3">
-                <img src="/assets/realisations/silvea/galerie.webp" alt="“Silvéa in pictures” photo gallery on the homepage" loading="lazy">
-                <figcaption>The photo gallery, managed from the admin panel.</figcaption>
+                <img src="/assets/realisations/claudy/reporting.webp" alt="Yearly financial reporting: revenue per lodge and month, beds occupied" loading="lazy">
+                <figcaption>Financial reporting: revenue per lodge, venue and month, occupancy gauges included. (Fictional data.)</figcaption>
+            </figure>
+            <figure class="case-figure animate delay-3">
+                <img src="/assets/realisations/claudy/rassemblement.webp" alt="A collective council sheet: agenda, item carriers and processed points" loading="lazy">
+                <figcaption>Governance lives in the app: every collective meeting has its agenda, carriers, actions and decisions. (Fictional data.)</figcaption>
+            </figure>
+            <figure class="case-figure animate delay-3">
+                <img src="/assets/realisations/claudy/organisation.webp" alt="Organisation overview: current cycle, next moment, decision register" loading="lazy">
+                <figcaption>The collective overview: current cycle, next gathering and the decision register. (Fictional data.)</figcaption>
+            </figure>
+            <figure class="case-figure animate delay-3">
+                <img src="/assets/realisations/claudy/cycle-membre.webp" alt="A member's cycle tasks with workload gauge" loading="lazy">
+                <figcaption>Each member sees their cycle load: committed hours, capacity, and their ritual, one-off or delegated actions. (Fictional data.)</figcaption>
             </figure>
             <div class="article-body animate delay-3">
                 <h2>The context</h2>
-<p>Silvéa is a Walloon non-profit offering activities at the intersection of human health and nature connection — forest immersions, forest therapy, tailor-made programmes — for individuals, groups and healthcare professionals.</p>
+<p>Les 4 Sources is a 15-hectare community estate in Yvoir, Belgium: lodges for 25 guests, meeting rooms, a grocery, a wood-fired oven — and a collective of families running it all, two days a week.</p>
 <h2>The need</h2>
-<p>The organisation needed a real website: presenting its offerings, publishing its activity calendar, taking registrations and payments online, running a resources blog, and managing all of it autonomously — without depending on a developer for every update.</p>
+<p>A place like this is two businesses in one: a hospitality activity that must run like a real company (bookings, payments, invoices, reporting), and a collective life that needs structure without bureaucracy (meetings, decisions, workload sharing). No off-the-shelf tool does both.</p>
 <h2>The solution</h2>
-<p>A complete web application, built with AI agents from architecture to deployment: five content pages, a calendar with registration and Stripe payments (promo codes and refunds included), a blog, a GDPR-compliant newsletter, and four admin panels so the team manages activities, content and registrations themselves.</p>
+<p>Claudy, a tailor-made application that speaks both languages. Hospitality side: a multi-lodge occupancy calendar with availability derived on the fly (the big lodge is composed of the two smaller ones), an online booking funnel, Stripe payments, and a public stay page per secret link — guests see everything, no account needed. Collective side: gatherings with agendas, actions and a decision register, plus work cycles — each member sees their load, hours, and what was delegated or requested. Topped with financial reporting down to the bed-night, and a private read-only API for the estate's AI agents.</p>
 <h2>The result</h2>
-<p>A fast, accessible, SEO-minded website (structured data, semantic HTML), pixel-faithful to the designs, that the organisation keeps alive day to day without technical help.</p>
+<p>One open-source app to run the whole place: guests book and pay online, the collective decides and shares the work, and the year's numbers read on a single page. The screenshots above run on a demo instance filled with fictional data.</p>
             </div>
             <div class="cta-box animate delay-3">
                 <p>Have a similar project in mind?</p>

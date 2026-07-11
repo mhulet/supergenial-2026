@@ -1,0 +1,90 @@
+{
+  "slug": "terranova",
+  "slug_en": "terranova",
+  "type": "Plateforme collaborative",
+  "type_en": "Collaboration platform",
+  "client": "Semisto",
+  "year": "2026",
+  "title": "Terranova — un Basecamp sur mesure pour les Semisto Hubs",
+  "title_en": "Terranova — a tailor-made Basecamp for the Semisto Hubs",
+  "description": "La plateforme multi-hubs de Semisto : projets, messages, to-dos avec hill charts, chat, calendrier, palettes végétales et un membre IA — une réécriture greenfield inspirée de Basecamp, taillée pour les forêts comestibles.",
+  "description_en": "Semisto's multi-hub platform: projects, messages, to-dos with hill charts, chat, calendar, plant palettes and an AI member — a greenfield rewrite inspired by Basecamp, tailored for food forests.",
+  "keywords": "étude de cas, plateforme collaborative, multi-tenant, Ruby on Rails, Hotwire, Basecamp, hill chart, agents IA, forêts comestibles",
+  "keywords_en": "case study, collaboration platform, multi-tenant, Ruby on Rails, Hotwire, Basecamp, hill chart, AI agents, food forests",
+  "stack": ["Rails 8.1", "Hotwire", "Tailwind CSS 4", "PostgreSQL", "Solid Queue", "PWA"],
+  "images": [
+    {
+      "src": "/assets/realisations/terranova/projets.webp",
+      "alt": "Accueil d'un hub Terranova : projets, activité du compte et membres actifs",
+      "alt_en": "A Terranova hub home: projects, account activity and active members",
+      "caption": "L'accueil d'un hub : les projets du collectif, l'activité en temps réel et qui travaille aujourd'hui. (Données fictives.)",
+      "caption_en": "A hub's home: the collective's projects, real-time activity and who's working today. (Fictional data.)"
+    },
+    {
+      "src": "/assets/realisations/terranova/todos.webp",
+      "alt": "To-dos avec hill chart : trois listes suivies sur la colline",
+      "alt_en": "To-dos with a hill chart: three lists tracked on the hill",
+      "caption": "Les to-dos et leur hill chart : d'un coup d'œil, ce qui grimpe encore (on cherche) et ce qui descend (on exécute). (Données fictives.)",
+      "caption_en": "To-dos and their hill chart: at a glance, what's still climbing (figuring out) and what's rolling down (executing). (Fictional data.)"
+    },
+    {
+      "src": "/assets/realisations/terranova/palette.webp",
+      "alt": "Palette végétale d'un projet de jardin-forêt : canopée, arbustes, herbacées avec quantités et prix",
+      "alt_en": "Plant palette of a food forest project: canopy, shrubs, herbaceous with quantities and prices",
+      "caption": "Là où Basecamp s'arrête, Terranova continue : la palette végétale d'un jardin-forêt, strate par strate, chiffrée. (Données fictives.)",
+      "caption_en": "Where Basecamp stops, Terranova keeps going: a food forest's plant palette, layer by layer, costed. (Fictional data.)"
+    }
+  ],
+  "carousel": {
+    "title": "Les outils d'un projet",
+    "title_en": "A project's tools",
+    "intro": "Chaque projet compose ses outils : annonces, chat, kanban, calendrier partagé… Les captures ci-dessous tournent sur une instance de démonstration remplie de données fictives.",
+    "intro_en": "Each project composes its own tools: announcements, chat, kanban, shared calendar… The screenshots below run on a demo instance filled with fictional data.",
+    "images": [
+      {
+        "src": "/assets/realisations/terranova/projet-home.webp",
+        "alt": "Page d'un projet avec ses membres et ses outils : annonces, to-dos, chat",
+        "alt_en": "A project page with its members and tools: announcements, to-dos, chat",
+        "caption": "La page d'un projet : ses membres (dont Nova, le membre IA) et ses outils, activés à la carte.",
+        "caption_en": "A project page: its members (including Nova, the AI member) and its tools, enabled à la carte."
+      },
+      {
+        "src": "/assets/realisations/terranova/messages.webp",
+        "alt": "Tableau d'annonces avec messages, auteurs et commentaires",
+        "alt_en": "Message board with posts, authors and comments",
+        "caption": "Les annonces : la communication de fond, qui remplace les fils de discussion perdus dans les e-mails.",
+        "caption_en": "Announcements: the deep communication that replaces threads lost in e-mail."
+      },
+      {
+        "src": "/assets/realisations/terranova/campfire.webp",
+        "alt": "Chat d'équipe temps réel avec plusieurs membres",
+        "alt_en": "Real-time team chat with several members",
+        "caption": "Le chat d'équipe, temps réel via Hotwire — et Nova, le membre IA, peut y répondre.",
+        "caption_en": "The team chat, real-time via Hotwire — and Nova, the AI member, can chime in."
+      },
+      {
+        "src": "/assets/realisations/terranova/calendrier.webp",
+        "alt": "Calendrier du hub avec événements de tous les projets, filtrables",
+        "alt_en": "Hub calendar with events from all projects, filterable",
+        "caption": "Le calendrier du hub : les événements de tous les projets, filtrables projet par projet, abonnables en iCal.",
+        "caption_en": "The hub calendar: events from every project, filterable per project, subscribable via iCal."
+      },
+      {
+        "src": "/assets/realisations/terranova/cardtable.webp",
+        "alt": "Tableau de cartes kanban de la pépinière avec colonnes de multiplication",
+        "alt_en": "Kanban card table of the nursery with propagation columns",
+        "caption": "Le tableau de cartes façon kanban — ici, le suivi des multiplications de la pépinière-école.",
+        "caption_en": "The kanban-style card table — here tracking the nursery school's plant propagation."
+      },
+      {
+        "src": "/assets/realisations/terranova/activity.webp",
+        "alt": "Flux d'activité du hub, tous projets confondus",
+        "alt_en": "Hub activity feed across all projects",
+        "caption": "Le flux d'activité : tout ce qui bouge dans le hub, projet par projet, minute par minute.",
+        "caption_en": "The activity feed: everything moving in the hub, project by project, minute by minute."
+      }
+    ]
+  },
+  "body_html": "<h2>Le contexte</h2>\n<p>Semisto veut transformer l'Europe en forêts comestibles — via des hubs locaux qui répliquent le modèle wallon : formations, bureau d'études, pépinière-école. Chaque hub est une équipe, avec ses projets, ses bénévoles et ses outils.</p>\n<h2>Le besoin</h2>\n<p>Basecamp était l'outil rêvé pour la culture d'équipe de Semisto — mais il ne connaît ni les palettes végétales, ni les plans de plantation, ni les hubs multiples, ni les membres IA. Il fallait le meilleur des deux : la sobriété de Basecamp, plus le métier des forêts comestibles.</p>\n<h2>La solution</h2>\n<p>Terranova, une réécriture greenfield en Rails 8 et Hotwire, architecturée comme Basecamp : chaque contenu — message, to-do, carte, document — est un « recording » dans un projet, ce qui donne gratuitement commentaires, mentions, boosts, corbeille, recherche et API à tous les outils. Multi-hubs par construction : un compte, plusieurs hubs, isolation stricte. Les outils classiques répondent présent — annonces, to-dos avec hill charts, chat temps réel, calendrier, documents — et les outils métier s'y ajoutent : palettes végétales par strates, plans de plantation, catalogue botanique. Nova, le membre IA, rejoint les projets où on l'invite. Le tout exposé par une API privée avec spécification OpenAPI générée en direct, et installable en PWA.</p>\n<h2>Le résultat</h2>\n<p>Une plateforme que l'équipe wallonne utilise au quotidien et que chaque futur hub européen recevra clé en main : la méthode Basecamp, le métier Semisto, et une IA membre de l'équipe. Les captures tournent sur une instance de démonstration remplie de données fictives.</p>",
+  "body_html_en": "<h2>The context</h2>\n<p>Semisto wants to turn Europe into food forests — through local hubs replicating the Walloon model: training, a design studio, a nursery school. Each hub is a team, with its projects, volunteers and tools.</p>\n<h2>The need</h2>\n<p>Basecamp was the dream tool for Semisto's team culture — but it knows nothing about plant palettes, planting plans, multiple hubs or AI members. They needed the best of both: Basecamp's sobriety, plus the food forest trade.</p>\n<h2>The solution</h2>\n<p>Terranova, a greenfield rewrite in Rails 8 and Hotwire, architected like Basecamp: every piece of content — message, to-do, card, document — is a “recording” inside a project, which gives comments, mentions, boosts, trash, search and an API to every tool for free. Multi-hub by construction: one account, several hubs, strict isolation. The classic tools are all there — announcements, to-dos with hill charts, real-time chat, calendar, documents — and the trade tools join in: layered plant palettes, planting plans, a botanical catalogue. Nova, the AI member, joins the projects it gets invited to. Everything is exposed through a private API with a live-generated OpenAPI spec, and installs as a PWA.</p>\n<h2>The result</h2>\n<p>A platform the Walloon team uses daily and that every future European hub will receive turnkey: the Basecamp method, the Semisto trade, and an AI teammate. The screenshots run on a demo instance filled with fictional data.</p>"
+}

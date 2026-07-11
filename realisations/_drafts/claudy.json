@@ -1,0 +1,61 @@
+{
+  "slug": "claudy",
+  "slug_en": "claudy",
+  "type": "Application de gestion",
+  "type_en": "Management application",
+  "client": "Les 4 Sources",
+  "year": "2026",
+  "title": "Claudy — l'application qui fait tourner un tiers-lieu de 15 hectares",
+  "title_en": "Claudy — the app that runs a 15-hectare community estate",
+  "description": "L'application interne du collectif des 4 Sources : réservations de gîtes et d'espaces, espace client sans mot de passe, reporting financier, gouvernance des rassemblements et charge de travail des membres — tout le tiers-lieu dans une seule app.",
+  "description_en": "The in-house application of the Les 4 Sources collective: lodge and venue bookings, passwordless guest pages, financial reporting, gathering governance and member workload — the whole estate in one app.",
+  "keywords": "étude de cas, application de gestion, tiers-lieu, réservations, Ruby on Rails, Hotwire, agents IA, gouvernance collective",
+  "keywords_en": "case study, management application, community estate, bookings, Ruby on Rails, Hotwire, AI agents, collective governance",
+  "stack": ["Rails 7", "Hotwire", "Vite", "Tailwind CSS", "Stripe", "PostgreSQL"],
+  "images": [
+    {
+      "src": "/assets/realisations/claudy/calendrier.webp",
+      "alt": "Calendrier d'occupation des gîtes et espaces des 4 Sources",
+      "alt_en": "Occupancy calendar of the Les 4 Sources lodges and venues",
+      "caption": "Le calendrier central : gîtes, espaces et événements sur une seule vue, avec bascule vers la vie du collectif. (Données fictives.)",
+      "caption_en": "The central calendar: lodges, venues and events in one view, with a toggle to collective life. (Fictional data.)"
+    },
+    {
+      "src": "/assets/realisations/claudy/reservation-client.webp",
+      "alt": "Page publique d'une réservation d'hébergement, accessible par lien secret",
+      "alt_en": "Public page of a lodging booking, reached via a secret link",
+      "caption": "Chaque groupe reçoit sa page de séjour — sans compte ni mot de passe, juste un lien secret. (Données fictives.)",
+      "caption_en": "Each group gets its own stay page — no account, no password, just a secret link. (Fictional data.)"
+    },
+    {
+      "src": "/assets/realisations/claudy/reporting.webp",
+      "alt": "Reporting financier annuel : revenus par gîte et par mois, lits occupés",
+      "alt_en": "Yearly financial reporting: revenue per lodge and month, beds occupied",
+      "caption": "Le reporting financier : revenus par gîte, par espace et par mois, jauges d'occupation comprises. (Données fictives.)",
+      "caption_en": "Financial reporting: revenue per lodge, venue and month, occupancy gauges included. (Fictional data.)"
+    },
+    {
+      "src": "/assets/realisations/claudy/rassemblement.webp",
+      "alt": "Fiche d'un Conseil des Sourciers : ordre du jour, porteurs et points traités",
+      "alt_en": "A collective council sheet: agenda, item carriers and processed points",
+      "caption": "La gouvernance vit dans l'app : chaque réunion collective a son ordre du jour, ses porteurs, ses actions et ses décisions. (Données fictives.)",
+      "caption_en": "Governance lives in the app: every collective meeting has its agenda, carriers, actions and decisions. (Fictional data.)"
+    },
+    {
+      "src": "/assets/realisations/claudy/organisation.webp",
+      "alt": "Vue d'ensemble de l'organisation : cycle en cours, prochain moment, registre des décisions",
+      "alt_en": "Organisation overview: current cycle, next moment, decision register",
+      "caption": "La vue d'ensemble du collectif : le cycle en cours, le prochain rassemblement et le registre des décisions. (Données fictives.)",
+      "caption_en": "The collective overview: current cycle, next gathering and the decision register. (Fictional data.)"
+    },
+    {
+      "src": "/assets/realisations/claudy/cycle-membre.webp",
+      "alt": "Tâches de cycle d'une membre avec jauge de charge de travail",
+      "alt_en": "A member's cycle tasks with workload gauge",
+      "caption": "Chaque membre voit sa charge du cycle : heures engagées, capacité, et ses actions rituelles, ponctuelles ou déléguées. (Données fictives.)",
+      "caption_en": "Each member sees their cycle load: committed hours, capacity, and their ritual, one-off or delegated actions. (Fictional data.)"
+    }
+  ],
+  "body_html": "<h2>Le contexte</h2>\n<p>Les 4 Sources, c'est un tiers-lieu de 15 hectares à Yvoir : des gîtes pour 25 personnes, des salles, une épicerie, un four à bois — et un collectif de familles qui fait vivre le tout, deux jours par semaine.</p>\n<h2>Le besoin</h2>\n<p>Un lieu pareil, c'est deux métiers en un : une activité d'accueil qui doit tourner comme une vraie entreprise (réservations, paiements, factures, reporting), et une vie collective qui a besoin de structure sans bureaucratie (réunions, décisions, répartition du travail). Aucun outil du marché ne fait les deux.</p>\n<h2>La solution</h2>\n<p>Claudy, une application sur mesure qui parle les deux langues. Côté accueil : le calendrier d'occupation multi-gîtes avec disponibilité dérivée à la volée (le grand gîte se compose des deux petits), le funnel de réservation en ligne, les paiements Stripe, et une page de séjour publique par lien secret — le groupe consulte tout, sans compte. Côté collectif : les rassemblements avec ordre du jour, actions et registre des décisions, et les cycles de travail — chaque membre voit sa charge, ses heures et ce qu'on lui a délégué ou demandé. Le tout couronné d'un reporting financier au lit près et d'une API privée en lecture pour les agents IA du lieu.</p>\n<h2>Le résultat</h2>\n<p>Une seule app open source pour piloter le lieu : les hôtes réservent et paient en ligne, le collectif décide et se répartit le travail, et les chiffres de l'année se lisent en une page. Les captures ci-dessus tournent sur une instance de démonstration remplie de données fictives.</p>",
+  "body_html_en": "<h2>The context</h2>\n<p>Les 4 Sources is a 15-hectare community estate in Yvoir, Belgium: lodges for 25 guests, meeting rooms, a grocery, a wood-fired oven — and a collective of families running it all, two days a week.</p>\n<h2>The need</h2>\n<p>A place like this is two businesses in one: a hospitality activity that must run like a real company (bookings, payments, invoices, reporting), and a collective life that needs structure without bureaucracy (meetings, decisions, workload sharing). No off-the-shelf tool does both.</p>\n<h2>The solution</h2>\n<p>Claudy, a tailor-made application that speaks both languages. Hospitality side: a multi-lodge occupancy calendar with availability derived on the fly (the big lodge is composed of the two smaller ones), an online booking funnel, Stripe payments, and a public stay page per secret link — guests see everything, no account needed. Collective side: gatherings with agendas, actions and a decision register, plus work cycles — each member sees their load, hours, and what was delegated or requested. Topped with financial reporting down to the bed-night, and a private read-only API for the estate's AI agents.</p>\n<h2>The result</h2>\n<p>One open-source app to run the whole place: guests book and pay online, the collective decides and shares the work, and the year's numbers read on a single page. The screenshots above run on a demo instance filled with fictional data.</p>"
+}

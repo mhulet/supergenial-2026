@@ -1,0 +1,55 @@
+{
+  "slug": "site-semisto",
+  "slug_en": "site-semisto",
+  "type": "Site web",
+  "type_en": "Website",
+  "client": "Semisto",
+  "year": "2026",
+  "title": "semisto.org — le nouveau site de l'association des forêts comestibles",
+  "title_en": "semisto.org — the new website of the food forest association",
+  "description": "Le site public de Semisto, reconstruit en Astro : 100 % statique, bilingue par construction, design system maison, SEO migré sans casse et contenu éditable par l'équipe — conçu et porté par des agents IA.",
+  "description_en": "Semisto's public website, rebuilt with Astro: fully static, bilingual by construction, a custom design system, SEO migrated intact and team-editable content — designed and built by AI agents.",
+  "keywords": "étude de cas, site web, Astro, site statique, design system, SEO, i18n, agents IA, forêts comestibles",
+  "keywords_en": "case study, website, Astro, static site, design system, SEO, i18n, AI agents, food forests",
+  "url_live": "https://www.semisto.org",
+  "stack": ["Astro 5", "Tailwind CSS 4", "Content Collections", "Sveltia CMS", "Docker", "nginx"],
+  "images": [
+    {
+      "src": "/assets/realisations/semisto-website/home.webp",
+      "alt": "Page d'accueil de semisto.org : « En route vers l'ère des forêts comestibles »",
+      "alt_en": "semisto.org homepage: towards the era of food forests",
+      "caption": "La page d'accueil : la mission d'abord, les photos de chantiers réels ensuite.",
+      "caption_en": "The homepage: the mission first, photos of real work sites second."
+    },
+    {
+      "src": "/assets/realisations/semisto-website/formations.webp",
+      "alt": "Page Academy : « Apprends à faire naître ta forêt-jardin »",
+      "alt_en": "Academy page: learn to grow your own forest garden",
+      "caption": "L'Academy : tout le catalogue de formations, du week-end découverte au cursus long.",
+      "caption_en": "The Academy: the whole training catalogue, from discovery weekends to the long course."
+    },
+    {
+      "src": "/assets/realisations/semisto-website/cursus.webp",
+      "alt": "Page du cursus « Concepteur·rice de forêts comestibles » avec vidéo",
+      "alt_en": "The food forest designer course page, with video",
+      "caption": "La page du cursus phare 2026-2027 — 18 week-ends pour apprendre un nouveau métier.",
+      "caption_en": "The flagship 2026-2027 course page — 18 weekends to learn a new trade."
+    },
+    {
+      "src": "/assets/realisations/semisto-website/realisations.webp",
+      "alt": "Page des réalisations : « Des jardins-forêts bien vivants »",
+      "alt_en": "Portfolio page: living food forest projects",
+      "caption": "Les réalisations : chaque jardin-forêt conçu par le bureau d'études, raconté et illustré.",
+      "caption_en": "The portfolio: every food forest designed by the studio, told and illustrated."
+    },
+    {
+      "src": "/assets/realisations/semisto-website/pepiniere.webp",
+      "alt": "Page de la pépinière-école : « On est, avant tout, une pépinière-école »",
+      "alt_en": "Nursery school page: first and foremost, a nursery school",
+      "caption": "La pépinière-école, cœur du modèle : des plantes adaptées au climat de demain, et ceux qui savent les multiplier.",
+      "caption_en": "The nursery school, the model's heart: plants fit for tomorrow's climate, and the people who know how to propagate them."
+    }
+  ],
+  "body_html": "<h2>Le contexte</h2>\n<p>Semisto forme des concepteurs de forêts comestibles, dessine des jardins-forêts et multiplie des plantes rares dans sa pépinière-école. Son ancien site, monté sur un service no-code, ne suivait plus : lent, monolingue, difficile à éditer, et invisible pour les moteurs.</p>\n<h2>Le besoin</h2>\n<p>Un site rapide, beau et bilingue, que l'équipe non technique peut éditer elle-même — sans perdre le référencement accumulé : 171 URLs de l'ancien site à rediriger proprement.</p>\n<h2>La solution</h2>\n<p>Un site 100 % statique en Astro 5, généré à partir de collections de contenu typées : formations, réalisations, articles, équipe, événements — éditables en Markdown ou via un CMS visuel. Le design system maison décline une quarantaine de composants aux couleurs de Semisto. Le français et l'anglais sont bilingues par construction, chaque page dans les deux langues. Côté référencement : données structurées JSON-LD, table de redirections 301 depuis l'ancien site, et même un llms.txt généré au build pour les moteurs IA. Le tout vérifié en CI à chaque commit et déployé automatiquement sur le VPS de l'association.</p>\n<h2>Le résultat</h2>\n<p>Un site qui charge instantanément, se lit dans deux langues, se modifie sans développeur — et qui raconte enfin la mission de Semisto à la hauteur de ce qu'elle est : transformer l'Europe en forêts comestibles.</p>",
+  "body_html_en": "<h2>The context</h2>\n<p>Semisto trains food forest designers, designs forest gardens and propagates rare plants in its nursery school. Its previous website, built on a no-code service, couldn't keep up: slow, single-language, hard to edit, and invisible to search engines.</p>\n<h2>The need</h2>\n<p>A fast, beautiful, bilingual website the non-technical team can edit themselves — without losing accumulated SEO: 171 URLs from the old site to redirect cleanly.</p>\n<h2>The solution</h2>\n<p>A fully static Astro 5 site, generated from typed content collections: courses, projects, articles, team, events — editable in Markdown or through a visual CMS. The custom design system declines about forty components in Semisto's colours. French and English are bilingual by construction, every page in both languages. On the SEO side: JSON-LD structured data, a 301 redirect table from the old site, and even a build-time llms.txt for AI search engines. Everything is verified in CI on every commit and deployed automatically to the association's VPS.</p>\n<h2>The result</h2>\n<p>A site that loads instantly, reads in two languages, updates without a developer — and finally tells Semisto's mission at the scale it deserves: turning Europe into food forests.</p>"
+}
