@@ -24,6 +24,10 @@ const SLUGS: Record<string, string> = {
 // Correspondance FR slug → EN slug (études de cas / réalisations).
 const CASE_SLUGS: Record<string, string> = {
   "silvea": "silvea",
+  "tranches-de-vie": "tranches-de-vie",
+  "claudy": "claudy",
+  "terranova": "terranova",
+  "site-semisto": "site-semisto",
 };
 
 // Paires d'URL { fr, en } par "clé de page".
@@ -31,6 +35,7 @@ const PAIRS: Record<string, { fr: string; en: string }> = {
   home: { fr: "/", en: "/en/" },
   maintenance: { fr: "/maintenance/", en: "/en/maintenance/" },
   pricing: { fr: "/tarifs/", en: "/en/pricing/" },
+  diagnostic: { fr: "/diagnostic-ia/", en: "/en/ai-assessment/" },
   resources: { fr: "/ressources/", en: "/en/resources/" },
   cases: { fr: "/realisations/", en: "/en/case-studies/" },
 };
@@ -72,6 +77,8 @@ const pages: Page[] = [
   { path: "index.html", key: "home", active: "fr" },
   { path: "maintenance/index.html", key: "maintenance", active: "fr" },
   { path: "tarifs/index.html", key: "pricing", active: "fr" },
+  { path: "diagnostic-ia/index.html", key: "diagnostic", active: "fr" },
+  { path: "en/ai-assessment/index.html", key: "diagnostic", active: "en" },
   { path: "ressources/index.html", key: "resources", active: "fr" },
   { path: "en/index.html", key: "home", active: "en" },
   { path: "en/maintenance/index.html", key: "maintenance", active: "en" },

@@ -1,8 +1,8 @@
 // en-build.ts — Génère les pages EN des articles + l'index EN, et injecte le
 // sélecteur de langue dans les pages FR existantes.
 // Source : _drafts-bi/*.json (produits par la traduction). Usage : bun ressources/en-build.ts
-// POST-BUILD OBLIGATOIRE : lancer ensuite `bun ressources/langswitch.ts` pour poser
-// le toggle de langue segmenté FR/EN (remplace le lien texte par défaut ci-dessous).
+// POST-BUILD OBLIGATOIRE : lancer ensuite `bun ressources/langswitch.ts` (toggle de
+// langue FR/EN) puis `bun ressources/mainnav.ts` (menu principal du site).
 
 import { readdirSync, readFileSync, writeFileSync, mkdirSync, existsSync, rmSync } from "node:fs";
 import { join, dirname } from "node:path";

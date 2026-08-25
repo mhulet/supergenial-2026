@@ -1,7 +1,7 @@
 // Génère les pages EN des études de cas (/en/case-studies/) à partir des MÊMES
 // drafts bilingues que build.ts (realisations/_drafts/*.json — jamais supprimés).
 // Usage : bun realisations/en-build.ts
-// POST-BUILD : bun ressources/langswitch.ts pour poser le toggle FR/EN.
+// POST-BUILD : bun ressources/langswitch.ts (toggle FR/EN) puis bun ressources/mainnav.ts (menu principal).
 
 import { writeFileSync, mkdirSync } from "node:fs";
 import { join, dirname } from "node:path";

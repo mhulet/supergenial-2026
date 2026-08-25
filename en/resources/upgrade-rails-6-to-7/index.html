@@ -132,6 +132,34 @@ a:hover { color: var(--link-hover); }
 .related ul{list-style:none;display:flex;flex-direction:column;gap:.6rem}
 .related li{font-size:15px;line-height:1.4}
 .related a{color:var(--text-primary)}
+/*mainnav*/
+.site-head{margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);padding:0.9rem max(1.5rem,calc(50vw - 480px));border-bottom:1px solid rgba(128,128,128,.15);margin-bottom:2.5rem}
+.site-nav{display:flex;align-items:center;gap:0.9rem;flex-wrap:wrap}
+.site-nav a::after{display:none!important}
+.site-nav .brand{display:inline-flex;align-items:center;gap:.5rem;font-weight:600;font-size:15px;letter-spacing:-.01em;margin-right:auto;white-space:nowrap;color:var(--text-primary)}
+.site-nav .brand-mark{width:11px;height:11px;border-radius:3.5px;background:linear-gradient(135deg,var(--accent-1),var(--accent-2));flex-shrink:0}
+.nav-menu{display:flex;align-items:center;gap:1rem}
+.nav-menu a{font-size:13.5px;color:var(--text-secondary);white-space:nowrap;padding-bottom:4px;transition:color .2s ease}
+.nav-menu a:hover{color:var(--text-primary)}
+.nav-menu a[aria-current]{color:var(--text-primary);background:linear-gradient(90deg,var(--accent-1),var(--accent-2)) left bottom/100% 2px no-repeat}
+.nav-toggle{display:none;background:none;border:1px solid rgba(128,128,128,.22);border-radius:8px;padding:.42rem .5rem;color:var(--text-primary);cursor:pointer;line-height:0}
+.nav-toggle:hover{border-color:var(--accent-1)}
+.nav-toggle .i-close{display:none}
+.site-nav.open .nav-toggle .i-burger{display:none}
+.site-nav.open .nav-toggle .i-close{display:block}
+@media (max-width:860px){
+.nav-toggle{display:inline-flex;order:3}
+.site-nav .lang-switch{order:2;margin-left:auto}
+.site-nav .brand{margin-right:0;order:1}
+.nav-menu{display:none;order:4;width:100%;flex-direction:column;align-items:stretch;gap:0;padding:.6rem 0 .2rem;border-top:1px solid rgba(128,128,128,.18);margin-top:.85rem}
+.site-nav.open .nav-menu{display:flex}
+.nav-menu a{font-size:15px;padding:.55rem 0;width:100%}
+.nav-menu a[aria-current]{background-size:2.2rem 2px}
+}
+/* Illustrations : disponibles sur toutes les pages (trait noir → blanc en dark) */
+.illu{display:block;margin:2.5rem auto 0;max-width:min(420px,80%);height:auto}
+.illu--small{max-width:min(300px,60%)}
+@media (prefers-color-scheme:dark){.illu{filter:invert(1) hue-rotate(180deg)}}
 </style>
     <link rel="alternate" hreflang="fr" href="https://www.supergenial.be/ressources/migrer-rails-6-vers-7/">
     <link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/resources/upgrade-rails-6-to-7/">
@@ -153,7 +181,7 @@ window.addEventListener('mouseleave',()=>glow.classList.remove('visible'));
 (function a(){gx+=(mx-gx)*0.1;gy+=(my-gy)*0.1;glow.style.left=gx+'px';glow.style.top=gy+'px';requestAnimationFrame(a);})();
 </script>
     <main>
-        <div class="topbar"><a href="/en/resources/" class="back-link plain">← All resources</a><div class="lang-switch" aria-label="Language / Langue"><svg class="lang-globe" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><ellipse cx="12" cy="12" rx="4.2" ry="9"/></svg><a href="/ressources/migrer-rails-6-vers-7/">FR</a><a href="/en/resources/upgrade-rails-6-to-7/" class="is-active">EN</a></div></div>
+        <!--mainnav--><header class="site-head"><nav class="site-nav" aria-label="Main navigation"><a href="/en/" class="brand plain"><span class="brand-mark" aria-hidden="true"></span>Super Génial</a><button class="nav-toggle plain" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="Open menu"><svg class="i-burger" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg><svg class="i-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button><div class="nav-menu" id="site-menu"><a href="/en/ai-assessment/" class="plain">AI Assessment</a><a href="/en/pricing/" class="plain">Pricing</a><a href="/en/case-studies/" class="plain">Case studies</a><a href="/en/resources/" class="plain" aria-current="page">Resources</a><a href="/en/maintenance/" class="plain">Maintenance</a></div><div class="lang-switch" aria-label="Language / Langue"><svg class="lang-globe" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><ellipse cx="12" cy="12" rx="4.2" ry="9"/></svg><a href="/ressources/migrer-rails-6-vers-7/">FR</a><a href="/en/resources/upgrade-rails-6-to-7/" class="is-active">EN</a></div></nav></header><!--/mainnav-->
         <article>
             <h1 class="animate delay-1">Upgrading from Rails 6 to Rails 7: the guide to breaking nothing</h1>
             <p class="meta-date animate delay-2"><time datetime="2026-05-27">May 27, 2026</time> · Super Génial</p>
@@ -176,5 +204,6 @@ window.addEventListener('mouseleave',()=>glow.classList.remove('visible'));
             </div>
         </article>
     </main>
+<script>/*mainnavjs*/(function(){var n=document.querySelector(".site-nav"),t=document.querySelector(".nav-toggle");if(!n||!t)return;t.addEventListener("click",function(){var o=n.classList.toggle("open");t.setAttribute("aria-expanded",o?"true":"false")});})();</script>
 </body>
 </html>

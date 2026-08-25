@@ -1,7 +1,7 @@
 // Génère la page Réalisations (FR) + une page par étude de cas à partir des drafts JSON.
 // Usage : bun realisations/build.ts
 // Les drafts (_drafts/*.json) sont la SOURCE VERSIONNÉE — ils ne sont jamais supprimés.
-// POST-BUILD : bun realisations/en-build.ts puis bun ressources/langswitch.ts
+// POST-BUILD : bun realisations/en-build.ts puis bun ressources/langswitch.ts et bun ressources/mainnav.ts
 
 import { readdirSync, readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { join, dirname } from "node:path";
