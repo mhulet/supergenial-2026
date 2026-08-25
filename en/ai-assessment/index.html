@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Assessment for SMEs — Michael Hulet, Agentic Builder</title>
+    <meta name="author" content="Michael Hulet">
+    <meta name="description" content="Two weeks to find out what AI can do for your SME. Team interviews, process mapping, top 3 opportunities with real numbers and a 30-60-90 day plan. Fixed price: €2,500, credited if we build together.">
+    <meta property="og:title" content="AI Assessment for SMEs — Michael Hulet, Agentic Builder">
+    <meta property="og:description" content="Two weeks to find out what AI can do for your SME. Top 3 opportunities with real numbers, 30-60-90 day plan. Fixed price, credited if we build together.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.supergenial.be/en/ai-assessment">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #ffffff;
+            --text-primary: #171717;
+            --text-secondary: #737373;
+            --link-underline: #a3a3a3;
+            --link-hover: #000000;
+            --accent-1: #6366f1;
+            --accent-2: #8b5cf6;
+            --glow: rgba(99, 102, 241, 0.15);
+            --card-bg: #ffffff;
+            --card-border: #e5e5e5;
+            --card-border-featured: #6366f1;
+            --soft-bg: #f5f5f5;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #0a0a0a;
+                --text-primary: #ededed;
+                --text-secondary: #a3a3a3;
+                --link-underline: #525252;
+                --link-hover: #ffffff;
+                --glow: rgba(139, 92, 246, 0.1);
+                --card-bg: #111111;
+                --card-border: #262626;
+                --card-border-featured: #8b5cf6;
+                --soft-bg: #141414;
+            }
+        }
+
+        /* Grain texture overlay */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.03;
+            z-index: 1000;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes subtitleIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate {
+            animation: fadeUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+        .delay-6 { animation-delay: 0.6s; }
+        .delay-7 { animation-delay: 0.7s; }
+
+        main {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+            position: relative;
+        }
+
+        .cursor-glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle at center, var(--glow) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: -1;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .cursor-glow.visible { opacity: 1; }
+
+        @media (min-width: 768px) {
+            main { margin-top: 4rem; padding: 0 1.5rem 5rem; }
+            body { font-size: 18px; }
+        }
+
+        .back-link {
+            display: inline-block;
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        @media (min-width: 768px) {
+            h1 { font-size: 40px; }
+        }
+
+        .subtitle {
+            font-size: 20px;
+            margin-bottom: 2rem;
+            font-weight: 500;
+            color: var(--accent-1);
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2), var(--accent-1));
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0;
+            animation: subtitleIn 0.8s ease-out 0.2s forwards, gradientShift 4s ease 0.2s infinite;
+        }
+
+        @media (min-width: 768px) {
+            .subtitle { font-size: 24px; }
+        }
+
+        .intro {
+            font-size: 16px;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+            max-width: 38rem;
+        }
+
+        @media (min-width: 768px) {
+            .intro { font-size: 18px; }
+        }
+
+        section {
+            margin-bottom: 4rem;
+        }
+
+        .section-label {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 0.4rem;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (min-width: 768px) {
+            h2 { font-size: 28px; }
+        }
+
+        .section-desc {
+            color: var(--text-secondary);
+            font-size: 15px;
+            margin-bottom: 1.75rem;
+            max-width: 40rem;
+        }
+
+        .section-body p {
+            font-size: 16px;
+            margin-bottom: 1.1rem;
+            max-width: 40rem;
+        }
+
+        /* ── Principe (manifesto strip) ── */
+        .principle {
+            background-color: var(--soft-bg);
+            margin: 0 -1.5rem 4rem;
+            padding: 2.5rem 1.5rem;
+        }
+
+        .principle-inner {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .principle p {
+            font-size: 20px;
+            font-weight: 500;
+            line-height: 1.5;
+            letter-spacing: -0.01em;
+        }
+
+        .principle .em {
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .principle .sub {
+            font-size: 15px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            margin-top: 0.85rem;
+        }
+
+        @media (min-width: 768px) {
+            .principle {
+                margin-left: calc(-50vw + 360px);
+                margin-right: calc(-50vw + 360px);
+                padding: 3rem calc(50vw - 360px);
+            }
+            .principle p { font-size: 24px; }
+        }
+
+        /* ── Cartes ── */
+        .launch-card {
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 1.75rem;
+            background-color: var(--card-bg);
+        }
+
+        .launch-card.featured {
+            border-color: var(--card-border-featured);
+            box-shadow: 0 0 0 1px var(--card-border-featured);
+        }
+
+        .launch-card .price {
+            font-size: 26px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.25rem;
+        }
+
+        .launch-card .price small {
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--text-secondary);
+        }
+
+        .steps {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            margin-top: 1.25rem;
+        }
+
+        .steps li {
+            display: flex;
+            align-items: baseline;
+            gap: 0.7rem;
+            font-size: 15px;
+        }
+
+        .steps .num {
+            flex-shrink: 0;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--accent-1);
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* ── Livrables ── */
+        .deliverables {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+        }
+
+        @media (min-width: 768px) {
+            .deliverables { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        .deliverables li {
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 1rem 1.15rem;
+            background-color: var(--card-bg);
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        .deliverables li strong {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        .deliverables li small {
+            color: var(--text-secondary);
+            font-size: 13.5px;
+        }
+
+        /* ── Vécu (terrains) ── */
+        .terrains {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.55rem;
+            margin-top: 1.25rem;
+        }
+
+        .terrains li {
+            display: flex;
+            align-items: baseline;
+            gap: 0.55rem;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        .terrains li::before {
+            content: "→";
+            color: var(--accent-1);
+            flex-shrink: 0;
+            font-size: 13px;
+        }
+
+        /* ── Note ── */
+        .note {
+            margin-top: 1.5rem;
+            padding: 1.25rem 1.35rem;
+            border-left: 2px solid var(--accent-1);
+            background-color: var(--soft-bg);
+            border-radius: 0 12px 12px 0;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .note strong { color: var(--text-primary); font-weight: 600; }
+
+        /* ── FAQ ── */
+        .faq-item { margin-bottom: 1.5rem; }
+        .faq-q { font-size: 16px; font-weight: 600; margin-bottom: 0.35rem; }
+        .faq-a { font-size: 15px; color: var(--text-secondary); }
+
+        /* ── Contact ── */
+        .contact { margin-top: 4rem; }
+        .contact p { margin-bottom: 1rem; font-weight: 500; }
+        .contact-links { display: flex; flex-direction: column; gap: 0.5rem; }
+        .contact-links > div { padding: 0.25rem 0; transition: padding-left 0.2s ease; }
+        .contact-links > div:hover { padding-left: 0.25rem; }
+
+        a {
+            color: var(--text-primary);
+            text-decoration: none;
+            position: relative;
+            transition: color 0.2s ease;
+        }
+
+        a.plain::after { display: none; }
+
+        a:not(.plain)::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--link-underline);
+            transition: background 0.2s ease, transform 0.3s ease;
+            transform-origin: left;
+        }
+
+        a:hover { color: var(--link-hover); }
+
+        a:not(.plain):hover::after {
+            background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+            transform: scaleX(1.05);
+        }
+
+        .arrow {
+            display: inline-block;
+            margin-right: 0.5rem;
+            transition: transform 0.2s ease;
+        }
+
+        .contact-links > div:hover .arrow { transform: translateX(4px); }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.7rem 1.4rem;
+            border-radius: 999px;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            background-size: 200% 200%;
+            color: #ffffff;
+            font-weight: 500;
+            font-size: 15px;
+            box-shadow: 0 6px 18px -6px rgba(99, 102, 241, 0.5);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-position 0.4s ease;
+        }
+
+        .cta-btn::after { display: none; }
+
+        .cta-btn:hover {
+            color: #ffffff;
+            transform: translateY(-2px);
+            background-position: 100% 50%;
+            box-shadow: 0 12px 26px -8px rgba(99, 102, 241, 0.55);
+        }
+
+        .cta-arrow { transition: transform 0.2s ease; }
+        .cta-btn:hover .cta-arrow { transform: translateX(4px); }
+
+        .footnote {
+            margin-top: 3rem;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .illu {
+            display: block;
+            margin: 2.5rem auto 0;
+            max-width: min(420px, 80%);
+            height: auto;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .illu {
+                filter: invert(1) hue-rotate(180deg);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .animate, .subtitle { animation: none; opacity: 1; }
+        }
+    /*langswitch*/
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:2.5rem;flex-wrap:wrap}
+.topbar--end{justify-content:flex-end}
+.topbar .back-link{margin-bottom:0}
+.lang-switch{display:inline-flex;align-items:center;padding:3px 3px 3px 1px;border-radius:999px;background:rgba(128,128,128,.10);border:1px solid rgba(128,128,128,.22);font-size:12px;font-weight:600;letter-spacing:.04em;flex-shrink:0}
+.lang-switch .lang-globe{color:var(--text-secondary);margin:0 .4rem 0 .48rem;flex-shrink:0;display:block}
+.lang-switch a{text-decoration:none;color:var(--text-secondary);padding:.28rem .62rem;border-radius:999px;line-height:1;transition:color .2s ease,background .2s ease,box-shadow .2s ease}
+.lang-switch a::after{display:none!important}
+.lang-switch a:hover{color:var(--text-primary)}
+.lang-switch a.is-active,.lang-switch a.is-active:hover{color:#fff;background:linear-gradient(135deg,var(--accent-1),var(--accent-2));box-shadow:0 2px 10px -3px rgba(99,102,241,.45)}
+</style>
+    <link rel="canonical" href="https://www.supergenial.be/en/ai-assessment/">
+    <link rel="alternate" hreflang="fr" href="https://www.supergenial.be/diagnostic-ia/">
+    <link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/ai-assessment/">
+    <link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/diagnostic-ia/">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="AI Assessment for SMEs — Michael Hulet, Agentic Builder">
+    <meta name="twitter:description" content="Two weeks to find out what AI can do for your SME. Top 3 opportunities with real numbers, 30-60-90 day plan. Fixed price, credited if we build together.">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"AI Assessment for SMEs","serviceType":"AI Assessment","provider":{"@type":"ProfessionalService","@id":"https://www.supergenial.be/#business","name":"Super Génial"},"areaServed":{"@type":"Place","name":"Belgium"},"description":"A two-week analysis of what AI can bring to an SME: team interviews, process mapping, top 3 opportunities quantified in hours saved and a 30-60-90 day plan.","offers":{"@type":"Offer","price":"2500","priceCurrency":"EUR"}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","inLanguage":"en","mainEntity":[{"@type":"Question","name":"Why pay, when free AI audits exist?","acceptedAnswer":{"@type":"Answer","text":"A free audit is a sales pitch in disguise: it always concludes you should buy whatever its author sells. Here you pay for real work — interviews, mapping, numbers — and the report is yours. You can act on it with me, with someone else, or on your own."}},{"@type":"Question","name":"What if the assessment concludes there is nothing worth doing?","acceptedAnswer":{"@type":"Answer","text":"Then the report will say so, with the reasons. It's rare — there are almost always a few hours a week to win back — but knowing you should not invest right now saves you far more than the cost of an assessment."}},{"@type":"Question","name":"Do we need to be digitized already for this to make sense?","acceptedAnswer":{"@type":"Answer","text":"No. We start from your real processes, even if they live on paper, in notebooks, or in two people's heads. That is often exactly where the assessment uncovers the most value."}},{"@type":"Question","name":"How much of my team's time does it take?","acceptedAnswer":{"@type":"Answer","text":"About one hour per person interviewed, a kickoff meeting at the start, and a 90-minute walkthrough at the end. The rest of the work happens on my side."}}]}</script>
+</head>
+<body>
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <main>
+        <div class="topbar"><a href="/en/" class="back-link plain">← Super Génial</a><div class="lang-switch" aria-label="Language / Langue"><svg class="lang-globe" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><ellipse cx="12" cy="12" rx="4.2" ry="9"/></svg><a href="/diagnostic-ia/">FR</a><a href="/en/ai-assessment/" class="is-active">EN</a></div></div>
+
+        <h1 class="animate delay-1">AI Assessment</h1>
+        <p class="subtitle">Two weeks to find out what AI can do for your SME.</p>
+
+        <p class="intro animate delay-3">
+            Everyone tells you AI will change your business. Nobody tells you where to start,
+            or what it's actually worth in your company, with your team and your tools.
+            This assessment answers that question — with numbers, not slides.
+        </p>
+    </main>
+
+    <div class="principle animate delay-4">
+        <div class="principle-inner">
+            <p>An assessment by someone who has <span class="em">lived your business</span> — and who <span class="em">builds</span> what he recommends.</p>
+            <p class="sub">Not a report that gathers dust: every recommendation is feasible, quantified, and I can deliver it myself.</p>
+        </div>
+    </div>
+
+    <main>
+        <!-- LIVED IT -->
+        <section class="animate delay-5">
+            <div class="section-label">Why me</div>
+            <h2>I lived it, then I built it</h2>
+            <div class="section-body">
+                <p>
+                    In 25 years I've stood on both sides of the counter: freelance analyst-developer,
+                    but also co-founder of a shop, of a venue with holiday lodging and event spaces,
+                    of a training association, of startups and e-commerce businesses. I know the till
+                    that doesn't talk to the stock, the booking calendar that overflows, registrations
+                    managed by hand, quotes that sit for weeks.
+                </p>
+                <p>
+                    Since 2023 I've been building applications with AI agents — and I install them
+                    in my own organizations before offering them to anyone else. When I analyze your
+                    company, I'm not discovering your business: I recognize your processes, and I know
+                    which ones AI can genuinely take over today.
+                </p>
+            </div>
+            <ul class="terrains">
+                <li>Retail: a shop, its stock, its suppliers, its margins</li>
+                <li>Hospitality: lodges, event spaces, bookings all year round</li>
+                <li>Non-profits: members, training programmes, volunteers, grants</li>
+                <li>Services: quotes, invoices, schedules, clients to follow up</li>
+            </ul>
+        </section>
+
+        <!-- PROCESS -->
+        <section class="animate delay-5">
+            <div class="section-label">How it works</div>
+            <h2>Two weeks, five steps</h2>
+            <p class="section-desc">
+                I come to you, listen to your team describe their actual working day, and leave
+                with what I need to map the whole company. Your time: about one hour per person
+                interviewed, plus the final walkthrough.
+            </p>
+
+            <div class="launch-card">
+                <ol class="steps">
+                    <li><span class="num">01</span> Kickoff: your priorities, your constraints, your current tools</li>
+                    <li><span class="num">02</span> Team interviews — the people who do the work, not just management</li>
+                    <li><span class="num">03</span> Mapping of processes and information flows</li>
+                    <li><span class="num">04</span> Analysis: every AI opportunity scored on impact (hours saved) and feasibility (data, tools, cost)</li>
+                    <li><span class="num">05</span> Walkthrough: the report presented and discussed with you, decisions in hand</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- DELIVERABLES -->
+        <section class="animate delay-6">
+            <div class="section-label">What you get</div>
+            <h2>A short report, made for deciding</h2>
+            <p class="section-desc">
+                Not 80 pages of generalities about artificial intelligence. A document you can
+                read in an evening and act on the next morning.
+            </p>
+
+            <ul class="deliverables">
+                <li><strong>The top 3 opportunities</strong><small>The three places where AI pays off most in your company, quantified in hours saved per week and cost to implement.</small></li>
+                <li><strong>A map of your processes</strong><small>What the assessment saw of how your company really works — often a revelation for management in itself.</small></li>
+                <li><strong>A 30-60-90 day plan</strong><small>What to start with, in what order, and what it asks of your team. Not a three-year plan.</small></li>
+                <li><strong>The tools, with their real costs</strong><small>What to buy, what to build, and the actual monthly bill it adds up to.</small></li>
+            </ul>
+
+            <div class="note">
+                <strong>What this assessment is not.</strong> A promise of "transformation".
+                We look for hours saved on one or two concrete processes — that's how AI
+                enters an SME usefully. And if nothing serious emerges, the report will
+                say so honestly.
+            </div>
+        </section>
+
+        <!-- PRICE -->
+        <section class="animate delay-6">
+            <div class="section-label">The price</div>
+            <h2>Fixed price, announced upfront</h2>
+            <p class="section-desc">
+                Like everything at Super Génial: no hour counter, no surprises.
+            </p>
+
+            <div class="launch-card featured">
+                <div class="price">€2,500 <small>· fixed price, all included</small></div>
+                <p style="font-size:15px; margin-top:0.75rem; color:var(--text-secondary)">
+                    And if you ask me to build the first opportunity within 90 days,
+                    <strong style="color:var(--text-primary)">the €2,500 is fully deducted</strong> from the
+                    <a href="/en/pricing/">launch package</a>. The assessment will have cost you nothing.
+                </p>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="animate delay-6">
+            <div class="section-label">Good to know</div>
+            <h2>FAQ</h2>
+
+            <div class="faq-item" style="margin-top:1.5rem">
+                <div class="faq-q">Why pay, when free AI audits exist?</div>
+                <div class="faq-a">A free audit is a sales pitch in disguise: it always concludes you
+                should buy whatever its author sells. Here you pay for real work — interviews, mapping,
+                numbers — and the report is yours. You can act on it with me, with someone else, or
+                on your own.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-q">What if the assessment concludes there is nothing worth doing?</div>
+                <div class="faq-a">Then the report will say so, with the reasons. It's rare — there are
+                almost always a few hours a week to win back — but knowing you should not invest right
+                now saves you far more than the cost of an assessment.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-q">Do we need to be digitized already for this to make sense?</div>
+                <div class="faq-a">No. We start from your real processes, even if they live on paper,
+                in notebooks, or in two people's heads. That is often exactly where the assessment
+                uncovers the most value.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-q">How much of my team's time does it take?</div>
+                <div class="faq-a">About one hour per person interviewed, a kickoff meeting at the
+                start, and a 90-minute walkthrough at the end. The rest of the work happens on my side.</div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section class="contact animate delay-7">
+            <p>Shall we look at what AI can do in your company?</p>
+            <div class="contact-links">
+                <div><span class="arrow">→</span><a href="mailto:team@supergenial.be">team@supergenial.be</a></div>
+                <div><span class="arrow">→</span><a href="https://t.me/supergenialdotbe" target="_blank" rel="noopener noreferrer">Telegram: @supergenialdotbe</a></div>
+                <div><span class="arrow">→</span><a href="https://www.linkedin.com/in/michaelhulet/" target="_blank" rel="noopener noreferrer">LinkedIn</a></div>
+            </div>
+            <p class="footnote">Prices excluding VAT. Assessments run on site in Wallonia and Brussels;
+            elsewhere in Belgium and Europe, let's talk.</p>
+        </section>
+    </main>
+
+    <script>
+        const glow = document.getElementById('cursorGlow');
+        let mouseX = 0, mouseY = 0, glowX = 0, glowY = 0;
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            glow.classList.add('visible');
+        });
+        window.addEventListener('mouseleave', () => {
+            glow.classList.remove('visible');
+        });
+        (function animateGlow() {
+            glowX += (mouseX - glowX) * 0.1;
+            glowY += (mouseY - glowY) * 0.1;
+            glow.style.left = glowX + 'px';
+            glow.style.top = glowY + 'px';
+            requestAnimationFrame(animateGlow);
+        })();
+    </script>
+</body>
+</html>

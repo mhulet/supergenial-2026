@@ -5,6 +5,7 @@
 Michael conçoit des applications avec des agents IA et remet à niveau les applications existantes (mise à jour de framework, migration de version, durcissement serveur) sans tout casser, par paliers testés. Zone : Europe. Contact : team@supergenial.be.
 
 ## Services
+- [Diagnostic IA pour PME](https://www.supergenial.be/diagnostic-ia/) : deux semaines pour analyser ce que l'IA peut apporter à une PME — interviews des équipes, cartographie des processus, top 3 des opportunités chiffrées en heures gagnées, plan 30-60-90 jours. Prix fixe 2 500 €, intégralement déduit du forfait de lancement si on construit dans les 90 jours.
 - [Maintenance & mises à jour](https://www.supergenial.be/maintenance/) : reprise d'applications Rails et web vieillissantes + serveurs Ubuntu. Audit à prix fixe (490 €), mise à niveau au forfait, abonnement de maintenance dès 290 €/mois.
 - [Tarifs](https://www.supergenial.be/tarifs/) : forfait de lancement, abonnement mensuel, forfaits feature — prix annoncés d'avance, jamais à l'heure.
 

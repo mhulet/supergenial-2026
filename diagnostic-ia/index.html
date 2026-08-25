@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnostic IA pour PME — Michael Hulet, Agentic Builder</title>
+    <meta name="author" content="Michael Hulet">
+    <meta name="description" content="Deux semaines pour savoir ce que l'IA peut faire pour votre PME. Interviews, cartographie des processus, top 3 des opportunités chiffrées et plan 30-60-90 jours. Prix fixe : 2 500 €, crédités si on construit ensemble.">
+    <meta property="og:title" content="Diagnostic IA pour PME — Michael Hulet, Agentic Builder">
+    <meta property="og:description" content="Deux semaines pour savoir ce que l'IA peut faire pour votre PME. Top 3 des opportunités chiffrées, plan 30-60-90 jours. Prix fixe, crédité si on construit ensemble.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.supergenial.be/diagnostic-ia">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #ffffff;
+            --text-primary: #171717;
+            --text-secondary: #737373;
+            --link-underline: #a3a3a3;
+            --link-hover: #000000;
+            --accent-1: #6366f1;
+            --accent-2: #8b5cf6;
+            --glow: rgba(99, 102, 241, 0.15);
+            --card-bg: #ffffff;
+            --card-border: #e5e5e5;
+            --card-border-featured: #6366f1;
+            --soft-bg: #f5f5f5;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #0a0a0a;
+                --text-primary: #ededed;
+                --text-secondary: #a3a3a3;
+                --link-underline: #525252;
+                --link-hover: #ffffff;
+                --glow: rgba(139, 92, 246, 0.1);
+                --card-bg: #111111;
+                --card-border: #262626;
+                --card-border-featured: #8b5cf6;
+                --soft-bg: #141414;
+            }
+        }
+
+        /* Grain texture overlay */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.03;
+            z-index: 1000;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes subtitleIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate {
+            animation: fadeUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+        .delay-6 { animation-delay: 0.6s; }
+        .delay-7 { animation-delay: 0.7s; }
+
+        main {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+            position: relative;
+        }
+
+        .cursor-glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle at center, var(--glow) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: -1;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .cursor-glow.visible { opacity: 1; }
+
+        @media (min-width: 768px) {
+            main { margin-top: 4rem; padding: 0 1.5rem 5rem; }
+            body { font-size: 18px; }
+        }
+
+        .back-link {
+            display: inline-block;
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        @media (min-width: 768px) {
+            h1 { font-size: 40px; }
+        }
+
+        .subtitle {
+            font-size: 20px;
+            margin-bottom: 2rem;
+            font-weight: 500;
+            color: var(--accent-1);
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2), var(--accent-1));
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0;
+            animation: subtitleIn 0.8s ease-out 0.2s forwards, gradientShift 4s ease 0.2s infinite;
+        }
+
+        @media (min-width: 768px) {
+            .subtitle { font-size: 24px; }
+        }
+
+        .intro {
+            font-size: 16px;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+            max-width: 38rem;
+        }
+
+        @media (min-width: 768px) {
+            .intro { font-size: 18px; }
+        }
+
+        section {
+            margin-bottom: 4rem;
+        }
+
+        .section-label {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 0.4rem;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (min-width: 768px) {
+            h2 { font-size: 28px; }
+        }
+
+        .section-desc {
+            color: var(--text-secondary);
+            font-size: 15px;
+            margin-bottom: 1.75rem;
+            max-width: 40rem;
+        }
+
+        .section-body p {
+            font-size: 16px;
+            margin-bottom: 1.1rem;
+            max-width: 40rem;
+        }
+
+        /* ── Principe (manifesto strip) ── */
+        .principle {
+            background-color: var(--soft-bg);
+            margin: 0 -1.5rem 4rem;
+            padding: 2.5rem 1.5rem;
+        }
+
+        .principle-inner {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .principle p {
+            font-size: 20px;
+            font-weight: 500;
+            line-height: 1.5;
+            letter-spacing: -0.01em;
+        }
+
+        .principle .em {
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .principle .sub {
+            font-size: 15px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            margin-top: 0.85rem;
+        }
+
+        @media (min-width: 768px) {
+            .principle {
+                margin-left: calc(-50vw + 360px);
+                margin-right: calc(-50vw + 360px);
+                padding: 3rem calc(50vw - 360px);
+            }
+            .principle p { font-size: 24px; }
+        }
+
+        /* ── Cartes ── */
+        .launch-card {
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 1.75rem;
+            background-color: var(--card-bg);
+        }
+
+        .launch-card.featured {
+            border-color: var(--card-border-featured);
+            box-shadow: 0 0 0 1px var(--card-border-featured);
+        }
+
+        .launch-card .price {
+            font-size: 26px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.25rem;
+        }
+
+        .launch-card .price small {
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--text-secondary);
+        }
+
+        .steps {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            margin-top: 1.25rem;
+        }
+
+        .steps li {
+            display: flex;
+            align-items: baseline;
+            gap: 0.7rem;
+            font-size: 15px;
+        }
+
+        .steps .num {
+            flex-shrink: 0;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--accent-1);
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* ── Livrables ── */
+        .deliverables {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+        }
+
+        @media (min-width: 768px) {
+            .deliverables { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        .deliverables li {
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 1rem 1.15rem;
+            background-color: var(--card-bg);
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        .deliverables li strong {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        .deliverables li small {
+            color: var(--text-secondary);
+            font-size: 13.5px;
+        }
+
+        /* ── Vécu (terrains) ── */
+        .terrains {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.55rem;
+            margin-top: 1.25rem;
+        }
+
+        .terrains li {
+            display: flex;
+            align-items: baseline;
+            gap: 0.55rem;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        .terrains li::before {
+            content: "→";
+            color: var(--accent-1);
+            flex-shrink: 0;
+            font-size: 13px;
+        }
+
+        /* ── Note ── */
+        .note {
+            margin-top: 1.5rem;
+            padding: 1.25rem 1.35rem;
+            border-left: 2px solid var(--accent-1);
+            background-color: var(--soft-bg);
+            border-radius: 0 12px 12px 0;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .note strong { color: var(--text-primary); font-weight: 600; }
+
+        /* ── FAQ ── */
+        .faq-item { margin-bottom: 1.5rem; }
+        .faq-q { font-size: 16px; font-weight: 600; margin-bottom: 0.35rem; }
+        .faq-a { font-size: 15px; color: var(--text-secondary); }
+
+        /* ── Contact ── */
+        .contact { margin-top: 4rem; }
+        .contact p { margin-bottom: 1rem; font-weight: 500; }
+        .contact-links { display: flex; flex-direction: column; gap: 0.5rem; }
+        .contact-links > div { padding: 0.25rem 0; transition: padding-left 0.2s ease; }
+        .contact-links > div:hover { padding-left: 0.25rem; }
+
+        a {
+            color: var(--text-primary);
+            text-decoration: none;
+            position: relative;
+            transition: color 0.2s ease;
+        }
+
+        a.plain::after { display: none; }
+
+        a:not(.plain)::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--link-underline);
+            transition: background 0.2s ease, transform 0.3s ease;
+            transform-origin: left;
+        }
+
+        a:hover { color: var(--link-hover); }
+
+        a:not(.plain):hover::after {
+            background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+            transform: scaleX(1.05);
+        }
+
+        .arrow {
+            display: inline-block;
+            margin-right: 0.5rem;
+            transition: transform 0.2s ease;
+        }
+
+        .contact-links > div:hover .arrow { transform: translateX(4px); }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.7rem 1.4rem;
+            border-radius: 999px;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            background-size: 200% 200%;
+            color: #ffffff;
+            font-weight: 500;
+            font-size: 15px;
+            box-shadow: 0 6px 18px -6px rgba(99, 102, 241, 0.5);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-position 0.4s ease;
+        }
+
+        .cta-btn::after { display: none; }
+
+        .cta-btn:hover {
+            color: #ffffff;
+            transform: translateY(-2px);
+            background-position: 100% 50%;
+            box-shadow: 0 12px 26px -8px rgba(99, 102, 241, 0.55);
+        }
+
+        .cta-arrow { transition: transform 0.2s ease; }
+        .cta-btn:hover .cta-arrow { transform: translateX(4px); }
+
+        .footnote {
+            margin-top: 3rem;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .illu {
+            display: block;
+            margin: 2.5rem auto 0;
+            max-width: min(420px, 80%);
+            height: auto;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .illu {
+                filter: invert(1) hue-rotate(180deg);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .animate, .subtitle { animation: none; opacity: 1; }
+        }
+    /*langswitch*/
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:2.5rem;flex-wrap:wrap}
+.topbar--end{justify-content:flex-end}
+.topbar .back-link{margin-bottom:0}
+.lang-switch{display:inline-flex;align-items:center;padding:3px 3px 3px 1px;border-radius:999px;background:rgba(128,128,128,.10);border:1px solid rgba(128,128,128,.22);font-size:12px;font-weight:600;letter-spacing:.04em;flex-shrink:0}
+.lang-switch .lang-globe{color:var(--text-secondary);margin:0 .4rem 0 .48rem;flex-shrink:0;display:block}
+.lang-switch a{text-decoration:none;color:var(--text-secondary);padding:.28rem .62rem;border-radius:999px;line-height:1;transition:color .2s ease,background .2s ease,box-shadow .2s ease}
+.lang-switch a::after{display:none!important}
+.lang-switch a:hover{color:var(--text-primary)}
+.lang-switch a.is-active,.lang-switch a.is-active:hover{color:#fff;background:linear-gradient(135deg,var(--accent-1),var(--accent-2));box-shadow:0 2px 10px -3px rgba(99,102,241,.45)}
+</style>
+    <link rel="canonical" href="https://www.supergenial.be/diagnostic-ia/">
+    <link rel="alternate" hreflang="fr" href="https://www.supergenial.be/diagnostic-ia/">
+    <link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/ai-assessment/">
+    <link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/diagnostic-ia/">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Diagnostic IA pour PME — Michael Hulet, Agentic Builder">
+    <meta name="twitter:description" content="Deux semaines pour savoir ce que l'IA peut faire pour votre PME. Top 3 des opportunités chiffrées, plan 30-60-90 jours. Prix fixe, crédité si on construit ensemble.">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"Diagnostic IA pour PME","serviceType":"Diagnostic IA","provider":{"@type":"ProfessionalService","@id":"https://www.supergenial.be/#business","name":"Super Génial"},"areaServed":{"@type":"Place","name":"Belgique"},"description":"Analyse en deux semaines de ce que l'IA peut apporter à une PME : interviews des équipes, cartographie des processus, top 3 des opportunités chiffrées en heures gagnées et plan 30-60-90 jours.","offers":{"@type":"Offer","price":"2500","priceCurrency":"EUR"}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","inLanguage":"fr","mainEntity":[{"@type":"Question","name":"Pourquoi payer, alors que des audits IA gratuits existent ?","acceptedAnswer":{"@type":"Answer","text":"Un audit gratuit est un argumentaire commercial déguisé : il conclut toujours qu'il faut acheter ce que son auteur vend. Ici, vous payez un travail réel — des interviews, une cartographie, des chiffres — et le rapport vous appartient. Vous pouvez le mettre en œuvre avec moi, avec quelqu'un d'autre, ou seul."}},{"@type":"Question","name":"Et si le diagnostic conclut qu'il n'y a rien d'intéressant à faire ?","acceptedAnswer":{"@type":"Answer","text":"Alors le rapport le dira, avec les raisons. C'est rare — il y a presque toujours quelques heures par semaine à récupérer — mais savoir qu'il ne faut pas investir maintenant vous évite des dépenses bien plus grandes qu'un diagnostic."}},{"@type":"Question","name":"Faut-il déjà être « digitalisé » pour que ça ait du sens ?","acceptedAnswer":{"@type":"Answer","text":"Non. On part de vos processus réels, même s'ils vivent sur papier, dans des cahiers ou dans la tête de deux personnes. C'est justement là que le diagnostic révèle le plus de valeur."}},{"@type":"Question","name":"Combien de temps ça demande à mon équipe ?","acceptedAnswer":{"@type":"Answer","text":"Environ une heure par personne interviewée, une réunion de cadrage au départ et une restitution d'une heure trente à la fin. Le reste du travail se fait de mon côté."}},{"@type":"Question","name":"Existe-t-il des aides publiques pour ce type de mission ?","acceptedAnswer":{"@type":"Answer","text":"Les dispositifs wallons de soutien au numérique et à l'IA (Start IA, chèques-entreprises) sont en pleine recomposition. Selon votre situation et le calendrier des appels, je vous oriente vers ce qui existe au moment de votre demande."}}]}</script>
+</head>
+<body>
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <main>
+        <div class="topbar"><a href="/" class="back-link plain">← Super Génial</a><div class="lang-switch" aria-label="Language / Langue"><svg class="lang-globe" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><ellipse cx="12" cy="12" rx="4.2" ry="9"/></svg><a href="/diagnostic-ia/" class="is-active">FR</a><a href="/en/ai-assessment/">EN</a></div></div>
+
+        <h1 class="animate delay-1">Diagnostic IA</h1>
+        <p class="subtitle">Deux semaines pour savoir ce que l'IA peut faire pour votre PME.</p>
+
+        <p class="intro animate delay-3">
+            Tout le monde vous dit que l'IA va changer votre métier. Personne ne vous dit
+            par où commencer, ni ce que ça vaut chez vous, avec vos équipes et vos outils.
+            Ce diagnostic répond à cette question — avec des chiffres, pas des slides.
+        </p>
+    </main>
+
+    <div class="principle animate delay-4">
+        <div class="principle-inner">
+            <p>Un diagnostic fait par quelqu'un qui a <span class="em">vécu vos métiers</span> — et qui <span class="em">construit</span> ce qu'il recommande.</p>
+            <p class="sub">Pas un rapport qui dort dans un tiroir : chaque recommandation est faisable, chiffrée, et je peux la livrer moi-même.</p>
+        </div>
+    </div>
+
+    <main>
+        <!-- VÉCU -->
+        <section class="animate delay-5">
+            <div class="section-label">Pourquoi moi</div>
+            <h2>Je l'ai vécu, puis construit</h2>
+            <div class="section-body">
+                <p>
+                    En 25 ans, j'ai été des deux côtés du comptoir : analyste-programmeur freelance,
+                    mais aussi co-fondateur d'un magasin, d'un lieu d'accueil avec gîtes et salles,
+                    d'une association de formation, de startups et d'e-commerces. Je connais la caisse
+                    qui ne croise pas le stock, le planning des réservations qui déborde, les
+                    inscriptions gérées à la main, les devis qui traînent.
+                </p>
+                <p>
+                    Depuis 2023, je conçois des applications avec des agents IA — et je les installe
+                    d'abord dans mes propres structures avant de les proposer aux autres. Quand
+                    j'analyse votre entreprise, je ne découvre pas votre métier : je reconnais
+                    vos processus, et je sais lesquels une IA peut prendre en charge aujourd'hui.
+                </p>
+            </div>
+            <ul class="terrains">
+                <li>Commerce : un magasin, ses stocks, ses fournisseurs, ses marges</li>
+                <li>Accueil : des gîtes, des salles, des réservations toute l'année</li>
+                <li>Associatif : des membres, des formations, des bénévoles, des subsides</li>
+                <li>Services : des devis, des factures, des plannings, des clients à relancer</li>
+            </ul>
+        </section>
+
+        <!-- DÉROULÉ -->
+        <section class="animate delay-5">
+            <div class="section-label">Le déroulé</div>
+            <h2>Deux semaines, cinq étapes</h2>
+            <p class="section-desc">
+                Je viens chez vous, j'écoute vos équipes décrire leur vraie journée de travail,
+                et je repars avec de quoi cartographier l'entreprise entière. Votre temps :
+                environ une heure par personne interviewée, plus la restitution.
+            </p>
+
+            <div class="launch-card">
+                <ol class="steps">
+                    <li><span class="num">01</span> Cadrage : vos priorités, vos contraintes, vos outils actuels</li>
+                    <li><span class="num">02</span> Interviews des équipes — les personnes qui font le travail, pas seulement la direction</li>
+                    <li><span class="num">03</span> Cartographie des processus et des flux d'information</li>
+                    <li><span class="num">04</span> Analyse : chaque opportunité IA évaluée en impact (heures gagnées) et en faisabilité (données, outils, coût)</li>
+                    <li><span class="num">05</span> Restitution : le rapport présenté et discuté avec vous, décisions en main</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- LIVRABLES -->
+        <section class="animate delay-6">
+            <div class="section-label">Ce que vous recevez</div>
+            <h2>Un rapport court, fait pour décider</h2>
+            <p class="section-desc">
+                Pas 80 pages de généralités sur l'intelligence artificielle. Un document
+                que vous pouvez lire en une soirée et actionner le lendemain.
+            </p>
+
+            <ul class="deliverables">
+                <li><strong>Le top 3 des opportunités</strong><small>Les trois endroits où l'IA rapporte le plus chez vous, chiffrés en heures gagnées par semaine et en coût de mise en œuvre.</small></li>
+                <li><strong>La carte de vos processus</strong><small>Ce que le diagnostic a vu de votre fonctionnement — souvent une découverte en soi pour la direction.</small></li>
+                <li><strong>Un plan 30-60-90 jours</strong><small>Par quoi commencer, dans quel ordre, et ce que ça demande à vos équipes. Pas un plan à trois ans.</small></li>
+                <li><strong>Les outils, avec leurs vrais coûts</strong><small>Ce qu'il faut acheter, ce qu'il faut construire, et l'abonnement mensuel réel que ça représente.</small></li>
+            </ul>
+
+            <div class="note">
+                <strong>Ce que ce diagnostic n'est pas.</strong> Une promesse de « transformation ».
+                On cherche des heures gagnées sur un ou deux processus concrets — c'est comme ça
+                que l'IA entre utilement dans une PME. Et si rien de sérieux n'émerge, le rapport
+                le dira honnêtement.
+            </div>
+        </section>
+
+        <!-- PRIX -->
+        <section class="animate delay-6">
+            <div class="section-label">Le prix</div>
+            <h2>Prix fixe, annoncé d'avance</h2>
+            <p class="section-desc">
+                Comme tout chez Super Génial : pas de compteur d'heures, pas de surprise.
+            </p>
+
+            <div class="launch-card featured">
+                <div class="price">2 500 € <small>· prix fixe, tout compris</small></div>
+                <p style="font-size:15px; margin-top:0.75rem; color:var(--text-secondary)">
+                    Et si vous me confiez la construction de la première opportunité dans les
+                    90 jours, <strong style="color:var(--text-primary)">les 2 500 € sont intégralement déduits</strong> du
+                    <a href="/tarifs/">forfait de lancement</a>. Le diagnostic ne vous aura rien coûté.
+                </p>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="animate delay-6">
+            <div class="section-label">Bon à savoir</div>
+            <h2>Questions fréquentes</h2>
+
+            <div class="faq-item" style="margin-top:1.5rem">
+                <div class="faq-q">Pourquoi payer, alors que des audits IA gratuits existent ?</div>
+                <div class="faq-a">Un audit gratuit est un argumentaire commercial déguisé : il conclut
+                toujours qu'il faut acheter ce que son auteur vend. Ici, vous payez un travail réel —
+                des interviews, une cartographie, des chiffres — et le rapport vous appartient. Vous
+                pouvez le mettre en œuvre avec moi, avec quelqu'un d'autre, ou seul.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-q">Et si le diagnostic conclut qu'il n'y a rien d'intéressant à faire ?</div>
+                <div class="faq-a">Alors le rapport le dira, avec les raisons. C'est rare — il y a presque
+                toujours quelques heures par semaine à récupérer — mais savoir qu'il ne faut pas investir
+                maintenant vous évite des dépenses bien plus grandes qu'un diagnostic.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-q">Faut-il déjà être « digitalisé » pour que ça ait du sens ?</div>
+                <div class="faq-a">Non. On part de vos processus réels, même s'ils vivent sur papier,
+                dans des cahiers ou dans la tête de deux personnes. C'est justement là que le diagnostic
+                révèle le plus de valeur.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-q">Combien de temps ça demande à mon équipe ?</div>
+                <div class="faq-a">Environ une heure par personne interviewée, une réunion de cadrage
+                au départ et une restitution d'une heure trente à la fin. Le reste du travail se fait
+                de mon côté.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-q">Existe-t-il des aides publiques pour ce type de mission ?</div>
+                <div class="faq-a">Les dispositifs wallons de soutien au numérique et à l'IA
+                (Start IA, chèques-entreprises) sont en pleine recomposition. Selon votre situation
+                et le calendrier des appels, je vous oriente vers ce qui existe au moment de votre demande.</div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section class="contact animate delay-7">
+            <p>On regarde ensemble ce que l'IA peut faire chez vous ?</p>
+            <div class="contact-links">
+                <div><span class="arrow">→</span><a href="mailto:team@supergenial.be">team@supergenial.be</a></div>
+                <div><span class="arrow">→</span><a href="https://t.me/supergenialdotbe" target="_blank" rel="noopener noreferrer">Telegram : @supergenialdotbe</a></div>
+                <div><span class="arrow">→</span><a href="https://www.linkedin.com/in/michaelhulet/" target="_blank" rel="noopener noreferrer">LinkedIn</a></div>
+            </div>
+            <p class="footnote">Prix hors TVA. Diagnostic mené en Wallonie et à Bruxelles, sur site ;
+            ailleurs en Belgique et en Europe, on en parle.</p>
+        </section>
+    </main>
+
+    <script>
+        const glow = document.getElementById('cursorGlow');
+        let mouseX = 0, mouseY = 0, glowX = 0, glowY = 0;
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            glow.classList.add('visible');
+        });
+        window.addEventListener('mouseleave', () => {
+            glow.classList.remove('visible');
+        });
+        (function animateGlow() {
+            glowX += (mouseX - glowX) * 0.1;
+            glowY += (mouseY - glowY) * 0.1;
+            glow.style.left = glowX + 'px';
+            glow.style.top = glowY + 'px';
+            requestAnimationFrame(animateGlow);
+        })();
+    </script>
+</body>
+</html>

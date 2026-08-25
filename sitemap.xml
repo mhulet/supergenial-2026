@@ -2,14 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://www.supergenial.be/</loc>
-    <lastmod>2026-07-11</lastmod>
+    <lastmod>2026-08-25</lastmod>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/"/>
   </url>
   <url>
     <loc>https://www.supergenial.be/en/</loc>
-    <lastmod>2026-07-11</lastmod>
+    <lastmod>2026-08-25</lastmod>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/"/>
@@ -30,17 +30,31 @@
   </url>
   <url>
     <loc>https://www.supergenial.be/tarifs/</loc>
-    <lastmod>2026-07-11</lastmod>
+    <lastmod>2026-08-25</lastmod>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/tarifs/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/pricing/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/tarifs/"/>
   </url>
   <url>
     <loc>https://www.supergenial.be/en/pricing/</loc>
-    <lastmod>2026-07-11</lastmod>
+    <lastmod>2026-08-25</lastmod>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/tarifs/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/pricing/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/tarifs/"/>
+  </url>
+  <url>
+    <loc>https://www.supergenial.be/diagnostic-ia/</loc>
+    <lastmod>2026-08-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/diagnostic-ia/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/ai-assessment/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/diagnostic-ia/"/>
+  </url>
+  <url>
+    <loc>https://www.supergenial.be/en/ai-assessment/</loc>
+    <lastmod>2026-08-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/diagnostic-ia/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/ai-assessment/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/diagnostic-ia/"/>
   </url>
   <url>
     <loc>https://www.supergenial.be/ressources/</loc>
