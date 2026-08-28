@@ -47,9 +47,9 @@ body {
 .delay-1 { animation-delay: 0.1s; }
 .delay-2 { animation-delay: 0.2s; }
 .delay-3 { animation-delay: 0.3s; }
-main { max-width: 720px; margin: 0 auto; padding: 3rem 1.5rem; position: relative; }
+main { max-width: 720px; margin: 0 auto; padding: 3rem 1.5rem 0; position: relative; }
 @media (min-width: 768px) {
-  main { margin-top: 4rem; padding: 0 1.5rem 5rem; }
+  main { margin-top: 4rem; padding: 0 1.5rem 0; }
   body { font-size: 18px; }
 }
 .back-link { display: inline-block; font-size: 14px; color: var(--text-secondary); margin-bottom: 2.5rem; }
@@ -386,36 +386,57 @@ a:hover::after {
   /* Trait noir → blanc ; hue-rotate ramène l'accent violet près de sa teinte d'origine */ .illu { filter: invert(1) hue-rotate(180deg); }
 }
 .parcours {
-            background-color: var(--soft-bg);
-            margin: 0 calc(50% - 50vw);
-            padding: 3rem 1.5rem;
+            /* Fond de page, pas la bande grise du pied : deux bandes grises empilées
+               se lisaient comme deux pieds de page. Un simple filet le sépare du contenu. */
+            background-color: transparent;
+            margin: 4rem calc(50% - 50vw) 0;
+            padding: 3rem 1.5rem 0;
+            border-top: 1px solid var(--card-border);
         }
-@media (prefers-color-scheme: dark) {
-}
 .parcours-inner {
             max-width: 650px;
             margin: 0 auto;
             padding: 0 1.5rem;
         }
 .parcours h2 {
-            font-size: 18px;
+            font-size: 15px;
             font-weight: 600;
-            margin-bottom: 1.5rem;
-            color: var(--text-secondary);
+            color: var(--text-primary);
+            letter-spacing: -0.01em;
+            margin-bottom: 1.4rem;
         }
 .parcours ul {
             list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.8rem 2.5rem;
         }
 .parcours li {
-            color: var(--text-primary);
+            position: relative;
+            padding-left: 1.35rem;
             font-size: 15px;
+            line-height: 1.5;
+            color: var(--text-secondary);
         }
+/* Le marqueur reprend le carré violet du logo, en plus petit. En absolu : le contenu
+   du li reste en flux inline, sinon le texte et les liens deviennent des items flex
+   séparés et les liens ne peuvent plus se replier normalement. */
+.parcours li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0.58em;
+            width: 7px;
+            height: 7px;
+            border-radius: 2.5px;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            opacity: 0.5;
+        }
+.parcours li a { color: var(--text-primary); font-weight: 500; }
 @media (min-width: 768px) {
-  .parcours { padding: 3rem 1.5rem; }
-  .parcours li { font-size: 16px; }
+  .parcours { padding: 3.5rem 1.5rem 0; }
+  .parcours li { font-size: 15.5px; }
+  .parcours ul { grid-template-columns: 1fr 1fr; }
 }
 
 /* ═══ Landing commun ═══ */
@@ -925,7 +946,6 @@ a:not(.plain):hover::after {
     .foot-nav { gap: 0.5rem 1rem; }
 }
 
-/* Pas de couture entre deux bandes : le pied colle à la bande qui le précède.
-   .parcours est un <section>, il héritait des 3rem de marge basse de .page-home section. */
+/* Pas de couture quand le pied suit une bande de même couleur. */
 .page-home .parcours { margin-bottom: 0; }
-.parcours + .site-foot, .principle + .site-foot { margin-top: 0; border-top-color: transparent; }
+.principle + .site-foot { margin-top: 0; border-top-color: transparent; }
