@@ -1,0 +1,32 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box }
+body { width:1200px; height:630px; overflow:hidden;
+  font-family:'Geist',-apple-system,sans-serif; background:#ffffff; color:#17171c;
+  display:flex; align-items:center; position:relative }
+body::after { content:""; position:absolute; inset:0; pointer-events:none; opacity:.035;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E") }
+.bar { position:absolute; left:0; top:0; bottom:0; width:14px;
+  background:linear-gradient(160deg,#6366f1,#8b5cf6) }
+.txt { padding:0 0 0 88px; width:660px }
+.brand { display:flex; align-items:center; gap:11px; font-size:24px; font-weight:600;
+  letter-spacing:-.01em; margin-bottom:44px }
+.mark { width:20px; height:20px; border-radius:6px; background:linear-gradient(135deg,#6366f1,#8b5cf6) }
+h1 { font-size:60px; font-weight:600; letter-spacing:-.035em; line-height:1.04; text-wrap:balance }
+p { font-size:26px; color:#6f6f7d; margin-top:24px; line-height:1.4; text-wrap:pretty }
+.url { position:absolute; left:88px; bottom:56px; font-size:20px; color:#6f6f7d; font-weight:500 }
+.illu { position:absolute; right:52px; top:50%; transform:translateY(-50%); width:430px; height:430px }
+</style></head><body>
+<div class="bar"></div>
+<div class="txt"><div class="brand"><span class="mark"></span>Super Génial</div>
+<h1 id="t"></h1><p id="s"></p></div>
+<img class="illu" id="i" alt="">
+<div class="url">supergenial.be</div>
+<script>
+const p=new URLSearchParams(location.search);
+document.getElementById('t').textContent=p.get('t')||'';
+document.getElementById('s').textContent=p.get('s')||'';
+const img=document.getElementById('i');
+if(p.get('i')) img.src=p.get('i'); else img.remove();
+</script></body></html>
