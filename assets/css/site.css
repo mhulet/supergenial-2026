@@ -16,6 +16,8 @@
     --r-sm: 8px; --r-card: 16px; --r-pill: 999px;
     /* Courbe d'accélération unique */
     --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    /* Échelle z-index : une seule, documentée */
+    --z-nav: 10; --z-overlay: 20; --z-grain: 30;
 }
 @media (prefers-color-scheme: dark) {
   :root {
@@ -30,9 +32,10 @@
 }
 body::before {
     content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    pointer-events: none; opacity: 0.03; z-index: 1000;
+    pointer-events: none; opacity: 0.03; z-index: var(--z-grain);
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
 }
+html { scroll-behavior: smooth; }
 body {
     font-family: 'Geist', -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
     background-color: var(--bg); color: var(--text-primary); line-height: 1.65; font-size: 16px;
@@ -867,3 +870,32 @@ a:not(.plain):hover::after {
     }
     .animate, .subtitle { animation: none; opacity: 1; }
 }
+
+/* ═══ États interactifs : focus clavier et retour au clic ═══ */
+:where(a, button, [tabindex]):focus-visible {
+    outline: 2px solid var(--accent-1);
+    outline-offset: 3px;
+    border-radius: var(--r-sm);
+}
+.cta-btn:active, .cta-ghost:active, .cta-box .cta-btn:active,
+.nav-toggle:active, .lang-switch a:active, .info-dot:active {
+    transform: translateY(1px) scale(0.985);
+}
+.article-item:active, .case-item:active { transform: translateY(1px); }
+
+/* Lien d'évitement : premier élément focusable de chaque page */
+.skip-link {
+    position: absolute; left: 0.75rem; top: -4rem;
+    z-index: var(--z-overlay);
+    padding: 0.6rem 1rem; border-radius: var(--r-sm);
+    background: var(--accent-1); color: #fff; font-size: 14px; font-weight: 500;
+    transition: top 0.2s var(--ease);
+}
+.skip-link:focus { top: 0.75rem; color: #fff; }
+.skip-link::after { display: none !important; }
+
+/* ═══ Utilitaires (remplacent les derniers style="" en ligne) ═══ */
+.mt-6 { margin-top: 1.5rem; }
+.note-sm { font-size: 15px; margin-top: 0.75rem; }
+.muted { color: var(--text-secondary); }
+.text-strong { color: var(--text-primary); }
