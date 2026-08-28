@@ -294,4 +294,6 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/case-studies/site-semisto/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/realisations/site-semisto/"/>
   </url>
+  <url><loc>https://www.supergenial.be/mentions-legales/</loc><changefreq>yearly</changefreq><priority>0.1</priority></url>
+  <url><loc>https://www.supergenial.be/en/legal/</loc><changefreq>yearly</changefreq><priority>0.1</priority></url>
 </urlset>

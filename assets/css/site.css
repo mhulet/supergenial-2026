@@ -447,7 +447,8 @@ h2 {
 /* ── Principe (manifesto strip) ── */
         .principle {
             background-color: var(--soft-bg);
-            margin: 0 -1.5rem 4rem;
+            /* pleine largeur depuis l'intérieur de main, même mécanique que .site-head */
+            margin: 0 calc(50% - 50vw) 4rem;
             padding: 2.5rem 1.5rem;
         }
 .principle-inner {
@@ -474,7 +475,7 @@ h2 {
             margin-top: 0.85rem;
         }
 @media (min-width: 768px) {
-  .principle { margin-left: calc(-50vw + 360px); margin-right: calc(-50vw + 360px); padding: 3rem calc(50vw - 360px); }
+  .principle { padding: 3rem 1.5rem; }
   .principle p { font-size: 24px; }
 }
 /* ── EOL clocks table ── */
@@ -899,3 +900,28 @@ a:not(.plain):hover::after {
 .note-sm { font-size: 15px; margin-top: 0.75rem; }
 .muted { color: var(--text-secondary); }
 .text-strong { color: var(--text-primary); }
+
+/* ═══ Pied de page ═══ */
+.site-foot {
+    margin: 5rem calc(50% - 50vw) 0;
+    padding: 2.5rem max(1.5rem, calc(50vw - 480px)) 3rem;
+    border-top: 1px solid var(--card-border);
+    background-color: var(--soft-bg);
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+.foot-nav { display: flex; flex-wrap: wrap; gap: 0.5rem 1.4rem; margin-bottom: 1.6rem; }
+.foot-nav a { color: var(--text-primary); font-weight: 500; }
+.foot-nav a::after { display: none !important; }
+.foot-nav a:hover { color: var(--accent-1); }
+.foot-legal { line-height: 1.7; max-width: 46rem; }
+.foot-legal a { color: var(--text-secondary); }
+.foot-legal a:hover { color: var(--text-primary); }
+.foot-social { display: flex; gap: 1.1rem; margin-top: 1.4rem; align-items: center; }
+.foot-social a { color: var(--text-secondary); display: inline-flex; line-height: 0; }
+.foot-social a::after { display: none !important; }
+.foot-social a:hover { color: var(--accent-1); }
+@media (max-width: 640px) {
+    .site-foot { padding-top: 2rem; font-size: 13.5px; }
+    .foot-nav { gap: 0.5rem 1rem; }
+}
