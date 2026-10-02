@@ -1,9 +1,9 @@
 #!/usr/bin/env bun
 /**
- * GenerateIllustration.ts — Illustrations Super Génial via Imagen 4.
+ * GenerateIllustration.ts — Illustrations Super Génial via Gemini image (Gemini API).
  *
  * Génère une illustration single-line minimaliste sur fond blanc pur via
- * l'API Imagen (Gemini API), puis reconstruit la transparence par un-blend
+ * l'API Gemini image, puis reconstruit la transparence par un-blend
  * exact du blanc : α = 255 − min(r,g,b) ; couleur = (c − (255−α)) / (α/255).
  * Sortie : PNG24 RGBA (8-bit/canal + alpha).
  *
@@ -20,9 +20,10 @@ import { existsSync } from "fs";
 import { mkdir } from "fs/promises";
 import { dirname, resolve } from "path";
 
+// Imagen 4 (imagen-4.0-generate-001) a été retiré de l'API Gemini (404 constaté le 2026-10-02).
 const MODELS = {
-  imagen: "imagen-4.0-generate-001", // qualité max — requiert un plan payant / facturation GCP
-  flash: "gemini-2.5-flash-image", // gratuit (tier AI Studio)
+  pro: "gemini-3-pro-image", // qualité max (défaut) — requiert la facturation GCP
+  flash: "gemini-3.1-flash-image", // moins cher, fallback auto si pro indisponible
 } as const;
 type ModelKey = keyof typeof MODELS;
 const API_BASE = "https://generativelanguage.googleapis.com/v1beta/models";
@@ -102,7 +103,7 @@ Options:
   --accent <variant>    fill | scene | none            (défaut: fill)
   --aspect <ratio>      1:1 | 4:3 | 3:4 | 16:9 | 9:16    (défaut: 1:1)
   --out <path.png>      Défaut: assets/illustrations/<slug>-<ts>.png
-  --model <m>           imagen (défaut, plan payant) | flash (gratuit, fallback auto)
+  --model <m>           pro (défaut) | flash (moins cher, fallback auto)
   --raw-prompt "<p>"    Remplace entièrement le prompt composé
   --keep-bg             Garde aussi le PNG original (fond blanc) en <out>.bg.png
   --dry-run             Affiche le prompt et sort sans appeler l'API
@@ -169,37 +170,29 @@ async function main() {
       `${import.meta.dir}/../../../../assets/illustrations/${slug}-${ts}.png`
   );
 
-  // Appel API avec retry sur erreurs transitoires ; imagen → fallback flash si plan gratuit
-  let modelKey = ((opt["model"] as string) || "imagen") as ModelKey;
+  // Appel API avec retry sur erreurs transitoires ; pro → fallback flash si indisponible
+  let modelKey = ((opt["model"] as string) || "pro") as ModelKey;
   if (!(modelKey in MODELS)) {
     console.error(`Modèle invalide: ${modelKey}`);
     usage(1);
   }
 
   function requestFor(key: ModelKey): { url: string; body: string } {
-    if (key === "imagen")
-      return {
-        url: `${API_BASE}/${MODELS.imagen}:predict`,
-        body: JSON.stringify({
-          instances: [{ prompt }],
-          parameters: { sampleCount: 1, aspectRatio: aspect },
-        }),
-      };
     return {
-      url: `${API_BASE}/${MODELS.flash}:generateContent`,
+      url: `${API_BASE}/${MODELS[key]}:generateContent`,
       body: JSON.stringify({
-        contents: [{ parts: [{ text: `${prompt}. Aspect ratio ${aspect}.` }] }],
-        generationConfig: { responseModalities: ["TEXT", "IMAGE"] },
+        contents: [{ parts: [{ text: prompt }] }],
+        generationConfig: {
+          responseModalities: ["TEXT", "IMAGE"],
+          imageConfig: { aspectRatio: aspect },
+        },
       }),
     };
   }
 
-  function extractImage(key: ModelKey, json: any): Buffer | null {
-    const b64 =
-      key === "imagen"
-        ? json?.predictions?.[0]?.bytesBase64Encoded
-        : json?.candidates?.[0]?.content?.parts?.find((p: any) => p.inlineData)
-            ?.inlineData?.data;
+  function extractImage(json: any): Buffer | null {
+    const b64 = json?.candidates?.[0]?.content?.parts?.find((p: any) => p.inlineData)
+      ?.inlineData?.data;
     return b64 ? Buffer.from(b64, "base64") : null;
   }
 
@@ -214,15 +207,15 @@ async function main() {
     });
     if (res.ok) {
       const json: any = await res.json();
-      const img = extractImage(modelKey, json);
+      const img = extractImage(json);
       if (!img)
         throw new Error(`Réponse sans image: ${JSON.stringify(json).slice(0, 300)}`);
       original = img;
       break;
     }
     const text = await res.text();
-    if (modelKey === "imagen" && res.status === 400 && /paid plan/i.test(text)) {
-      console.error("Imagen indisponible (plan gratuit) → fallback gemini flash image.");
+    if (modelKey === "pro" && (res.status === 404 || /paid plan/i.test(text))) {
+      console.error(`${MODELS.pro} indisponible (HTTP ${res.status}) → fallback ${MODELS.flash}.`);
       modelKey = "flash";
       continue;
     }

@@ -1,7 +1,7 @@
 ---
 name: Illustrations
 description: >
-  Génère les illustrations du site Super Génial via Imagen 4 (Gemini API) :
+  Génère les illustrations du site Super Génial via les modèles image de Gemini (Gemini API) :
   dessin d'encre sketchy à main levée, un objet en aplat violet débordant,
   forme taupe optionnelle en fond, livré en PNG24 transparent (RGBA) prêt à
   poser sur n'importe quel fond.
@@ -35,7 +35,7 @@ prompt** (voir Gotchas) : décrire la couleur verbalement ("soft violet").
 
 ## Contrainte clé : la transparence
 
-**Imagen ne génère pas d'alpha.** Le pipeline demande un fond blanc pur
+**Le modèle ne génère pas d'alpha.** Le pipeline demande un fond blanc pur
 `#FFFFFF` puis reconstruit la transparence par **un-blend exact du blanc**
 (`α = 255 − min(r,g,b)`, couleur dé-compositée) — ce qui préserve
 l'anti-aliasing du trait ET les accents colorés. Ne jamais remplacer par un
@@ -44,7 +44,7 @@ chroma-key « blanc → transparent » binaire.
 ## Prérequis
 
 - Clé API : `SUPERGENIAL_GEMINI_API_KEY` dans `~/.claude/.env`
-  (fallback : `SEMISTO_GEMINI_API_KEY`). Modèle : `imagen-4.0-generate-001`.
+  (fallback : `SEMISTO_GEMINI_API_KEY`). Modèle : `gemini-3-pro-image` par défaut (`--model flash` → `gemini-3.1-flash-image`, moins cher). Imagen 4 a été retiré de l'API (404 constaté le 2026-10-02).
 - Outil : `Tools/GenerateIllustration.ts` (bun ; dépendance `sharp` déjà
   installée dans `Tools/`).
 
@@ -129,8 +129,8 @@ coiled"), échelle ("small", "oversized").
   image (Imagen ET Gemini Flash Image) pour les nouveaux projets. Symptômes :
   Imagen → 400 « only available on paid plans » ; Flash → 429
   « free_tier_requests, limit: 0 ». Solution : activer Billing sur le projet.
-- `--model flash` (gemini-2.5-flash-image) coûte moins cher qu'Imagen 4 ;
-  l'outil bascule automatiquement d'imagen vers flash si le plan ne couvre
+- `--model flash` (gemini-3.1-flash-image) coûte moins cher que `pro` ;
+  l'outil bascule automatiquement de pro vers flash si le plan ne couvre
   qu'un des deux.
 - Clé `SEMISTO_GEMINI_API_KEY` révoquée par Google le 2026-07-11 (« reported
   as leaked ») — ne plus l'utiliser ; `SUPERGENIAL_GEMINI_API_KEY` la remplace.
