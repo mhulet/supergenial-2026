@@ -1,6 +1,6 @@
 # Super Génial
 
-> Super Génial (Marco & Vespucci SRL) est l'activité de Michael Hulet, « agentic builder » belge. Spécialité : reprendre, mettre à niveau et maintenir des applications web vieillissantes — Ruby on Rails en priorité, mais aussi toute application web hébergée sur un VPS — ainsi que leurs serveurs Ubuntu, à prix fixe.
+> Super Génial by Semisto est le service numérique de Semisto ASBL, porté par Michael Hulet, « agentic builder » belge. 20 % de chaque facture financent le déploiement des forêts comestibles de Semisto. Spécialité : reprendre, mettre à niveau et maintenir des applications web vieillissantes — Ruby on Rails en priorité, mais aussi toute application web hébergée sur un VPS — ainsi que leurs serveurs Ubuntu, à prix fixe.
 
 Michael conçoit des applications avec des agents IA et remet à niveau les applications existantes (mise à jour de framework, migration de version, durcissement serveur) sans tout casser, par paliers testés. Zone : Europe. Contact : team@supergenial.be.
 
@@ -28,7 +28,7 @@ Michael conçoit des applications avec des agents IA et remet à niveau les appl
 - [Rails 7.1 est en fin de support : qu'est-ce que ça change pour vous ?](https://www.supergenial.be/ressources/rails-7-1-fin-de-support/) — Rails 7.1 ne reçoit plus de correctifs de sécurité depuis octobre 2025. Ce que ça implique concrètement, et comment remettre votre application à niveau sans tout casser.
 
 ## À propos
-- Entité : Marco & Vespucci SRL (BCE BE 0523.920.556), Eghezée, Belgique.
+- Entité : Semisto ASBL (BCE et TVA BE 0790.631.657), Yvoir, Belgique.
 - Fondateur : Michael Hulet.
 - Site : https://www.supergenial.be/ · Version anglaise : https://www.supergenial.be/en/
 - Contact : team@supergenial.be · LinkedIn : https://www.linkedin.com/in/michaelhulet/

@@ -59,7 +59,7 @@ const orgLd = (lang: "fr" | "en", url: string) => ({
   "@type": "ProfessionalService",
   "@id": BASE + "/#business",
   name: "Super Génial",
-  legalName: "Marco & Vespucci SRL",
+  legalName: "Semisto ASBL",
   url,
   description: lang === "fr"
     ? "Reprise, mise à niveau et maintenance d'applications web vieillissantes (Ruby on Rails et autres) et de leurs serveurs Ubuntu, à prix fixe."
@@ -69,8 +69,8 @@ const orgLd = (lang: "fr" | "en", url: string) => ({
   areaServed: { "@type": "Place", name: "Europe" },
   knowsAbout: ["Ruby on Rails", "Rails upgrade", "Ruby upgrade", "web application maintenance", "Ubuntu server maintenance", "legacy application modernization"],
   sameAs: ["https://www.linkedin.com/in/michaelhulet/", "https://github.com/mhulet", "https://t.me/supergenialdotbe"],
-  vatID: "BE0523920556",
-  address: { "@type": "PostalAddress", streetAddress: "rue Ernest Feron 64", addressLocality: "Eghezée", addressCountry: "BE" },
+  vatID: "BE0790631657",
+  address: { "@type": "PostalAddress", streetAddress: "Fonds d'Ahinvaux 1", postalCode: "5530", addressLocality: "Yvoir", addressCountry: "BE" },
 });
 
 const articleLd = (p: Page, url: string, title: string, desc: string, date: string) => ({
@@ -163,7 +163,7 @@ const articles = entries.filter((e) => e.isArticle).sort((a, b) => b.date.locale
 const artLines = articles.map((e) => `- [${e.titleFr}](${BASE}${e.fr}) — ${e.descFr}`).join("\n");
 const llms = `# Super Génial
 
-> Super Génial (Marco & Vespucci SRL) est l'activité de Michael Hulet, « agentic builder » belge. Spécialité : reprendre, mettre à niveau et maintenir des applications web vieillissantes — Ruby on Rails en priorité, mais aussi toute application web hébergée sur un VPS — ainsi que leurs serveurs Ubuntu, à prix fixe.
+> Super Génial by Semisto est le service numérique de Semisto ASBL, porté par Michael Hulet, « agentic builder » belge. 20 % de chaque facture financent le déploiement des forêts comestibles de Semisto. Spécialité : reprendre, mettre à niveau et maintenir des applications web vieillissantes — Ruby on Rails en priorité, mais aussi toute application web hébergée sur un VPS — ainsi que leurs serveurs Ubuntu, à prix fixe.
 
 Michael conçoit des applications avec des agents IA et remet à niveau les applications existantes (mise à jour de framework, migration de version, durcissement serveur) sans tout casser, par paliers testés. Zone : Europe. Contact : team@supergenial.be.
 
@@ -176,7 +176,7 @@ Michael conçoit des applications avec des agents IA et remet à niveau les appl
 ${artLines}
 
 ## À propos
-- Entité : Marco & Vespucci SRL (BCE BE 0523.920.556), Eghezée, Belgique.
+- Entité : Semisto ASBL (BCE et TVA BE 0790.631.657), Yvoir, Belgique.
 - Fondateur : Michael Hulet.
 - Site : ${BASE}/ · Version anglaise : ${BASE}/en/
 - Contact : team@supergenial.be · LinkedIn : https://www.linkedin.com/in/michaelhulet/
