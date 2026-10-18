@@ -29,6 +29,20 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/maintenance/"/>
   </url>
   <url>
+    <loc>https://www.supergenial.be/communication/</loc>
+    <lastmod>2026-10-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/communication/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/communication/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/communication/"/>
+  </url>
+  <url>
+    <loc>https://www.supergenial.be/en/communication/</loc>
+    <lastmod>2026-10-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/communication/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/communication/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/communication/"/>
+  </url>
+  <url>
     <loc>https://www.supergenial.be/tarifs/</loc>
     <lastmod>2026-08-25</lastmod>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/tarifs/"/>

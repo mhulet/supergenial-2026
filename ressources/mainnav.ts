@@ -11,11 +11,12 @@ import { execSync } from "node:child_process";
 
 const ROOT = dirname(dirname(new URL(import.meta.url).pathname)); // repo root
 
-type Section = "diagnostic" | "pricing" | "cases" | "resources" | "maintenance" | null;
+type Section = "diagnostic" | "communication" | "pricing" | "cases" | "resources" | "maintenance" | null;
 
 const NAV: Record<"fr" | "en", { label: string; href: string; key: Section }[]> = {
   fr: [
     { label: "Diagnostic IA", href: "/diagnostic-ia/", key: "diagnostic" },
+    { label: "Communication", href: "/communication/", key: "communication" },
     { label: "Tarifs", href: "/tarifs/", key: "pricing" },
     { label: "Réalisations", href: "/realisations/", key: "cases" },
     { label: "Ressources", href: "/ressources/", key: "resources" },
@@ -23,6 +24,7 @@ const NAV: Record<"fr" | "en", { label: string; href: string; key: Section }[]> 
   ],
   en: [
     { label: "AI Assessment", href: "/en/ai-assessment/", key: "diagnostic" },
+    { label: "Communication", href: "/en/communication/", key: "communication" },
     { label: "Pricing", href: "/en/pricing/", key: "pricing" },
     { label: "Case studies", href: "/en/case-studies/", key: "cases" },
     { label: "Resources", href: "/en/resources/", key: "resources" },
@@ -35,6 +37,7 @@ const CSS = `/*mainnav*/
 .site-nav{display:flex;align-items:center;gap:0.9rem;flex-wrap:wrap}
 .site-nav a::after{display:none!important}
 .site-nav .brand{display:inline-flex;align-items:center;gap:.5rem;font-weight:600;font-size:15px;letter-spacing:-.01em;margin-right:auto;white-space:nowrap;color:var(--text-primary)}
+.site-nav .brand-by{font-weight:500;font-size:12px;color:var(--text-secondary);letter-spacing:0;margin-left:.1rem}
 .site-nav .brand-mark{width:11px;height:11px;border-radius:3.5px;background:linear-gradient(135deg,var(--accent-1),var(--accent-2));flex-shrink:0}
 .nav-menu{display:flex;align-items:center;gap:1rem}
 .nav-menu a{font-size:13.5px;color:var(--text-secondary);white-space:nowrap;padding-bottom:4px;transition:color .2s ease}
@@ -65,6 +68,7 @@ const BURGER = `<svg class="i-burger" width="16" height="16" viewBox="0 0 24 24"
 
 function sectionOf(path: string): Section {
   if (/^(diagnostic-ia|en\/ai-assessment)\//.test(path)) return "diagnostic";
+  if (/^(communication|en\/communication)\//.test(path)) return "communication";
   if (/^(tarifs|en\/pricing)\//.test(path)) return "pricing";
   if (/^(realisations|en\/case-studies)\//.test(path)) return "cases";
   if (/^(ressources|en\/resources)\//.test(path)) return "resources";
@@ -81,7 +85,7 @@ function header(lang: "fr" | "en", active: Section, pill: string): string {
   const menuLabel = lang === "fr" ? "Ouvrir le menu" : "Open menu";
   return (
     `<!--mainnav--><header class="site-head"><nav class="site-nav" aria-label="${navLabel}">` +
-    `<a href="${home}" class="brand plain"><span class="brand-mark" aria-hidden="true"></span>Super Génial</a>` +
+    `<a href="${home}" class="brand plain"><span class="brand-mark" aria-hidden="true"></span>Super Génial<span class="brand-by">by Semisto</span></a>` +
     `<button class="nav-toggle plain" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="${menuLabel}">${BURGER}</button>` +
     `<div class="nav-menu" id="site-menu">${links}</div>` +
     pill +

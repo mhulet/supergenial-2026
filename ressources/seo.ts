@@ -30,6 +30,8 @@ const pages: Page[] = [
   { file: "en/index.html", fr: "/", en: "/en/", lang: "en", type: "home" },
   { file: "maintenance/index.html", fr: "/maintenance/", en: "/en/maintenance/", lang: "fr", type: "page" },
   { file: "en/maintenance/index.html", fr: "/maintenance/", en: "/en/maintenance/", lang: "en", type: "page" },
+  { file: "communication/index.html", fr: "/communication/", en: "/en/communication/", lang: "fr", type: "page" },
+  { file: "en/communication/index.html", fr: "/communication/", en: "/en/communication/", lang: "en", type: "page" },
   { file: "tarifs/index.html", fr: "/tarifs/", en: "/en/pricing/", lang: "fr", type: "page" },
   { file: "en/pricing/index.html", fr: "/tarifs/", en: "/en/pricing/", lang: "en", type: "page" },
   { file: "ressources/index.html", fr: "/ressources/", en: "/en/resources/", lang: "fr", type: "page" },
@@ -166,6 +168,7 @@ const llms = `# Super Génial
 Michael conçoit des applications avec des agents IA et remet à niveau les applications existantes (mise à jour de framework, migration de version, durcissement serveur) sans tout casser, par paliers testés. Zone : Europe. Contact : team@supergenial.be.
 
 ## Services
+- [Communication digitale](${BASE}/communication/) : site web sobre et référencé, newsletter, réseaux sociaux et stratégie de contenu pour les organisations durables (B Corp, ONG, coopératives). Sans greenwashing, en forfaits sur devis.
 - [Maintenance & mises à jour](${BASE}/maintenance/) : reprise d'applications Rails et web vieillissantes + serveurs Ubuntu. Audit à prix fixe (490 €), mise à niveau au forfait, abonnement de maintenance dès 290 €/mois.
 - [Tarifs](${BASE}/tarifs/) : forfait de lancement, abonnement mensuel, forfaits feature — prix annoncés d'avance, jamais à l'heure.
 

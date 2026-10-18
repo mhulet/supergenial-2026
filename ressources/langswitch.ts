@@ -34,6 +34,7 @@ const CASE_SLUGS: Record<string, string> = {
 const PAIRS: Record<string, { fr: string; en: string }> = {
   home: { fr: "/", en: "/en/" },
   maintenance: { fr: "/maintenance/", en: "/en/maintenance/" },
+  communication: { fr: "/communication/", en: "/en/communication/" },
   pricing: { fr: "/tarifs/", en: "/en/pricing/" },
   diagnostic: { fr: "/diagnostic-ia/", en: "/en/ai-assessment/" },
   resources: { fr: "/ressources/", en: "/en/resources/" },
