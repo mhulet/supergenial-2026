@@ -62,8 +62,8 @@ const orgLd = (lang: "fr" | "en", url: string) => ({
   legalName: "Semisto ASBL",
   url,
   description: lang === "fr"
-    ? "Reprise, mise à niveau et maintenance d'applications web vieillissantes (Ruby on Rails et autres) et de leurs serveurs Ubuntu, à prix fixe."
-    : "Take-over, upgrade and maintenance of aging web applications (Ruby on Rails and others) and their Ubuntu servers, at a fixed price.",
+    ? "Agence web et de communication de Semisto ASBL : applications web, sites, assistants IA et communication digitale conçus avec des agents IA, plus reprise et maintenance d'applications Ruby on Rails à prix fixe."
+    : "Semisto ASBL's web and communication agency: web applications, websites, AI assistants and digital communication built with AI agents, plus fixed-price take-over and maintenance of Ruby on Rails applications.",
   email: "team@supergenial.be",
   founder: { "@type": "Person", name: "Michael Hulet" },
   areaServed: { "@type": "Place", name: "Europe" },
@@ -163,9 +163,9 @@ const articles = entries.filter((e) => e.isArticle).sort((a, b) => b.date.locale
 const artLines = articles.map((e) => `- [${e.titleFr}](${BASE}${e.fr}) — ${e.descFr}`).join("\n");
 const llms = `# Super Génial
 
-> Super Génial by Semisto est le service numérique de Semisto ASBL, porté par Michael Hulet, « agentic builder » belge. 20 % de chaque facture financent le déploiement des forêts comestibles de Semisto. Spécialité : reprendre, mettre à niveau et maintenir des applications web vieillissantes — Ruby on Rails en priorité, mais aussi toute application web hébergée sur un VPS — ainsi que leurs serveurs Ubuntu, à prix fixe.
+> Super Génial by Semisto est l'agence web et de communication de Semisto ASBL, fondée par Michael Hulet et portée par une équipe. 20 % de chaque facture financent le déploiement des forêts comestibles de Semisto. Spécialité : reprendre, mettre à niveau et maintenir des applications web vieillissantes — Ruby on Rails en priorité, mais aussi toute application web hébergée sur un VPS — ainsi que leurs serveurs Ubuntu, à prix fixe.
 
-Michael conçoit des applications avec des agents IA et remet à niveau les applications existantes (mise à jour de framework, migration de version, durcissement serveur) sans tout casser, par paliers testés. Zone : Europe. Contact : team@supergenial.be.
+L'équipe conçoit des applications, des sites et la communication d'organisations durables avec des agents IA, et remet à niveau les applications existantes (mise à jour de framework, migration de version, durcissement serveur) sans tout casser, par paliers testés. Zone : Europe. Contact : team@supergenial.be.
 
 ## Services
 - [Communication digitale](${BASE}/communication/) : site web sobre et référencé, newsletter, réseaux sociaux et stratégie de contenu pour les organisations durables (B Corp, ONG, coopératives). Sans greenwashing, en forfaits sur devis.

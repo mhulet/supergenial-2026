@@ -36,7 +36,7 @@ ${figures(c)}
             </div>${carouselSection(c, "en")}
             <div class="cta-box animate delay-3">
                 <p>Have a similar project in mind?</p>
-                <a href="/en/pricing/" class="cta-btn">See my pricing <span>→</span></a>
+                <a href="/en/pricing/" class="cta-btn">See our pricing <span>→</span></a>
             </div>
         </article>
     </main>
@@ -63,7 +63,7 @@ ${thumb}                    <div class="a-type">${c.type_en} · ${c.year}</div>
         <h1 class="animate delay-1">Case studies</h1>
         <p class="subtitle">From brief to live site.</p>
         <p class="intro animate delay-3">
-            A few recent projects — websites, internal applications, newsletters —
+            A few recent projects by our team — websites, internal applications, newsletters —
             built with AI agents, from architecture to deployment.
             Want yours? <a href="/en/pricing/">Have a look at the pricing</a>.
         </p>

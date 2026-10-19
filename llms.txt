@@ -1,8 +1,8 @@
 # Super Génial
 
-> Super Génial by Semisto est le service numérique de Semisto ASBL, porté par Michael Hulet, « agentic builder » belge. 20 % de chaque facture financent le déploiement des forêts comestibles de Semisto. Spécialité : reprendre, mettre à niveau et maintenir des applications web vieillissantes — Ruby on Rails en priorité, mais aussi toute application web hébergée sur un VPS — ainsi que leurs serveurs Ubuntu, à prix fixe.
+> Super Génial by Semisto est l'agence web et de communication de Semisto ASBL, fondée par Michael Hulet et portée par une équipe. 20 % de chaque facture financent le déploiement des forêts comestibles de Semisto. Spécialité : reprendre, mettre à niveau et maintenir des applications web vieillissantes — Ruby on Rails en priorité, mais aussi toute application web hébergée sur un VPS — ainsi que leurs serveurs Ubuntu, à prix fixe.
 
-Michael conçoit des applications avec des agents IA et remet à niveau les applications existantes (mise à jour de framework, migration de version, durcissement serveur) sans tout casser, par paliers testés. Zone : Europe. Contact : team@supergenial.be.
+L'équipe conçoit des applications, des sites et la communication d'organisations durables avec des agents IA, et remet à niveau les applications existantes (mise à jour de framework, migration de version, durcissement serveur) sans tout casser, par paliers testés. Zone : Europe. Contact : team@supergenial.be.
 
 ## Services
 - [Diagnostic IA pour PME](https://www.supergenial.be/diagnostic-ia/) : deux semaines pour analyser ce que l'IA peut apporter à une PME — interviews des équipes, cartographie des processus, top 3 des opportunités chiffrées en heures gagnées, plan 30-60-90 jours. Prix fixe 2 500 €, intégralement déduit du forfait de lancement si on construit dans les 90 jours.

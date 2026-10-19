@@ -99,7 +99,7 @@ export const HEAD = (lang: string, title: string, description: string, keywords:
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${title}</title>
-    <meta name="author" content="Michael Hulet">
+    <meta name="author" content="Super Génial">
     <meta name="description" content="${description}">
     <meta name="keywords" content="${keywords}">
     <meta property="og:title" content="${title}">
@@ -214,7 +214,7 @@ ${figures(c)}
             </div>${carouselSection(c, "fr")}
             <div class="cta-box animate delay-3">
                 <p>Un projet similaire en tête ?</p>
-                <a href="/tarifs/" class="cta-btn">Voir mes tarifs <span>→</span></a>
+                <a href="/tarifs/" class="cta-btn">Voir nos tarifs <span>→</span></a>
             </div>
         </article>
     </main>
@@ -241,7 +241,7 @@ ${thumb}                    <div class="a-type">${c.type} · ${c.year}</div>
         <h1 class="animate delay-1">Réalisations</h1>
         <p class="subtitle">Du brief au site en ligne.</p>
         <p class="intro animate delay-3">
-            Quelques projets récents — sites web, applications internes, newsletters —
+            Quelques projets récents de notre équipe — sites web, applications internes, newsletters —
             conçus avec des agents IA, de l'architecture au déploiement.
             Envie du vôtre ? <a href="/tarifs/">Voyons les tarifs</a>.
         </p>
