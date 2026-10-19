@@ -1,17 +1,21 @@
 /* ═══ Base + article ═══ */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
-    /* Accent de marque - inchangé, les illustrations en dépendent */
-    --accent-1: #6366f1; --accent-2: #8b5cf6; --glow: rgba(99, 102, 241, 0.15);
-    /* Gris : une seule famille, très légèrement teintée violet pour s'harmoniser à l'accent */
-    --bg: #ffffff; --text-primary: #17171c; --text-secondary: #6f6f7d;
-    --link-underline: #a5a5b2; --link-hover: #08080c;
-    --card-bg: #ffffff; --card-border: #e6e5ec; --soft-bg: #f6f5f9;
-    --card-border-featured: #6366f1; --danger: #dc2626;
-    /* Ombres teintées de la couleur du fond, jamais du noir pur ni un halo violet */
-    --shadow-sm: 0 1px 2px rgba(23, 23, 28, 0.05);
-    --shadow-md: 0 4px 14px -6px rgba(23, 23, 28, 0.16);
-    --shadow-lg: 0 14px 34px -14px rgba(23, 23, 28, 0.22);
+    /* Charte Semisto (« Humus & Prune ») : papier beige, encre, titres en prune.
+       Le mauve est la couleur propre de Super Génial : on le garde en touches
+       (repère du logo, sous-titre, boutons, étiquettes), jamais en aplat. */
+    --plum: #5b5781; --plum-ink: #3c3956; --plum-soft: #8d89ad;
+    --accent-1: #7b4fc9; --accent-2: #a77bdb; --glow: rgba(123, 79, 201, 0.16);
+    --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    --font-serif: "EB Garamond", "Sole Serif Small", Georgia, "Times New Roman", serif;
+    --bg: #f7f3ea; --text-primary: #1a1a1a; --text-secondary: #595959;
+    --link-underline: rgba(91, 87, 129, 0.35); --link-hover: #3c3956;
+    --card-bg: #fffdf8; --card-border: #e4dccb; --soft-bg: #eee8da;
+    --card-border-featured: #7b4fc9; --danger: #b01a19;
+    /* Ombres chaudes et discrètes, comme sur semisto.org */
+    --shadow-sm: 0 1px 2px rgba(26, 26, 26, 0.06);
+    --shadow-md: 0 6px 16px -6px rgba(26, 26, 26, 0.14);
+    --shadow-lg: 0 14px 40px -14px rgba(26, 26, 26, 0.2);
     /* Rayons : une seule échelle - 8 (petit), 16 (carte), 999 (pilule) */
     --r-sm: 8px; --r-card: 16px; --r-pill: 999px;
     /* Courbe d'accélération unique */
@@ -21,10 +25,13 @@
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #0a0a0c; --text-primary: #ececf1; --text-secondary: #a1a1b0;
-    --link-underline: #55555f; --link-hover: #ffffff; --glow: rgba(139, 92, 246, 0.1);
-    --card-bg: #121216; --card-border: #27272f; --soft-bg: #141419;
-    --card-border-featured: #8b5cf6; --danger: #f87171;
+    /* Nuit Semisto : fond mûre, texte papier, titres prune clair */
+    --plum: #c4bfe0; --plum-ink: #ddd9f0;
+    --accent-1: #b48ee8; --accent-2: #cdb0f0; --glow: rgba(180, 142, 232, 0.12);
+    --bg: #1c161c; --text-primary: #f2ede4; --text-secondary: #b8afa6;
+    --link-underline: #5a4f5a; --link-hover: #ffffff;
+    --card-bg: #251e25; --card-border: #3a3039; --soft-bg: #221b22;
+    --card-border-featured: #b48ee8; --danger: #f08a7e;
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
     --shadow-md: 0 4px 14px -6px rgba(0, 0, 0, 0.55);
     --shadow-lg: 0 14px 34px -14px rgba(0, 0, 0, 0.65);
@@ -37,7 +44,7 @@ body::before {
 }
 html { scroll-behavior: smooth; }
 body {
-    font-family: 'Geist', -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    font-family: var(--font-sans);
     background-color: var(--bg); color: var(--text-primary); line-height: 1.65; font-size: 16px;
     -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
 }
@@ -804,7 +811,7 @@ a:not(.plain):hover::after {
 .plan li .info-dot::before { content: none; }
 @keyframes noteFlash {
             0% { box-shadow: 0 0 0 0 var(--accent-1); }
-            100% { box-shadow: 0 0 0 8px rgba(99, 102, 241, 0); }
+            100% { box-shadow: 0 0 0 8px rgba(123, 79, 201, 0); }
         }
 .note.flash {
             animation: noteFlash 1.2s ease-out;
@@ -949,3 +956,32 @@ a:not(.plain):hover::after {
 /* Pas de couture quand le pied suit une bande de même couleur. */
 .page-home .parcours { margin-bottom: 0; }
 .principle + .site-foot { margin-top: 0; border-top-color: transparent; }
+
+/* ═══ Charte Semisto ═══
+   Titres en EB Garamond prune (graisse 500, la « 475 » de la charte arrondie),
+   texte en Inter. Les petits libellés en capitales restent en sans-serif. */
+h1, h2, .article-body h2, .article-body h3, .launch-card h3, .plan-name,
+.article-item .a-title, .case-item .a-title, .principle p {
+    font-family: var(--font-serif); font-weight: 500; color: var(--plum);
+    letter-spacing: -0.015em;
+}
+h1 { line-height: 1.04; }
+@media (min-width: 768px) { h1 { font-size: 58px; } h2 { font-size: 32px; } }
+.article-body h2 { font-size: 26px; }
+@media (min-width: 768px) { .article-body h2 { font-size: 30px; } }
+.launch-card h3, .article-item .a-title, .case-item .a-title { font-size: 22px; }
+.plan-name { font-size: 21px; }
+.article-item:hover .a-title, .case-item:hover .a-title { color: var(--plum-ink); }
+.principle p { font-size: 23px; line-height: 1.35; color: var(--plum-ink); }
+@media (min-width: 768px) { .principle p { font-size: 28px; } }
+.related h2, .parcours h2 { font-family: var(--font-sans); color: var(--text-secondary); }
+.parcours h2 { color: var(--text-primary); }
+/* Prix et chiffres : Inter, tabulaires, en encre */
+.launch-card .price, .plan-price, .feature-price { font-family: var(--font-sans); color: var(--text-primary); }
+/* Liens du corps : soulignement prune, comme semisto.org */
+.article-body a::after, .intro a::after { background: var(--link-underline); }
+::selection { background: var(--plum); color: #fff; }
+:where(a, button, summary):focus-visible { outline: 2px solid var(--plum); outline-offset: 2px; }
+/* Le grain reste, à peine plus présent sur le papier beige */
+body::before { opacity: 0.035; }
+.principle p.sub { font-family: var(--font-sans); font-size: 15px; line-height: 1.5; color: var(--text-secondary); letter-spacing: 0; }
