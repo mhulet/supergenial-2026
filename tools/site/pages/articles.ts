@@ -414,10 +414,13 @@ export function resourcesIndex(lang: Lang): string {
                     </a>`).join("");
   const body = `
         <section class="page-hero">
-            <div class="wrap">
-                <p class="eyebrow">${fr ? "Ressources" : "Resources"}</p>
-                <h1 class="display display--page">${fr ? "Avant d'appeler, <em>de quoi y voir clair.</em>" : "Before you call, <em>a few things to see clearly.</em>"}</h1>
-                <p class="lede">${fr ? "Des articles courts pour les dirigeants d'entreprises à impact&nbsp;: ce que coûtent vraiment vos outils, par où commencer avec l'IA, que faire d'une application qui vieillit." : "Short articles for leaders of impact-driven companies: what your tools really cost, where to start with AI, what to do with an ageing application."}</p>
+            <div class="wrap page-hero-grid">
+                <div>
+                    <p class="eyebrow">${fr ? "Ressources" : "Resources"}</p>
+                    <h1 class="display display--page">${fr ? "Avant d'appeler, <em>de quoi y voir clair.</em>" : "Before you call, <em>a few things to see clearly.</em>"}</h1>
+                    <p class="lede">${fr ? "Des articles courts pour les dirigeants d'entreprises à impact&nbsp;: ce que coûtent vraiment vos outils, par où commencer avec l'IA, que faire d'une application qui vieillit." : "Short articles for leaders of impact-driven companies: what your tools really cost, where to start with AI, what to do with an ageing application."}</p>
+                </div>
+                <img class="illu-side" src="/assets/illustrations/sg-ressources.webp" decoding="async" alt="${fr ? "Illustration au trait : un petit robot lit sous un jeune arbre, à côté d'une pile de livres" : "Line drawing: a small robot reads under a young tree, next to a stack of books"}" width="800" height="800">
             </div>
         </section>
         <section class="sec">

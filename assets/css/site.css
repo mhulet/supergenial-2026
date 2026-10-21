@@ -1351,3 +1351,10 @@ main:not(.wide) .site-foot { margin: 5rem calc(50% - 50vw) 0; }
 .cta-box .actions { margin-top: 1rem; }
 .cta-box .btn-primary { color: #fff; }
 @media (max-width: 900px) { .res-grid, .tiles--3 { grid-template-columns: 1fr; } }
+
+/* Illustrations encre et lavis (fond blanc fondu dans le beige) */
+.hero-illu { display: block; width: 100%; height: auto; mix-blend-mode: multiply; }
+.illu-side, .illu, .illu-article { mix-blend-mode: multiply; }
+.hero-grid:has(.hero-illu) { grid-template-columns: minmax(0, 1.25fr) minmax(0, .95fr); }
+.hero-illu { margin-right: calc(-1 * var(--gutter) / 2); }
+.page-hero .illu-side { max-width: 400px; }

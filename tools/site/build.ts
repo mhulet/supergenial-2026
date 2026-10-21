@@ -41,16 +41,19 @@ const notFound = page({
   og: "home", ogAlt: "Super Génial by Semisto",
   body: `
         <section class="page-hero">
-            <div class="wrap">
-                <p class="eyebrow">Erreur 404</p>
-                <h1 class="display display--page">Cette adresse <em>ne mène nulle part.</em></h1>
-                <p class="lede">Elle a peut-être changé, ou le lien qui vous a amené ici est ancien. <span lang="en">This page does not exist; the links below still work.</span></p>
-                <div class="actions">
-                    <a href="/" class="btn btn-primary plain">Retour à l'accueil <span class="arr">→</span></a>
-                    <a href="/diagnostic-ia/" class="btn btn-line plain">Le Diagnostic IA</a>
-                    <a href="/tarifs/" class="link-arrow plain">Les tarifs →</a>
-                    <a href="/realisations/" class="link-arrow plain">Les réalisations →</a>
+            <div class="wrap page-hero-grid">
+                <div>
+                    <p class="eyebrow">Erreur 404</p>
+                    <h1 class="display display--page">Cette adresse <em>ne mène nulle part.</em></h1>
+                    <p class="lede">Elle a peut-être changé, ou le lien qui vous a amené ici est ancien. <span lang="en">This page does not exist; the links below still work.</span></p>
+                    <div class="actions">
+                        <a href="/" class="btn btn-primary plain">Retour à l'accueil <span class="arr">→</span></a>
+                        <a href="/diagnostic-ia/" class="btn btn-line plain">Le Diagnostic IA</a>
+                        <a href="/tarifs/" class="link-arrow plain">Les tarifs →</a>
+                        <a href="/realisations/" class="link-arrow plain">Les réalisations →</a>
+                    </div>
                 </div>
+                <img class="illu-side" src="/assets/illustrations/sg-404.webp" decoding="async" alt="Illustration au trait : un petit robot perplexe, une carte à l'envers, devant un pot vide" width="800" height="800">
             </div>
         </section>`,
 }).replace("</title>", "</title>\n    <meta name=\"robots\" content=\"noindex\">");

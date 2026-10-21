@@ -57,6 +57,7 @@ ${OPEN("en", INDEX_ALT)}
             from specification to go-live, and most of them serve my own organisations first:
             I build for myself before offering it to others.
         </p>
+        <img class="illu illu--small" src="/assets/illustrations/sg-realisations.webp" decoding="async" alt="Line drawing: a small robot walks along a garden bed where each plant carries a tool: calendar, basket, map, chart" width="800" height="800">
         <div class="article-list animate delay-3">
 ${items}
         </div>
