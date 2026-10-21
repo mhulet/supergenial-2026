@@ -1,6 +1,7 @@
 /* ═══ Base + article ═══ */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
+    color-scheme: light;
     /* Charte Semisto (« Humus & Prune ») : papier beige, encre, titres en prune.
        Le mauve est la couleur propre de Super Génial : on le garde en touches
        (repère du logo, sous-titre, boutons, étiquettes), jamais en aplat. */
@@ -22,20 +23,6 @@
     --ease: cubic-bezier(0.16, 1, 0.3, 1);
     /* Échelle z-index : une seule, documentée */
     --z-nav: 10; --z-overlay: 20; --z-grain: 30;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* Nuit Semisto : fond mûre, texte papier, titres prune clair */
-    --plum: #c4bfe0; --plum-ink: #ddd9f0;
-    --accent-1: #b48ee8; --accent-2: #cdb0f0; --glow: rgba(180, 142, 232, 0.12);
-    --bg: #1c161c; --text-primary: #f2ede4; --text-secondary: #b8afa6;
-    --link-underline: #5a4f5a; --link-hover: #ffffff;
-    --card-bg: #251e25; --card-border: #3a3039; --soft-bg: #221b22;
-    --card-border-featured: #b48ee8; --danger: #f08a7e;
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
-    --shadow-md: 0 4px 14px -6px rgba(0, 0, 0, 0.55);
-    --shadow-lg: 0 14px 34px -14px rgba(0, 0, 0, 0.65);
-  }
 }
 body::before {
     content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -150,9 +137,6 @@ a:hover { color: var(--link-hover); }
 .related li{font-size:15px;line-height:1.4}
 .related a{color:var(--text-primary)}
 .illu-article { display: block; margin: 1.5rem auto 2rem; max-width: min(340px, 75%); height: auto; }
-@media (prefers-color-scheme: dark) {
-  .illu-article { filter: invert(1) hue-rotate(180deg); }
-}
 /*mainnav*/
 .site-head{margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);padding:0.9rem max(1.5rem,calc(50vw - 480px));border-bottom:1px solid rgba(128,128,128,.15);margin-bottom:2.5rem}
 .site-nav{display:flex;align-items:center;gap:0.9rem;flex-wrap:wrap}
@@ -180,9 +164,6 @@ a:hover { color: var(--link-hover); }
 /* Illustrations : disponibles sur toutes les pages (trait noir → blanc en dark) */
 .illu{display:block;margin:2.5rem auto 0;max-width:min(420px,80%);height:auto}
 .illu--small{max-width:min(300px,60%)}
-@media (prefers-color-scheme:dark) {
-  .illu{filter:invert(1) hue-rotate(180deg)}
-}
 
 /* ═══ Realisations ═══ */
 /* Réalisations */
@@ -389,9 +370,6 @@ a:hover::after {
 .contact-links > div:hover .arrow {
             transform: translateX(4px);
         }
-@media (prefers-color-scheme: dark) {
-  /* Trait noir → blanc ; hue-rotate ramène l'accent violet près de sa teinte d'origine */ .illu { filter: invert(1) hue-rotate(180deg); }
-}
 .parcours {
             /* Fond de page, pas la bande grise du pied : deux bandes grises empilées
                se lisaient comme deux pieds de page. Un simple filet le sépare du contenu. */
@@ -1006,17 +984,6 @@ body::before { opacity: 0.035; }
     --wrap: 1200px; --gutter: clamp(20px, 4vw, 48px);
     --r-xl: 28px;
 }
-@media (prefers-color-scheme: dark) {
-  :root {
-    --sg: #b48ee8; --sg-hover: #c7a8f0; --sg-light: #cdb0f0; --sg-pale: #5d4589;
-    --sg-50: #241a33; --sg-100: #2e2242;
-    --sg-ink: #ece3fb; --sg-night: #120b1e; --sg-night-2: #1d1330;
-    --on-night: #f2ede4; --on-night-2: #b9aecb;
-    --plum: #ece3fb; --plum-ink: #ffffff;
-    --link-underline: rgba(180, 142, 232, 0.45); --link-hover: #ffffff;
-    --bg: #17111f; --card-bg: #20182b; --card-border: #362a46; --soft-bg: #1d1627;
-  }
-}
 ::selection { background: var(--sg); color: #fff; }
 
 /* ── Coquille large ── */
@@ -1102,7 +1069,6 @@ main:not(.wide) .site-head { margin-bottom: 2.5rem; }
 .price-tag .v small { font-size: 16px; font-weight: 500; color: var(--on-night-2); letter-spacing: 0; }
 .price-tag p { font-size: 15px; color: var(--on-night-2); margin: 0; }
 .price-tag p + p { margin-top: .5rem; }
-@media (prefers-color-scheme: dark) { .price-tag { background: var(--sg-night-2); } }
 
 /* Illustration du héros : du désordre à un outil */
 .hero-art { position: relative; border-radius: var(--r-xl); background: var(--sg-night); padding: 28px 26px 26px; color: var(--on-night);
@@ -1178,7 +1144,6 @@ main:not(.wide) .site-head { margin-bottom: 2.5rem; }
 .offer-card.is-first .price small, .offer-card.is-first p { color: rgba(255, 255, 255, .82); }
 .offer-card.is-first li::before { color: #fff; }
 .offer-card.is-first .link-arrow { color: #fff !important; }
-@media (prefers-color-scheme: dark) { .offer-card.is-first { background: #5e3aa3; border-color: #5e3aa3; } }
 
 /* Deuxième porte d'entrée */
 .door { margin-top: clamp(20px, 2.5vw, 28px); display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 1.6rem 2.2rem; align-items: center;
@@ -1233,7 +1198,6 @@ main:not(.wide) .site-head { margin-bottom: 2.5rem; }
 .facts div { border-top: 1px solid rgba(255, 255, 255, .35); padding-top: 1rem; }
 .facts b { display: block; font-family: var(--font-serif); font-weight: 500; font-size: 30px; color: #fff; line-height: 1.1; }
 .facts span { font-size: 15px; color: rgba(255, 255, 255, .82); }
-@media (prefers-color-scheme: dark) { .band--mauve { background: #5e3aa3; } .manifesto .big em { color: #e9def6; } }
 
 /* Réassurance */
 .trust { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 2vw, 24px); }
@@ -1313,7 +1277,6 @@ main:not(.wide) .site-head { margin-bottom: 2.5rem; }
 .faq details p { margin: .8rem 0 0 !important; font-size: 15.5px; line-height: 1.65; color: var(--text-secondary); }
 .fine { font-size: 14px; color: var(--text-secondary); margin-top: 2rem !important; }
 .illu-side { display: block; width: 100%; max-width: 320px; height: auto; margin-left: auto; }
-@media (prefers-color-scheme: dark) { .illu-side { filter: invert(1) hue-rotate(180deg); } }
 
 /* Pied de page (version large) */
 .site-foot { margin: 0; padding: 3.5rem max(var(--gutter), calc(50vw - 600px)) 3rem; background: var(--soft-bg); border-top: 1px solid var(--card-border); }

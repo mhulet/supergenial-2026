@@ -47,13 +47,6 @@ const CSS = `
     --accent-1: #6366f1; --accent-2: #8b5cf6; --glow: rgba(99, 102, 241, 0.15);
     --card-bg: #ffffff; --card-border: #e5e5e5; --soft-bg: #f5f5f5;
 }
-@media (prefers-color-scheme: dark) {
-    :root {
-        --bg: #0a0a0a; --text-primary: #ededed; --text-secondary: #a3a3a3;
-        --link-underline: #525252; --link-hover: #ffffff; --glow: rgba(139, 92, 246, 0.1);
-        --card-bg: #111111; --card-border: #262626; --soft-bg: #141414;
-    }
-}
 body::before {
     content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     pointer-events: none; opacity: 0.03; z-index: 1000;
@@ -138,7 +131,6 @@ a:hover { color: var(--link-hover); }
 .article-item:hover .a-title { color: var(--link-hover); }
 .footnote { margin-top: 3rem; font-size: 13px; color: var(--text-secondary); }
 .illu-article { display: block; margin: 1.5rem auto 2rem; max-width: min(340px, 75%); height: auto; }
-@media (prefers-color-scheme: dark) { .illu-article { filter: invert(1) hue-rotate(180deg); } }
 @media (prefers-reduced-motion: reduce) { .animate, .subtitle { animation: none; opacity: 1; } }
 `;
 
