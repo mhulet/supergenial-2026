@@ -273,7 +273,7 @@ const FR = `
                         <li>Quelle tâche aimeriez-vous ne plus jamais faire à la main&nbsp;?</li>
                     </ol>
                     <a ${BK("fr")} class="btn btn-light plain">Réserver un call de 30 minutes <span class="arr">→</span></a>
-                    <div class="contact-alt"><a href="mailto:team@supergenial.be">team@supergenial.be</a><a href="https://www.linkedin.com/in/michaelhulet/" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="https://t.me/supergenialdotbe" target="_blank" rel="noopener noreferrer">Telegram</a></div>
+                    <div class="contact-alt"><a href="mailto:supergenial@semisto.org">supergenial@semisto.org</a><a href="https://www.linkedin.com/in/michaelhulet/" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="https://t.me/supergenialdotbe" target="_blank" rel="noopener noreferrer">Telegram</a></div>
                 </div>
             </div>
         </section>
@@ -533,7 +533,7 @@ const EN = `
                         <li>Which task would you love to never do by hand again?</li>
                     </ol>
                     <a ${BK("en")} class="btn btn-light plain">Book a 30-minute call <span class="arr">→</span></a>
-                    <div class="contact-alt"><a href="mailto:team@supergenial.be">team@supergenial.be</a><a href="https://www.linkedin.com/in/michaelhulet/" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="https://t.me/supergenialdotbe" target="_blank" rel="noopener noreferrer">Telegram</a></div>
+                    <div class="contact-alt"><a href="mailto:supergenial@semisto.org">supergenial@semisto.org</a><a href="https://www.linkedin.com/in/michaelhulet/" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="https://t.me/supergenialdotbe" target="_blank" rel="noopener noreferrer">Telegram</a></div>
                 </div>
             </div>
         </section>

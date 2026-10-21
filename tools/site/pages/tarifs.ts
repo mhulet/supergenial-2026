@@ -127,7 +127,7 @@ const FR = `
                 <div>
                     <p>En trente minutes, je vous dis si le diagnostic a du sens chez vous et dans quel ordre de grandeur se situerait une construction.</p>
                     <div class="actions"><a ${BK("fr")} class="btn btn-light plain">Réserver un call de 30 minutes <span class="arr">→</span></a></div>
-                    <div class="contact-alt"><a href="mailto:team@supergenial.be">team@supergenial.be</a></div>
+                    <div class="contact-alt"><a href="mailto:supergenial@semisto.org">supergenial@semisto.org</a></div>
                 </div>
             </div>
         </section>
@@ -217,7 +217,7 @@ const EN = `
                 <div>
                     <p>In thirty minutes I will tell you whether the assessment makes sense for you, and the rough budget a build would need.</p>
                     <div class="actions"><a ${BK("en")} class="btn btn-light plain">Book a 30-minute call <span class="arr">→</span></a></div>
-                    <div class="contact-alt"><a href="mailto:team@supergenial.be">team@supergenial.be</a></div>
+                    <div class="contact-alt"><a href="mailto:supergenial@semisto.org">supergenial@semisto.org</a></div>
                 </div>
             </div>
         </section>

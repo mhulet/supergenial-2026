@@ -87,8 +87,8 @@ export function footer(lang: Lang): string {
     : `Fewer spreadsheets, <em>more mission.</em>`;
   const cta = fr ? "Réserver un call de 30 minutes" : "Book a 30-minute call";
   const legal = fr
-    ? `Super Génial est le service IT de <strong>Semisto ASBL</strong>, association sans but lucratif de droit belge&nbsp;: chaque euro facturé va à l'association, sans actionnaire, et finance la mission de <a href="https://www.semisto.org" target="_blank" rel="noopener noreferrer">Semisto</a>. Numéro d'entreprise et de TVA&nbsp;: BE&nbsp;0790.631.657. Siège&nbsp;: Fonds d'Ahinvaux 1, 5530 Yvoir, Belgique. Contact&nbsp;: <a href="mailto:team@supergenial.be">team@supergenial.be</a>. Éditeur responsable&nbsp;: Michael Hulet.`
-    : `Super Génial is the IT service of <strong>Semisto ASBL</strong>, a Belgian non-profit association: every euro invoiced goes to the association, with no shareholders, and funds <a href="https://www.semisto.org" target="_blank" rel="noopener noreferrer">Semisto</a>'s mission. Company and VAT number: BE&nbsp;0790.631.657. Registered office: Fonds d'Ahinvaux 1, 5530 Yvoir, Belgium. Contact: <a href="mailto:team@supergenial.be">team@supergenial.be</a>. Publisher: Michael Hulet.`;
+    ? `Super Génial est le service IT de <strong>Semisto ASBL</strong>, association sans but lucratif de droit belge&nbsp;: chaque euro facturé va à l'association, sans actionnaire, et finance la mission de <a href="https://www.semisto.org" target="_blank" rel="noopener noreferrer">Semisto</a>. Numéro d'entreprise et de TVA&nbsp;: BE&nbsp;0790.631.657. Siège&nbsp;: Fonds d'Ahinvaux 1, 5530 Yvoir, Belgique. Contact&nbsp;: <a href="mailto:supergenial@semisto.org">supergenial@semisto.org</a>. Éditeur responsable&nbsp;: Michael Hulet.`
+    : `Super Génial is the IT service of <strong>Semisto ASBL</strong>, a Belgian non-profit association: every euro invoiced goes to the association, with no shareholders, and funds <a href="https://www.semisto.org" target="_blank" rel="noopener noreferrer">Semisto</a>'s mission. Company and VAT number: BE&nbsp;0790.631.657. Registered office: Fonds d'Ahinvaux 1, 5530 Yvoir, Belgium. Contact: <a href="mailto:supergenial@semisto.org">supergenial@semisto.org</a>. Publisher: Michael Hulet.`;
   return `<!--sitefoot--><footer class="site-foot">
             <div class="foot-top"><p class="foot-brand">${brand}</p><a href="${BOOKING[lang]}" class="btn btn-primary plain" data-booking target="_blank" rel="noopener noreferrer">${cta} <span class="arr">→</span></a></div>
             <nav class="foot-nav" aria-label="${fr ? "Pied de page" : "Footer"}">
@@ -180,7 +180,7 @@ export const orgLd = (lang: Lang) => ({
   description: lang === "fr"
     ? "Service IT de Semisto ASBL : outils internes et agents IA sur mesure pour les entreprises à impact de 5 à 100 personnes, Diagnostic IA à prix fixe et reprise d'applications web existantes. Chaque euro facturé va à l'association."
     : "The IT service of Semisto ASBL: custom internal tools and AI agents for impact-driven companies of 5 to 100 people, a fixed-price AI Assessment and take-over of existing web applications. Every euro invoiced goes to the association.",
-  email: "team@supergenial.be",
+  email: "supergenial@semisto.org",
   founder: { "@type": "Person", name: "Michael Hulet", url: "https://www.linkedin.com/in/michaelhulet/" },
   parentOrganization: { "@type": "NGO", name: "Semisto ASBL", url: "https://www.semisto.org" },
   areaServed: [{ "@type": "Place", name: "Wallonie" }, { "@type": "Place", name: "Bruxelles" }, { "@type": "Place", name: "Europe" }],
