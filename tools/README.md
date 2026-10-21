@@ -24,3 +24,7 @@ bun realisations/build.ts && bun realisations/en-build.ts && bun tools/site/buil
 ```
 
 Pour changer le lien « Réserver un call », modifier `BOOKING` dans `tools/site/layout.ts` puis relancer le pipeline.
+
+## Déploiement sur le serveur Semisto (Coolify)
+
+`Dockerfile` + `deploy/nginx.conf` : nginx sert les fichiers du dépôt tels quels (aucune étape de build, les pages sont commitées). `.dockerignore` écarte les sources (`*.ts`, `_drafts`, `tools/`, notes). L'apex `supergenial.be` redirige en 301 vers `www.supergenial.be` ; tout autre hôte (sous-domaine d'essai) est servi tel quel. Tant que le DNS pointe vers GitHub Pages, `CNAME` reste nécessaire.

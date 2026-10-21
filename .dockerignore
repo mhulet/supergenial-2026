@@ -1,0 +1,16 @@
+# Seul le site publié part dans l'image : ni sources de build, ni notes, ni outillage.
+.git
+.github
+.claude
+Plans
+tools
+deploy
+Dockerfile
+.dockerignore
+.tool-versions
+CNAME
+todoset-repos.png
+**/*.ts
+**/*.md
+**/_drafts
+ressources/_css.txt
