@@ -51,25 +51,7 @@ const FR = `
                         <span>Entreprises à impact</span><span>5 à 100 personnes</span><span>Wallonie et Bruxelles</span>
                     </div>
                 </div>
-                <div class="hero-art" aria-hidden="true">
-                    <div class="lbl">Aujourd'hui</div>
-                    <div class="mess">
-                        <span class="chip xls"><i></i>inscriptions_2026_v4_FINAL.xlsx</span>
-                        <span class="chip sub"><i></i>Formulaires <em class="x">/ mois</em></span>
-                        <span class="chip msg"><i></i>Groupe « commandes »</span>
-                        <span class="chip xls"><i></i>stock (copie).xlsx</span>
-                        <span class="chip sub"><i></i>CRM <em class="x">/ utilisateur / mois</em></span>
-                        <span class="chip sub"><i></i>Automatisations <em class="x">palier supérieur</em></span>
-                    </div>
-                    <div class="funnel">Demain : un seul outil, le vôtre</div>
-                    <div class="app">
-                        <div class="app-bar"><i></i><i></i><i></i><span>votre-outil</span></div>
-                        <div class="app-row"><div><b>Nouvelle commande par e-mail</b><small>lue et encodée par l'agent</small></div><span class="tag ok">fait</span></div>
-                        <div class="app-row"><div><b>Stock mis à jour</b><small>sans recopie</small></div><span class="tag">auto</span></div>
-                        <div class="app-row"><div><b>Réponse au client</b><small>préparée par l'agent</small></div><span class="tag wait">à valider</span></div>
-                        <div class="app-foot"><span>votre code</span><span>vos données</span><span>hébergé en Suisse</span></div>
-                    </div>
-                </div>
+                <img class="hero-illu" src="/assets/illustrations/sg-accueil.webp" decoding="async" alt="Illustration au trait : d'une pile de tableurs pousse une plante qui porte une application, arrosée par un petit robot" width="1200" height="800">
             </div>
         </section>
 
@@ -311,25 +293,7 @@ const EN = `
                         <span>Impact-driven companies</span><span>5 to 100 people</span><span>Wallonia and Brussels</span>
                     </div>
                 </div>
-                <div class="hero-art" aria-hidden="true">
-                    <div class="lbl">Today</div>
-                    <div class="mess">
-                        <span class="chip xls"><i></i>registrations_2026_v4_FINAL.xlsx</span>
-                        <span class="chip sub"><i></i>Forms <em class="x">/ month</em></span>
-                        <span class="chip msg"><i></i>“Orders” group chat</span>
-                        <span class="chip xls"><i></i>stock (copy).xlsx</span>
-                        <span class="chip sub"><i></i>CRM <em class="x">/ user / month</em></span>
-                        <span class="chip sub"><i></i>Automations <em class="x">next tier up</em></span>
-                    </div>
-                    <div class="funnel">Tomorrow: one tool, yours</div>
-                    <div class="app">
-                        <div class="app-bar"><i></i><i></i><i></i><span>your-tool</span></div>
-                        <div class="app-row"><div><b>New order by e-mail</b><small>read and entered by the agent</small></div><span class="tag ok">done</span></div>
-                        <div class="app-row"><div><b>Stock updated</b><small>no copying</small></div><span class="tag">auto</span></div>
-                        <div class="app-row"><div><b>Reply to the customer</b><small>drafted by the agent</small></div><span class="tag wait">to approve</span></div>
-                        <div class="app-foot"><span>your code</span><span>your data</span><span>hosted in Switzerland</span></div>
-                    </div>
-                </div>
+                <img class="hero-illu" src="/assets/illustrations/sg-accueil.webp" decoding="async" alt="Line drawing: a plant grows out of a pile of spreadsheets and carries an app, watered by a small robot" width="1200" height="800">
             </div>
         </section>
 
