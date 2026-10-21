@@ -8,7 +8,7 @@ const FAQ: Record<Lang, [string, string][]> = {
   fr: [
     ["Combien coûte un projet sur mesure ?", "Tout dépend de ce qu'il remplace. Pour donner un ordre de grandeur, un outil ciblé sur un seul processus démarre autour de 5 000 €, et un back-office complet qui remplace plusieurs abonnements se chiffre en dizaines de milliers d'euros. Le devis exact, à prix fixe, sort du Diagnostic IA."],
     ["Pourquoi pas une facturation à l'heure ?", "Parce qu'avec les agents IA, la même fonctionnalité peut prendre dix fois moins de temps qu'avant. Facturer à l'heure récompenserait la lenteur. Vous payez un résultat, à un prix connu d'avance."],
-    ["C'est quoi un « point » ?", "L'unité des petites évolutions incluses dans l'abonnement, à la place des heures. 1 point : un petit ajustement (un champ, un libellé). 2 points : une petite évolution (un filtre, un e-mail automatique). Environ 5 points : un écran complet. Au-delà du quota, l'évolution est chiffrée à part, d'avance."],
+    ["C'est quoi un « point » ?", "L'unité des petites évolutions incluses dans l'abonnement, à la place des heures. 1 point : un petit ajustement (un champ, un libellé). 2 points : une petite évolution (un filtre, un e-mail automatique). Environ 5 points : un écran complet. Au-delà du quota, l'évolution est chiffrée à part, d'avance."],
     ["Les points non utilisés sont-ils reportés ?", "Le quota se renouvelle chaque mois et n'est pas cumulable. Si vos besoins grandissent durablement, on ajuste le palier plutôt que d'accumuler."],
     ["Puis-je changer de palier ou résilier ?", "Oui. L'abonnement est sans engagement, modifiable ou résiliable d'un mois à l'autre. Et le code reste à vous dans tous les cas."],
     ["Pourquoi une ASBL facture-t-elle de l'informatique ?", "Super Génial est le service IT de Semisto ASBL. L'association facture ses prestations avec son numéro de TVA, comme n'importe quel prestataire, et chaque euro reste dans l'association : il rémunère le travail et finance sa mission, sans actionnaire à rémunérer."],
@@ -90,10 +90,10 @@ const FR = `
             <div class="wrap">
                 <p class="eyebrow">Abonnements</p>
                 <h2 class="h-sec">Votre outil reste en vie, <em>et continue d'évoluer.</em></h2>
-                <p class="sec-intro">L'abonnement remplace les « packs d'heures »&nbsp;: un montant fixe, et un flux de petites évolutions sans renégocier à chaque fois.</p>
+                <p class="sec-intro">L'abonnement remplace les « packs d'heures »&nbsp;: un montant fixe, et un flux de petites évolutions sans renégocier à chaque fois.</p>
                 <div class="tiers">${tiers("fr")}
                 </div>
-                <div class="callout" id="points"><b>C'est quoi un « point »&nbsp;?</b> Plutôt que des heures, j'utilise des points de complexité comme unité de valeur.
+                <div class="callout" id="points"><b>C'est quoi un « point »&nbsp;?</b> Plutôt que des heures, j'utilise des points de complexité comme unité de valeur.
                     <ul class="scale"><li><b>1 pt</b>Petit ajustement&nbsp;: un champ, un libellé, une couleur</li><li><b>2 pts</b>Petite évolution&nbsp;: un filtre, un tri, un e-mail automatique</li><li><b>~5 pts</b>Évolution standard&nbsp;: un écran complet</li></ul>
                     Un mois type en Évolution&nbsp;: un filtre de recherche (2 pts), une relance e-mail automatique (2 pts) et un libellé corrigé (1 pt), soit 5 points, inclus. Au-delà du quota, l'évolution est chiffrée à part, avant de commencer.</div>
             </div>

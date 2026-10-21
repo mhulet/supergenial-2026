@@ -71,10 +71,10 @@ const FR = `
                 <p class="eyebrow">Les signaux d'alerte</p>
                 <h2 class="h-sec">Vous reconnaissez <em>au moins deux de ces phrases&nbsp;?</em></h2>
                 <div class="tiles">
-                    <div class="tile"><b>« On ne fait plus les mises à jour. »</b><span>Le langage, le framework ou le serveur ne reçoivent plus de correctifs de sécurité.</span></div>
-                    <div class="tile"><b>« Personne ne connaît le code. »</b><span>Pas de documentation, ou elle date du premier jour. Le développeur d'origine est parti.</span></div>
-                    <div class="tile"><b>« Ajouter un champ prend des semaines. »</b><span>Chaque petite demande devient un chantier, et un devis qui fait peur.</span></div>
-                    <div class="tile"><b>« On a un tableur à côté. »</b><span>L'équipe contourne l'outil pour ce qu'il ne sait plus faire.</span></div>
+                    <div class="tile"><b>« On ne fait plus les mises à jour. »</b><span>Le langage, le framework ou le serveur ne reçoivent plus de correctifs de sécurité.</span></div>
+                    <div class="tile"><b>« Personne ne connaît le code. »</b><span>Pas de documentation, ou elle date du premier jour. Le développeur d'origine est parti.</span></div>
+                    <div class="tile"><b>« Ajouter un champ prend des semaines. »</b><span>Chaque petite demande devient un chantier, et un devis qui fait peur.</span></div>
+                    <div class="tile"><b>« On a un tableur à côté. »</b><span>L'équipe contourne l'outil pour ce qu'il ne sait plus faire.</span></div>
                 </div>
             </div>
         </section>

@@ -100,7 +100,7 @@ export const ARTICLES: Article[] = [
       en: "An AI agent isn't a robot that replaces a team. It's a colleague that takes on precise tasks. How to pick the first one, and which safeguards to set.",
     },
     lead: {
-      fr: "La bonne question n'est pas « faut-il de l'IA ? », mais « quelle tâche précise pourrait-elle prendre en charge dès le mois prochain ? ».",
+      fr: "La bonne question n'est pas « faut-il de l'IA ? », mais « quelle tâche précise pourrait-elle prendre en charge dès le mois prochain ? ».",
       en: "The right question isn't “do we need AI?”, but “which precise task could it take on as soon as next month?”.",
     },
     body: {

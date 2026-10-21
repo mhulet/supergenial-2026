@@ -8,7 +8,7 @@ export type Section = "diagnostic" | "pricing" | "cases" | "resources" | "repris
 
 export const SITE_URL = "https://www.supergenial.be";
 
-// Lien « Réserver un call de 30 minutes » : la page de réservation Notion Calendar
+// Lien « Réserver un call de 30 minutes » : la page de réservation Notion Calendar
 // de Michael. Tous les boutons data-booking du site pointent ici.
 export const BOOKING: Record<Lang, string> = {
   fr: "https://calendar.notion.so/meet/michaelhulet/supergenial",

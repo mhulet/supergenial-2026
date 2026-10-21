@@ -1375,3 +1375,12 @@ main:not(.wide) .site-foot { margin: 5rem calc(50% - 50vw) 0; }
   .eol-date { text-align: left; white-space: normal; }
   .cta-box .btn { padding-left: 1.1rem; padding-right: 1.1rem; font-size: 15px; white-space: nowrap; }
 }
+@media (max-width: 420px) {
+  .site-nav .lang-switch { padding: 3px; }
+  .site-nav .lang-switch .lang-globe { display: none; }
+  .site-nav .lang-switch a { padding: .28rem .55rem; }
+  .site-nav .brand-by { font-size: 12px; }
+}
+@media (max-width: 350px) {
+  .site-nav .brand-by { display: none; }
+}
