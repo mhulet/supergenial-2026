@@ -945,7 +945,7 @@ h1, h2, .article-body h2, .article-body h3, .launch-card h3, .plan-name,
 }
 h1 { line-height: 1.04; }
 @media (min-width: 768px) { h1 { font-size: 58px; } h2 { font-size: 32px; } }
-.article-body h2 { font-size: 26px; }
+.article-body h2 { font-size: 26px; line-height: 1.2; }
 @media (min-width: 768px) { .article-body h2 { font-size: 30px; } }
 .launch-card h3, .article-item .a-title, .case-item .a-title { font-size: 22px; }
 .plan-name { font-size: 21px; }
@@ -1358,3 +1358,20 @@ main:not(.wide) .site-foot { margin: 5rem calc(50% - 50vw) 0; }
 .hero-grid:has(.hero-illu) { grid-template-columns: minmax(0, 1.25fr) minmax(0, .95fr); }
 .hero-illu { margin-right: calc(-1 * var(--gutter) / 2); }
 .page-hero .illu-side { max-width: 400px; }
+@media (max-width: 900px) {
+  .hero-grid:has(.hero-illu) { grid-template-columns: 1fr; }
+  .hero-illu { margin: 0 auto; max-width: 520px; }
+  .page-hero .illu-side { max-width: 260px; margin: 1.5rem auto 0; }
+}
+/* En-tête mobile : marque, langue et menu sur une seule ligne */
+.site-nav .brand-by { font-weight: 500; color: var(--text-secondary); }
+@media (max-width: 560px) {
+  .site-nav { gap: .5rem; }
+  .site-nav .brand { gap: .4rem; }
+  .site-nav .brand-by { font-size: 13px; }
+}
+@media (max-width: 560px) {
+  .eol-row { grid-template-columns: 1fr; gap: .35rem; }
+  .eol-date { text-align: left; white-space: normal; }
+  .cta-box .btn { padding-left: 1.1rem; padding-right: 1.1rem; font-size: 15px; white-space: nowrap; }
+}
