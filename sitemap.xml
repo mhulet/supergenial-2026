@@ -323,6 +323,20 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/realisations/site-semisto/"/>
   </url>
   <url>
+    <loc>https://www.supergenial.be/realisations/d-ici/</loc>
+    <lastmod>2026-10-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/realisations/d-ici/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/case-studies/d-ici/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/realisations/d-ici/"/>
+  </url>
+  <url>
+    <loc>https://www.supergenial.be/en/case-studies/d-ici/</loc>
+    <lastmod>2026-10-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/realisations/d-ici/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/case-studies/d-ici/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/realisations/d-ici/"/>
+  </url>
+  <url>
     <loc>https://www.supergenial.be/realisations/terranova/</loc>
     <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/realisations/terranova/"/>

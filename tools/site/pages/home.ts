@@ -26,14 +26,15 @@ const proofs = (l: Lang) => PROOFS[l].map(([href, src, alt, k, h, who]) => `
                         <div class="body"><div class="k">${k}</div><h3>${h}</h3><div class="who">${who}</div></div>
                     </a>`).join("");
 
-const REFS = `<a href="https://tranchesdevie.les4sources.be" target="_blank" rel="noopener noreferrer">Tranches de Vie</a>
-                    <a href="https://www.silvea.org" target="_blank" rel="noopener noreferrer">Silvéa</a>
-                    <a href="https://www.upcyclinarium.com" target="_blank" rel="noopener noreferrer">Upcyclinarium</a>
-                    <a href="https://www.novabirra.com" target="_blank" rel="noopener noreferrer">Novabirra</a>
+const REFS = `<a class="plain" href="https://www.d-ici.be" target="_blank" rel="noopener noreferrer"><img class="sq" src="/assets/logos/dici.webp" alt="d'ici" width="120" height="120" loading="lazy"></a>
+                    <a class="plain" href="https://www.silvea.org" target="_blank" rel="noopener noreferrer"><img src="/assets/logos/silvea.webp" alt="Silvéa" width="322" height="120" loading="lazy"></a>
+                    <a class="plain" href="https://www.upcyclinarium.com" target="_blank" rel="noopener noreferrer"><img class="sq" src="/assets/logos/upcyclinarium.svg" alt="Upcyclinarium" width="400" height="400" loading="lazy"></a>
+                    <a class="plain" href="https://www.novabirra.com" target="_blank" rel="noopener noreferrer"><img src="/assets/logos/novabirra.webp" alt="Novabirra" width="298" height="120" loading="lazy"></a>
+                    <a class="plain" href="https://www.semisto.org" target="_blank" rel="noopener noreferrer"><img src="/assets/logos/semisto.webp" alt="Semisto" width="261" height="120" loading="lazy"></a>
+                    <a class="plain" href="https://www.les4sources.be" target="_blank" rel="noopener noreferrer"><img class="sq" src="/assets/logos/les-4-sources.webp" alt="Les 4 Sources" width="75" height="120" loading="lazy"></a>
+                    <a href="https://tranchesdevie.les4sources.be" target="_blank" rel="noopener noreferrer">Tranches de Vie</a>
                     <a href="https://www.petitkiwi.be" target="_blank" rel="noopener noreferrer">Petit Kiwi</a>
-                    <a href="https://www.notranet.net" target="_blank" rel="noopener noreferrer">Notranet</a>
-                    <a href="https://www.semisto.org" target="_blank" rel="noopener noreferrer">Semisto</a>
-                    <a href="https://www.les4sources.be" target="_blank" rel="noopener noreferrer">Les 4 Sources</a>`;
+                    <a class="txt" href="https://www.notranet.net" target="_blank" rel="noopener noreferrer">Compagnies des Notaires du Hainaut, de Namur et du Luxembourg</a>`;
 
 const FR = `
         <section class="hero">

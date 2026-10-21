@@ -1,0 +1,64 @@
+{
+  "slug": "d-ici",
+  "slug_en": "d-ici",
+  "order": 0,
+  "type": "Plateforme métier",
+  "type_en": "Business platform",
+  "client": "d'ici",
+  "year": "2026",
+  "problem": "Remplacer les e-mails et les fichiers Excel du référencement des producteurs locaux par une seule plateforme",
+  "problem_en": "Replacing the emails and Excel files used to onboard local producers with a single platform",
+  "title": "d'ici — le référencement des producteurs",
+  "title_en": "d'ici — producer onboarding",
+  "description": "La plateforme de référencement de d'ici : portail producteur, validation des articles par les sourceurs, tableau de bord et export vers l'ERP.",
+  "description_en": "The d'ici onboarding platform: producer portal, item approval by sourcers, dashboard and export to the ERP.",
+  "keywords": "étude de cas, plateforme métier, référencement producteurs, Ruby on Rails, Inertia, React, agents IA",
+  "keywords_en": "case study, business platform, producer onboarding, Ruby on Rails, Inertia, React, AI agents",
+  "url_live": "https://www.d-ici.be",
+  "stack": [
+    "Rails 8.1",
+    "Inertia + React 19",
+    "TypeScript",
+    "PostgreSQL",
+    "Tailwind CSS"
+  ],
+  "images": [
+    {
+      "src": "/assets/realisations/d-ici/01-tableau-de-bord.webp",
+      "alt": "Tableau de bord Cercle Sourcing de la plateforme d'ici",
+      "alt_en": "Cercle Sourcing dashboard of the d'ici platform",
+      "caption": "Le tableau de bord Cercle Sourcing : producteurs actifs, articles validés, complétude des dossiers.",
+      "caption_en": "The Cercle Sourcing dashboard: active producers, validated items, file completeness."
+    },
+    {
+      "src": "/assets/realisations/d-ici/02-taches-sourceur.webp",
+      "alt": "Liste des tâches du sourceur avec les articles à valider",
+      "alt_en": "Sourcer's task list with items to review",
+      "caption": "Les tâches du sourceur : valider ou refuser les articles soumis par les producteurs.",
+      "caption_en": "The sourcer's task list: approve or reject items submitted by producers."
+    },
+    {
+      "src": "/assets/realisations/d-ici/03-fiche-producteur.webp",
+      "alt": "Fiche d'un producteur fictif dans la plateforme d'ici",
+      "alt_en": "Record of a fictional producer in the d'ici platform",
+      "caption": "La fiche producteur : informations manquantes, activité sur le portail et articles.",
+      "caption_en": "The producer record: missing information, portal activity and items."
+    },
+    {
+      "src": "/assets/realisations/d-ici/04-portail-producteur.webp",
+      "alt": "Portail producteur, page « Mes articles »",
+      "alt_en": "Producer portal, \"My items\" page",
+      "caption": "Le portail producteur : chaque producteur suit et complète ses propres articles.",
+      "caption_en": "The producer portal: each producer tracks and completes their own items."
+    },
+    {
+      "src": "/assets/realisations/d-ici/05-export-biv.webp",
+      "alt": "Export Excel des articles vers l'ERP BIV",
+      "alt_en": "Excel export of items to the BIV ERP",
+      "caption": "L'export vers BIV : un fichier Excel prêt pour l'ERP.",
+      "caption_en": "The BIV export: an Excel file ready for the ERP."
+    }
+  ],
+  "body_html": "<h2>Le contexte</h2>\n<p>d'ici vend des produits de producteurs locaux dans trois magasins. Chaque nouveau producteur et chaque nouvel article doit être référencé avant d'arriver en rayon : informations sur l'entreprise, logistique, fiches articles, documents, prix.</p>\n<h2>Le problème</h2>\n<p>Ce référencement passait par des e-mails et des fichiers Excel, entre les producteurs, les sourceurs, l'équipe référencement, l'administratif et la communication, avant d'être encodé dans BIV, l'ERP de d'ici. Les informations se perdaient entre les versions, et personne ne voyait d'un coup d'œil quels dossiers étaient complets.</p>\n<h2>La solution</h2>\n<p>J'ai construit avec des agents IA une plateforme qui réunit tout le monde au même endroit :</p>\n<ul>\n<li><strong>Un portail producteur</strong>, accessible par lien magique, en français et en néerlandais : chaque producteur complète sa fiche entreprise, sa logistique, ses articles et ses documents.</li>\n<li><strong>La validation par les sourceurs</strong> : ils acceptent ou refusent les articles soumis et les changements de prix.</li>\n<li><strong>Un tableau de bord</strong> qui montre la complétude des dossiers et les alertes, avec export Excel et PDF.</li>\n<li><strong>Une file de référencement</strong> qui produit le fichier Excel attendu par BIV, et réimporte le retour de l'ERP.</li>\n</ul>\n<p>L'équipe interne se connecte avec ses comptes Microsoft.</p>\n<h2>Le résultat</h2>\n<p>La plateforme est en production depuis 2026. Les e-mails et les tableurs du référencement sont remplacés par un seul outil, partagé par les producteurs et l'équipe de d'ici.</p>",
+  "body_html_en": "<h2>The context</h2>\n<p>d'ici sells products from local producers in three shops. Every new producer and every new item has to be onboarded before it reaches the shelves: company details, logistics, item sheets, documents, prices.</p>\n<h2>The problem</h2>\n<p>Onboarding ran on emails and Excel files, between producers, sourcers, the onboarding team, admin and communication, before being keyed into BIV, d'ici's ERP. Information got lost between versions, and nobody could see at a glance which files were complete.</p>\n<h2>The solution</h2>\n<p>With AI agents, I built a platform that brings everyone into one place:</p>\n<ul>\n<li><strong>A producer portal</strong>, opened with a magic link, in French and Dutch: each producer completes their company record, logistics, items and documents.</li>\n<li><strong>Approval by sourcers</strong>: they accept or reject submitted items and price changes.</li>\n<li><strong>A dashboard</strong> showing file completeness and alerts, with Excel and PDF export.</li>\n<li><strong>An onboarding queue</strong> that produces the Excel file BIV expects, and imports the ERP's response back.</li>\n</ul>\n<p>The internal team signs in with their Microsoft accounts.</p>\n<h2>The result</h2>\n<p>The platform has been in production since 2026. The onboarding emails and spreadsheets have been replaced by a single tool shared by producers and the d'ici team.</p>"
+}
