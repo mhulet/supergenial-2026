@@ -12,3 +12,15 @@ agent-browser screenshot assets/og/nom.png
 sips -z 630 1200 assets/og/nom.png
 sips -s format jpeg -s formatOptions 82 assets/og/nom.png --out assets/og/nom.jpg && rm assets/og/nom.png
 ```
+
+Paramètres optionnels : `u` remplace la ligne de pied (défaut « supergenial.be · le service IT de Semisto ») ; dans `t`, `*mot*` passe en italique mauve.
+
+## Générer le site
+
+Les pages principales, les articles de Ressources et les redirections sont écrites par `tools/site/build.ts`. La coquille commune (menu, pied de page, `<head>`, Plausible, lien de réservation `BOOKING`) vient d'une seule source : `tools/site/layout.ts`. Pipeline complet, idempotent :
+
+```
+bun realisations/build.ts && bun realisations/en-build.ts && bun tools/site/build.ts && bun ressources/langswitch.ts && bun ressources/mainnav.ts && bun ressources/seo.ts
+```
+
+Pour changer le lien « Réserver un call », modifier `BOOKING` dans `tools/site/layout.ts` puis relancer le pipeline.

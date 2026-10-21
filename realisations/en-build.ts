@@ -5,7 +5,7 @@
 
 import { writeFileSync, mkdirSync } from "node:fs";
 import { join, dirname } from "node:path";
-import { HEAD, OPEN, FOOT, alt, INDEX_ALT, loadCases, carouselSection, type CaseStudy } from "./build.ts";
+import { HEAD, OPEN, FOOT, CTA, alt, INDEX_ALT, loadCases, carouselSection, type CaseStudy } from "./build.ts";
 
 const ROOT = dirname(new URL(import.meta.url).pathname);      // .../realisations
 const SITE = dirname(ROOT);                                   // repo root
@@ -22,19 +22,18 @@ function casePage(c: CaseStudy): string {
   const canonical = `https://www.supergenial.be/en/case-studies/${c.slug_en}/`;
   const live = c.url_live ? ` · <a href="${c.url_live}" target="_blank" rel="noopener noreferrer">Visit the site</a>` : "";
   const stack = c.stack.map((s) => `<span class="stack-tag">${s}</span>`).join(" ");
-  return `${HEAD("en", c.title_en + " — Super Génial", c.description_en, c.keywords_en, canonical, alt(c))}
-${OPEN("en")}
+  return `${HEAD("en", c.title_en + " · Super Génial", c.description_en, c.keywords_en, canonical, alt(c))}
+${OPEN("en", alt(c))}
         <article>
+            <p class="eyebrow"><a href="/en/case-studies/" class="plain">Case studies</a></p>
             <h1 class="animate delay-1">${c.title_en}</h1>
+            <p class="case-problem">The problem: ${c.problem_en.charAt(0).toLowerCase() + c.problem_en.slice(1)}.</p>
             <p class="case-meta animate delay-2"><span>${c.type_en}</span><span>${c.client} · ${c.year}${live}</span><span>${stack}</span></p>
 ${figures(c)}
             <div class="article-body animate delay-3">
                 ${c.body_html_en}
             </div>${carouselSection(c, "en")}
-            <div class="cta-box animate delay-3">
-                <p>Have a similar project in mind?</p>
-                <a href="/en/pricing/" class="cta-btn">See our pricing <span>→</span></a>
-            </div>
+${CTA("en")}
         </article>
 ${FOOT("en")}`;
 }
@@ -44,24 +43,24 @@ function indexPage(cases: CaseStudy[]): string {
   const items = cases.map((c) => {
     const thumb = c.images[0] ? `                    <img class="case-thumb" src="${c.images[0].src}" alt="${c.images[0].alt_en}" loading="lazy">\n` : "";
     return `                <a href="/en/case-studies/${c.slug_en}/" class="case-item plain">
-${thumb}                    <div class="a-type">${c.type_en} · ${c.year}</div>
+${thumb}                    <div class="a-type">${c.type_en} · ${c.client} · ${c.year}</div>
+                    <div class="a-problem">${c.problem_en}</div>
                     <div class="a-title">${c.title_en}</div>
-                    <div class="a-desc">${c.description_en}</div>
                 </a>`;
   }).join("\n");
-  return `${HEAD("en", "Case studies — Super Génial", "Case studies: websites, internal apps and newsletters built with AI agents.", "case studies, portfolio, web application, website, AI agents", canonical, INDEX_ALT)}
-${OPEN("en")}
-        <h1 class="animate delay-1">Case studies</h1>
-        <p class="subtitle">From brief to live site.</p>
+  return `${HEAD("en", "Case studies: tools in production · Super Génial", "Case studies: internal tools, management applications and websites built with AI agents, presented by the business problem they solve.", "case studies, internal tool, management application, AI agents", canonical, INDEX_ALT)}
+${OPEN("en", INDEX_ALT)}
+        <p class="eyebrow">Case studies</p>
+        <h1 class="animate delay-1">Tools used every day.</h1>
         <p class="intro animate delay-3">
-            A few recent projects by our team — websites, internal applications, newsletters —
-            built with AI agents, from architecture to deployment.
-            Want yours? <a href="/en/pricing/">Have a look at the pricing</a>.
+            Each project is presented by the problem it solves. I built them with AI agents,
+            from specification to go-live, and most of them serve my own organisations first:
+            I build for myself before offering it to others.
         </p>
         <div class="article-list animate delay-3">
 ${items}
         </div>
-        <p class="footnote">More case studies coming. A question? <a href="mailto:team@supergenial.be">team@supergenial.be</a></p>
+${CTA("en")}
 ${FOOT("en")}`;
 }
 

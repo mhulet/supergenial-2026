@@ -1,159 +1,337 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="Super Génial, agence web et de communication de Semisto : applications, sites et communication conçus avec des agents IA. 20 % de chaque facture financent des forêts comestibles.">
-    <meta name="author" content="Super Génial">
-
-    <!-- Open Graph / Social -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Super Génial by Semisto · Agence web et de communication">
-    <meta property="og:description"
-        content="Agence web et de communication. Nous concevons applications, sites et campagnes avec des agents IA, depuis 2023.">
-    <meta property="og:url" content="https://www.supergenial.be">
-
+    <title>Super Génial · Outils internes et agents IA sur mesure</title>
+    <meta name="description" content="Le service IT de Semisto remplace vos tableurs et vos abonnements empilés par des outils internes et des agents IA sur mesure, pour les entreprises à impact.">
+    <meta name="author" content="Michael Hulet">
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/assets/favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Super Génial · Outils internes et agents IA sur mesure">
+    <meta property="og:description" content="Le service IT de Semisto remplace vos tableurs et vos abonnements empilés par des outils internes et des agents IA sur mesure, pour les entreprises à impact.">
+    <meta property="og:url" content="https://www.supergenial.be/">
     <meta property="og:image" content="https://www.supergenial.be/assets/og/home.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Un ordinateur portable dessiné à l'encre, à côté d'une tasse">
+    <meta property="og:image:alt" content="Super Génial by Semisto : votre équipe est là pour la mission, pas pour recopier des tableurs">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Super Génial · Outils internes et agents IA sur mesure">
+    <meta name="twitter:description" content="Le service IT de Semisto remplace vos tableurs et vos abonnements empilés par des outils internes et des agents IA sur mesure, pour les entreprises à impact.">
     <meta name="twitter:image" content="https://www.supergenial.be/assets/og/home.jpg">
-    <title>Super Génial by Semisto · Agence web et de communication</title>
-
-    <!-- Google Font for distinctive typography -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400..600&family=Inter:wght@400..700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/site.css">
-
     <link rel="canonical" href="https://www.supergenial.be/">
     <link rel="alternate" hreflang="fr" href="https://www.supergenial.be/">
     <link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/">
     <link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","@id":"https://www.supergenial.be/#business","name":"Super Génial","legalName":"Semisto ASBL","url":"https://www.supergenial.be/","description":"Agence web et de communication de Semisto ASBL : applications web, sites, assistants IA et communication digitale conçus avec des agents IA, plus reprise et maintenance d'applications Ruby on Rails à prix fixe.","email":"team@supergenial.be","founder":{"@type":"Person","name":"Michael Hulet"},"areaServed":{"@type":"Place","name":"Europe"},"knowsAbout":["Ruby on Rails","Rails upgrade","Ruby upgrade","web application maintenance","Ubuntu server maintenance","legacy application modernization"],"sameAs":["https://www.linkedin.com/in/michaelhulet/","https://github.com/mhulet","https://t.me/supergenialdotbe"],"vatID":"BE0790631657","address":{"@type":"PostalAddress","streetAddress":"Fonds d'Ahinvaux 1","postalCode":"5530","addressLocality":"Yvoir","addressCountry":"BE"}}</script>
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Super Génial by Semisto · Agence web et de communication">
-    <meta name="twitter:description" content="Agence web et de communication. Nous concevons applications, sites et campagnes avec des agents IA, depuis 2023.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..600;1,400..600&family=Inter:wght@400..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/site.css">
+    <script defer data-domain="supergenial.be" src="https://stats.semisto.org/js/script.js"></script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","@id":"https://www.supergenial.be/#business","name":"Super Génial","legalName":"Semisto ASBL","url":"https://www.supergenial.be/","description":"Service IT de Semisto ASBL : outils internes et agents IA sur mesure pour les entreprises à impact de 5 à 100 personnes, Diagnostic IA à prix fixe et reprise d'applications web existantes. Chaque euro facturé va à l'association.","email":"team@supergenial.be","founder":{"@type":"Person","name":"Michael Hulet","url":"https://www.linkedin.com/in/michaelhulet/"},"parentOrganization":{"@type":"NGO","name":"Semisto ASBL","url":"https://www.semisto.org"},"areaServed":[{"@type":"Place","name":"Wallonie"},{"@type":"Place","name":"Bruxelles"},{"@type":"Place","name":"Europe"}],"knowsAbout":["internal tools","AI agents","custom business software","Ruby on Rails","web application maintenance","legacy application modernization"],"sameAs":["https://www.linkedin.com/in/michaelhulet/","https://github.com/mhulet","https://t.me/supergenialdotbe"],"vatID":"BE0790631657","address":{"@type":"PostalAddress","streetAddress":"Fonds d'Ahinvaux 1","postalCode":"5530","addressLocality":"Yvoir","addressCountry":"BE"}}</script>
 </head>
-
 <body class="page-home">
 <a class="skip-link plain" href="#contenu">Aller au contenu</a>
-    <main id="contenu">
-        <!--mainnav--><header class="site-head"><nav class="site-nav" aria-label="Navigation principale"><a href="/" class="brand plain"><span class="brand-mark" aria-hidden="true"></span>Super Génial<span class="brand-by">by Semisto</span></a><button class="nav-toggle plain" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="Ouvrir le menu"><svg class="i-burger" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg><svg class="i-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button><div class="nav-menu" id="site-menu"><a href="/diagnostic-ia/" class="plain">Diagnostic IA</a><a href="/communication/" class="plain">Communication</a><a href="/tarifs/" class="plain">Tarifs</a><a href="/realisations/" class="plain">Réalisations</a><a href="/ressources/" class="plain">Ressources</a><a href="/maintenance/" class="plain">Maintenance</a></div><div class="lang-switch" aria-label="Language / Langue"><svg class="lang-globe" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><ellipse cx="12" cy="12" rx="4.2" ry="9"/></svg><a href="/" class="is-active">FR</a><a href="/en/">EN</a></div></nav></header><!--/mainnav-->
-        <header>
-            <h1 class="animate delay-1">Super Génial 🇪🇺</h1>
-            <div class="subtitle">Agence web et de communication</div>
-            <p class="intro animate delay-3">Nous concevons des applications, des sites et votre communication avec des agents IA.</p>
-            <p class="credential animate delay-3">Applications web - Workflows autonomes - Assistants IA - Communication digitale</p>
-            <div class="hero-cta animate delay-3">
-                <a href="tarifs/" class="cta-btn">Voir nos tarifs <span class="cta-arrow">→</span></a>
-                <a href="diagnostic-ia/" class="cta-ghost">Diagnostic IA pour PME <span class="new-badge" aria-label="Nouveau service">Nouveau</span> <span class="cta-arrow">→</span></a>
-            </div>
-        </header>
+    <main id="contenu" class="wide">
+        <!--mainnav--><header class="site-head"><nav class="site-nav" aria-label="Navigation principale"><a href="/" class="brand plain"><span class="brand-mark" aria-hidden="true"></span>Super Génial<span class="brand-by">by Semisto</span></a><button class="nav-toggle plain" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="Ouvrir le menu"><svg class="i-burger" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg><svg class="i-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button><div class="nav-menu" id="site-menu"><a href="/diagnostic-ia/" class="plain">Diagnostic IA</a><a href="/tarifs/" class="plain">Tarifs</a><a href="/realisations/" class="plain">Réalisations</a><a href="/ressources/" class="plain">Ressources</a></div><div class="lang-switch" aria-label="Language / Langue"><svg class="lang-globe" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><ellipse cx="12" cy="12" rx="4.2" ry="9"/></svg><a href="/" class="is-active">FR</a><a href="/en/">EN</a></div><a href="https://calendar.notion.so/meet/michaelhulet/supergenial" class="nav-cta plain" data-booking target="_blank" rel="noopener noreferrer">Réserver un call</a></nav></header><!--/mainnav-->
 
-        <section class="animate delay-4">
-            <p>
-                Nous pensons en systèmes. Notre équipe vient de contextes variés, startups, e-commerce, associatif,
-                et c'est ce qui nous apprend à voir les connexions que d'autres ne voient pas.
-            </p>
-
-            <p>
-                Aujourd'hui, nous concevons applications, sites et communication avec des agents IA, de la stratégie
-                à la mise en ligne.
-            </p>
-            <p>
-                Pas de chef de projet, pas de compte-rendu à trois étages. Vous parlez directement à l'équipe
-                qui construit&nbsp;: c'est aussi ça qui rend la vitesse des agents utile.
-            </p>
-            <img class="illu" src="assets/illustrations/laptop-mug.png" decoding="async" alt="Illustration au trait : un ordinateur portable ouvert à côté d'un mug" width="800" height="800">
-        </section>
-
-        <div class="principle animate delay-5">
-            <div class="principle-inner">
-                <p>Les agents <span class="em">écrivent</span> le code. Nous choisissons <span class="em">ce qui reste</span>.</p>
-                <p class="sub">Direction, arbitrages, vérification : rien ne part en ligne sans être relu et validé par notre équipe, menée par un fondateur qui code depuis 2004.</p>
-            </div>
-        </div>
-
-        <section class="mission animate delay-5">
-            <div class="section-label">Super Génial by Semisto</div>
-            <h2>Une facture qui fait pousser des forêts</h2>
-            <p>
-                Super Génial est l'agence web et de communication de <a href="https://www.semisto.org" target="_blank" rel="noopener noreferrer">Semisto</a>,
-                l'association fondée par Michael Hulet pour transformer l'Europe en un maillage de forêts comestibles.
-                20&nbsp;% de chaque facture financent ce déploiement. Le prix ne change pas&nbsp;: la contribution est comprise.
-            </p>
-            <p>
-                Nous travaillons volontiers pour les organisations qui portent la durabilité&nbsp;: entreprises B Corp,
-                ONG, coopératives, producteurs locaux. Applications, sites web, IA et
-                <a href="/communication/">communication digitale</a>.
-            </p>
-        </section>
-
-        <section class="references animate delay-6">
-            <p>Quelques références</p>
-            <div class="references-list">
-                <span class="new-ref"><a href="realisations/silvea/">Silvéa</a><span class="new-badge" aria-label="Nouvelle référence">Nouveau</span></span>
-                <span><a href="https://tranchesdevie.les4sources.be" target="_blank" rel="noopener noreferrer">Tranches de Vie</a></span>
-                <span><a href="https://www.upcyclinarium.com" target="_blank" rel="noopener noreferrer">Upcyclinarium</a></span>
-                <span><a href="https://www.novabirra.com" target="_blank" rel="noopener noreferrer">Novabirra</a></span>
-                <span><a href="https://www.petitkiwi.be" target="_blank" rel="noopener noreferrer">Petit Kiwi</a></span>
-                <span><a href="https://www.notranet.net" target="_blank" rel="noopener noreferrer">Notranet</a></span>
-                <span><a href="https://www.semisto.org" target="_blank" rel="noopener noreferrer">Semisto</a></span>
-                <span><a href="https://www.les4sources.be" target="_blank" rel="noopener noreferrer">Les 4 Sources</a></span>
-                <span><a href="https://terranova.semisto.org" target="_blank" rel="noopener noreferrer">Terranova</a></span>
-            </div>
-            <img class="illu" src="assets/illustrations/lampe-mug.png" decoding="async" alt="Illustration au trait : une lampe de bureau articulée éclairant un mug, abat-jour dégradé indigo-violet" width="800" height="800">
-        </section>
-
-        <section class="contact animate delay-7">
-            <p>Envie d'explorer des pistes ensemble&nbsp;?</p>
-            <div class="contact-links">
-                <div><span class="arrow">→</span><a href="mailto:team@supergenial.be">team@supergenial.be</a></div>
-                <div><span class="arrow">→</span><a href="https://t.me/supergenialdotbe" target="_blank"
-                        rel="noopener noreferrer">Telegram: @supergenialdotbe</a></div>
-                <div><span class="arrow">→</span><a href="https://www.linkedin.com/in/michaelhulet/" target="_blank"
-                        rel="noopener noreferrer">LinkedIn</a></div>
-                <div><span class="arrow">→</span><a href="https://github.com/mhulet" target="_blank"
-                        rel="noopener noreferrer">GitHub</a></div>
+        <section class="hero">
+            <div class="wrap hero-grid">
+                <div>
+                    <p class="eyebrow">Outils internes et agents IA sur mesure</p>
+                    <h1 class="display">Votre équipe est là pour la mission, <em>pas pour recopier des tableurs.</em></h1>
+                    <p class="lede">Je remplace vos tableurs, vos tâches répétitives et vos abonnements empilés par <strong>des outils internes et des agents IA construits pour votre entreprise</strong>. Le code vous appartient, et chaque euro facturé finance la mission de Semisto.</p>
+                    <div class="actions">
+                        <a href="https://calendar.notion.so/meet/michaelhulet/supergenial" data-booking target="_blank" rel="noopener noreferrer" class="btn btn-primary plain">Réserver un call de 30 minutes <span class="arr">→</span></a>
+                        <a href="/diagnostic-ia/" class="btn btn-line plain">Le Diagnostic IA</a>
+                    </div>
+                    <div class="hero-for" aria-label="Pour qui">
+                        <span>Entreprises à impact</span><span>5 à 100 personnes</span><span>Wallonie et Bruxelles</span>
+                    </div>
+                </div>
+                <div class="hero-art" aria-hidden="true">
+                    <div class="lbl">Aujourd'hui</div>
+                    <div class="mess">
+                        <span class="chip xls"><i></i>inscriptions_2026_v4_FINAL.xlsx</span>
+                        <span class="chip sub"><i></i>Formulaires <em class="x">/ mois</em></span>
+                        <span class="chip msg"><i></i>Groupe « commandes »</span>
+                        <span class="chip xls"><i></i>stock (copie).xlsx</span>
+                        <span class="chip sub"><i></i>CRM <em class="x">/ utilisateur / mois</em></span>
+                        <span class="chip sub"><i></i>Automatisations <em class="x">palier supérieur</em></span>
+                    </div>
+                    <div class="funnel">Demain : un seul outil, le vôtre</div>
+                    <div class="app">
+                        <div class="app-bar"><i></i><i></i><i></i><span>votre-outil</span></div>
+                        <div class="app-row"><div><b>Nouvelle commande par e-mail</b><small>lue et encodée par l'agent</small></div><span class="tag ok">fait</span></div>
+                        <div class="app-row"><div><b>Stock mis à jour</b><small>sans recopie</small></div><span class="tag">auto</span></div>
+                        <div class="app-row"><div><b>Réponse au client</b><small>préparée par l'agent</small></div><span class="tag wait">à valider</span></div>
+                        <div class="app-foot"><span>votre code</span><span>vos données</span><span>hébergé en Suisse</span></div>
+                    </div>
+                </div>
             </div>
         </section>
-            <section class="parcours">
-        <div class="parcours-inner">
-            <h2>L'équipe</h2>
-            <ul>
-                <li><a href="https://www.linkedin.com/in/michaelhulet/" target="_blank" rel="noopener noreferrer">Michael Hulet</a>, fondateur&nbsp;: analyste-programmeur depuis 2004, co-fondateur d'une agence web, de startups et d'e-commerces</li>
-                <li>Fondateur de l'association <a href="https://semisto.org" target="_blank" rel="noopener noreferrer">Semisto</a> et co-fondateur du tiers-lieu <a href="https://www.les4sources.be" target="_blank" rel="noopener noreferrer">Les 4 Sources</a> 🇧🇪</li>
-                <li>Développement&nbsp;: applications web, workflows autonomes, assistants IA</li>
-                <li>Communication&nbsp;: sites, newsletters, réseaux sociaux, stratégie de contenu</li>
-            </ul>
-        </div>
-    </section>
-        <footer class="site-foot">
+
+        <section class="sec band">
+            <div class="wrap">
+                <p class="eyebrow">Ce qui coûte cher sans se voir</p>
+                <h2 class="h-sec">Deux fuites silencieuses <em>dans votre budget.</em></h2>
+                <div class="pains">
+                    <div class="pain">
+                        <div class="num">01</div>
+                        <h3>Les tableurs qui font tourner l'entreprise</h3>
+                        <p>Commandes, inscriptions, stocks, plannings : tout passe par un fichier que tout le monde craint d'ouvrir. Il ne coûte rien à l'achat. Il se paie en heures de recopie, en erreurs et en dépendance à une seule personne.</p>
+                        <ul><li>Une information saisie deux ou trois fois</li><li>Des versions qui se contredisent</li><li>Une seule personne qui sait comment ça marche</li></ul>
+                    </div>
+                    <div class="pain">
+                        <div class="num">02</div>
+                        <h3>Les abonnements qui s'empilent</h3>
+                        <p>Formulaires, agenda, e-mailing, CRM, automatisations pour relier le tout. Chaque abonnement est raisonnable. Leur somme ne l'est plus, et elle grimpe à chaque nouvelle personne dans l'équipe.</p>
+                        <ul><li>Un prix par utilisateur qui suit votre croissance</li><li>Des paliers qui sautent au mauvais moment</li><li>Des outils complets payés pour trois fonctions</li></ul>
+                    </div>
+                </div>
+                <p class="pains-foot">Un outil sur mesure ne convient pas à tout le monde : il a lui aussi un coût mensuel. <strong>Le Diagnostic IA fait le calcul avec vous, sur cinq ans, avant de construire quoi que ce soit.</strong></p>
+            </div>
+        </section>
+
+        <section class="sec" id="offre">
+            <div class="wrap">
+                <div class="sec-head">
+                    <div>
+                        <p class="eyebrow">L'offre</p>
+                        <h2 class="h-sec">Trois temps, <em>une seule personne responsable.</em></h2>
+                    </div>
+                    <a href="/tarifs/" class="link-arrow plain">Tous les tarifs →</a>
+                </div>
+                <div class="offer">
+                    <div class="offer-card is-first">
+                        <div class="step">Le point de départ <b>1</b></div>
+                        <h3>Diagnostic IA</h3>
+                        <div class="price">3 500 € <small>prix fixe, HTVA</small></div>
+                        <p>Deux semaines pour savoir où l'IA et le sur-mesure vous font gagner le plus.</p>
+                        <ul><li>Interviews de vos équipes</li><li>Inventaire de vos tableurs et de vos abonnements</li><li>Top 3 des opportunités, chiffrées sur cinq ans</li><li>Déduit si on construit ensuite</li></ul>
+                        <a href="/diagnostic-ia/" class="link-arrow plain">Le Diagnostic en détail →</a>
+                    </div>
+                    <div class="offer-card">
+                        <div class="step">La construction <b>2</b></div>
+                        <h3>Votre outil sur mesure</h3>
+                        <div class="price">Sur devis <small>prix fixe annoncé d'avance</small></div>
+                        <p>Je conçois et livre l'outil interne ou l'agent IA que le diagnostic a désigné.</p>
+                        <ul><li>Outils de gestion et back-offices</li><li>Agents IA qui lisent, préparent, mettent à jour</li><li>Testé, documenté, mis en ligne</li><li>Le code source vous est remis</li></ul>
+                        <a href="/realisations/" class="link-arrow plain">Voir des réalisations →</a>
+                    </div>
+                    <div class="offer-card">
+                        <div class="step">La vie de l'outil <b>3</b></div>
+                        <h3>Abonnement</h3>
+                        <div class="price">dès 390 € <small>/ mois, HTVA, sans engagement</small></div>
+                        <p>L'outil reste en vie, surveillé, à jour, et continue d'évoluer avec vous.</p>
+                        <ul><li>Maintenance et mises à jour</li><li>Correction des bugs</li><li>Petites évolutions incluses chaque mois</li><li>Trois paliers : 390, 890 ou 1 890 €</li></ul>
+                        <a href="/tarifs/#abonnements" class="link-arrow plain">Comparer les paliers →</a>
+                    </div>
+                </div>
+                <div class="door">
+                    <div class="door-k">ou</div>
+                    <div>
+                        <h3>Votre application existe déjà, mais elle vieillit ?</h3>
+                        <p>Plus de mises à jour de sécurité, un développeur parti, la moindre demande qui devient un chantier. Je reprends toute application web : je la comprends, je la documente, je la remets à jour par paliers testés.</p>
+                    </div>
+                    <a href="/maintenance/" class="btn btn-line plain">Reprise d'application <span class="arr">→</span></a>
+                </div>
+            </div>
+        </section>
+
+        <section class="sec sec--soft">
+            <div class="wrap split">
+                <div>
+                    <p class="eyebrow">Pour qui</p>
+                    <h2 class="h-sec">Pour les entreprises <em>qui portent une mission.</em></h2>
+                    <p class="sec-intro">Je ne m'adresse pas à tout le monde. Si vous vous reconnaissez dans ces quatre lignes, on devrait se parler.</p>
+                </div>
+                <div>
+                    <ul class="checks">
+                        <li><div><b>De 5 à 100 personnes</b><span>Assez grand pour que les tableurs coincent, assez petit pour qu'un logiciel d'entreprise soit démesuré. Un agent IA prend tout son sens au-delà d'une dizaine de personnes&nbsp;; en dessous, on commence par l'outil interne.</span></div></li>
+                        <li><div><b>La durabilité au cœur du modèle</b><span>B Corp, coopérative, PME durable, producteur établi : l'impact fait partie de ce que vous vendez.</span></div></li>
+                        <li><div><b>Des process qui tiennent sur Excel et WhatsApp</b><span>Et une facture d'abonnements que personne n'a vraiment décidée.</span></div></li>
+                        <li><div><b>Quelqu'un qui peut décider</b><span>Une direction ou une coordination prête à investir pour que son équipe gagne du temps.</span></div></li>
+                    </ul>
+                    <p class="aside-note">Fondation ou ONG établie&nbsp;? Bienvenue aussi, sur devis.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="sec">
+            <div class="wrap">
+                <div class="sec-head">
+                    <div>
+                        <p class="eyebrow">Ce que je construis</p>
+                        <h2 class="h-sec">Des outils qui font <em>le travail ingrat.</em></h2>
+                    </div>
+                </div>
+                <div class="missions">
+                    <div class="mission"><div class="who">Coopérative</div><p>Le suivi des commandes, des stocks et des livraisons, sans un seul tableur</p></div>
+                    <div class="mission"><div class="who">Domaine viticole</div><p>La gestion des parcelles, des vendanges, des stocks et des ventes</p></div>
+                    <div class="mission"><div class="who">Producteur</div><p>Une boutique en ligne reliée à la production et aux livraisons</p></div>
+                    <div class="mission"><div class="who">PME à impact</div><p>Un CRM interne à la place de trois abonnements qui se recoupent</p></div>
+                    <div class="mission"><div class="who">Organisme de formation</div><p>Inscriptions, sessions, formateurs et attestations dans un seul outil</p></div>
+                    <div class="mission"><div class="who">Fondation</div><p>Le traitement des appels à projets, de la candidature au suivi</p></div>
+                    <div class="mission"><div class="who">ONG</div><p>Un back-office complet pour les dons, les bénévoles et les campagnes</p></div>
+                    <div class="mission"><div class="who">Toute équipe</div><p>Un agent IA qui trie les demandes et prépare les réponses à valider</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="sec band--mauve">
+            <div class="wrap manifesto-grid manifesto">
+                <div>
+                    <p class="eyebrow">Ma façon de travailler</p>
+                    <p class="big">Les agents écrivent le code. <em>Je choisis ce qui reste.</em></p>
+                    <p class="sub">J'orchestre une série d'agents IA qui travaillent avec moi. Direction, arbitrages, vérification : rien ne part en ligne sans que je l'aie relu et validé. Une personne responsable, la capacité d'une équipe.</p>
+                </div>
+                <div class="facts">
+                    <div><b>Depuis 2004</b><span>analyste-programmeur, co-fondateur d'une agence web, de startups et d'e-commerces</span></div>
+                    <div><b>Depuis 2023</b><span>des applications conçues avec des agents IA, d'abord pour mes propres structures</span></div>
+                    <div><b>Un seul interlocuteur</b><span>vous parlez à la personne qui construit</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="sec">
+            <div class="wrap">
+                <div class="sec-head">
+                    <div>
+                        <p class="eyebrow">Déjà en production</p>
+                        <h2 class="h-sec">Des outils <em>qui tournent tous les jours.</em></h2>
+                    </div>
+                    <a href="/realisations/" class="link-arrow plain">Toutes les réalisations →</a>
+                </div>
+                <div class="proofs">
+                    <a href="/realisations/claudy/" class="proof plain">
+                        <div class="shot"><img src="/assets/realisations/claudy/calendrier.webp" alt="Calendrier d'occupation des gîtes et espaces d'un tiers-lieu" loading="lazy" width="1600" height="1000"></div>
+                        <div class="body"><div class="k">Outil interne</div><h3>Réservations, paiements, reporting et vie collective dans un seul outil</h3><div class="who">Claudy · Les 4 Sources</div></div>
+                    </a>
+                    <a href="/realisations/tranches-de-vie/" class="proof plain">
+                        <div class="shot"><img src="/assets/realisations/tranches-de-vie/admin-fournee.webp" alt="Back-office de planification des fournées d'une boulangerie" loading="lazy" width="1600" height="1000"></div>
+                        <div class="body"><div class="k">E-commerce et production</div><h3>Les commandes en ligne planifient chaque fournée, au gramme près</h3><div class="who">Tranches de Vie</div></div>
+                    </a>
+                    <a href="/realisations/terranova/" class="proof plain">
+                        <div class="shot"><img src="/assets/realisations/terranova/projets.webp" alt="Liste des projets d'une plateforme collaborative" loading="lazy" width="1600" height="1000"></div>
+                        <div class="body"><div class="k">Plateforme sur mesure</div><h3>Un outil de projet taillé pour son métier, à la place d'un logiciel générique</h3><div class="who">Terranova · Semisto</div></div>
+                    </a>
+                </div>
+                <div class="logos"><span class="k">Ils m'ont fait confiance</span>
+                    <a href="https://tranchesdevie.les4sources.be" target="_blank" rel="noopener noreferrer">Tranches de Vie</a>
+                    <a href="https://www.silvea.org" target="_blank" rel="noopener noreferrer">Silvéa</a>
+                    <a href="https://www.upcyclinarium.com" target="_blank" rel="noopener noreferrer">Upcyclinarium</a>
+                    <a href="https://www.novabirra.com" target="_blank" rel="noopener noreferrer">Novabirra</a>
+                    <a href="https://www.petitkiwi.be" target="_blank" rel="noopener noreferrer">Petit Kiwi</a>
+                    <a href="https://www.notranet.net" target="_blank" rel="noopener noreferrer">Notranet</a>
+                    <a href="https://www.semisto.org" target="_blank" rel="noopener noreferrer">Semisto</a>
+                    <a href="https://www.les4sources.be" target="_blank" rel="noopener noreferrer">Les 4 Sources</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="sec sec--soft">
+            <div class="wrap">
+                <p class="eyebrow">Sans dépendance</p>
+                <h2 class="h-sec">Votre outil <em>reste à vous.</em></h2>
+                <p class="sec-intro">Travailler avec une seule personne pose une question légitime : et si elle disparaît&nbsp;? La réponse est écrite dans chaque projet.</p>
+                <div class="trust">
+                    <div class="trust-card">
+                        <div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M13.5 4l-3 16"/></svg></div>
+                        <h3>Votre code vous appartient</h3>
+                        <ul>
+                            <li><b>Le code source vous est remis</b>, hébergé sur GitHub, dans un espace à votre nom.</li>
+                            <li><b>Des technologies standard</b>, connues de milliers de développeurs.</li>
+                            <li><b>Documentation et tests livrés</b> : un autre développeur peut reprendre le projet.</li>
+                        </ul>
+                    </div>
+                    <div class="trust-card">
+                        <div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10.5" width="16" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg></div>
+                        <h3>Vos données</h3>
+                        <ul>
+                            <li><b>Hébergement chez Infomaniak, en Suisse</b>, un hébergeur indépendant.</li>
+                            <li><b>Modèle IA&nbsp;: Claude, d'Anthropic</b>, utilisé via son API professionnelle.</li>
+                            <li><b>Un agent ne fait que ce qu'on lui permet</b> : ce qui engage l'entreprise passe par une validation humaine.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="sec" id="semisto">
+            <div class="wrap semisto">
+                <div>
+                    <p class="eyebrow">Semisto, c'est quoi&nbsp;?</p>
+                    <p class="quote">Transformer l'Europe en un maillage <em>de forêts comestibles.</em></p>
+                    <p class="prose">C'est la mission de <a href="https://www.semisto.org" target="_blank" rel="noopener noreferrer">Semisto</a>, l'association que j'ai fondée. Elle conçoit, plante et transmet des jardins-forêts&nbsp;: des écosystèmes nourriciers qui régénèrent le sol, la biodiversité et les liens entre les gens. Super Génial est son service IT.</p>
+                    <div class="money"><b>Chaque euro facturé va à Semisto ASBL, sans actionnaire.</b> Il rémunère mon travail et finance la mission. Votre budget IT devient aussi un soutien, que vous pouvez citer dans votre rapport d'impact.</div>
+                </div>
+                <ul class="poles">
+                    <li><b>Design Labs</b><span>le bureau d'études qui dessine les jardins-forêts</span></li>
+                    <li><b>Mycorrhiza</b><span>la réalisation, avec un réseau de pros du jardin</span></li>
+                    <li><b>Semisto Designer</b><span>l'outil en ligne pour concevoir son jardin-forêt</span></li>
+                    <li><b>Academy</b><span>les formations, d'un jour à trente jours</span></li>
+                    <li><b>Pépinière-école</b><span>des plants résilients, et un lieu pour apprendre à les multiplier</span></li>
+                    <li><b>Food Forest Heroes</b><span>les bénévoles qui plantent, en musique</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="sec band" id="contact">
+            <div class="wrap contact-band">
+                <div>
+                    <p class="eyebrow">On en parle&nbsp;?</p>
+                    <h2 class="h-sec">Parlons de <em>vos tableurs.</em></h2>
+                    <p>Trente minutes, sans engagement, pour voir si je peux vous être utile. Pour en tirer le meilleur, gardez en tête ces trois questions&nbsp;:</p>
+                </div>
+                <div>
+                    <ol class="qs">
+                        <li>Combien de personnes compte votre équipe&nbsp;?</li>
+                        <li>Sur quels tableurs, outils et abonnements tourne-t-elle aujourd'hui&nbsp;?</li>
+                        <li>Quelle tâche aimeriez-vous ne plus jamais faire à la main&nbsp;?</li>
+                    </ol>
+                    <a href="https://calendar.notion.so/meet/michaelhulet/supergenial" data-booking target="_blank" rel="noopener noreferrer" class="btn btn-light plain">Réserver un call de 30 minutes <span class="arr">→</span></a>
+                    <div class="contact-alt"><a href="mailto:team@supergenial.be">team@supergenial.be</a><a href="https://www.linkedin.com/in/michaelhulet/" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="https://t.me/supergenialdotbe" target="_blank" rel="noopener noreferrer">Telegram</a></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="sec">
+            <div class="wrap builder">
+                <div>
+                    <p class="eyebrow">Qui construit</p>
+                    <h2 class="h-sec">Michael Hulet</h2>
+                    <p class="role">Fondateur de Semisto, développeur, entrepreneur. Basé à Yvoir, au tiers-lieu Les 4 Sources.</p>
+                </div>
+                <ul>
+                    <li>Analyste-programmeur depuis 2004, co-fondateur d'une agence web, de startups et d'e-commerces</li>
+                    <li>Des deux côtés du comptoir&nbsp;: co-fondateur d'un magasin, d'un lieu d'accueil avec gîtes et salles, d'une association de formation</li>
+                    <li>Fondateur de l'association <a href="https://www.semisto.org" target="_blank" rel="noopener noreferrer">Semisto</a> et co-fondateur du tiers-lieu <a href="https://www.les4sources.be" target="_blank" rel="noopener noreferrer">Les 4 Sources</a></li>
+                    <li>Je construis d'abord pour mes propres structures, puis je propose aux autres ce qui a fait ses preuves</li>
+                </ul>
+            </div>
+        </section>
+
+        <!--sitefoot--><footer class="site-foot">
+            <div class="foot-top"><p class="foot-brand">Moins de tableurs, <em>plus de mission.</em></p><a href="https://calendar.notion.so/meet/michaelhulet/supergenial" class="btn btn-primary plain" data-booking target="_blank" rel="noopener noreferrer">Réserver un call de 30 minutes <span class="arr">→</span></a></div>
             <nav class="foot-nav" aria-label="Pied de page">
                 <a href="/" class="plain">Accueil</a>
                 <a href="/diagnostic-ia/" class="plain">Diagnostic IA</a>
-                <a href="/communication/" class="plain">Communication</a>
                 <a href="/tarifs/" class="plain">Tarifs</a>
-                <a href="/maintenance/" class="plain">Maintenance</a>
+                <a href="/maintenance/" class="plain">Reprise d'application</a>
                 <a href="/realisations/" class="plain">Réalisations</a>
                 <a href="/ressources/" class="plain">Ressources</a>
                 <a href="/mentions-legales/" class="plain">Mentions légales</a>
             </nav>
-            <p class="foot-legal">Super Génial by Semisto est l'agence web et de communication de <strong>Semisto ASBL</strong>, association sans but lucratif de droit belge. 20&nbsp;% de chaque facture financent le déploiement des forêts comestibles de <a href="https://www.semisto.org" target="_blank" rel="noopener noreferrer">Semisto</a>. Numéro d'entreprise et de TVA&nbsp;: BE&nbsp;0790.631.657. Siège&nbsp;: Fonds d'Ahinvaux 1, 5530 Yvoir, Belgique. Contact&nbsp;: <a href="mailto:team@supergenial.be">team@supergenial.be</a>. Éditeur responsable&nbsp;: Michael Hulet.</p>
+            <p class="foot-legal">Super Génial est le service IT de <strong>Semisto ASBL</strong>, association sans but lucratif de droit belge&nbsp;: chaque euro facturé va à l'association, sans actionnaire, et finance la mission de <a href="https://www.semisto.org" target="_blank" rel="noopener noreferrer">Semisto</a>. Numéro d'entreprise et de TVA&nbsp;: BE&nbsp;0790.631.657. Siège&nbsp;: Fonds d'Ahinvaux 1, 5530 Yvoir, Belgique. Contact&nbsp;: <a href="mailto:team@supergenial.be">team@supergenial.be</a>. Éditeur responsable&nbsp;: Michael Hulet.</p>
             <div class="foot-social">
             <a href="https://www.linkedin.com/in/michaelhulet/" rel="noopener noreferrer" target="_blank" aria-label="LinkedIn"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm7 0h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.5c0-1.31-.02-3-1.83-3-1.83 0-2.11 1.43-2.11 2.9V21h-4V9Z"/></svg></a>
             <a href="https://github.com/mhulet" rel="noopener noreferrer" target="_blank" aria-label="GitHub"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.09.66-.22.66-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.16.58.67.48A10 10 0 0 0 22 12c0-5.52-4.48-10-10-10Z"/></svg></a>
             <a href="https://t.me/supergenialdotbe" rel="noopener noreferrer" target="_blank" aria-label="Telegram"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.6 4.3 18.5 19c-.2 1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.3-4.9 8.9-8c.4-.3-.1-.5-.6-.2L5.9 13 1.1 11.5c-1-.3-1-1 .2-1.5l19-7.3c.9-.3 1.6.2 1.3 1.6Z"/></svg></a>
         </div>
-        </footer>
+        </footer><!--/sitefoot-->
     </main>
-
 <script>/*mainnavjs*/(function(){var n=document.querySelector(".site-nav"),t=document.querySelector(".nav-toggle");if(!n||!t)return;t.addEventListener("click",function(){var o=n.classList.toggle("open");t.setAttribute("aria-expanded",o?"true":"false")});})();</script>
 </body>
-
 </html>

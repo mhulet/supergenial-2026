@@ -2,87 +2,143 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://www.supergenial.be/</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/"/>
   </url>
   <url>
     <loc>https://www.supergenial.be/en/</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/"/>
   </url>
   <url>
     <loc>https://www.supergenial.be/maintenance/</loc>
-    <lastmod>2026-07-11</lastmod>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/maintenance/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/maintenance/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/maintenance/"/>
   </url>
   <url>
     <loc>https://www.supergenial.be/en/maintenance/</loc>
-    <lastmod>2026-07-11</lastmod>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/maintenance/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/maintenance/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/maintenance/"/>
   </url>
   <url>
-    <loc>https://www.supergenial.be/communication/</loc>
-    <lastmod>2026-10-18</lastmod>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/communication/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/communication/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/communication/"/>
-  </url>
-  <url>
-    <loc>https://www.supergenial.be/en/communication/</loc>
-    <lastmod>2026-10-18</lastmod>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/communication/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/communication/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/communication/"/>
-  </url>
-  <url>
-    <loc>https://www.supergenial.be/tarifs/</loc>
-    <lastmod>2026-08-25</lastmod>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/tarifs/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/pricing/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/tarifs/"/>
-  </url>
-  <url>
-    <loc>https://www.supergenial.be/en/pricing/</loc>
-    <lastmod>2026-08-25</lastmod>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/tarifs/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/pricing/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/tarifs/"/>
-  </url>
-  <url>
     <loc>https://www.supergenial.be/diagnostic-ia/</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/diagnostic-ia/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/ai-assessment/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/diagnostic-ia/"/>
   </url>
   <url>
     <loc>https://www.supergenial.be/en/ai-assessment/</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/diagnostic-ia/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/ai-assessment/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/diagnostic-ia/"/>
   </url>
   <url>
+    <loc>https://www.supergenial.be/mentions-legales/</loc>
+    <lastmod>2026-10-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/mentions-legales/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/legal/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/mentions-legales/"/>
+  </url>
+  <url>
+    <loc>https://www.supergenial.be/en/legal/</loc>
+    <lastmod>2026-10-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/mentions-legales/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/legal/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/mentions-legales/"/>
+  </url>
+  <url>
+    <loc>https://www.supergenial.be/tarifs/</loc>
+    <lastmod>2026-10-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/tarifs/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/pricing/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/tarifs/"/>
+  </url>
+  <url>
+    <loc>https://www.supergenial.be/en/pricing/</loc>
+    <lastmod>2026-10-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/tarifs/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/pricing/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/tarifs/"/>
+  </url>
+  <url>
     <loc>https://www.supergenial.be/ressources/</loc>
-    <lastmod>2026-07-11</lastmod>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/ressources/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/resources/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/ressources/"/>
   </url>
   <url>
     <loc>https://www.supergenial.be/en/resources/</loc>
-    <lastmod>2026-07-11</lastmod>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/ressources/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/resources/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/ressources/"/>
+  </url>
+  <url>
+    <loc>https://www.supergenial.be/ressources/cout-cache-des-tableurs/</loc>
+    <lastmod>2026-10-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/ressources/cout-cache-des-tableurs/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/resources/hidden-cost-of-spreadsheets/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/ressources/cout-cache-des-tableurs/"/>
+  </url>
+  <url>
+    <loc>https://www.supergenial.be/en/resources/hidden-cost-of-spreadsheets/</loc>
+    <lastmod>2026-10-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/ressources/cout-cache-des-tableurs/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/resources/hidden-cost-of-spreadsheets/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/ressources/cout-cache-des-tableurs/"/>
+  </url>
+  <url>
+    <loc>https://www.supergenial.be/ressources/agent-ia-pme-par-ou-commencer/</loc>
+    <lastmod>2026-10-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/ressources/agent-ia-pme-par-ou-commencer/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/resources/ai-agent-small-business-where-to-start/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/ressources/agent-ia-pme-par-ou-commencer/"/>
+  </url>
+  <url>
+    <loc>https://www.supergenial.be/en/resources/ai-agent-small-business-where-to-start/</loc>
+    <lastmod>2026-10-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/ressources/agent-ia-pme-par-ou-commencer/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/resources/ai-agent-small-business-where-to-start/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/ressources/agent-ia-pme-par-ou-commencer/"/>
+  </url>
+  <url>
+    <loc>https://www.supergenial.be/ressources/application-qui-vieillit/</loc>
+    <lastmod>2026-10-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/ressources/application-qui-vieillit/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/resources/ageing-business-application/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/ressources/application-qui-vieillit/"/>
+  </url>
+  <url>
+    <loc>https://www.supergenial.be/en/resources/ageing-business-application/</loc>
+    <lastmod>2026-10-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/ressources/application-qui-vieillit/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/resources/ageing-business-application/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/ressources/application-qui-vieillit/"/>
+  </url>
+  <url>
+    <loc>https://www.supergenial.be/ressources/abonnements-logiciels/</loc>
+    <lastmod>2026-10-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/ressources/abonnements-logiciels/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/resources/software-subscriptions/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/ressources/abonnements-logiciels/"/>
+  </url>
+  <url>
+    <loc>https://www.supergenial.be/en/resources/software-subscriptions/</loc>
+    <lastmod>2026-10-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/ressources/abonnements-logiciels/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/resources/software-subscriptions/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/ressources/abonnements-logiciels/"/>
   </url>
   <url>
     <loc>https://www.supergenial.be/ressources/rails-7-1-fin-de-support/</loc>
@@ -226,88 +282,86 @@
   </url>
   <url>
     <loc>https://www.supergenial.be/realisations/</loc>
-    <lastmod>2026-07-11</lastmod>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/realisations/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/case-studies/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/realisations/"/>
   </url>
   <url>
     <loc>https://www.supergenial.be/en/case-studies/</loc>
-    <lastmod>2026-07-11</lastmod>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/realisations/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/case-studies/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/realisations/"/>
   </url>
   <url>
     <loc>https://www.supergenial.be/realisations/tranches-de-vie/</loc>
-    <lastmod>2026-07-11</lastmod>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/realisations/tranches-de-vie/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/case-studies/tranches-de-vie/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/realisations/tranches-de-vie/"/>
   </url>
   <url>
     <loc>https://www.supergenial.be/en/case-studies/tranches-de-vie/</loc>
-    <lastmod>2026-07-11</lastmod>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/realisations/tranches-de-vie/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/case-studies/tranches-de-vie/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/realisations/tranches-de-vie/"/>
   </url>
   <url>
-    <loc>https://www.supergenial.be/realisations/claudy/</loc>
-    <lastmod>2026-07-11</lastmod>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/realisations/claudy/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/case-studies/claudy/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/realisations/claudy/"/>
-  </url>
-  <url>
-    <loc>https://www.supergenial.be/en/case-studies/claudy/</loc>
-    <lastmod>2026-07-11</lastmod>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/realisations/claudy/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/case-studies/claudy/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/realisations/claudy/"/>
-  </url>
-  <url>
-    <loc>https://www.supergenial.be/realisations/silvea/</loc>
-    <lastmod>2026-07-11</lastmod>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/realisations/silvea/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/case-studies/silvea/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/realisations/silvea/"/>
-  </url>
-  <url>
-    <loc>https://www.supergenial.be/en/case-studies/silvea/</loc>
-    <lastmod>2026-07-11</lastmod>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/realisations/silvea/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/case-studies/silvea/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/realisations/silvea/"/>
-  </url>
-  <url>
-    <loc>https://www.supergenial.be/realisations/terranova/</loc>
-    <lastmod>2026-07-11</lastmod>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/realisations/terranova/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/case-studies/terranova/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/realisations/terranova/"/>
-  </url>
-  <url>
-    <loc>https://www.supergenial.be/en/case-studies/terranova/</loc>
-    <lastmod>2026-07-11</lastmod>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/realisations/terranova/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/case-studies/terranova/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/realisations/terranova/"/>
-  </url>
-  <url>
     <loc>https://www.supergenial.be/realisations/site-semisto/</loc>
-    <lastmod>2026-07-11</lastmod>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/realisations/site-semisto/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/case-studies/site-semisto/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/realisations/site-semisto/"/>
   </url>
   <url>
     <loc>https://www.supergenial.be/en/case-studies/site-semisto/</loc>
-    <lastmod>2026-07-11</lastmod>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/realisations/site-semisto/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/case-studies/site-semisto/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/realisations/site-semisto/"/>
   </url>
-  <url><loc>https://www.supergenial.be/mentions-legales/</loc><changefreq>yearly</changefreq><priority>0.1</priority></url>
-  <url><loc>https://www.supergenial.be/en/legal/</loc><changefreq>yearly</changefreq><priority>0.1</priority></url>
+  <url>
+    <loc>https://www.supergenial.be/realisations/terranova/</loc>
+    <lastmod>2026-10-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/realisations/terranova/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/case-studies/terranova/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/realisations/terranova/"/>
+  </url>
+  <url>
+    <loc>https://www.supergenial.be/en/case-studies/terranova/</loc>
+    <lastmod>2026-10-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/realisations/terranova/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/case-studies/terranova/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/realisations/terranova/"/>
+  </url>
+  <url>
+    <loc>https://www.supergenial.be/realisations/claudy/</loc>
+    <lastmod>2026-10-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/realisations/claudy/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/case-studies/claudy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/realisations/claudy/"/>
+  </url>
+  <url>
+    <loc>https://www.supergenial.be/en/case-studies/claudy/</loc>
+    <lastmod>2026-10-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/realisations/claudy/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/case-studies/claudy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/realisations/claudy/"/>
+  </url>
+  <url>
+    <loc>https://www.supergenial.be/realisations/silvea/</loc>
+    <lastmod>2026-10-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/realisations/silvea/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/case-studies/silvea/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/realisations/silvea/"/>
+  </url>
+  <url>
+    <loc>https://www.supergenial.be/en/case-studies/silvea/</loc>
+    <lastmod>2026-10-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.supergenial.be/realisations/silvea/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.supergenial.be/en/case-studies/silvea/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.supergenial.be/realisations/silvea/"/>
+  </url>
 </urlset>

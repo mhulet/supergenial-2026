@@ -22,7 +22,7 @@ const SLUGS: Record<string, string> = {
 };
 
 type Page = {
-  file: string; fr: string; en: string; lang: "fr" | "en"; type: "home" | "page" | "article";
+  file: string; fr: string; en: string; lang: "fr" | "en"; type: "home" | "page" | "article"; fresh?: boolean;
 };
 
 const pages: Page[] = [
@@ -30,13 +30,22 @@ const pages: Page[] = [
   { file: "en/index.html", fr: "/", en: "/en/", lang: "en", type: "home" },
   { file: "maintenance/index.html", fr: "/maintenance/", en: "/en/maintenance/", lang: "fr", type: "page" },
   { file: "en/maintenance/index.html", fr: "/maintenance/", en: "/en/maintenance/", lang: "en", type: "page" },
-  { file: "communication/index.html", fr: "/communication/", en: "/en/communication/", lang: "fr", type: "page" },
-  { file: "en/communication/index.html", fr: "/communication/", en: "/en/communication/", lang: "en", type: "page" },
+  { file: "diagnostic-ia/index.html", fr: "/diagnostic-ia/", en: "/en/ai-assessment/", lang: "fr", type: "page" },
+  { file: "en/ai-assessment/index.html", fr: "/diagnostic-ia/", en: "/en/ai-assessment/", lang: "en", type: "page" },
+  { file: "mentions-legales/index.html", fr: "/mentions-legales/", en: "/en/legal/", lang: "fr", type: "page" },
+  { file: "en/legal/index.html", fr: "/mentions-legales/", en: "/en/legal/", lang: "en", type: "page" },
   { file: "tarifs/index.html", fr: "/tarifs/", en: "/en/pricing/", lang: "fr", type: "page" },
   { file: "en/pricing/index.html", fr: "/tarifs/", en: "/en/pricing/", lang: "en", type: "page" },
   { file: "ressources/index.html", fr: "/ressources/", en: "/en/resources/", lang: "fr", type: "page" },
   { file: "en/resources/index.html", fr: "/ressources/", en: "/en/resources/", lang: "en", type: "page" },
 ];
+// Articles 2026 (listés sur la page Ressources), générés par tools/site/build.ts.
+import { ARTICLES } from "../tools/site/pages/articles.ts";
+for (const a of ARTICLES) {
+  pages.push({ file: `ressources/${a.slug.fr}/index.html`, fr: `/ressources/${a.slug.fr}/`, en: `/en/resources/${a.slug.en}/`, lang: "fr", type: "article", fresh: true });
+  pages.push({ file: `en/resources/${a.slug.en}/index.html`, fr: `/ressources/${a.slug.fr}/`, en: `/en/resources/${a.slug.en}/`, lang: "en", type: "article", fresh: true });
+}
+// Anciens guides techniques : toujours en ligne, plus listés sur Ressources.
 for (const [fr, en] of Object.entries(SLUGS)) {
   pages.push({ file: `ressources/${fr}/index.html`, fr: `/ressources/${fr}/`, en: `/en/resources/${en}/`, lang: "fr", type: "article" });
   pages.push({ file: `en/resources/${en}/index.html`, fr: `/ressources/${fr}/`, en: `/en/resources/${en}/`, lang: "en", type: "article" });
@@ -54,24 +63,8 @@ for (const f of readdirSync(join(ROOT, "realisations", "_drafts")).filter((f) =>
 
 const grab = (h: string, re: RegExp) => (h.match(re)?.[1] ?? "").trim();
 
-const orgLd = (lang: "fr" | "en", url: string) => ({
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  "@id": BASE + "/#business",
-  name: "Super Génial",
-  legalName: "Semisto ASBL",
-  url,
-  description: lang === "fr"
-    ? "Agence web et de communication de Semisto ASBL : applications web, sites, assistants IA et communication digitale conçus avec des agents IA, plus reprise et maintenance d'applications Ruby on Rails à prix fixe."
-    : "Semisto ASBL's web and communication agency: web applications, websites, AI assistants and digital communication built with AI agents, plus fixed-price take-over and maintenance of Ruby on Rails applications.",
-  email: "team@supergenial.be",
-  founder: { "@type": "Person", name: "Michael Hulet" },
-  areaServed: { "@type": "Place", name: "Europe" },
-  knowsAbout: ["Ruby on Rails", "Rails upgrade", "Ruby upgrade", "web application maintenance", "Ubuntu server maintenance", "legacy application modernization"],
-  sameAs: ["https://www.linkedin.com/in/michaelhulet/", "https://github.com/mhulet", "https://t.me/supergenialdotbe"],
-  vatID: "BE0790631657",
-  address: { "@type": "PostalAddress", streetAddress: "Fonds d'Ahinvaux 1", postalCode: "5530", addressLocality: "Yvoir", addressCountry: "BE" },
-});
+import { orgLd as layoutOrgLd } from "../tools/site/layout.ts";
+const orgLd = (lang: "fr" | "en", _url: string) => layoutOrgLd(lang);
 
 const articleLd = (p: Page, url: string, title: string, desc: string, date: string) => ({
   "@context": "https://schema.org",
@@ -128,12 +121,13 @@ for (const p of pages) {
 
   // collecte pour sitemap / llms
   const key = p.fr;
-  byPair[key] = byPair[key] || { fr: p.fr, en: p.en, date: "2026-07-11" };
+  byPair[key] = byPair[key] || { fr: p.fr, en: p.en, date: "2026-10-21" };
   if (p.type === "article") {
     byPair[key].date = grab(html, /<meta property="article:published_time" content="([^"]*)"/) || byPair[key].date;
     byPair[key].isArticle = true;
+    if (p.fresh) byPair[key].fresh = true;
   }
-  const t = grab(html, /<title>([^<]*)<\/title>/).replace(/\s*—\s*Super Génial\s*$/, "");
+  const t = grab(html, /<title>([^<]*)<\/title>/).replace(/\s*(—|·)\s*Super Génial\s*$/, "");
   const d = grab(html, /<meta name="description" content="([^"]*)"/);
   if (p.lang === "fr") { byPair[key].titleFr = t; byPair[key].descFr = d; }
   else { byPair[key].titleEn = t; byPair[key].descEn = d; }
@@ -159,25 +153,30 @@ writeFileSync(join(ROOT, "robots.txt"), robots);
 console.log("✓ robots.txt");
 
 // ---- llms.txt (convention pour agents IA) ----
-const articles = entries.filter((e) => e.isArticle).sort((a, b) => b.date.localeCompare(a.date));
-const artLines = articles.map((e) => `- [${e.titleFr}](${BASE}${e.fr}) — ${e.descFr}`).join("\n");
+const articles = entries.filter((e) => e.isArticle && e.fresh).sort((a, b) => b.date.localeCompare(a.date));
+const guides = entries.filter((e) => e.isArticle && !e.fresh && !e.fr.startsWith("/realisations/"));
+const line = (e: any) => `- [${e.titleFr}](${BASE}${e.fr}) : ${e.descFr}`;
 const llms = `# Super Génial
 
-> Super Génial by Semisto est l'agence web et de communication de Semisto ASBL, fondée par Michael Hulet et portée par une équipe. 20 % de chaque facture financent le déploiement des forêts comestibles de Semisto. Spécialité : reprendre, mettre à niveau et maintenir des applications web vieillissantes — Ruby on Rails en priorité, mais aussi toute application web hébergée sur un VPS — ainsi que leurs serveurs Ubuntu, à prix fixe.
+> Super Génial est le service IT de Semisto ASBL. Michael Hulet, fondateur de Semisto, y construit seul, en orchestrant des agents IA, des outils internes et des agents IA sur mesure pour les entreprises à impact de 5 à 100 personnes (B Corp, coopératives, PME durables, producteurs établis) en Wallonie et à Bruxelles. Il remplace les tableurs, les tâches répétitives et les abonnements logiciels empilés. Chaque euro facturé va à Semisto ASBL, sans actionnaire.
 
-L'équipe conçoit des applications, des sites et la communication d'organisations durables avec des agents IA, et remet à niveau les applications existantes (mise à jour de framework, migration de version, durcissement serveur) sans tout casser, par paliers testés. Zone : Europe. Contact : team@supergenial.be.
+Le code source est remis au client (GitHub) ; les applications sont hébergées chez Infomaniak (Suisse) ; le modèle IA utilisé est Claude (Anthropic). Contact : team@supergenial.be. Réserver un call de 30 minutes : https://calendar.notion.so/meet/michaelhulet/supergenial
 
-## Services
-- [Communication digitale](${BASE}/communication/) : site web sobre et référencé, newsletter, réseaux sociaux et stratégie de contenu pour les organisations durables (B Corp, ONG, coopératives). Sans greenwashing, en forfaits sur devis.
-- [Maintenance & mises à jour](${BASE}/maintenance/) : reprise d'applications Rails et web vieillissantes + serveurs Ubuntu. Audit à prix fixe (490 €), mise à niveau au forfait, abonnement de maintenance dès 290 €/mois.
-- [Tarifs](${BASE}/tarifs/) : forfait de lancement, abonnement mensuel, forfaits feature — prix annoncés d'avance, jamais à l'heure.
+## Offre
+- [Diagnostic IA](${BASE}/diagnostic-ia/) : deux semaines, prix fixe 3 500 € HTVA, interviews, inventaire des tableurs et des abonnements, top 3 des opportunités chiffrées sur cinq ans ; déduit si une construction suit dans les 90 jours.
+- [Tarifs](${BASE}/tarifs/) : construction sur mesure sur devis à prix fixe ; abonnements Essentiel 390 €, Évolution 890 €, Partenaire 1 890 € par mois HTVA, sans engagement. Jamais à l'heure.
+- [Reprise d'application](${BASE}/maintenance/) : reprise, documentation et mise à niveau par paliers testés de toute application web existante (Ruby on Rails, PHP, Node, Python…), audit à prix fixe annoncé d'avance.
+- [Réalisations](${BASE}/realisations/) : études de cas présentées par problème métier.
 
-## Ressources (guides sur les fins de support et migrations)
-${artLines}
+## Ressources
+${articles.map(line).join("\n")}
+
+## Guides techniques (reprise et mise à niveau)
+${guides.map(line).join("\n")}
 
 ## À propos
-- Entité : Semisto ASBL (BCE et TVA BE 0790.631.657), Yvoir, Belgique.
-- Fondateur : Michael Hulet.
+- Entité : Semisto ASBL (BCE et TVA BE 0790.631.657), Fonds d'Ahinvaux 1, 5530 Yvoir, Belgique.
+- Mission de Semisto : transformer l'Europe en un maillage de forêts comestibles (https://www.semisto.org).
 - Site : ${BASE}/ · Version anglaise : ${BASE}/en/
 - Contact : team@supergenial.be · LinkedIn : https://www.linkedin.com/in/michaelhulet/
 `;

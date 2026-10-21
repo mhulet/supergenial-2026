@@ -55,5 +55,3 @@ User-agent: YouBot
 Allow: /
 
 Sitemap: https://www.supergenial.be/sitemap.xml
-
-Disallow: /tools/

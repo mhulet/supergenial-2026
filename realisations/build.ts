@@ -22,6 +22,7 @@ export type CaseStudy = {
   order?: number;                         // position dans la liste (à année égale)
   type: string; type_en: string;          // Site web | App interne | Newsletter…
   client: string; year: string;
+  problem: string; problem_en: string;   // le problème métier résolu, affiché en tête
   title: string; title_en: string;
   description: string; description_en: string;
   keywords: string; keywords_en: string;
@@ -36,93 +37,42 @@ export type CaseStudy = {
   body_html: string; body_html_en: string;
 };
 
-// Carte de partage commune à toutes les études de cas (générée par tools/og-card.html).
-const SITE_URL = "https://www.supergenial.be";
-const OG_IMAGE = "https://www.supergenial.be/assets/og/realisations.jpg";
-const OG_ALT = "Un ordinateur portable dessiné à l'encre, à côté d'une tasse";
+// La coquille (head, menu, pied de page, Plausible) vient de tools/site/layout.ts, source unique.
+import { head, nav, footer, langPill, sectionOf, NAV_JS, BOOKING, SITE_URL, breadcrumbLd } from "../tools/site/layout.ts";
 
 // alt : { fr, en } = chemins des deux versions, pour les liens hreflang.
-export const HEAD = (lang: string, title: string, description: string, keywords: string, canonical: string, alt: { fr: string; en: string }) => `<!DOCTYPE html>
-<html lang="${lang}">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/assets/favicon.svg">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta property="og:image" content="${OG_IMAGE}">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="${OG_ALT}">
-    <meta name="twitter:image" content="${OG_IMAGE}">
-    <title>${title}</title>
-    <meta name="author" content="Super Génial">
-    <meta name="description" content="${description}">
-    <meta name="keywords" content="${keywords}">
-    <meta property="og:title" content="${title}">
-    <meta property="og:description" content="${description}">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="${canonical}">
-    <link rel="canonical" href="${canonical}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400..600&family=Inter:wght@400..700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/site.css">
-    <link rel="alternate" hreflang="fr" href="${SITE_URL}${alt.fr}">
-    <link rel="alternate" hreflang="en" href="${SITE_URL}${alt.en}">
-    <link rel="alternate" hreflang="x-default" href="${SITE_URL}${alt.fr}">
-</head>`;
+export const HEAD = (lang: string, title: string, description: string, _keywords: string, canonical: string, alt: { fr: string; en: string }) =>
+  head({
+    lang: lang as "fr" | "en", path: canonical.replace(SITE_URL, ""), alt, title, description,
+    og: "realisations",
+    ogAlt: lang === "fr" ? "Réalisations Super Génial : des outils qui tournent tous les jours" : "Super Génial case studies: tools used every day",
+    jsonld: [breadcrumbLd([["Super Génial", lang === "fr" ? "/" : "/en/"], [lang === "fr" ? "Réalisations" : "Case studies", lang === "fr" ? "/realisations/" : "/en/case-studies/"]])],
+  });
 
-// Début du <body> : lien d'évitement + <main>. Le menu (<!--mainnav-->) est injecté par ressources/mainnav.ts.
-export const OPEN = (lang: "fr" | "en") => `<body>
+// Début du <body> : lien d'évitement, <main>, menu.
+export const OPEN = (lang: "fr" | "en", alt: { fr: string; en: string }) => `<body>
 <a class="skip-link plain" href="#contenu">${lang === "fr" ? "Aller au contenu" : "Skip to content"}</a>
-    <main id="contenu">`;
+    <main id="contenu">
+        ${nav(lang, sectionOf(alt[lang]), langPill(lang, alt))}`;
 
-// Pied de page commun du site (même HTML que les autres pages), puis le script du menu mobile est
-// ajouté par ressources/mainnav.ts.
-export const FOOT = (lang: "fr" | "en") => (lang === "fr" ? FOOT_FR : FOOT_EN) + `
+// Pied de page commun, puis le script du menu mobile.
+export const FOOT = (lang: "fr" | "en") => `        ${footer(lang)}
     </main>
+${NAV_JS}
 </body>
 </html>
 `;
 
-const FOOT_FR = `            <footer class="site-foot">
-            <nav class="foot-nav" aria-label="Pied de page">
-                <a href="/" class="plain">Accueil</a>
-                <a href="/diagnostic-ia/" class="plain">Diagnostic IA</a>
-                <a href="/communication/" class="plain">Communication</a>
-                <a href="/tarifs/" class="plain">Tarifs</a>
-                <a href="/maintenance/" class="plain">Maintenance</a>
-                <a href="/realisations/" class="plain">Réalisations</a>
-                <a href="/ressources/" class="plain">Ressources</a>
-                <a href="/mentions-legales/" class="plain">Mentions légales</a>
-            </nav>
-            <p class="foot-legal">Super Génial by Semisto est l'agence web et de communication de <strong>Semisto ASBL</strong>, association sans but lucratif de droit belge. 20&nbsp;% de chaque facture financent le déploiement des forêts comestibles de <a href="https://www.semisto.org" target="_blank" rel="noopener noreferrer">Semisto</a>. Numéro d'entreprise et de TVA&nbsp;: BE&nbsp;0790.631.657. Siège&nbsp;: Fonds d'Ahinvaux 1, 5530 Yvoir, Belgique. Contact&nbsp;: <a href="mailto:team@supergenial.be">team@supergenial.be</a>. Éditeur responsable&nbsp;: Michael Hulet.</p>
-            <div class="foot-social">
-            <a href="https://www.linkedin.com/in/michaelhulet/" rel="noopener noreferrer" target="_blank" aria-label="LinkedIn"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm7 0h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.5c0-1.31-.02-3-1.83-3-1.83 0-2.11 1.43-2.11 2.9V21h-4V9Z"/></svg></a>
-            <a href="https://github.com/mhulet" rel="noopener noreferrer" target="_blank" aria-label="GitHub"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.09.66-.22.66-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.16.58.67.48A10 10 0 0 0 22 12c0-5.52-4.48-10-10-10Z"/></svg></a>
-            <a href="https://t.me/supergenialdotbe" rel="noopener noreferrer" target="_blank" aria-label="Telegram"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.6 4.3 18.5 19c-.2 1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.3-4.9 8.9-8c.4-.3-.1-.5-.6-.2L5.9 13 1.1 11.5c-1-.3-1-1 .2-1.5l19-7.3c.9-.3 1.6.2 1.3 1.6Z"/></svg></a>
-        </div>
-        </footer>`;
-
-const FOOT_EN = `            <footer class="site-foot">
-            <nav class="foot-nav" aria-label="Footer">
-                <a href="/en/" class="plain">Home</a>
-                <a href="/en/ai-assessment/" class="plain">AI Assessment</a>
-                <a href="/en/communication/" class="plain">Communication</a>
-                <a href="/en/pricing/" class="plain">Pricing</a>
-                <a href="/en/maintenance/" class="plain">Maintenance</a>
-                <a href="/en/case-studies/" class="plain">Case studies</a>
-                <a href="/en/resources/" class="plain">Resources</a>
-                <a href="/en/legal/" class="plain">Legal notice</a>
-            </nav>
-            <p class="foot-legal">Super Génial by Semisto is the web and communication agency of <strong>Semisto ASBL</strong>, a Belgian non-profit association. 20% of every invoice funds the spread of <a href="https://www.semisto.org" target="_blank" rel="noopener noreferrer">Semisto</a>'s edible forests. Company and VAT number: BE&nbsp;0790.631.657. Registered office: Fonds d'Ahinvaux 1, 5530 Yvoir, Belgium. Contact: <a href="mailto:team@supergenial.be">team@supergenial.be</a>. Publisher: Michael Hulet.</p>
-            <div class="foot-social">
-            <a href="https://www.linkedin.com/in/michaelhulet/" rel="noopener noreferrer" target="_blank" aria-label="LinkedIn"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm7 0h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.5c0-1.31-.02-3-1.83-3-1.83 0-2.11 1.43-2.11 2.9V21h-4V9Z"/></svg></a>
-            <a href="https://github.com/mhulet" rel="noopener noreferrer" target="_blank" aria-label="GitHub"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.09.66-.22.66-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.16.58.67.48A10 10 0 0 0 22 12c0-5.52-4.48-10-10-10Z"/></svg></a>
-            <a href="https://t.me/supergenialdotbe" rel="noopener noreferrer" target="_blank" aria-label="Telegram"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.6 4.3 18.5 19c-.2 1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.3-4.9 8.9-8c.4-.3-.1-.5-.6-.2L5.9 13 1.1 11.5c-1-.3-1-1 .2-1.5l19-7.3c.9-.3 1.6.2 1.3 1.6Z"/></svg></a>
-        </div>
-        </footer>`;
+// Encadré de fin d'étude de cas : le call de 30 minutes.
+export const CTA = (lang: "fr" | "en") => lang === "fr"
+  ? `            <div class="cta-box animate delay-3">
+                <p>Un problème du même genre chez vous&nbsp;? Parlons-en trente minutes.</p>
+                <div class="actions"><a href="${BOOKING.fr}" class="btn btn-primary plain" data-booking target="_blank" rel="noopener noreferrer">Réserver un call de 30 minutes <span class="arr">→</span></a><a href="/diagnostic-ia/" class="link-arrow plain">Le Diagnostic IA →</a></div>
+            </div>`
+  : `            <div class="cta-box animate delay-3">
+                <p>A similar problem on your side? Let's talk for thirty minutes.</p>
+                <div class="actions"><a href="${BOOKING.en}" class="btn btn-primary plain" data-booking target="_blank" rel="noopener noreferrer">Book a 30-minute call <span class="arr">→</span></a><a href="/en/ai-assessment/" class="link-arrow plain">The AI Assessment →</a></div>
+            </div>`;
 
 export const alt = (c: CaseStudy) => ({ fr: `/realisations/${c.slug}/`, en: `/en/case-studies/${c.slug_en}/` });
 export const INDEX_ALT = { fr: "/realisations/", en: "/en/case-studies/" };
@@ -204,19 +154,18 @@ function casePage(c: CaseStudy): string {
   const canonical = `https://www.supergenial.be/realisations/${c.slug}/`;
   const live = c.url_live ? ` · <a href="${c.url_live}" target="_blank" rel="noopener noreferrer">Voir le site</a>` : "";
   const stack = c.stack.map((s) => `<span class="stack-tag">${s}</span>`).join(" ");
-  return `${HEAD("fr", c.title + " — Super Génial", c.description, c.keywords, canonical, alt(c))}
-${OPEN("fr")}
+  return `${HEAD("fr", c.title + " · Super Génial", c.description, c.keywords, canonical, alt(c))}
+${OPEN("fr", alt(c))}
         <article>
+            <p class="eyebrow"><a href="/realisations/" class="plain">Réalisations</a></p>
             <h1 class="animate delay-1">${c.title}</h1>
+            <p class="case-problem">Le problème&nbsp;: ${c.problem.charAt(0).toLowerCase() + c.problem.slice(1)}.</p>
             <p class="case-meta animate delay-2"><span>${c.type}</span><span>${c.client} · ${c.year}${live}</span><span>${stack}</span></p>
 ${figures(c)}
             <div class="article-body animate delay-3">
                 ${c.body_html}
             </div>${carouselSection(c, "fr")}
-            <div class="cta-box animate delay-3">
-                <p>Un projet similaire en tête ?</p>
-                <a href="/tarifs/" class="cta-btn">Voir nos tarifs <span>→</span></a>
-            </div>
+${CTA("fr")}
         </article>
 ${FOOT("fr")}`;
 }
@@ -226,24 +175,24 @@ function indexPage(cases: CaseStudy[]): string {
   const items = cases.map((c) => {
     const thumb = c.images[0] ? `                    <img class="case-thumb" src="${c.images[0].src}" alt="${c.images[0].alt}" loading="lazy">\n` : "";
     return `                <a href="/realisations/${c.slug}/" class="case-item plain">
-${thumb}                    <div class="a-type">${c.type} · ${c.year}</div>
+${thumb}                    <div class="a-type">${c.type} · ${c.client} · ${c.year}</div>
+                    <div class="a-problem">${c.problem}</div>
                     <div class="a-title">${c.title}</div>
-                    <div class="a-desc">${c.description}</div>
                 </a>`;
   }).join("\n");
-  return `${HEAD("fr", "Réalisations — Super Génial", "Études de cas : sites web, applications internes et newsletters conçus avec des agents IA.", "réalisations, études de cas, portfolio, application web, site web, agents IA", canonical, INDEX_ALT)}
-${OPEN("fr")}
-        <h1 class="animate delay-1">Réalisations</h1>
-        <p class="subtitle">Du brief au site en ligne.</p>
+  return `${HEAD("fr", "Réalisations : des outils en production · Super Génial", "Études de cas : outils internes, applications de gestion et sites conçus avec des agents IA, présentés par le problème métier qu'ils résolvent.", "réalisations, études de cas, outil interne, application de gestion, agents IA", canonical, INDEX_ALT)}
+${OPEN("fr", INDEX_ALT)}
+        <p class="eyebrow">Réalisations</p>
+        <h1 class="animate delay-1">Des outils qui tournent tous les jours.</h1>
         <p class="intro animate delay-3">
-            Quelques projets récents de notre équipe — sites web, applications internes, newsletters —
-            conçus avec des agents IA, de l'architecture au déploiement.
-            Envie du vôtre ? <a href="/tarifs/">Voyons les tarifs</a>.
+            Chaque projet est présenté par le problème qu'il résout. Je les ai conçus avec des agents IA,
+            de la spécification à la mise en ligne, et la plupart servent d'abord mes propres structures&nbsp;:
+            je construis pour moi avant de proposer aux autres.
         </p>
         <div class="article-list animate delay-3">
 ${items}
         </div>
-        <p class="footnote">D'autres études de cas arrivent. Une question ? <a href="mailto:team@supergenial.be">team@supergenial.be</a></p>
+${CTA("fr")}
 ${FOOT("fr")}`;
 }
 
