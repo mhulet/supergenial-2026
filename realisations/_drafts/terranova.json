@@ -1,6 +1,7 @@
 {
   "slug": "terranova",
   "slug_en": "terranova",
+  "order": 4,
   "type": "Plateforme collaborative",
   "type_en": "Collaboration platform",
   "client": "Semisto",

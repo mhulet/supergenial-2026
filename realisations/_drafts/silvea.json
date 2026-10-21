@@ -1,6 +1,7 @@
 {
   "slug": "silvea",
   "slug_en": "silvea",
+  "order": 3,
   "type": "Site web",
   "type_en": "Website",
   "client": "Silvéa ASBL",

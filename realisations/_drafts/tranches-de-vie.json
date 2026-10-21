@@ -1,6 +1,7 @@
 {
   "slug": "tranches-de-vie",
   "slug_en": "tranches-de-vie",
+  "order": 1,
   "type": "Application e-commerce",
   "type_en": "E-commerce application",
   "client": "Tranches de Vie · Les 4 Sources",

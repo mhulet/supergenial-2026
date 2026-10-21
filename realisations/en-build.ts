@@ -5,7 +5,7 @@
 
 import { writeFileSync, mkdirSync } from "node:fs";
 import { join, dirname } from "node:path";
-import { HEAD, GLOW, loadCases, carouselSection, type CaseStudy } from "./build.ts";
+import { HEAD, OPEN, FOOT, alt, INDEX_ALT, loadCases, carouselSection, type CaseStudy } from "./build.ts";
 
 const ROOT = dirname(new URL(import.meta.url).pathname);      // .../realisations
 const SITE = dirname(ROOT);                                   // repo root
@@ -22,11 +22,8 @@ function casePage(c: CaseStudy): string {
   const canonical = `https://www.supergenial.be/en/case-studies/${c.slug_en}/`;
   const live = c.url_live ? ` · <a href="${c.url_live}" target="_blank" rel="noopener noreferrer">Visit the site</a>` : "";
   const stack = c.stack.map((s) => `<span class="stack-tag">${s}</span>`).join(" ");
-  return `${HEAD("en", c.title_en + " — Super Génial", c.description_en, c.keywords_en, canonical)}
-<body>
-    ${GLOW}
-    <main>
-        <a href="/en/case-studies/" class="back-link plain">← All case studies</a>
+  return `${HEAD("en", c.title_en + " — Super Génial", c.description_en, c.keywords_en, canonical, alt(c))}
+${OPEN("en")}
         <article>
             <h1 class="animate delay-1">${c.title_en}</h1>
             <p class="case-meta animate delay-2"><span>${c.type_en}</span><span>${c.client} · ${c.year}${live}</span><span>${stack}</span></p>
@@ -39,10 +36,7 @@ ${figures(c)}
                 <a href="/en/pricing/" class="cta-btn">See our pricing <span>→</span></a>
             </div>
         </article>
-    </main>
-</body>
-</html>
-`;
+${FOOT("en")}`;
 }
 
 function indexPage(cases: CaseStudy[]): string {
@@ -55,11 +49,8 @@ ${thumb}                    <div class="a-type">${c.type_en} · ${c.year}</div>
                     <div class="a-desc">${c.description_en}</div>
                 </a>`;
   }).join("\n");
-  return `${HEAD("en", "Case studies — Super Génial", "Case studies: websites, internal apps and newsletters built with AI agents.", "case studies, portfolio, web application, website, AI agents", canonical)}
-<body>
-    ${GLOW}
-    <main>
-        <a href="/en/" class="back-link plain">← Super Génial</a>
+  return `${HEAD("en", "Case studies — Super Génial", "Case studies: websites, internal apps and newsletters built with AI agents.", "case studies, portfolio, web application, website, AI agents", canonical, INDEX_ALT)}
+${OPEN("en")}
         <h1 class="animate delay-1">Case studies</h1>
         <p class="subtitle">From brief to live site.</p>
         <p class="intro animate delay-3">
@@ -71,10 +62,7 @@ ${thumb}                    <div class="a-type">${c.type_en} · ${c.year}</div>
 ${items}
         </div>
         <p class="footnote">More case studies coming. A question? <a href="mailto:team@supergenial.be">team@supergenial.be</a></p>
-    </main>
-</body>
-</html>
-`;
+${FOOT("en")}`;
 }
 
 // ---- Build ----

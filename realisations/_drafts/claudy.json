@@ -1,6 +1,7 @@
 {
   "slug": "claudy",
   "slug_en": "claudy",
+  "order": 2,
   "type": "Application de gestion",
   "type_en": "Management application",
   "client": "Les 4 Sources",

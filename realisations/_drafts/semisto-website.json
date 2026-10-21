@@ -1,6 +1,7 @@
 {
   "slug": "site-semisto",
   "slug_en": "site-semisto",
+  "order": 5,
   "type": "Site web",
   "type_en": "Website",
   "client": "Semisto",

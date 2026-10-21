@@ -2,6 +2,8 @@
 // Usage : bun realisations/build.ts
 // Les drafts (_drafts/*.json) sont la SOURCE VERSIONNÉE — ils ne sont jamais supprimés.
 // POST-BUILD : bun realisations/en-build.ts puis bun ressources/langswitch.ts et bun ressources/mainnav.ts
+// Les pages sortent avec la coquille du site (site.css, favicon, carte de partage, hreflang,
+// lien d'évitement, pied de page) : le pipeline complet ne doit laisser aucun diff.
 
 import { readdirSync, readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { join, dirname } from "node:path";
@@ -17,6 +19,7 @@ export type CaseImage = {
 
 export type CaseStudy = {
   slug: string; slug_en: string;
+  order?: number;                         // position dans la liste (à année égale)
   type: string; type_en: string;          // Site web | App interne | Newsletter…
   client: string; year: string;
   title: string; title_en: string;
@@ -33,71 +36,25 @@ export type CaseStudy = {
   body_html: string; body_html_en: string;
 };
 
-const BASE_CSS = readFileSync(join(SITE, "ressources", "_css.txt"), "utf8");
+// Carte de partage commune à toutes les études de cas (générée par tools/og-card.html).
+const SITE_URL = "https://www.supergenial.be";
+const OG_IMAGE = "https://www.supergenial.be/assets/og/realisations.jpg";
+const OG_ALT = "Un ordinateur portable dessiné à l'encre, à côté d'une tasse";
 
-export const EXTRA_CSS = `
-/* Réalisations */
-.case-meta { display: flex; flex-wrap: wrap; gap: 0.4rem 1.2rem; font-size: 14px; color: var(--text-secondary); margin-bottom: 2.5rem; }
-.case-meta .stack-tag {
-    display: inline-flex; padding: 0.1rem 0.6rem; border-radius: 999px;
-    border: 1px solid var(--card-border); background: var(--soft-bg); font-size: 12.5px;
-}
-.case-figure { margin: 2rem 0; }
-.case-figure img {
-    display: block; width: 100%; max-width: 100%; height: auto;
-    border: 1px solid var(--card-border); border-radius: 16px;
-}
-.case-figure figcaption { font-size: 13.5px; color: var(--text-secondary); margin-top: 0.6rem; }
-/* Carousel de screenshots */
-.case-carousel { margin: 1.5rem 0 0.5rem; }
-.case-carousel-track {
-    display: flex; gap: 1rem; overflow-x: auto;
-    scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
-    scrollbar-width: none; border-radius: 16px;
-}
-.case-carousel-track::-webkit-scrollbar { display: none; }
-.case-carousel-slide { flex: 0 0 100%; scroll-snap-align: start; }
-.case-carousel-slide img {
-    display: block; width: 100%; height: auto;
-    border: 1px solid var(--card-border); border-radius: 16px;
-}
-.case-carousel-slide figcaption { font-size: 13.5px; color: var(--text-secondary); margin-top: 0.6rem; }
-.case-carousel-nav { display: flex; align-items: center; gap: 0.9rem; margin-top: 0.9rem; }
-.case-carousel-btn {
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 38px; height: 38px; border-radius: 999px;
-    border: 1px solid var(--card-border); background: var(--soft-bg);
-    color: var(--text-primary); font-size: 19px; line-height: 1;
-    cursor: pointer; transition: transform 0.15s ease, border-color 0.15s ease;
-}
-.case-carousel-btn:hover { transform: translateY(-1px); border-color: var(--text-secondary); }
-.case-carousel-count { font-size: 13.5px; color: var(--text-secondary); min-width: 3.2em; text-align: center; font-variant-numeric: tabular-nums; }
-.case-carousel-dots { display: flex; gap: 0.45rem; margin-left: auto; flex-wrap: wrap; }
-.case-carousel-dot {
-    width: 8px; height: 8px; border-radius: 999px; padding: 0; border: none;
-    background: var(--card-border); cursor: pointer; transition: background 0.15s ease, transform 0.15s ease;
-}
-.case-carousel-dot[aria-current="true"] { background: var(--accent-1); transform: scale(1.25); }
-/* Index des réalisations */
-.case-item { display: block; padding: 1.75rem 0; border-bottom: 1px solid var(--card-border); transition: padding-left 0.2s ease; }
-.case-item:hover { padding-left: 0.4rem; }
-.case-item:hover .a-title { color: var(--link-hover); }
-.case-thumb {
-    display: block; width: 100%; height: auto; margin-bottom: 1rem;
-    border: 1px solid var(--card-border); border-radius: 16px;
-}
-.case-item .a-type { font-size: 13px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.06em; }
-.case-item .a-title { font-size: 19px; font-weight: 600; margin: 0.3rem 0; letter-spacing: -0.01em; color: inherit; }
-.case-item .a-desc { font-size: 15px; color: var(--text-secondary); }
-`;
-
-export const CSS = BASE_CSS + EXTRA_CSS;
-
-export const HEAD = (lang: string, title: string, description: string, keywords: string, canonical: string, extraOg = "") => `<!DOCTYPE html>
+// alt : { fr, en } = chemins des deux versions, pour les liens hreflang.
+export const HEAD = (lang: string, title: string, description: string, keywords: string, canonical: string, alt: { fr: string; en: string }) => `<!DOCTYPE html>
 <html lang="${lang}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/assets/favicon.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:image" content="${OG_IMAGE}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="${OG_ALT}">
+    <meta name="twitter:image" content="${OG_IMAGE}">
     <title>${title}</title>
     <meta name="author" content="Super Génial">
     <meta name="description" content="${description}">
@@ -106,29 +63,76 @@ export const HEAD = (lang: string, title: string, description: string, keywords:
     <meta property="og:description" content="${description}">
     <meta property="og:type" content="website">
     <meta property="og:url" content="${canonical}">
-    <link rel="canonical" href="${canonical}">${extraOg}
+    <link rel="canonical" href="${canonical}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400..600&family=Inter:wght@400..700&display=swap" rel="stylesheet">
-    <style>${CSS}</style>
+    <link rel="stylesheet" href="/assets/css/site.css">
+    <link rel="alternate" hreflang="fr" href="${SITE_URL}${alt.fr}">
+    <link rel="alternate" hreflang="en" href="${SITE_URL}${alt.en}">
+    <link rel="alternate" hreflang="x-default" href="${SITE_URL}${alt.fr}">
 </head>`;
 
-export const GLOW = `
-<div class="cursor-glow" id="cursorGlow"></div>
-<script>
-const glow = document.getElementById('cursorGlow');
-let mx=0,my=0,gx=0,gy=0;
-window.addEventListener('mousemove',(e)=>{mx=e.clientX;my=e.clientY;glow.classList.add('visible');});
-window.addEventListener('mouseleave',()=>glow.classList.remove('visible'));
-(function a(){gx+=(mx-gx)*0.1;gy+=(my-gy)*0.1;glow.style.left=gx+'px';glow.style.top=gy+'px';requestAnimationFrame(a);})();
-</script>`;
+// Début du <body> : lien d'évitement + <main>. Le menu (<!--mainnav-->) est injecté par ressources/mainnav.ts.
+export const OPEN = (lang: "fr" | "en") => `<body>
+<a class="skip-link plain" href="#contenu">${lang === "fr" ? "Aller au contenu" : "Skip to content"}</a>
+    <main id="contenu">`;
+
+// Pied de page commun du site (même HTML que les autres pages), puis le script du menu mobile est
+// ajouté par ressources/mainnav.ts.
+export const FOOT = (lang: "fr" | "en") => (lang === "fr" ? FOOT_FR : FOOT_EN) + `
+    </main>
+</body>
+</html>
+`;
+
+const FOOT_FR = `            <footer class="site-foot">
+            <nav class="foot-nav" aria-label="Pied de page">
+                <a href="/" class="plain">Accueil</a>
+                <a href="/diagnostic-ia/" class="plain">Diagnostic IA</a>
+                <a href="/communication/" class="plain">Communication</a>
+                <a href="/tarifs/" class="plain">Tarifs</a>
+                <a href="/maintenance/" class="plain">Maintenance</a>
+                <a href="/realisations/" class="plain">Réalisations</a>
+                <a href="/ressources/" class="plain">Ressources</a>
+                <a href="/mentions-legales/" class="plain">Mentions légales</a>
+            </nav>
+            <p class="foot-legal">Super Génial by Semisto est l'agence web et de communication de <strong>Semisto ASBL</strong>, association sans but lucratif de droit belge. 20&nbsp;% de chaque facture financent le déploiement des forêts comestibles de <a href="https://www.semisto.org" target="_blank" rel="noopener noreferrer">Semisto</a>. Numéro d'entreprise et de TVA&nbsp;: BE&nbsp;0790.631.657. Siège&nbsp;: Fonds d'Ahinvaux 1, 5530 Yvoir, Belgique. Contact&nbsp;: <a href="mailto:team@supergenial.be">team@supergenial.be</a>. Éditeur responsable&nbsp;: Michael Hulet.</p>
+            <div class="foot-social">
+            <a href="https://www.linkedin.com/in/michaelhulet/" rel="noopener noreferrer" target="_blank" aria-label="LinkedIn"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm7 0h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.5c0-1.31-.02-3-1.83-3-1.83 0-2.11 1.43-2.11 2.9V21h-4V9Z"/></svg></a>
+            <a href="https://github.com/mhulet" rel="noopener noreferrer" target="_blank" aria-label="GitHub"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.09.66-.22.66-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.16.58.67.48A10 10 0 0 0 22 12c0-5.52-4.48-10-10-10Z"/></svg></a>
+            <a href="https://t.me/supergenialdotbe" rel="noopener noreferrer" target="_blank" aria-label="Telegram"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.6 4.3 18.5 19c-.2 1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.3-4.9 8.9-8c.4-.3-.1-.5-.6-.2L5.9 13 1.1 11.5c-1-.3-1-1 .2-1.5l19-7.3c.9-.3 1.6.2 1.3 1.6Z"/></svg></a>
+        </div>
+        </footer>`;
+
+const FOOT_EN = `            <footer class="site-foot">
+            <nav class="foot-nav" aria-label="Footer">
+                <a href="/en/" class="plain">Home</a>
+                <a href="/en/ai-assessment/" class="plain">AI Assessment</a>
+                <a href="/en/communication/" class="plain">Communication</a>
+                <a href="/en/pricing/" class="plain">Pricing</a>
+                <a href="/en/maintenance/" class="plain">Maintenance</a>
+                <a href="/en/case-studies/" class="plain">Case studies</a>
+                <a href="/en/resources/" class="plain">Resources</a>
+                <a href="/en/legal/" class="plain">Legal notice</a>
+            </nav>
+            <p class="foot-legal">Super Génial by Semisto is the web and communication agency of <strong>Semisto ASBL</strong>, a Belgian non-profit association. 20% of every invoice funds the spread of <a href="https://www.semisto.org" target="_blank" rel="noopener noreferrer">Semisto</a>'s edible forests. Company and VAT number: BE&nbsp;0790.631.657. Registered office: Fonds d'Ahinvaux 1, 5530 Yvoir, Belgium. Contact: <a href="mailto:team@supergenial.be">team@supergenial.be</a>. Publisher: Michael Hulet.</p>
+            <div class="foot-social">
+            <a href="https://www.linkedin.com/in/michaelhulet/" rel="noopener noreferrer" target="_blank" aria-label="LinkedIn"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm7 0h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.5c0-1.31-.02-3-1.83-3-1.83 0-2.11 1.43-2.11 2.9V21h-4V9Z"/></svg></a>
+            <a href="https://github.com/mhulet" rel="noopener noreferrer" target="_blank" aria-label="GitHub"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.09.66-.22.66-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.16.58.67.48A10 10 0 0 0 22 12c0-5.52-4.48-10-10-10Z"/></svg></a>
+            <a href="https://t.me/supergenialdotbe" rel="noopener noreferrer" target="_blank" aria-label="Telegram"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.6 4.3 18.5 19c-.2 1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.3-4.9 8.9-8c.4-.3-.1-.5-.6-.2L5.9 13 1.1 11.5c-1-.3-1-1 .2-1.5l19-7.3c.9-.3 1.6.2 1.3 1.6Z"/></svg></a>
+        </div>
+        </footer>`;
+
+export const alt = (c: CaseStudy) => ({ fr: `/realisations/${c.slug}/`, en: `/en/case-studies/${c.slug_en}/` });
+export const INDEX_ALT = { fr: "/realisations/", en: "/en/case-studies/" };
 
 export function loadCases(): CaseStudy[] {
   const files = readdirSync(DRAFTS).filter((f) => f.endsWith(".json"));
   if (files.length === 0) { console.error("Aucun draft trouvé dans _drafts/"); process.exit(1); }
   return files
     .map((f) => JSON.parse(readFileSync(join(DRAFTS, f), "utf8")) as CaseStudy)
-    .sort((a, b) => b.year.localeCompare(a.year));
+    .sort((a, b) => b.year.localeCompare(a.year) || (a.order ?? 99) - (b.order ?? 99));
 }
 
 // Carousel de screenshots — vanilla JS inline, aucune dépendance (CSP stricte).
@@ -200,11 +204,8 @@ function casePage(c: CaseStudy): string {
   const canonical = `https://www.supergenial.be/realisations/${c.slug}/`;
   const live = c.url_live ? ` · <a href="${c.url_live}" target="_blank" rel="noopener noreferrer">Voir le site</a>` : "";
   const stack = c.stack.map((s) => `<span class="stack-tag">${s}</span>`).join(" ");
-  return `${HEAD("fr", c.title + " — Super Génial", c.description, c.keywords, canonical)}
-<body>
-    ${GLOW}
-    <main>
-        <a href="/realisations/" class="back-link plain">← Toutes les réalisations</a>
+  return `${HEAD("fr", c.title + " — Super Génial", c.description, c.keywords, canonical, alt(c))}
+${OPEN("fr")}
         <article>
             <h1 class="animate delay-1">${c.title}</h1>
             <p class="case-meta animate delay-2"><span>${c.type}</span><span>${c.client} · ${c.year}${live}</span><span>${stack}</span></p>
@@ -217,10 +218,7 @@ ${figures(c)}
                 <a href="/tarifs/" class="cta-btn">Voir nos tarifs <span>→</span></a>
             </div>
         </article>
-    </main>
-</body>
-</html>
-`;
+${FOOT("fr")}`;
 }
 
 function indexPage(cases: CaseStudy[]): string {
@@ -233,11 +231,8 @@ ${thumb}                    <div class="a-type">${c.type} · ${c.year}</div>
                     <div class="a-desc">${c.description}</div>
                 </a>`;
   }).join("\n");
-  return `${HEAD("fr", "Réalisations — Super Génial", "Études de cas : sites web, applications internes et newsletters conçus avec des agents IA.", "réalisations, études de cas, portfolio, application web, site web, agents IA", canonical)}
-<body>
-    ${GLOW}
-    <main>
-        <a href="/" class="back-link plain">← Super Génial</a>
+  return `${HEAD("fr", "Réalisations — Super Génial", "Études de cas : sites web, applications internes et newsletters conçus avec des agents IA.", "réalisations, études de cas, portfolio, application web, site web, agents IA", canonical, INDEX_ALT)}
+${OPEN("fr")}
         <h1 class="animate delay-1">Réalisations</h1>
         <p class="subtitle">Du brief au site en ligne.</p>
         <p class="intro animate delay-3">
@@ -249,10 +244,7 @@ ${thumb}                    <div class="a-type">${c.type} · ${c.year}</div>
 ${items}
         </div>
         <p class="footnote">D'autres études de cas arrivent. Une question ? <a href="mailto:team@supergenial.be">team@supergenial.be</a></p>
-    </main>
-</body>
-</html>
-`;
+${FOOT("fr")}`;
 }
 
 // ---- Build ----
