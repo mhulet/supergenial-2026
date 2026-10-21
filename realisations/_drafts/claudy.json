@@ -1,9 +1,12 @@
 {
   "slug": "claudy",
   "slug_en": "claudy",
+  "order": 2,
   "type": "Application de gestion",
   "type_en": "Management application",
   "client": "Les 4 Sources",
+  "problem": "Réunir réservations, paiements, reporting et vie collective d'un tiers-lieu dans un seul outil",
+  "problem_en": "Bringing bookings, payments, reporting and community life of a shared estate into one tool",
   "year": "2026",
   "title": "Claudy — l'application qui fait tourner un tiers-lieu de 15 hectares",
   "title_en": "Claudy — the app that runs a 15-hectare community estate",
@@ -11,7 +14,14 @@
   "description_en": "The in-house application of the Les 4 Sources collective: lodge and venue bookings, passwordless guest pages, financial reporting, gathering governance and member workload — the whole estate in one app.",
   "keywords": "étude de cas, application de gestion, tiers-lieu, réservations, Ruby on Rails, Hotwire, agents IA, gouvernance collective",
   "keywords_en": "case study, management application, community estate, bookings, Ruby on Rails, Hotwire, AI agents, collective governance",
-  "stack": ["Rails 7", "Hotwire", "Vite", "Tailwind CSS", "Stripe", "PostgreSQL"],
+  "stack": [
+    "Rails 7",
+    "Hotwire",
+    "Vite",
+    "Tailwind CSS",
+    "Stripe",
+    "PostgreSQL"
+  ],
   "images": [
     {
       "src": "/assets/realisations/claudy/calendrier.webp",

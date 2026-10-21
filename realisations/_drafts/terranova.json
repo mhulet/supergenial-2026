@@ -1,9 +1,12 @@
 {
   "slug": "terranova",
   "slug_en": "terranova",
+  "order": 4,
   "type": "Plateforme collaborative",
   "type_en": "Collaboration platform",
   "client": "Semisto",
+  "problem": "Coordonner les projets de plusieurs équipes dans un outil taillé pour leur métier, plutôt qu'un logiciel générique",
+  "problem_en": "Coordinating several teams' projects in a tool built for their work, rather than generic software",
   "year": "2026",
   "title": "Terranova — un Basecamp sur mesure pour les Semisto Hubs",
   "title_en": "Terranova — a tailor-made Basecamp for the Semisto Hubs",
@@ -11,7 +14,14 @@
   "description_en": "Semisto's multi-hub platform: projects, messages, to-dos with hill charts, chat, calendar, plant palettes and an AI member — a greenfield rewrite inspired by Basecamp, tailored for food forests.",
   "keywords": "étude de cas, plateforme collaborative, multi-tenant, Ruby on Rails, Hotwire, Basecamp, hill chart, agents IA, forêts comestibles",
   "keywords_en": "case study, collaboration platform, multi-tenant, Ruby on Rails, Hotwire, Basecamp, hill chart, AI agents, food forests",
-  "stack": ["Rails 8.1", "Hotwire", "Tailwind CSS 4", "PostgreSQL", "Solid Queue", "PWA"],
+  "stack": [
+    "Rails 8.1",
+    "Hotwire",
+    "Tailwind CSS 4",
+    "PostgreSQL",
+    "Solid Queue",
+    "PWA"
+  ],
   "images": [
     {
       "src": "/assets/realisations/terranova/projets.webp",

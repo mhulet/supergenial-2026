@@ -1,9 +1,12 @@
 {
   "slug": "silvea",
   "slug_en": "silvea",
+  "order": 3,
   "type": "Site web",
   "type_en": "Website",
   "client": "Silvéa ASBL",
+  "problem": "Publier ses activités, encaisser les inscriptions et gérer son site sans dépendre d'un développeur",
+  "problem_en": "Publishing activities, taking paid registrations and running the site without depending on a developer",
   "year": "2026",
   "title": "Silvéa — santé et connexion au vivant",
   "title_en": "Silvéa — health and connection to the living world",
@@ -12,7 +15,13 @@
   "keywords": "étude de cas, site web ASBL, Ruby on Rails, Inertia, React, Stripe, agents IA",
   "keywords_en": "case study, non-profit website, Ruby on Rails, Inertia, React, Stripe, AI agents",
   "url_live": "https://www.silvea.org",
-  "stack": ["Rails 8", "Inertia + React", "TypeScript", "Tailwind CSS", "Stripe"],
+  "stack": [
+    "Rails 8",
+    "Inertia + React",
+    "TypeScript",
+    "Tailwind CSS",
+    "Stripe"
+  ],
   "images": [
     {
       "src": "/assets/realisations/silvea/home.webp",

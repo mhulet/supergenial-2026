@@ -34,6 +34,7 @@ const CASE_SLUGS: Record<string, string> = {
 const PAIRS: Record<string, { fr: string; en: string }> = {
   home: { fr: "/", en: "/en/" },
   maintenance: { fr: "/maintenance/", en: "/en/maintenance/" },
+  communication: { fr: "/communication/", en: "/en/communication/" },
   pricing: { fr: "/tarifs/", en: "/en/pricing/" },
   diagnostic: { fr: "/diagnostic-ia/", en: "/en/ai-assessment/" },
   resources: { fr: "/ressources/", en: "/en/resources/" },
@@ -117,8 +118,8 @@ for (const pg of pages) {
       // barre : back-link à gauche, toggle à droite
       html = html.replace(backlink[0], `<div class="topbar">${backlink[0]}${p}</div>`);
     } else {
-      // pas de back-link (accueil) : toggle seul, aligné à droite, après <main>
-      html = html.replace(/<main>/, `<main>\n        <div class="topbar topbar--end">${p}</div>`);
+      // pas de back-link (accueil, réalisations) : toggle seul, aligné à droite, après <main>
+      html = html.replace(/<main( id="contenu")?>/, (m) => `${m}\n        <div class="topbar topbar--end">${p}</div>`);
     }
   }
 

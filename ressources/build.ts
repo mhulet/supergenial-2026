@@ -35,7 +35,7 @@ const HEAD = (title: string, description: string, keywords: string, canonical: s
     <link rel="canonical" href="${canonical}">${extraOg}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400..600&family=Inter:wght@400..700&display=swap" rel="stylesheet">
     <style>${CSS}</style>
 </head>`;
 
@@ -46,13 +46,6 @@ const CSS = `
     --link-underline: #a3a3a3; --link-hover: #000000;
     --accent-1: #6366f1; --accent-2: #8b5cf6; --glow: rgba(99, 102, 241, 0.15);
     --card-bg: #ffffff; --card-border: #e5e5e5; --soft-bg: #f5f5f5;
-}
-@media (prefers-color-scheme: dark) {
-    :root {
-        --bg: #0a0a0a; --text-primary: #ededed; --text-secondary: #a3a3a3;
-        --link-underline: #525252; --link-hover: #ffffff; --glow: rgba(139, 92, 246, 0.1);
-        --card-bg: #111111; --card-border: #262626; --soft-bg: #141414;
-    }
 }
 body::before {
     content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -138,7 +131,6 @@ a:hover { color: var(--link-hover); }
 .article-item:hover .a-title { color: var(--link-hover); }
 .footnote { margin-top: 3rem; font-size: 13px; color: var(--text-secondary); }
 .illu-article { display: block; margin: 1.5rem auto 2rem; max-width: min(340px, 75%); height: auto; }
-@media (prefers-color-scheme: dark) { .illu-article { filter: invert(1) hue-rotate(180deg); } }
 @media (prefers-reduced-motion: reduce) { .animate, .subtitle { animation: none; opacity: 1; } }
 `;
 
@@ -201,7 +193,7 @@ function indexPage(articles: Article[]): string {
         <div class="article-list animate delay-3">
 ${items}
         </div>
-        <p class="footnote">Nouveaux articles régulièrement. Une question précise ? <a href="mailto:team@supergenial.be">team@supergenial.be</a></p>
+        <p class="footnote">Nouveaux articles régulièrement. Une question précise ? <a href="mailto:supergenial@semisto.org">supergenial@semisto.org</a></p>
     </main>
 </body>
 </html>

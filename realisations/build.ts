@@ -2,6 +2,8 @@
 // Usage : bun realisations/build.ts
 // Les drafts (_drafts/*.json) sont la SOURCE VERSIONNÉE — ils ne sont jamais supprimés.
 // POST-BUILD : bun realisations/en-build.ts puis bun ressources/langswitch.ts et bun ressources/mainnav.ts
+// Les pages sortent avec la coquille du site (site.css, favicon, carte de partage, hreflang,
+// lien d'évitement, pied de page) : le pipeline complet ne doit laisser aucun diff.
 
 import { readdirSync, readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { join, dirname } from "node:path";
@@ -17,8 +19,10 @@ export type CaseImage = {
 
 export type CaseStudy = {
   slug: string; slug_en: string;
+  order?: number;                         // position dans la liste (à année égale)
   type: string; type_en: string;          // Site web | App interne | Newsletter…
   client: string; year: string;
+  problem: string; problem_en: string;   // le problème métier résolu, affiché en tête
   title: string; title_en: string;
   description: string; description_en: string;
   keywords: string; keywords_en: string;
@@ -33,102 +37,52 @@ export type CaseStudy = {
   body_html: string; body_html_en: string;
 };
 
-const BASE_CSS = readFileSync(join(SITE, "ressources", "_css.txt"), "utf8");
+// La coquille (head, menu, pied de page, Plausible) vient de tools/site/layout.ts, source unique.
+import { head, nav, footer, langPill, sectionOf, NAV_JS, BOOKING, SITE_URL, breadcrumbLd } from "../tools/site/layout.ts";
 
-export const EXTRA_CSS = `
-/* Réalisations */
-.case-meta { display: flex; flex-wrap: wrap; gap: 0.4rem 1.2rem; font-size: 14px; color: var(--text-secondary); margin-bottom: 2.5rem; }
-.case-meta .stack-tag {
-    display: inline-flex; padding: 0.1rem 0.6rem; border-radius: 999px;
-    border: 1px solid var(--card-border); background: var(--soft-bg); font-size: 12.5px;
-}
-.case-figure { margin: 2rem 0; }
-.case-figure img {
-    display: block; width: 100%; max-width: 100%; height: auto;
-    border: 1px solid var(--card-border); border-radius: 16px;
-}
-.case-figure figcaption { font-size: 13.5px; color: var(--text-secondary); margin-top: 0.6rem; }
-/* Carousel de screenshots */
-.case-carousel { margin: 1.5rem 0 0.5rem; }
-.case-carousel-track {
-    display: flex; gap: 1rem; overflow-x: auto;
-    scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
-    scrollbar-width: none; border-radius: 16px;
-}
-.case-carousel-track::-webkit-scrollbar { display: none; }
-.case-carousel-slide { flex: 0 0 100%; scroll-snap-align: start; }
-.case-carousel-slide img {
-    display: block; width: 100%; height: auto;
-    border: 1px solid var(--card-border); border-radius: 16px;
-}
-.case-carousel-slide figcaption { font-size: 13.5px; color: var(--text-secondary); margin-top: 0.6rem; }
-.case-carousel-nav { display: flex; align-items: center; gap: 0.9rem; margin-top: 0.9rem; }
-.case-carousel-btn {
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 38px; height: 38px; border-radius: 999px;
-    border: 1px solid var(--card-border); background: var(--soft-bg);
-    color: var(--text-primary); font-size: 19px; line-height: 1;
-    cursor: pointer; transition: transform 0.15s ease, border-color 0.15s ease;
-}
-.case-carousel-btn:hover { transform: translateY(-1px); border-color: var(--text-secondary); }
-.case-carousel-count { font-size: 13.5px; color: var(--text-secondary); min-width: 3.2em; text-align: center; font-variant-numeric: tabular-nums; }
-.case-carousel-dots { display: flex; gap: 0.45rem; margin-left: auto; flex-wrap: wrap; }
-.case-carousel-dot {
-    width: 8px; height: 8px; border-radius: 999px; padding: 0; border: none;
-    background: var(--card-border); cursor: pointer; transition: background 0.15s ease, transform 0.15s ease;
-}
-.case-carousel-dot[aria-current="true"] { background: var(--accent-1); transform: scale(1.25); }
-/* Index des réalisations */
-.case-item { display: block; padding: 1.75rem 0; border-bottom: 1px solid var(--card-border); transition: padding-left 0.2s ease; }
-.case-item:hover { padding-left: 0.4rem; }
-.case-item:hover .a-title { color: var(--link-hover); }
-.case-thumb {
-    display: block; width: 100%; height: auto; margin-bottom: 1rem;
-    border: 1px solid var(--card-border); border-radius: 16px;
-}
-.case-item .a-type { font-size: 13px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.06em; }
-.case-item .a-title { font-size: 19px; font-weight: 600; margin: 0.3rem 0; letter-spacing: -0.01em; color: inherit; }
-.case-item .a-desc { font-size: 15px; color: var(--text-secondary); }
+// alt : { fr, en } = chemins des deux versions, pour les liens hreflang.
+export const HEAD = (lang: string, title: string, description: string, _keywords: string, canonical: string, alt: { fr: string; en: string }) =>
+  head({
+    lang: lang as "fr" | "en", path: canonical.replace(SITE_URL, ""), alt, title, description,
+    og: "realisations",
+    ogAlt: lang === "fr" ? "Réalisations Super Génial : des outils qui tournent tous les jours" : "Super Génial case studies: tools used every day",
+    jsonld: [breadcrumbLd([["Super Génial", lang === "fr" ? "/" : "/en/"], [lang === "fr" ? "Réalisations" : "Case studies", lang === "fr" ? "/realisations/" : "/en/case-studies/"]])],
+  });
+
+// Début du <body> : lien d'évitement, <main>, menu.
+export const OPEN = (lang: "fr" | "en", alt: { fr: string; en: string }) => `<body>
+<a class="skip-link plain" href="#contenu">${lang === "fr" ? "Aller au contenu" : "Skip to content"}</a>
+    <main id="contenu">
+        ${nav(lang, sectionOf(alt[lang]), langPill(lang, alt))}`;
+
+// Pied de page commun, puis le script du menu mobile.
+export const FOOT = (lang: "fr" | "en") => `        ${footer(lang)}
+    </main>
+${NAV_JS}
+</body>
+</html>
 `;
 
-export const CSS = BASE_CSS + EXTRA_CSS;
+// Encadré de fin d'étude de cas : le call de 30 minutes.
+export const CTA = (lang: "fr" | "en") => lang === "fr"
+  ? `            <div class="cta-box animate delay-3">
+                <p>Un problème du même genre chez vous&nbsp;? Parlons-en trente minutes.</p>
+                <div class="actions"><a href="${BOOKING.fr}" class="btn btn-primary plain" data-booking target="_blank" rel="noopener noreferrer">Réserver un call de 30 minutes <span class="arr">→</span></a><a href="/diagnostic-ia/" class="link-arrow plain">Le Diagnostic IA →</a></div>
+            </div>`
+  : `            <div class="cta-box animate delay-3">
+                <p>A similar problem on your side? Let's talk for thirty minutes.</p>
+                <div class="actions"><a href="${BOOKING.en}" class="btn btn-primary plain" data-booking target="_blank" rel="noopener noreferrer">Book a 30-minute call <span class="arr">→</span></a><a href="/en/ai-assessment/" class="link-arrow plain">The AI Assessment →</a></div>
+            </div>`;
 
-export const HEAD = (lang: string, title: string, description: string, keywords: string, canonical: string, extraOg = "") => `<!DOCTYPE html>
-<html lang="${lang}">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${title}</title>
-    <meta name="author" content="Michael Hulet">
-    <meta name="description" content="${description}">
-    <meta name="keywords" content="${keywords}">
-    <meta property="og:title" content="${title}">
-    <meta property="og:description" content="${description}">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="${canonical}">
-    <link rel="canonical" href="${canonical}">${extraOg}
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <style>${CSS}</style>
-</head>`;
-
-export const GLOW = `
-<div class="cursor-glow" id="cursorGlow"></div>
-<script>
-const glow = document.getElementById('cursorGlow');
-let mx=0,my=0,gx=0,gy=0;
-window.addEventListener('mousemove',(e)=>{mx=e.clientX;my=e.clientY;glow.classList.add('visible');});
-window.addEventListener('mouseleave',()=>glow.classList.remove('visible'));
-(function a(){gx+=(mx-gx)*0.1;gy+=(my-gy)*0.1;glow.style.left=gx+'px';glow.style.top=gy+'px';requestAnimationFrame(a);})();
-</script>`;
+export const alt = (c: CaseStudy) => ({ fr: `/realisations/${c.slug}/`, en: `/en/case-studies/${c.slug_en}/` });
+export const INDEX_ALT = { fr: "/realisations/", en: "/en/case-studies/" };
 
 export function loadCases(): CaseStudy[] {
   const files = readdirSync(DRAFTS).filter((f) => f.endsWith(".json"));
   if (files.length === 0) { console.error("Aucun draft trouvé dans _drafts/"); process.exit(1); }
   return files
     .map((f) => JSON.parse(readFileSync(join(DRAFTS, f), "utf8")) as CaseStudy)
-    .sort((a, b) => b.year.localeCompare(a.year));
+    .sort((a, b) => b.year.localeCompare(a.year) || (a.order ?? 99) - (b.order ?? 99));
 }
 
 // Carousel de screenshots — vanilla JS inline, aucune dépendance (CSP stricte).
@@ -200,27 +154,20 @@ function casePage(c: CaseStudy): string {
   const canonical = `https://www.supergenial.be/realisations/${c.slug}/`;
   const live = c.url_live ? ` · <a href="${c.url_live}" target="_blank" rel="noopener noreferrer">Voir le site</a>` : "";
   const stack = c.stack.map((s) => `<span class="stack-tag">${s}</span>`).join(" ");
-  return `${HEAD("fr", c.title + " — Super Génial", c.description, c.keywords, canonical)}
-<body>
-    ${GLOW}
-    <main>
-        <a href="/realisations/" class="back-link plain">← Toutes les réalisations</a>
+  return `${HEAD("fr", c.title + " · Super Génial", c.description, c.keywords, canonical, alt(c))}
+${OPEN("fr", alt(c))}
         <article>
+            <p class="eyebrow"><a href="/realisations/" class="plain">Réalisations</a></p>
             <h1 class="animate delay-1">${c.title}</h1>
+            <p class="case-problem">Le problème&nbsp;: ${c.problem.charAt(0).toLowerCase() + c.problem.slice(1)}.</p>
             <p class="case-meta animate delay-2"><span>${c.type}</span><span>${c.client} · ${c.year}${live}</span><span>${stack}</span></p>
 ${figures(c)}
             <div class="article-body animate delay-3">
                 ${c.body_html}
             </div>${carouselSection(c, "fr")}
-            <div class="cta-box animate delay-3">
-                <p>Un projet similaire en tête ?</p>
-                <a href="/tarifs/" class="cta-btn">Voir mes tarifs <span>→</span></a>
-            </div>
+${CTA("fr")}
         </article>
-    </main>
-</body>
-</html>
-`;
+${FOOT("fr")}`;
 }
 
 function indexPage(cases: CaseStudy[]): string {
@@ -228,31 +175,25 @@ function indexPage(cases: CaseStudy[]): string {
   const items = cases.map((c) => {
     const thumb = c.images[0] ? `                    <img class="case-thumb" src="${c.images[0].src}" alt="${c.images[0].alt}" loading="lazy">\n` : "";
     return `                <a href="/realisations/${c.slug}/" class="case-item plain">
-${thumb}                    <div class="a-type">${c.type} · ${c.year}</div>
+${thumb}                    <div class="a-type">${c.type} · ${c.client} · ${c.year}</div>
+                    <div class="a-problem">${c.problem}</div>
                     <div class="a-title">${c.title}</div>
-                    <div class="a-desc">${c.description}</div>
                 </a>`;
   }).join("\n");
-  return `${HEAD("fr", "Réalisations — Super Génial", "Études de cas : sites web, applications internes et newsletters conçus avec des agents IA.", "réalisations, études de cas, portfolio, application web, site web, agents IA", canonical)}
-<body>
-    ${GLOW}
-    <main>
-        <a href="/" class="back-link plain">← Super Génial</a>
-        <h1 class="animate delay-1">Réalisations</h1>
-        <p class="subtitle">Du brief au site en ligne.</p>
+  return `${HEAD("fr", "Réalisations : des outils en production · Super Génial", "Études de cas : outils internes, applications de gestion et sites conçus avec des agents IA, présentés par le problème métier qu'ils résolvent.", "réalisations, études de cas, outil interne, application de gestion, agents IA", canonical, INDEX_ALT)}
+${OPEN("fr", INDEX_ALT)}
+        <p class="eyebrow">Réalisations</p>
+        <h1 class="animate delay-1">Des outils qui tournent tous les jours.</h1>
         <p class="intro animate delay-3">
-            Quelques projets récents — sites web, applications internes, newsletters —
-            conçus avec des agents IA, de l'architecture au déploiement.
-            Envie du vôtre ? <a href="/tarifs/">Voyons les tarifs</a>.
+            Chaque projet est présenté par le problème qu'il résout. Je les ai conçus avec des agents IA,
+            de la spécification à la mise en ligne, et la plupart servent d'abord mes propres structures&nbsp;:
+            je construis pour moi avant de proposer aux autres.
         </p>
         <div class="article-list animate delay-3">
 ${items}
         </div>
-        <p class="footnote">D'autres études de cas arrivent. Une question ? <a href="mailto:team@supergenial.be">team@supergenial.be</a></p>
-    </main>
-</body>
-</html>
-`;
+${CTA("fr")}
+${FOOT("fr")}`;
 }
 
 // ---- Build ----

@@ -1,9 +1,12 @@
 {
   "slug": "site-semisto",
   "slug_en": "site-semisto",
+  "order": 5,
   "type": "Site web",
   "type_en": "Website",
   "client": "Semisto",
+  "problem": "Reconstruire un site bilingue sans perdre son référencement, et le rendre éditable par l'équipe",
+  "problem_en": "Rebuilding a bilingual website without losing its search ranking, and making it editable by the team",
   "year": "2026",
   "title": "semisto.org — le nouveau site de l'association des forêts comestibles",
   "title_en": "semisto.org — the new website of the food forest association",
@@ -12,7 +15,14 @@
   "keywords": "étude de cas, site web, Astro, site statique, design system, SEO, i18n, agents IA, forêts comestibles",
   "keywords_en": "case study, website, Astro, static site, design system, SEO, i18n, AI agents, food forests",
   "url_live": "https://www.semisto.org",
-  "stack": ["Astro 5", "Tailwind CSS 4", "Content Collections", "Sveltia CMS", "Docker", "nginx"],
+  "stack": [
+    "Astro 5",
+    "Tailwind CSS 4",
+    "Content Collections",
+    "Sveltia CMS",
+    "Docker",
+    "nginx"
+  ],
   "images": [
     {
       "src": "/assets/realisations/semisto-website/home.webp",

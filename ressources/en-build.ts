@@ -35,7 +35,7 @@ const HEAD = (title: string, description: string, keywords: string, canonical: s
     <link rel="canonical" href="${canonical}">${extraOg}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400..600&family=Inter:wght@400..700&display=swap" rel="stylesheet">
     <style>${CSS}</style>
 </head>`;
 
@@ -96,7 +96,7 @@ function enIndexPage(articles: BiArticle[]): string {
         <div class="article-list animate delay-3">
 ${items}
         </div>
-        <p class="footnote">New articles regularly. A specific question? <a href="mailto:team@supergenial.be">team@supergenial.be</a></p>
+        <p class="footnote">New articles regularly. A specific question? <a href="mailto:supergenial@semisto.org">supergenial@semisto.org</a></p>
     </main>
 </body>
 </html>

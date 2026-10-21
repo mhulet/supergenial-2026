@@ -1,31 +1,39 @@
 <!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8">
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..600;1,400..600&family=Inter:wght@400..700&display=swap" rel="stylesheet">
 <style>
+/* Charte Semisto (papier beige, EB Garamond, Inter) avec le mauve de Super Génial
+   en couleur principale. */
 * { margin:0; padding:0; box-sizing:border-box }
 body { width:1200px; height:630px; overflow:hidden;
-  font-family:'Geist',-apple-system,sans-serif; background:#ffffff; color:#17171c;
+  font-family:'Inter',-apple-system,sans-serif; background:#f7f3ea; color:#1a1a1a;
   display:flex; align-items:center; position:relative }
-body::after { content:""; position:absolute; inset:0; pointer-events:none; opacity:.035;
+body::after { content:""; position:absolute; inset:0; pointer-events:none; opacity:.04;
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E") }
 .bar { position:absolute; left:0; top:0; bottom:0; width:14px;
-  background:linear-gradient(160deg,#6366f1,#8b5cf6) }
-.txt { padding:0 0 0 88px; width:660px }
-.brand { display:flex; align-items:center; gap:11px; font-size:24px; font-weight:600;
-  letter-spacing:-.01em; margin-bottom:44px }
-.mark { width:20px; height:20px; border-radius:6px; background:linear-gradient(135deg,#6366f1,#8b5cf6) }
-h1 { font-size:60px; font-weight:600; letter-spacing:-.035em; line-height:1.04; text-wrap:balance }
-p { font-size:26px; color:#6f6f7d; margin-top:24px; line-height:1.4; text-wrap:pretty }
-.url { position:absolute; left:88px; bottom:56px; font-size:20px; color:#6f6f7d; font-weight:500 }
-.illu { position:absolute; right:52px; top:50%; transform:translateY(-50%); width:430px; height:430px }
+  background:#7b4fc9 }
+.txt { padding:0 0 0 88px; width:680px }
+.brand { display:flex; align-items:baseline; gap:12px; font-size:24px; font-weight:600;
+  letter-spacing:-.01em; margin-bottom:40px; color:#1a1a1a }
+.mark { width:18px; height:18px; border-radius:5.5px; align-self:center;
+  background:linear-gradient(135deg,#7b4fc9,#a77bdb) }
+.by { font-size:18px; font-weight:500; color:#595959 }
+h1 em { font-style:italic; color:#7b4fc9 }
+h1 { font-family:'EB Garamond',Georgia,serif; font-size:76px; font-weight:500; color:#2a1a48;
+  letter-spacing:-.015em; line-height:1.02; text-wrap:balance }
+p { font-size:26px; color:#595959; margin-top:26px; line-height:1.4; text-wrap:pretty }
+.url { position:absolute; left:88px; bottom:54px; font-size:19px; color:#595959; font-weight:500 }
+.url b { color:#7b4fc9; font-weight:600 }
+.illu { position:absolute; right:52px; top:50%; transform:translateY(-50%); width:420px; height:420px }
 </style></head><body>
 <div class="bar"></div>
-<div class="txt"><div class="brand"><span class="mark"></span>Super Génial</div>
+<div class="txt"><div class="brand"><span class="mark"></span>Super Génial<span class="by">by Semisto</span></div>
 <h1 id="t"></h1><p id="s"></p></div>
 <img class="illu" id="i" alt="">
-<div class="url">supergenial.be</div>
+<div class="url" id="u">supergenial.be <b>·</b> le service IT de Semisto</div>
 <script>
 const p=new URLSearchParams(location.search);
-document.getElementById('t').textContent=p.get('t')||'';
+document.getElementById('t').innerHTML=(p.get('t')||'').replace(/[<>&]/g,'').replace(/\*([^*]+)\*/g,'<em>$1</em>');
+if(p.get('u')) document.getElementById('u').innerHTML='supergenial.be <b>·</b> '+p.get('u').replace(/[<>&]/g,'');
 document.getElementById('s').textContent=p.get('s')||'';
 const img=document.getElementById('i');
 if(p.get('i')) img.src=p.get('i'); else img.remove();

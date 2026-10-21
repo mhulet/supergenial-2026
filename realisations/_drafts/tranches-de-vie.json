@@ -1,9 +1,12 @@
 {
   "slug": "tranches-de-vie",
   "slug_en": "tranches-de-vie",
+  "order": 1,
   "type": "Application e-commerce",
   "type_en": "E-commerce application",
   "client": "Tranches de Vie · Les 4 Sources",
+  "problem": "Vendre son pain en ligne et planifier chaque fournée, au lieu de prendre les commandes à la main",
+  "problem_en": "Selling bread online and planning every bake, instead of taking orders by hand",
   "year": "2026",
   "title": "Tranches de Vie — la boulangerie artisanale qui vend son pain en ligne",
   "title_en": "Tranches de Vie — an artisan bakery selling its bread online",
@@ -12,7 +15,14 @@
   "keywords": "étude de cas, e-commerce boulangerie, Ruby on Rails, Hotwire, Stripe, Bancontact, agents IA, application web",
   "keywords_en": "case study, bakery e-commerce, Ruby on Rails, Hotwire, Stripe, Bancontact, AI agents, web application",
   "url_live": "https://tranchesdevie.les4sources.be",
-  "stack": ["Rails 8", "Hotwire", "Tailwind CSS", "Stripe", "PostgreSQL", "SMS"],
+  "stack": [
+    "Rails 8",
+    "Hotwire",
+    "Tailwind CSS",
+    "Stripe",
+    "PostgreSQL",
+    "SMS"
+  ],
   "images": [
     {
       "src": "/assets/realisations/tranches-de-vie/hero.webp",
