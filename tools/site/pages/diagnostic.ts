@@ -8,7 +8,7 @@ const FAQ: Record<Lang, [string, string][]> = {
   fr: [
     ["Pourquoi payer, alors que des audits IA gratuits existent ?", "Un audit gratuit est un argumentaire commercial déguisé : il conclut toujours qu'il faut acheter ce que son auteur vend. Ici, vous payez un travail réel, des interviews, une cartographie, des chiffres, et le rapport vous appartient. Vous pouvez le mettre en œuvre avec moi, avec quelqu'un d'autre, ou seul."],
     ["Et si le diagnostic conclut qu'il n'y a rien d'intéressant à faire ?", "Alors le rapport le dira, avec les raisons. Il y a presque toujours quelques heures par semaine à récupérer ou un abonnement de trop, mais savoir qu'il ne faut pas investir maintenant vous évite des dépenses bien plus grandes qu'un diagnostic."],
-    ["Faut-il déjà être « digitalisé » pour que ça ait du sens ?", "Non. Je pars de vos processus réels, même s'ils vivent sur papier, dans des cahiers ou dans la tête de deux personnes. C'est justement là que le diagnostic révèle le plus de valeur."],
+    ["Faut-il déjà être « digitalisé » pour que ça ait du sens ?", "Non. Je pars de vos processus réels, même s'ils vivent sur papier, dans des cahiers ou dans la tête de deux personnes. C'est justement là que le diagnostic révèle le plus de valeur."],
     ["Combien de temps ça demande à mon équipe ?", "Environ une heure par personne interviewée, une réunion de cadrage au départ et une restitution d'une heure trente à la fin. Le reste du travail se fait de mon côté."],
     ["Allez-vous me conseiller de tout remplacer par du sur-mesure ?", "Non. Un outil sur mesure a lui aussi un coût mensuel. Ce qui est standard (comptabilité, messagerie) reste souvent mieux servi par un logiciel du marché. Le diagnostic compare les deux options sur cinq ans, honnêtement."],
     ["Existe-t-il des aides publiques pour ce type de mission ?", "Les dispositifs wallons de soutien au numérique et à l'IA (Start IA, chèques-entreprises) évoluent régulièrement. Selon votre situation et le calendrier des appels, je vous oriente vers ce qui existe au moment de votre demande."],
@@ -81,7 +81,7 @@ const FR = `
                     <div class="tile"><b>La carte de vos processus</b><span>Ce que le diagnostic a vu de votre fonctionnement, souvent une découverte en soi pour la direction.</span></div>
                     <div class="tile"><b>Un plan 30-60-90 jours</b><span>Par quoi commencer, dans quel ordre, et ce que ça demande à vos équipes. Pas un plan à trois ans.</span></div>
                 </div>
-                <div class="callout"><b>Ce que ce diagnostic n'est pas.</b> Une promesse de « transformation ». Je cherche des heures gagnées et des euros économisés sur un ou deux processus concrets&nbsp;: c'est comme ça que l'IA entre utilement dans une entreprise. Et si rien de sérieux n'émerge, le rapport le dira honnêtement.</div>
+                <div class="callout"><b>Ce que ce diagnostic n'est pas.</b> Une promesse de « transformation ». Je cherche des heures gagnées et des euros économisés sur un ou deux processus concrets&nbsp;: c'est comme ça que l'IA entre utilement dans une entreprise. Et si rien de sérieux n'émerge, le rapport le dira honnêtement.</div>
             </div>
         </section>
 

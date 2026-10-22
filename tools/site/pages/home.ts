@@ -26,6 +26,40 @@ const proofs = (l: Lang) => PROOFS[l].map(([href, src, alt, k, h, who]) => `
                         <div class="body"><div class="k">${k}</div><h3>${h}</h3><div class="who">${who}</div></div>
                     </a>`).join("");
 
+const PHOTOS = {
+  fr: [
+    "Chantier participatif dans un jardin clos : le collectif creuse les baissières d'un futur jardin-forêt",
+    "Le groupe d'un chantier de plantation hivernal, bras levés autour d'un jeune arbre",
+    "Chantier de plantation : outils posés sur la terre fraîchement travaillée",
+    "Plantation de jeunes arbres à travers une toile de paillage naturel",
+    "Vue aérienne des cercles concentriques d'un jardin-forêt Semisto",
+  ],
+  en: [
+    "Community work day in a walled garden: the group digs the swales of a future food forest",
+    "A winter planting crew, arms raised around a young tree",
+    "Planting day: tools resting on freshly worked soil",
+    "Young trees planted through a natural mulch cloth",
+    "Aerial view of the concentric circles of a Semisto food forest",
+  ],
+};
+const UI = {
+  fr: { label: "Photos de Semisto", prev: "Photo précédente", next: "Photo suivante", go: "Voir la photo" },
+  en: { label: "Photos of Semisto", prev: "Previous photo", next: "Next photo", go: "Show photo" },
+};
+
+const photos = (l: Lang) => `
+            <div class="wrap">
+                <div class="sg-carousel" role="region" aria-roledescription="carousel" aria-label="${UI[l].label}">
+                    <div class="sg-slides">${PHOTOS[l].map((alt, i) => `
+                        <figure class="sg-slide${i === 0 ? " is-active" : ""}"${i === 0 ? "" : ' aria-hidden="true"'}><img src="/assets/semisto/semisto-${i + 1}-1600.webp" srcset="/assets/semisto/semisto-${i + 1}-800.webp 800w, /assets/semisto/semisto-${i + 1}-1600.webp 1600w" sizes="(max-width: 1180px) 100vw, 1100px" alt="${alt}" width="1600" height="1067"${i === 0 ? "" : ' loading="lazy"'} decoding="async"></figure>`).join("")}
+                    </div>
+                    <button class="sg-nav sg-prev plain" type="button" aria-label="${UI[l].prev}">←</button>
+                    <button class="sg-nav sg-next plain" type="button" aria-label="${UI[l].next}">→</button>
+                    <div class="sg-dots">${PHOTOS[l].map((_, i) => `<button type="button" class="plain${i === 0 ? " is-active" : ""}" aria-label="${UI[l].go} ${i + 1}"></button>`).join("")}</div>
+                </div>
+            </div>
+            <script>(function(){var c=document.currentScript.previousElementSibling.querySelector(".sg-carousel"),s=c.querySelectorAll(".sg-slide"),d=c.querySelectorAll(".sg-dots button"),i=0,t;function go(n){s[i].classList.remove("is-active");s[i].setAttribute("aria-hidden","true");d[i].classList.remove("is-active");i=(n+s.length)%s.length;s[i].classList.add("is-active");s[i].removeAttribute("aria-hidden");d[i].classList.add("is-active")}function play(){stop();if(!matchMedia("(prefers-reduced-motion: reduce)").matches)t=setInterval(function(){go(i+1)},5000)}function stop(){clearInterval(t)}c.querySelector(".sg-prev").onclick=function(){go(i-1);play()};c.querySelector(".sg-next").onclick=function(){go(i+1);play()};d.forEach(function(b,k){b.onclick=function(){go(k);play()}});c.addEventListener("mouseenter",stop);c.addEventListener("mouseleave",play);c.addEventListener("focusin",stop);c.addEventListener("focusout",play);var x;c.addEventListener("touchstart",function(e){x=e.touches[0].clientX;stop()},{passive:true});c.addEventListener("touchend",function(e){var dx=e.changedTouches[0].clientX-x;if(Math.abs(dx)>40)go(i+(dx<0?1:-1));play()});play()})();</script>`;
+
 const REFS = `<a class="plain" href="https://www.d-ici.be" target="_blank" rel="noopener noreferrer"><img class="sq" src="/assets/logos/dici.webp" alt="d'ici" width="120" height="120" loading="lazy"></a>
                     <a class="plain" href="https://www.silvea.org" target="_blank" rel="noopener noreferrer"><img src="/assets/logos/silvea.webp" alt="Silvéa" width="322" height="120" loading="lazy"></a>
                     <a class="plain" href="https://www.upcyclinarium.com" target="_blank" rel="noopener noreferrer"><img class="sq" src="/assets/logos/upcyclinarium.svg" alt="Upcyclinarium" width="400" height="400" loading="lazy"></a>
@@ -223,7 +257,7 @@ const FR = `
             </div>
         </section>
 
-        <section class="sec" id="semisto">
+        <section class="sec" id="semisto">${photos("fr")}
             <div class="wrap semisto">
                 <div>
                     <p class="eyebrow">Semisto, c'est quoi&nbsp;?</p>
@@ -465,7 +499,7 @@ const EN = `
             </div>
         </section>
 
-        <section class="sec" id="semisto">
+        <section class="sec" id="semisto">${photos("en")}
             <div class="wrap semisto">
                 <div>
                     <p class="eyebrow">What is Semisto?</p>

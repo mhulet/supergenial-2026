@@ -1375,3 +1375,29 @@ main:not(.wide) .site-foot { margin: 5rem calc(50% - 50vw) 0; }
   .eol-date { text-align: left; white-space: normal; }
   .cta-box .btn { padding-left: 1.1rem; padding-right: 1.1rem; font-size: 15px; white-space: nowrap; }
 }
+@media (max-width: 420px) {
+  .site-nav .lang-switch { padding: 3px; }
+  .site-nav .lang-switch .lang-globe { display: none; }
+  .site-nav .lang-switch a { padding: .28rem .55rem; }
+  .site-nav .brand-by { font-size: 12px; }
+}
+@media (max-width: 350px) {
+  .site-nav .brand-by { display: none; }
+}
+/* Carrousel photos Semisto (accueil) */
+.sg-carousel { position: relative; margin-bottom: clamp(40px, 7vh, 72px); border-radius: var(--r-card, 22px); overflow: hidden; background: var(--sg-ink); aspect-ratio: 3 / 2; max-height: 620px; width: 100%; }
+.sg-slides, .sg-slide { position: absolute; inset: 0; margin: 0; }
+.sg-slide { opacity: 0; transition: opacity .9s ease; }
+.sg-slide.is-active { opacity: 1; }
+.sg-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.sg-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 999px; border: 0; background: rgba(255,255,255,.88); color: var(--sg-ink); font-size: 18px; line-height: 1; cursor: pointer; display: grid; place-items: center; box-shadow: 0 6px 18px -8px rgba(0,0,0,.4); transition: background .2s ease; }
+.sg-nav:hover { background: #fff; }
+.sg-prev { left: 16px; }
+.sg-next { right: 16px; }
+.sg-dots { position: absolute; left: 0; right: 0; bottom: 14px; display: flex; justify-content: center; gap: 8px; }
+.sg-dots button { width: 9px; height: 9px; padding: 0; border-radius: 999px; border: 0; background: rgba(255,255,255,.55); cursor: pointer; transition: width .3s ease, background .3s ease; }
+.sg-dots button.is-active { width: 26px; background: #fff; }
+.sg-nav:focus-visible, .sg-dots button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+@media (min-width: 900px) { .sg-carousel { aspect-ratio: 21 / 9; } }
+@media (max-width: 560px) { .sg-nav { width: 36px; height: 36px; font-size: 15px; } .sg-prev { left: 10px; } .sg-next { right: 10px; } }
+@media (prefers-reduced-motion: reduce) { .sg-slide { transition: none; } }
