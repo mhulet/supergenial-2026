@@ -81,11 +81,26 @@ const FR = `
                         <a ${BK("fr")} class="btn btn-primary plain">Réserver un call de 30 minutes <span class="arr">→</span></a>
                         <a href="/diagnostic-ia/" class="btn btn-line plain">Le Diagnostic IA</a>
                     </div>
+                    <a href="#lettre" class="hero-sign plain"><img src="/assets/lieu/michael-hulet.webp" alt="Portrait de Michael Hulet" width="400" height="400"><span><b>Michael Hulet</b>depuis Les 4 Sources, à Yvoir</span></a>
                     <div class="hero-for" aria-label="Pour qui">
                         <span>Entreprises à impact</span><span>5 à 100 personnes</span><span>Wallonie et Bruxelles</span>
                     </div>
                 </div>
                 <img class="hero-illu" src="/assets/illustrations/sg-accueil.webp" decoding="async" alt="Illustration au trait : d'une pile de tableurs pousse une plante qui porte une application, arrosée par un petit robot" width="1200" height="800">
+            </div>
+        </section>
+
+        <section class="sec letter-sec" id="lettre">
+            <div class="wrap letter">
+                <img class="letter-photo" src="/assets/lieu/michael-hulet.webp" alt="Portrait de Michael Hulet" width="400" height="400" loading="lazy">
+                <div class="letter-body">
+                    <p class="eyebrow">Un mot avant de commencer</p>
+                    <p class="letter-hello">Bonjour, je m'appelle Michael.</p>
+                    <p>Je code depuis 2004. Mais ce qui m'a appris à construire des outils utiles, c'est d'avoir été de l'autre côté du comptoir&nbsp;: un magasin, un lieu d'accueil avec gîtes et salles, une association de formation. Je connais la caisse qui ne croise pas le stock, le planning des réservations qui déborde, les inscriptions gérées à la main.</p>
+                    <p>Depuis 2023, je construis avec des agents IA les outils dont nos propres structures avaient besoin. Claudy fait tourner Les 4 Sources, le tiers-lieu que nous avons cofondé à Yvoir. Terranova coordonne les équipes de Semisto. Ce qui a fait ses preuves chez nous, je le propose aux entreprises qui portent elles aussi une mission.</p>
+                    <p>Et chaque euro que vous me confiez va à Semisto, pour planter des forêts comestibles.</p>
+                    <p class="letter-sign">Michael</p>
+                </div>
             </div>
         </section>
 
@@ -257,6 +272,22 @@ const FR = `
             </div>
         </section>
 
+        <section class="sec lieu-sec">
+            <div class="wrap">
+                <div class="sec-head">
+                    <p class="eyebrow">D'où j'écris</p>
+                    <h2 class="h-sec">Les 4 Sources, <em>notre terrain d'essai.</em></h2>
+                    <p class="sec-intro">Un tiers-lieu de 15 hectares à Yvoir&nbsp;: des gîtes et des salles, un verger, des ânes, et un collectif qui y vit. C'est ici que mes outils sont mis à l'épreuve, tous les jours, avant d'arriver chez vous.</p>
+                </div>
+                <div class="lieu-grid">
+                    <img class="lieu-main" src="/assets/lieu/4-sources-vue-aerienne.webp" alt="Vue aérienne du domaine des 4 Sources à Yvoir : prairies, bâtiments et bois" width="1600" height="900" loading="lazy">
+                    <img src="/assets/lieu/4-sources-gite.webp" alt="La façade en pierre du gîte des 4 Sources, couverte de vigne" width="1000" height="666" loading="lazy">
+                    <img src="/assets/lieu/4-sources-anes.webp" alt="Deux ânes broutent dans une prairie des 4 Sources" width="1000" height="750" loading="lazy">
+                </div>
+                <div class="lieu-links"><a href="/realisations/claudy/" class="link-arrow plain">Claudy, l'outil qui fait tourner le lieu →</a><a href="https://www.les4sources.be" target="_blank" rel="noopener noreferrer" class="link-arrow plain">Découvrir Les 4 Sources →</a></div>
+            </div>
+        </section>
+
         <section class="sec" id="semisto">${photos("fr")}
             <div class="wrap semisto">
                 <div>
@@ -295,21 +326,6 @@ const FR = `
             </div>
         </section>
 
-        <section class="sec">
-            <div class="wrap builder">
-                <div>
-                    <p class="eyebrow">Qui construit</p>
-                    <h2 class="h-sec">Michael Hulet</h2>
-                    <p class="role">Fondateur de Semisto, développeur, entrepreneur. Basé à Yvoir, au tiers-lieu Les 4 Sources.</p>
-                </div>
-                <ul>
-                    <li>Analyste-programmeur depuis 2004, co-fondateur d'une agence web, de startups et d'e-commerces</li>
-                    <li>Des deux côtés du comptoir&nbsp;: co-fondateur d'un magasin, d'un lieu d'accueil avec gîtes et salles, d'une association de formation</li>
-                    <li>Fondateur de l'association <a href="https://www.semisto.org" target="_blank" rel="noopener noreferrer">Semisto</a> et co-fondateur du tiers-lieu <a href="https://www.les4sources.be" target="_blank" rel="noopener noreferrer">Les 4 Sources</a></li>
-                    <li>Je construis d'abord pour mes propres structures, puis je propose aux autres ce qui a fait ses preuves</li>
-                </ul>
-            </div>
-        </section>
 `;
 
 const EN = `
@@ -323,11 +339,26 @@ const EN = `
                         <a ${BK("en")} class="btn btn-primary plain">Book a 30-minute call <span class="arr">→</span></a>
                         <a href="/en/ai-assessment/" class="btn btn-line plain">The AI Assessment</a>
                     </div>
+                    <a href="#letter" class="hero-sign plain"><img src="/assets/lieu/michael-hulet.webp" alt="Portrait of Michael Hulet" width="400" height="400"><span><b>Michael Hulet</b>from Les 4 Sources, in Yvoir, Belgium</span></a>
                     <div class="hero-for" aria-label="Who it is for">
                         <span>Impact-driven companies</span><span>5 to 100 people</span><span>Wallonia and Brussels</span>
                     </div>
                 </div>
                 <img class="hero-illu" src="/assets/illustrations/sg-accueil.webp" decoding="async" alt="Line drawing: a plant grows out of a pile of spreadsheets and carries an app, watered by a small robot" width="1200" height="800">
+            </div>
+        </section>
+
+        <section class="sec letter-sec" id="letter">
+            <div class="wrap letter">
+                <img class="letter-photo" src="/assets/lieu/michael-hulet.webp" alt="Portrait of Michael Hulet" width="400" height="400" loading="lazy">
+                <div class="letter-body">
+                    <p class="eyebrow">A word before we start</p>
+                    <p class="letter-hello">Hello, I'm Michael.</p>
+                    <p>I have been coding since 2004. But what taught me to build useful tools was being on the other side of the counter: a shop, a guest house with venues, a training association. I know the till that never matches the stock, the booking schedule that overflows, the registrations handled by hand.</p>
+                    <p>Since 2023, I have been building with AI agents the tools our own organisations needed. Claudy runs Les 4 Sources, the community estate we co-founded in Yvoir. Terranova coordinates Semisto's teams. What has proven itself at home, I offer to companies that also carry a mission.</p>
+                    <p>And every euro you entrust me with goes to Semisto, to plant edible forests.</p>
+                    <p class="letter-sign">Michael</p>
+                </div>
             </div>
         </section>
 
@@ -499,6 +530,22 @@ const EN = `
             </div>
         </section>
 
+        <section class="sec lieu-sec">
+            <div class="wrap">
+                <div class="sec-head">
+                    <p class="eyebrow">Where I write from</p>
+                    <h2 class="h-sec">Les 4 Sources, <em>our testing ground.</em></h2>
+                    <p class="sec-intro">A 15-hectare community estate in Yvoir, Belgium: lodges and venues, an orchard, donkeys, and a community that lives there. This is where my tools are put to the test, every day, before they reach you.</p>
+                </div>
+                <div class="lieu-grid">
+                    <img class="lieu-main" src="/assets/lieu/4-sources-vue-aerienne.webp" alt="Aerial view of the Les 4 Sources estate in Yvoir: meadows, buildings and woods" width="1600" height="900" loading="lazy">
+                    <img src="/assets/lieu/4-sources-gite.webp" alt="The stone front of the Les 4 Sources lodge, covered with vines" width="1000" height="666" loading="lazy">
+                    <img src="/assets/lieu/4-sources-anes.webp" alt="Two donkeys grazing in a Les 4 Sources meadow" width="1000" height="750" loading="lazy">
+                </div>
+                <div class="lieu-links"><a href="/en/case-studies/claudy/" class="link-arrow plain">Claudy, the tool that runs the estate →</a><a href="https://www.les4sources.be" target="_blank" rel="noopener noreferrer" class="link-arrow plain">Discover Les 4 Sources →</a></div>
+            </div>
+        </section>
+
         <section class="sec" id="semisto">${photos("en")}
             <div class="wrap semisto">
                 <div>
@@ -537,21 +584,6 @@ const EN = `
             </div>
         </section>
 
-        <section class="sec">
-            <div class="wrap builder">
-                <div>
-                    <p class="eyebrow">Who builds</p>
-                    <h2 class="h-sec">Michael Hulet</h2>
-                    <p class="role">Founder of Semisto, developer, entrepreneur. Based in Yvoir, Belgium, at the Les 4 Sources community estate.</p>
-                </div>
-                <ul>
-                    <li>Analyst-programmer since 2004, co-founder of a web agency, start-ups and online shops</li>
-                    <li>On both sides of the counter: co-founder of a shop, a guest house with venues, and a training association</li>
-                    <li>Founder of the <a href="https://www.semisto.org" target="_blank" rel="noopener noreferrer">Semisto</a> association and co-founder of the <a href="https://www.les4sources.be" target="_blank" rel="noopener noreferrer">Les 4 Sources</a> community estate</li>
-                    <li>I build for my own organisations first, then offer others what has proven itself</li>
-                </ul>
-            </div>
-        </section>
 `;
 
 export const home = (lang: Lang) => page({
