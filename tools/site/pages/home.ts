@@ -183,7 +183,7 @@ const FR = `
                     <ul class="checks">
                         <li><div><b>De 5 à 100 personnes</b><span>Assez grand pour que les tableurs coincent, assez petit pour qu'un logiciel d'entreprise soit démesuré. Un agent IA prend tout son sens au-delà d'une dizaine de personnes&nbsp;; en dessous, on commence par l'outil interne.</span></div></li>
                         <li><div><b>La durabilité au cœur du modèle</b><span>B Corp, coopérative, PME durable, producteur établi : l'impact fait partie de ce que vous vendez.</span></div></li>
-                        <li><div><b>Des process qui tiennent sur Excel et WhatsApp</b><span>Et une facture d'abonnements que personne n'a vraiment décidée.</span></div></li>
+                        <li><div><b>Une organisation bricolée entre Excel et WhatsApp</b><span>Des fichiers partagés, des groupes de messages, et une facture d'abonnements que personne n'a vraiment décidée.</span></div></li>
                         <li><div><b>Quelqu'un qui peut décider</b><span>Une direction ou une coordination prête à investir pour que son équipe gagne du temps.</span></div></li>
                     </ul>
                     <p class="aside-note">Fondation ou ONG établie&nbsp;? Bienvenue aussi, sur devis.</p>
@@ -441,7 +441,7 @@ const EN = `
                     <ul class="checks">
                         <li><div><b>5 to 100 people</b><span>Big enough for spreadsheets to break, small enough for enterprise software to be overkill. An AI agent really pays off beyond ten or so people; below that, we start with the internal tool.</span></div></li>
                         <li><div><b>Sustainability at the core</b><span>B Corp, cooperative, sustainable SME, established producer: impact is part of what you sell.</span></div></li>
-                        <li><div><b>Processes held together by Excel and WhatsApp</b><span>And a subscriptions bill nobody really decided on.</span></div></li>
+                        <li><div><b>An organisation patched together with Excel and WhatsApp</b><span>Shared files, group chats, and a subscriptions bill nobody really decided on.</span></div></li>
                         <li><div><b>Someone who can decide</b><span>Management ready to invest so the team gets its time back.</span></div></li>
                     </ul>
                     <p class="aside-note">An established foundation or NGO? Welcome too, on quote.</p>
