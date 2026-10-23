@@ -75,7 +75,7 @@ const FR = `
             <div class="wrap hero-grid">
                 <div>
                     <p class="eyebrow">Outils internes et agents IA sur mesure</p>
-                    <h1 class="display">Votre équipe est là pour la mission, <em>pas pour recopier des tableurs.</em></h1>
+                    <h1 class="display">Vos outils sur mesure, <em>qui financent des forêts comestibles.</em></h1>
                     <p class="lede">Je remplace vos tableurs, vos tâches répétitives et vos abonnements empilés par <strong>des outils internes et des agents IA construits pour votre entreprise</strong>. Le code vous appartient, et chaque euro facturé finance la mission de Semisto.</p>
                     <div class="actions">
                         <a ${BK("fr")} class="btn btn-primary plain">Réserver un call de 30 minutes <span class="arr">→</span></a>
@@ -333,7 +333,7 @@ const EN = `
             <div class="wrap hero-grid">
                 <div>
                     <p class="eyebrow">Custom internal tools and AI agents</p>
-                    <h1 class="display">Your team is here for the mission, <em>not to copy spreadsheets.</em></h1>
+                    <h1 class="display">Your custom tools, <em>funding edible forests.</em></h1>
                     <p class="lede">I replace your spreadsheets, your repetitive tasks and your pile of software subscriptions with <strong>internal tools and AI agents built for your company</strong>. You own the code, and every euro invoiced funds Semisto's mission.</p>
                     <div class="actions">
                         <a ${BK("en")} class="btn btn-primary plain">Book a 30-minute call <span class="arr">→</span></a>
