@@ -83,7 +83,7 @@ const FR = `
                     </div>
                     <a href="#lettre" class="hero-sign plain"><img src="/assets/lieu/michael-hulet.webp" alt="Portrait de Michael Hulet" width="400" height="400"><span><b>Michael Hulet</b>depuis Les 4 Sources, à Yvoir</span></a>
                     <div class="hero-for" aria-label="Pour qui">
-                        <span>Entreprises à impact</span><span>5 à 100 personnes</span><span>Wallonie et Bruxelles</span>
+                        <span>Pour les entreprises à impact</span><span>5 à 100 personnes</span><span>Wallonie et Bruxelles</span>
                     </div>
                 </div>
                 <img class="hero-illu" src="/assets/illustrations/sg-accueil.webp" decoding="async" alt="Illustration au trait : d'une pile de tableurs pousse une plante qui porte une application, arrosée par un petit robot" width="1200" height="800">
@@ -92,7 +92,7 @@ const FR = `
 
         <section class="sec letter-sec" id="lettre">
             <div class="wrap letter">
-                <img class="letter-photo" src="/assets/lieu/michael-hulet.webp" alt="Portrait de Michael Hulet" width="400" height="400" loading="lazy">
+                <div class="letter-photo-wrap"><img class="letter-photo" src="/assets/lieu/michael-hulet.webp" alt="Portrait de Michael Hulet" width="400" height="400" loading="lazy"></div>
                 <div class="letter-body">
                     <p class="eyebrow">Un mot avant de commencer</p>
                     <p class="letter-hello">Bonjour, je m'appelle Michael.</p>
@@ -102,6 +102,7 @@ const FR = `
                     <p class="letter-sign">Michael</p>
                 </div>
             </div>
+            <script>(function(){var w=document.querySelectorAll(".letter-photo-wrap");if(!("IntersectionObserver" in window)){w.forEach(function(e){e.classList.add("in")});return}var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");o.unobserve(e.target)}})},{threshold:.35});w.forEach(function(e){o.observe(e)})})();</script>
         </section>
 
         <section class="sec band">
@@ -341,7 +342,7 @@ const EN = `
                     </div>
                     <a href="#letter" class="hero-sign plain"><img src="/assets/lieu/michael-hulet.webp" alt="Portrait of Michael Hulet" width="400" height="400"><span><b>Michael Hulet</b>from Les 4 Sources, in Yvoir, Belgium</span></a>
                     <div class="hero-for" aria-label="Who it is for">
-                        <span>Impact-driven companies</span><span>5 to 100 people</span><span>Wallonia and Brussels</span>
+                        <span>For impact-driven companies</span><span>5 to 100 people</span><span>Wallonia and Brussels</span>
                     </div>
                 </div>
                 <img class="hero-illu" src="/assets/illustrations/sg-accueil.webp" decoding="async" alt="Line drawing: a plant grows out of a pile of spreadsheets and carries an app, watered by a small robot" width="1200" height="800">
@@ -350,7 +351,7 @@ const EN = `
 
         <section class="sec letter-sec" id="letter">
             <div class="wrap letter">
-                <img class="letter-photo" src="/assets/lieu/michael-hulet.webp" alt="Portrait of Michael Hulet" width="400" height="400" loading="lazy">
+                <div class="letter-photo-wrap"><img class="letter-photo" src="/assets/lieu/michael-hulet.webp" alt="Portrait of Michael Hulet" width="400" height="400" loading="lazy"></div>
                 <div class="letter-body">
                     <p class="eyebrow">A word before we start</p>
                     <p class="letter-hello">Hello, I'm Michael.</p>
@@ -360,6 +361,7 @@ const EN = `
                     <p class="letter-sign">Michael</p>
                 </div>
             </div>
+            <script>(function(){var w=document.querySelectorAll(".letter-photo-wrap");if(!("IntersectionObserver" in window)){w.forEach(function(e){e.classList.add("in")});return}var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");o.unobserve(e.target)}})},{threshold:.35});w.forEach(function(e){o.observe(e)})})();</script>
         </section>
 
         <section class="sec band">

@@ -1408,7 +1408,8 @@ main:not(.wide) .site-foot { margin: 5rem calc(50% - 50vw) 0; }
 .hero-sign + .hero-for { margin-top: 1.2rem; }
 .letter-sec { padding-top: clamp(24px, 4vh, 48px); }
 .letter { display: grid; grid-template-columns: minmax(0, .55fr) minmax(0, 1.45fr); gap: clamp(32px, 6vw, 88px); align-items: start; max-width: 1000px; }
-.letter-photo { width: 100%; max-width: 300px; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 999px; box-shadow: 0 0 0 6px var(--bg), 0 0 0 8px var(--sg); justify-self: center; margin-top: .5rem; }
+.letter-photo-wrap { position: relative; width: 100%; max-width: 300px; justify-self: center; margin-top: .5rem; }
+.letter-photo { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 999px; box-shadow: 0 0 0 6px var(--bg), 0 0 0 8px var(--sg); }
 .letter-body p { font-family: var(--font-serif); font-size: clamp(19px, 1.6vw, 22px); line-height: 1.55; color: var(--sg-ink); margin: 0 0 1rem; }
 .letter-body .eyebrow { font-family: var(--font-sans); font-size: 12px; margin-bottom: 1.2rem; color: var(--sg); }
 .letter-body .letter-hello { font-size: clamp(28px, 2.6vw, 36px); line-height: 1.15; margin-bottom: 1.2rem; }
@@ -1419,9 +1420,27 @@ main:not(.wide) .site-foot { margin: 5rem calc(50% - 50vw) 0; }
 .lieu-links { display: flex; flex-wrap: wrap; gap: .8rem 2rem; margin-top: 1.4rem; }
 @media (max-width: 900px) {
   .letter { grid-template-columns: 1fr; }
-  .letter-photo { max-width: 180px; justify-self: start; }
+  .letter-photo-wrap { max-width: 180px; justify-self: start; }
   .lieu-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; aspect-ratio: auto; }
   .lieu-grid .lieu-main { aspect-ratio: 16 / 10; }
   .lieu-grid .lieu-main { grid-column: 1 / span 2; grid-row: auto; }
   .lieu-grid img:not(.lieu-main) { aspect-ratio: 4 / 3; }
 }
+/* Puces du hero : une coche apparaît sur chacune, l'une après l'autre */
+.hero-for span { display: inline-flex; align-items: center; gap: .45rem; }
+.hero-for span::before { content: ""; flex: none; width: 16px; height: 16px; border-radius: 999px; background: var(--sg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.3l2.3 2.3 4.7-4.9' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 16px no-repeat; transform: scale(0); opacity: 0; animation: sg-tick .45s cubic-bezier(.34, 1.56, .64, 1) forwards; }
+.hero-for span:nth-child(1)::before { animation-delay: .6s; }
+.hero-for span:nth-child(2)::before { animation-delay: 1s; }
+.hero-for span:nth-child(3)::before { animation-delay: 1.4s; }
+@keyframes sg-tick { to { transform: scale(1); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .hero-for span::before { animation: none; transform: none; opacity: 1; } }
+/* Portrait de la lettre : apparition puis anneau en pointillés qui tourne lentement */
+.letter-photo-wrap::before { content: ""; position: absolute; inset: -18px; border-radius: 999px; border: 2px dashed var(--sg); opacity: 0; transform: scale(.85) rotate(-40deg); transition: opacity .9s ease .35s, transform 1.2s cubic-bezier(.22, 1, .36, 1) .35s; }
+.letter-photo-wrap .letter-photo { opacity: 0; transform: scale(.88) translateY(14px); transition: opacity .8s ease, transform 1s cubic-bezier(.22, 1, .36, 1); }
+.letter-photo-wrap.in::before { opacity: .55; transform: scale(1) rotate(0); animation: sg-ring 40s linear 1.6s infinite; }
+.letter-photo-wrap.in .letter-photo { opacity: 1; transform: none; }
+.letter-photo-wrap.in:hover .letter-photo { transform: scale(1.03) rotate(-1.5deg); transition-duration: .5s; }
+@keyframes sg-ring { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .letter-photo-wrap::before, .letter-photo-wrap .letter-photo { transition: none; animation: none !important; } .letter-photo-wrap .letter-photo { opacity: 1; transform: none; } .letter-photo-wrap::before { opacity: .55; transform: none; } }
+.hero-for span { padding: .35rem .7rem .35rem .45rem; gap: .38rem; }
+.hero-for { gap: .35rem; }
