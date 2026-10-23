@@ -83,7 +83,7 @@ const FR = `
                     </div>
                     <a href="#lettre" class="hero-sign plain"><img src="/assets/lieu/michael-hulet.webp" alt="Portrait de Michael Hulet" width="400" height="400"><span><b>Michael Hulet</b>depuis Les 4 Sources, à Yvoir</span></a>
                     <div class="hero-for" aria-label="Pour qui">
-                        <span>Pour les entreprises à impact</span><span>5 à 100 personnes</span><span>Wallonie et Bruxelles</span>
+                        <span>Pour les entreprises à impact</span><span>5 à 100 personnes</span>
                     </div>
                 </div>
                 <img class="hero-illu" src="/assets/illustrations/sg-accueil.webp" decoding="async" alt="Illustration au trait : d'une pile de tableurs pousse une plante qui porte une application, arrosée par un petit robot" width="1200" height="800">
@@ -342,7 +342,7 @@ const EN = `
                     </div>
                     <a href="#letter" class="hero-sign plain"><img src="/assets/lieu/michael-hulet.webp" alt="Portrait of Michael Hulet" width="400" height="400"><span><b>Michael Hulet</b>from Les 4 Sources, in Yvoir, Belgium</span></a>
                     <div class="hero-for" aria-label="Who it is for">
-                        <span>For impact-driven companies</span><span>5 to 100 people</span><span>Wallonia and Brussels</span>
+                        <span>For impact-driven companies</span><span>5 to 100 people</span>
                     </div>
                 </div>
                 <img class="hero-illu" src="/assets/illustrations/sg-accueil.webp" decoding="async" alt="Line drawing: a plant grows out of a pile of spreadsheets and carries an app, watered by a small robot" width="1200" height="800">
