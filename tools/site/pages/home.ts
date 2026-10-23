@@ -96,9 +96,9 @@ const FR = `
                 <div class="letter-body">
                     <p class="eyebrow">Un mot avant de commencer</p>
                     <p class="letter-hello">Bonjour, je m'appelle Michael.</p>
-                    <p>Je code depuis 2004. Mais ce qui m'a appris à construire des outils utiles, c'est d'avoir été de l'autre côté du comptoir&nbsp;: un magasin, un lieu d'accueil avec gîtes et salles, une association de formation. Je connais la caisse qui ne croise pas le stock, le planning des réservations qui déborde, les inscriptions gérées à la main.</p>
-                    <p>Depuis 2023, je construis avec des agents IA les outils dont nos propres structures avaient besoin. Claudy fait tourner Les 4 Sources, le tiers-lieu que nous avons cofondé à Yvoir. Terranova coordonne les équipes de Semisto. Ce qui a fait ses preuves chez nous, je le propose aux entreprises qui portent elles aussi une mission.</p>
-                    <p>Et chaque euro que vous me confiez va à Semisto, pour planter des forêts comestibles.</p>
+                    <p>Je code en freelance depuis 2004. Ce qui m'a appris à construire des outils utiles, c'est d'en être régulièrement l'un des utilisateurs&nbsp;: un magasin, un lieu d'accueil avec gîtes et salles, un e-commerce, une association. Je connais la caisse qui ne croise pas le stock, le planning de réservations qui déborde, les inscriptions gérées à la main.</p>
+                    <p>Depuis 2023, je construis avec des agents IA les outils dont nos propres structures ont besoin. <em>Claudy</em> fait tourner le tiers-lieu qui héberge Semisto, Les 4 Sources à Yvoir. <em>My Semisto</em> développe la dynamique collective de l'association et <em>Terranova</em> est un puissant outil de cartographie pour nos équipes. Ce qui a fait ses preuves chez nous, je le propose aux entreprises qui portent elles aussi une mission durable.</p>
+                    <p>Et chaque euro que vous me confiez va à Semisto, dont la mission est de transformer l'Europe en un maillage de forêts comestibles.</p>
                     <p class="letter-sign">Michael</p>
                 </div>
             </div>
@@ -354,9 +354,9 @@ const EN = `
                 <div class="letter-body">
                     <p class="eyebrow">A word before we start</p>
                     <p class="letter-hello">Hello, I'm Michael.</p>
-                    <p>I have been coding since 2004. But what taught me to build useful tools was being on the other side of the counter: a shop, a guest house with venues, a training association. I know the till that never matches the stock, the booking schedule that overflows, the registrations handled by hand.</p>
-                    <p>Since 2023, I have been building with AI agents the tools our own organisations needed. Claudy runs Les 4 Sources, the community estate we co-founded in Yvoir. Terranova coordinates Semisto's teams. What has proven itself at home, I offer to companies that also carry a mission.</p>
-                    <p>And every euro you entrust me with goes to Semisto, to plant edible forests.</p>
+                    <p>I have been coding as a freelancer since 2004. What taught me to build useful tools is being one of their users, again and again: a shop, a guest house with venues, an online shop, an association. I know the till that never matches the stock, the booking schedule that overflows, the registrations handled by hand.</p>
+                    <p>Since 2023, I have been building with AI agents the tools our own organisations need. <em>Claudy</em> runs the community estate that hosts Semisto, Les 4 Sources in Yvoir. <em>My Semisto</em> drives the association's collective dynamics and <em>Terranova</em> is a powerful mapping tool for our teams. What has proven itself at home, I offer to companies that also carry a sustainable mission.</p>
+                    <p>And every euro you entrust me with goes to Semisto, whose mission is to turn Europe into a network of edible forests.</p>
                     <p class="letter-sign">Michael</p>
                 </div>
             </div>
