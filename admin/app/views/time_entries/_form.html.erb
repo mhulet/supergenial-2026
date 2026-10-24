@@ -1,0 +1,25 @@
+<%= form_with model: time_entry do |f| %>
+  <%= render "shared/errors", object: time_entry %>
+  <div class="row">
+    <%= field f, :performed_on, :date_field, required: true %>
+    <%= field f, :client_id, :select, client_options, include_blank: "Choisir…", required: true %>
+    <%= field f, :hours, :number_field, step: "0.25", min: "0.25", required: true, autofocus: true %>
+  </div>
+  <%= field f, :description %>
+  <div class="row">
+    <%= field f, :project_id, :select, project_options(time_entry.client_id), include_blank: "Aucun" %>
+    <%= field f, :pack_id, :select, pack_options(time_entry.client_id), include_blank: "Aucun", hint: "Un pack passe la prestation en « imputé au pack »" %>
+  </div>
+  <div class="row">
+    <%= field f, :km, :number_field %>
+    <%= field f, :location %>
+    <%= field f, :status, :select, TimeEntry.status_options %>
+  </div>
+  <div class="form-actions">
+    <%= f.submit "Enregistrer", class: "button" %>
+    <%= link_to "Annuler", time_entries_path, class: "button button--ghost" %>
+    <% if time_entry.persisted? %>
+      <%= link_to "Supprimer", time_entry, data: { turbo_method: :delete, turbo_confirm: "Supprimer cette prestation ?" }, class: "danger" %>
+    <% end %>
+  </div>
+<% end %>

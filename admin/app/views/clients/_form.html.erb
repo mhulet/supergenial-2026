@@ -1,0 +1,18 @@
+<%= form_with model: client do |f| %>
+  <%= render "shared/errors", object: client %>
+  <%= field f, :name, autofocus: true, required: true %>
+  <div class="row">
+    <%= field f, :kind, :select, Client.kind_options %>
+    <%= field f, :status, :select, Client.status_options %>
+  </div>
+  <div class="row">
+    <%= field f, :vat_number %>
+    <%= field f, :hourly_rate, :number_field, step: "0.01", hint: "Vide = #{Client::DEFAULT_HOURLY_RATE} €/h" %>
+  </div>
+  <%= field f, :address, :text_area, rows: 2 %>
+  <%= field f, :notes, :text_area, rows: 3 %>
+  <div class="form-actions">
+    <%= f.submit "Enregistrer", class: "button" %>
+    <%= link_to "Annuler", client.persisted? ? client : clients_path, class: "button button--ghost" %>
+  </div>
+<% end %>

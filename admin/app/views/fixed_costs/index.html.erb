@@ -1,0 +1,33 @@
+<%= page_header "Frais fixes" do %>
+  <%= link_to "+ Frais", new_fixed_cost_path, class: "button" %>
+<% end %>
+
+<% current = @active.sum(&:monthly_amount) %>
+<% forecast = @active.sum(&:monthly_forecast) %>
+<section class="stats">
+  <div class="stat"><span class="stat__label">Par mois</span><strong class="stat__value"><%= eur(current) %></strong><span class="stat__hint"><%= eur(current * 12) %> / an</span></div>
+  <div class="stat"><span class="stat__label">Prévisionnel / mois</span><strong class="stat__value"><%= eur(forecast) %></strong><span class="stat__hint"><%= eur(forecast * 12) %> / an</span></div>
+  <div class="stat"><span class="stat__label">Économie visée</span><strong class="stat__value"><%= eur((current - forecast) * 12) %></strong><span class="stat__hint">par an</span></div>
+</section>
+
+<% @fixed_costs.group_by(&:category).each do |category, costs| %>
+  <div class="card">
+    <h2><%= FixedCost::CATEGORIES[category] %></h2>
+    <table>
+      <thead><tr><th>Frais</th><th class="num">Montant</th><th class="num">/ mois</th><th class="num">Prévu / mois</th><th>Renouvellement</th><th>Action prévue</th></tr></thead>
+      <tbody>
+        <% costs.each do |cost| %>
+          <tr class="<%= 'is-inactive' unless cost.active? %>">
+            <td><%= link_to cost, edit_fixed_cost_path(cost) %><% if cost.billing_url.present? %> <%= link_to "↗", cost.billing_url, target: "_blank", rel: "noopener", class: "muted" %><% end %></td>
+            <td class="num"><%= eur(cost.amount) %> <small class="muted"><%= cost.period_label %></small></td>
+            <td class="num"><%= eur(cost.monthly_amount) %></td>
+            <td class="num <%= 'is-down' if cost.monthly_forecast < cost.monthly_amount %>"><%= eur(cost.monthly_forecast) %></td>
+            <td><%= date(cost.renews_on) %></td>
+            <td><small><%= cost.action %></small></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
+<% if @fixed_costs.empty? %><div class="card"><p class="muted">Aucun frais fixe.</p></div><% end %>

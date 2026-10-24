@@ -1,0 +1,17 @@
+<%= page_header "#{@pack.label} · #{@pack.client}" do %>
+  <%= link_to "+ Heures", new_time_entry_path(client_id: @pack.client_id), class: "button" %>
+  <%= link_to "Modifier", edit_pack_path(@pack), class: "button button--ghost" %>
+<% end %>
+
+<section class="stats">
+  <div class="stat"><span class="stat__label">Achetées</span><strong class="stat__value"><%= hours(@pack.hours) %></strong>
+    <span class="stat__hint"><%= @pack.hourly_rate ? "#{eur(@pack.hourly_rate)}/h · #{eur(@pack.hourly_rate * @pack.hours)}" : "" %></span></div>
+  <div class="stat"><span class="stat__label">Utilisées</span><strong class="stat__value"><%= hours(@pack.used_hours) %></strong></div>
+  <div class="stat"><span class="stat__label">Reste</span><strong class="stat__value <%= 'is-late' if @pack.exhausted? %>"><%= hours(@pack.remaining_hours) %></strong></div>
+</section>
+
+<div class="card">
+  <%= render "time_entries/table", time_entries: @time_entries, show_client: false %>
+</div>
+
+<p><%= link_to "Supprimer ce pack", @pack, data: { turbo_method: :delete, turbo_confirm: "Supprimer ce pack ?" }, class: "danger" %></p>

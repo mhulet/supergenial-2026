@@ -1,0 +1,22 @@
+<%= form_with model: invoice do |f| %>
+  <%= render "shared/errors", object: invoice %>
+  <div class="row">
+    <%= field f, :client_id, :select, client_options, include_blank: "Choisir…", required: true %>
+    <%= field f, :project_id, :select, project_options(invoice.client_id), include_blank: "Aucun" %>
+  </div>
+  <%= field f, :label, required: true %>
+  <div class="row">
+    <%= field f, :number %>
+    <%= field f, :issued_on, :date_field, required: true %>
+    <%= field f, :amount, :number_field, step: "0.01", required: true %>
+    <%= field f, :paid_on, :date_field %>
+  </div>
+  <%= field f, :notes, :text_area, rows: 2 %>
+  <div class="form-actions">
+    <%= f.submit "Enregistrer", class: "button" %>
+    <%= link_to "Annuler", invoices_path, class: "button button--ghost" %>
+    <% if invoice.persisted? %>
+      <%= link_to "Supprimer", invoice, data: { turbo_method: :delete, turbo_confirm: "Supprimer cette facture ? Les heures liées repassent « à facturer » manuellement." }, class: "danger" %>
+    <% end %>
+  </div>
+<% end %>

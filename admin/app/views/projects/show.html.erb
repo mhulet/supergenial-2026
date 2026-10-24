@@ -1,0 +1,28 @@
+<%= page_header @project.name do %>
+  <%= link_to "+ Heures", new_time_entry_path(client_id: @project.client_id, project_id: @project.id), class: "button" %>
+  <%= link_to "Modifier", edit_project_path(@project), class: "button button--ghost" %>
+<% end %>
+
+<p class="lead">
+  <%= link_to @project.client, @project.client %> · <%= @project.kind_label %> · <%= @project.billing_mode_label %>
+  <%= badge @project.status_label, @project.status %>
+</p>
+
+<section class="stats">
+  <div class="stat"><span class="stat__label">Forfait</span><strong class="stat__value"><%= @project.fixed_price ? eur(@project.fixed_price) : "–" %></strong></div>
+  <div class="stat"><span class="stat__label">Facturé</span><strong class="stat__value"><%= eur(@project.invoiced) %></strong></div>
+  <div class="stat"><span class="stat__label">Heures</span><strong class="stat__value"><%= hours(@project.hours_spent) %></strong>
+    <span class="stat__hint">à <%= eur(@project.rate) %>/h</span></div>
+  <div class="stat"><span class="stat__label">Période</span><strong class="stat__value small"><%= date(@project.started_on) %> → <%= date(@project.ended_on) %></strong></div>
+</section>
+
+<div class="card">
+  <h2>Prestations</h2>
+  <%= render "time_entries/table", time_entries: @time_entries, show_client: false %>
+</div>
+
+<% if @project.notes.present? %>
+  <div class="card"><h2>Notes</h2><%= simple_format(@project.notes) %></div>
+<% end %>
+
+<p><%= link_to "Supprimer ce projet", @project, data: { turbo_method: :delete, turbo_confirm: "Supprimer #{@project} ? Les heures restent, sans projet." }, class: "danger" %></p>

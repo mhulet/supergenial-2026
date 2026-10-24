@@ -1,0 +1,16 @@
+<%= form_with model: pack do |f| %>
+  <%= render "shared/errors", object: pack %>
+  <div class="row">
+    <%= field f, :client_id, :select, client_options, include_blank: "Choisir…", required: true %>
+    <%= field f, :label, required: true, placeholder: "Pack 10 h" %>
+  </div>
+  <div class="row">
+    <%= field f, :hours, :number_field, step: "0.25", required: true %>
+    <%= field f, :hourly_rate, :number_field, step: "0.01", hint: "5 h : 100 € · 10 h : 85 € · 25 h : 70 €" %>
+    <%= field f, :purchased_on, :date_field %>
+  </div>
+  <div class="form-actions">
+    <%= f.submit "Enregistrer", class: "button" %>
+    <%= link_to "Annuler", pack.persisted? ? pack : (pack.client || clients_path), class: "button button--ghost" %>
+  </div>
+<% end %>

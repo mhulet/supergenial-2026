@@ -1,0 +1,28 @@
+<%= page_header "Clients" do %>
+  <%= link_to "+ Client", new_client_path, class: "button" %>
+<% end %>
+
+<nav class="filters">
+  <%= link_to "Tous", clients_path, class: ("is-active" unless @status) %>
+  <% Client::STATUSES.each do |key, label| %>
+    <%= link_to label, clients_path(status: key), class: ("is-active" if @status == key) %>
+  <% end %>
+</nav>
+
+<div class="card">
+  <table>
+    <thead><tr><th>Client</th><th>Contact principal</th><th>Statut</th><th class="num">À facturer</th></tr></thead>
+    <tbody>
+      <% @clients.each do |client| %>
+        <% contact = client.primary_contact %>
+        <tr>
+          <td><%= link_to client, client %></td>
+          <td><%= contact ? safe_join([ contact.name, (mail_to(contact.email) if contact.email.present?) ].compact, " · ") : tag.span("–", class: "muted") %></td>
+          <td><%= badge client.status_label, client.status %></td>
+          <td class="num"><%= hours(client.unbilled_hours) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <% if @clients.empty? %><p class="muted">Aucun client.</p><% end %>
+</div>

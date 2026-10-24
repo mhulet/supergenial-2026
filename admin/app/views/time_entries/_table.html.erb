@@ -1,0 +1,35 @@
+<%# locals: (time_entries:, show_client: true, selectable: false) %>
+<% if time_entries.empty? %>
+  <p class="muted">Aucune prestation.</p>
+<% else %>
+  <table>
+    <thead>
+      <tr>
+        <% if selectable %><th></th><% end %>
+        <th>Date</th>
+        <% if show_client %><th>Client</th><% end %>
+        <th>Tâche</th><th class="num">Heures</th><th class="num">Km</th><th>Statut</th><th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% time_entries.each do |entry| %>
+        <tr>
+          <% if selectable %>
+            <td><%= check_box_tag "ids[]", entry.id, false, id: "entry_#{entry.id}", form: "bill-form", disabled: !entry.a_facturer? %></td>
+          <% end %>
+          <td class="nowrap"><%= l(entry.performed_on) %></td>
+          <% if show_client %><td><%= link_to entry.client, entry.client %></td><% end %>
+          <td>
+            <%= entry.description.presence || tag.span("–", class: "muted") %>
+            <% if entry.project %><br><small class="muted"><%= link_to entry.project, entry.project %></small><% end %>
+            <% if entry.location.present? %><small class="muted"> · <%= entry.location %></small><% end %>
+          </td>
+          <td class="num"><%= hours(entry.hours) %></td>
+          <td class="num"><%= entry.km %></td>
+          <td><%= badge entry.status_label, entry.status %><% if entry.pack %><br><small class="muted"><%= link_to entry.pack.label, entry.pack %></small><% end %></td>
+          <td><%= link_to "modifier", edit_time_entry_path(entry), class: "muted small" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

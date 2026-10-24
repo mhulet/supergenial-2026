@@ -1,0 +1,111 @@
+<%= page_header "Tableau de bord #{@dashboard.year}" do %>
+  <%= link_to "← #{@dashboard.year - 1}", root_path(year: @dashboard.year - 1), class: "button button--ghost" %>
+  <%= link_to "+ Heures", new_time_entry_path, class: "button" %>
+<% end %>
+
+<section class="stats">
+  <div class="stat">
+    <span class="stat__label">Facturé</span>
+    <strong class="stat__value"><%= eur(@dashboard.invoiced, precision: 0) %></strong>
+    <div class="meter"><span style="width: <%= [ @dashboard.target_progress, 100 ].min %>%"></span></div>
+    <span class="stat__hint"><%= @dashboard.target_progress %> % de l'objectif (<%= eur(@dashboard.target, precision: 0) %>)</span>
+  </div>
+  <div class="stat">
+    <span class="stat__label">Frais fixes / mois</span>
+    <strong class="stat__value"><%= eur(@dashboard.monthly_costs) %></strong>
+    <span class="stat__hint">Prévisionnel : <%= eur(@dashboard.monthly_forecast_costs) %></span>
+  </div>
+  <div class="stat">
+    <span class="stat__label">Marge brute</span>
+    <strong class="stat__value"><%= eur(@dashboard.gross_margin, precision: 0) %></strong>
+    <span class="stat__hint">Facturé − <%= eur(@dashboard.yearly_costs, precision: 0) %> de frais prévus</span>
+  </div>
+  <div class="stat">
+    <span class="stat__label">Salaire / mois</span>
+    <strong class="stat__value"><%= eur(@dashboard.monthly_salary, precision: 0) %></strong>
+    <span class="stat__hint">Récurrent : <%= eur(@dashboard.recurring_revenue, precision: 0) %> / an</span>
+  </div>
+</section>
+
+<section class="grid-2">
+  <div class="card">
+    <h2>Heures à facturer</h2>
+    <% rows = @dashboard.unbilled_by_client %>
+    <% if rows.empty? %>
+      <p class="muted">Rien en attente.</p>
+    <% else %>
+      <table>
+        <thead><tr><th>Client</th><th>Depuis</th><th class="num">Heures</th><th class="num">Montant</th></tr></thead>
+        <tbody>
+          <% rows.each do |row| %>
+            <tr>
+              <td><%= link_to row[:client], time_entries_path(client_id: row[:client].id) %></td>
+              <td><%= l(row[:since], format: :short) %></td>
+              <td class="num"><%= hours(row[:hours]) %></td>
+              <td class="num"><%= eur(row[:amount]) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+
+  <div class="card">
+    <h2>Échéances de contrats (30 jours)</h2>
+    <% contracts = @dashboard.due_contracts %>
+    <% if contracts.empty? %>
+      <p class="muted">Aucune échéance proche.</p>
+    <% else %>
+      <table>
+        <thead><tr><th>Contrat</th><th>Échéance</th><th class="num">Montant</th><th></th></tr></thead>
+        <tbody>
+          <% contracts.each do |contract| %>
+            <tr class="<%= 'is-late' if contract.next_billing_on < Date.current %>">
+              <td><%= link_to contract, contract %><br><small class="muted"><%= contract.client %></small></td>
+              <td><%= date(contract.next_billing_on) %></td>
+              <td class="num"><%= eur(contract.amount) %></td>
+              <td><%= button_to "Facturé", bill_contract_path(contract), class: "button button--small", form: { data: { turbo_confirm: "Enregistrer la facture de #{contract} ?" } } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+
+  <div class="card">
+    <h2>Factures non payées</h2>
+    <% invoices = @dashboard.unpaid_invoices %>
+    <% if invoices.empty? %>
+      <p class="muted">Tout est payé.</p>
+    <% else %>
+      <table>
+        <tbody>
+          <% invoices.each do |invoice| %>
+            <tr>
+              <td><%= link_to invoice.client, invoice.client %><br><small class="muted"><%= invoice %></small></td>
+              <td><%= date(invoice.issued_on) %></td>
+              <td class="num"><%= eur(invoice.amount) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+
+  <div class="card">
+    <h2>À surveiller</h2>
+    <% packs = @dashboard.low_packs %>
+    <% renewals = @dashboard.renewals %>
+    <% if packs.empty? && renewals.empty? %>
+      <p class="muted">Rien à signaler.</p>
+    <% end %>
+    <ul class="plain">
+      <% packs.each do |pack| %>
+        <li><%= link_to pack.client, pack %> : <%= pack.label %>, reste <strong><%= hours(pack.remaining_hours) %></strong></li>
+      <% end %>
+      <% renewals.each do |cost| %>
+        <li><%= link_to cost, edit_fixed_cost_path(cost) %> se renouvelle le <%= date(cost.renews_on) %><%= " : #{cost.action}" if cost.action.present? %></li>
+      <% end %>
+    </ul>
+  </div>
+</section>
