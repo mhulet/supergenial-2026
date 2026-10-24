@@ -3,12 +3,14 @@ class Client < ApplicationRecord
 
   DEFAULT_HOURLY_RATE = 80
 
+  # Les factures comptent dans le chiffre d'affaires : un client facturé ne se supprime pas,
+  # il passe en « Ancien client ». Sans facture, il part avec tout ce qui le concerne.
+  has_many :invoices, dependent: :restrict_with_error
   has_many :contacts, -> { order(primary: :desc, name: :asc) }, dependent: :destroy
+  has_many :time_entries, dependent: :destroy
   has_many :projects, dependent: :destroy
   has_many :contracts, dependent: :destroy
-  has_many :time_entries, dependent: :destroy
   has_many :packs, dependent: :destroy
-  has_many :invoices, dependent: :destroy
 
   choices :kind, organisation: "Organisation", particulier: "Particulier"
   choices :status, actif: "Actif", prospect: "Prospect", ancien: "Ancien client"

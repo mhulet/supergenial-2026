@@ -2,8 +2,10 @@
 class Invoice < ApplicationRecord
   belongs_to :client
   belongs_to :project, optional: true
-  has_many :time_entries, dependent: :nullify
+  has_many :time_entries
   has_many :packs, dependent: :nullify
+
+  before_destroy :release_time_entries
 
   validates :label, :issued_on, :amount, presence: true
 
@@ -14,4 +16,11 @@ class Invoice < ApplicationRecord
   def paid? = paid_on.present?
 
   def to_s = [ number, label ].compact_blank.join(" · ")
+
+  private
+    # Supprimer la facture annule la facturation : ses heures repassent « à facturer ».
+    def release_time_entries
+      time_entries.facture.update_all(status: "a_facturer")
+      time_entries.update_all(invoice_id: nil)
+    end
 end

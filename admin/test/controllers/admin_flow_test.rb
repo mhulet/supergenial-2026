@@ -10,7 +10,7 @@ class AdminFlowTest < ActionDispatch::IntegrationTest
   end
 
   test "every page renders" do
-    [ root_path, clients_path, client_path(clients(:dici)), new_client_path, new_client_contact_path(clients(:dici)),
+    [ root_path, clients_path, client_path(clients(:dici)), client_path(clients(:silvea)), new_client_path, new_client_contact_path(clients(:dici)),
       projects_path, project_path(projects(:platform)), new_project_path, time_entries_path, new_time_entry_path,
       edit_time_entry_path(time_entries(:visio)), pack_path(packs(:silvea_10h)), new_pack_path, contracts_path,
       contract_path(contracts(:hosting)), new_contract_path, fixed_costs_path, new_fixed_cost_path,
@@ -57,5 +57,47 @@ class AdminFlowTest < ActionDispatch::IntegrationTest
       post bill_contract_path(contracts(:hosting)), params: { number: "2026-051" }
     end
     assert_equal Date.new(2027, 10, 1), contracts(:hosting).reload.next_billing_on
+  end
+
+  test "delete a client without invoices, with everything it owns" do
+    client = clients(:dici)
+    assert_difference -> { Client.count } => -1, -> { TimeEntry.count } => -2, -> { Project.count } => -client.projects.count do
+      delete client_path(client)
+    end
+    assert_redirected_to clients_path
+  end
+
+  test "a client with invoices cannot be deleted" do
+    assert_no_difference -> { Client.count } do
+      delete client_path(clients(:silvea))
+    end
+    assert_redirected_to client_path(clients(:silvea))
+    assert_match "1 facture", flash[:alert]
+    assert Pack.exists?(packs(:silvea_10h).id), "rien n'est supprimé à moitié"
+  end
+
+  test "deleting an invoice puts its hours back to bill" do
+    entries = [ time_entries(:visio), time_entries(:dashboard) ]
+    post bill_time_entries_path, params: { ids: entries.map(&:id), number: "2026-052" }
+    delete invoice_path(Invoice.find_by!(number: "2026-052"))
+    assert entries.all? { |entry| entry.reload.a_facturer? && entry.invoice.nil? }
+  end
+
+  test "deleting a pack puts its hours back to bill" do
+    delete pack_path(packs(:silvea_10h))
+    assert_redirected_to client_path(clients(:silvea))
+    entry = time_entries(:seo).reload
+    assert entry.a_facturer?
+    assert_nil entry.pack
+  end
+
+  test "delete the other records" do
+    { client_contact_path(clients(:dici), contacts(:ethan)) => Contact, project_path(projects(:platform)) => Project,
+      contract_path(contracts(:hosting)) => Contract, fixed_cost_path(fixed_costs(:anthropic)) => FixedCost,
+      time_entry_path(time_entries(:visio)) => TimeEntry }.each do |path, model|
+      assert_difference -> { model.count }, -1, path do
+        delete path
+      end
+    end
   end
 end
