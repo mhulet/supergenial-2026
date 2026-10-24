@@ -18,7 +18,7 @@ jobs:
   site:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - name: Construire l'image Docker du site
         run: docker build -t site .
       - name: Le site répond
@@ -35,7 +35,7 @@ jobs:
       run:
         working-directory: admin
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - id: detect
         working-directory: .
         run: echo "present=$([ -f admin/Gemfile.lock ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
