@@ -27,7 +27,12 @@ class Dashboard
 
   def monthly_salary = gross_margin / 12
 
-  def recurring_revenue = Contract.actif.sum(&:yearly_amount)
+  def recurring_contracts = @recurring_contracts ||= Contract.actif.includes(plan: :prices).to_a
+
+  def recurring_revenue = recurring_contracts.sum(&:yearly_amount)
+
+  # Avec les changements de prix des formules déjà programmés.
+  def recurring_revenue_next_year = recurring_contracts.sum(&:revenue_over_next_year)
 
   def unbilled_by_client
     TimeEntry.a_facturer.includes(:client, :project).group_by(&:client)
@@ -36,7 +41,7 @@ class Dashboard
   end
 
   def due_contracts(horizon = 30.days)
-    Contract.due_by(Date.current + horizon).includes(:client).by_due_date
+    Contract.due_by(Date.current + horizon).includes(:client, plan: :prices).by_due_date
   end
 
   def low_packs

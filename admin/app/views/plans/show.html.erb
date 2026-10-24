@@ -1,0 +1,59 @@
+<%= page_header @plan.name do %>
+  <%= link_to "Modifier", edit_plan_path(@plan), class: "button button--ghost" %>
+<% end %>
+
+<p class="lead">
+  <%= @plan.description %>
+  <%= @plan.active? ? badge("proposée", "actif") : badge("retirée du catalogue") %>
+</p>
+
+<% next_price = @plan.next_price %>
+<% contracts = @contracts.select(&:actif?) %>
+<section class="stats">
+  <div class="stat"><span class="stat__label">Prix actuel</span><strong class="stat__value"><%= eur(@plan.current_price) %></strong><span class="stat__hint"><%= @plan.period_label %></span></div>
+  <div class="stat"><span class="stat__label">Prochain prix</span><strong class="stat__value"><%= next_price ? eur(next_price.amount) : "–" %></strong>
+    <span class="stat__hint"><%= "dès le #{l(next_price.starts_on)}" if next_price %></span></div>
+  <div class="stat"><span class="stat__label">Contrats actifs</span><strong class="stat__value"><%= contracts.size %></strong>
+    <span class="stat__hint"><%= eur(contracts.sum(&:yearly_amount)) %> / an<%= " · #{eur(contracts.sum { |c| c.yearly(c.amount_on(next_price.starts_on)) })} / an au nouveau prix" if next_price %></span></div>
+</section>
+
+<div class="card">
+  <h2>Prix</h2>
+  <table>
+    <thead><tr><th>Activé le</th><th class="num">Prix</th><th></th><th></th></tr></thead>
+    <tbody>
+      <% @plan.prices.reverse_each do |price| %>
+        <tr class="<%= 'is-inactive' unless price.current? || price.upcoming? %>">
+          <td><%= l(price.starts_on) %></td>
+          <td class="num"><%= eur(price.amount) %> <small class="muted"><%= @plan.period_label %></small></td>
+          <td><%= badge("en vigueur", "actif") if price.current? %><%= badge("à venir", "prospect") if price.upcoming? %></td>
+          <td><% if @plan.prices.size > 1 %><%= button_to "Supprimer", plan_price_path(@plan, price), method: :delete, class: "link-button danger", form: { data: { turbo_confirm: "Supprimer le prix du #{l(price.starts_on)} ?" } } %><% end %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= form_with model: @price, url: plan_prices_path(@plan), class: "inline-form" do |f| %>
+    <%= f.number_field :amount, step: "0.01", required: true, placeholder: "Nouveau prix", "aria-label": "Nouveau prix" %>
+    <%= f.date_field :starts_on, required: true, "aria-label": "Date d'activation" %>
+    <%= f.submit "Programmer ce prix", class: "button" %>
+  <% end %>
+  <p class="hint">Le prix en vigueur à une date est le dernier activé. Les contrats au prix du catalogue suivent ; ceux à prix négocié gardent le leur.</p>
+</div>
+
+<div class="card">
+  <header class="card-header"><h2>Contrats</h2><%= link_to "+ Contrat", new_contract_path(plan_id: @plan.id) %></header>
+  <table>
+    <tbody>
+      <% @contracts.each do |contract| %>
+        <tr>
+          <td><%= link_to contract, contract %><br><small class="muted"><%= contract.client %></small></td>
+          <td class="num"><%= eur(contract.current_amount) %> <small class="muted"><%= contract.period_label %><%= " · négocié" if contract.negotiated? %></small></td>
+          <td><%= contract.actif? ? date(contract.next_billing_on) : badge(contract.status_label, contract.status) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <% if @contracts.empty? %><p class="muted">Aucun contrat.</p><% end %>
+</div>
+
+<p><%= link_to "Supprimer cette formule", @plan, data: { turbo_method: :delete, turbo_confirm: "Supprimer #{@plan} ?" }, class: "danger" %></p>

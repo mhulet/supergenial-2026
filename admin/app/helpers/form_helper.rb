@@ -26,5 +26,11 @@ module FormHelper
     scope.map { |pack| [ "#{pack.client} · #{pack.label} (reste #{hours(pack.remaining_hours)})", pack.id ] }
   end
 
+  # Les formules actives, plus celle du contrat si elle a été retirée du catalogue.
+  def plan_options(selected_id = nil)
+    Plan.ordered.includes(:prices).select { |plan| plan.active? || plan.id == selected_id }
+      .map { |plan| [ "#{plan} · #{eur(plan.current_price)} #{plan.period_label}", plan.id ] }
+  end
+
   def period_options = Periodic::PERIODS.map { |key, label| [ label.capitalize, key ] }
 end

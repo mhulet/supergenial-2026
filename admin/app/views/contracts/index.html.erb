@@ -16,9 +16,9 @@
     <tbody>
       <% @contracts.each do |contract| %>
         <tr class="<%= 'is-late' if contract.due? %>">
-          <td><%= link_to contract, contract %><br><small class="muted"><%= contract.kinds_label %><%= " · #{contract.plan_label}" if contract.plan %><%= " · #{contract.registrar}" if contract.registrar.present? %></small></td>
+          <td><%= link_to contract, contract %><br><small class="muted"><%= contract.kinds_label %><%= " · #{contract.plan}" if contract.plan %><%= " · #{contract.registrar}" if contract.registrar.present? %></small></td>
           <td><%= link_to contract.client, contract.client %></td>
-          <td class="num"><%= eur(contract.amount) %><br><small class="muted"><%= contract.period_label %></small></td>
+          <td class="num"><%= eur(contract.current_amount) %><br><small class="muted"><%= contract.period_label %></small></td>
           <td class="num"><%= eur(contract.yearly_amount) %></td>
           <td class="num"><%= contract.cost ? percent(contract.margin_rate) : "–" %></td>
           <td><%= contract.actif? ? date(contract.next_billing_on) : badge(contract.status_label, contract.status) %></td>

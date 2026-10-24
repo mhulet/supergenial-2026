@@ -1,0 +1,9 @@
+essentiel:
+  name: Essentiel
+  period: mensuel
+  position: 0
+
+evolution:
+  name: Évolution
+  period: mensuel
+  position: 1

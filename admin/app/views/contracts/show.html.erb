@@ -3,12 +3,14 @@
 <% end %>
 
 <p class="lead">
-  <%= link_to @contract.client, @contract.client %> · <%= @contract.kinds_label %><%= " · #{@contract.plan_label}" if @contract.plan %>
+  <%= link_to @contract.client, @contract.client %> · <%= @contract.kinds_label %><% if @contract.plan %> · formule <%= link_to @contract.plan, @contract.plan %><% end %>
   <%= badge @contract.status_label, @contract.status %>
 </p>
 
 <section class="stats">
-  <div class="stat"><span class="stat__label">Prix</span><strong class="stat__value"><%= eur(@contract.amount) %></strong><span class="stat__hint"><%= @contract.period_label %></span></div>
+  <div class="stat"><span class="stat__label">Prix</span><strong class="stat__value"><%= eur(@contract.current_amount) %></strong>
+    <span class="stat__hint"><%= @contract.period_label %><%= " · prix négocié" if @contract.negotiated? %><% if (next_price = @contract.next_plan_price) %>
+      · <%= eur(next_price.amount) %> dès le <%= l(next_price.starts_on) %><% end %></span></div>
   <div class="stat"><span class="stat__label">Par an</span><strong class="stat__value"><%= eur(@contract.yearly_amount) %></strong>
     <span class="stat__hint"><%= "Coût #{eur(@contract.yearly_cost)} · marge #{percent(@contract.margin_rate)}" if @contract.cost %></span></div>
   <div class="stat"><span class="stat__label">Prochaine échéance</span><strong class="stat__value <%= 'is-late' if @contract.due? %>"><%= date(@contract.next_billing_on) %></strong>
@@ -21,7 +23,7 @@
     <%= form_with url: bill_contract_path(@contract), class: "inline-form" do |f| %>
       <%= f.text_field :number, placeholder: "N° OkiOki", "aria-label": "Numéro de facture OkiOki" %>
       <%= f.date_field :issued_on, value: Date.current, "aria-label": "Date de facture" %>
-      <%= f.submit "Facturé #{eur(@contract.amount)}", class: "button" %>
+      <%= f.submit "Facturé #{eur(@contract.amount_on(@contract.next_billing_on || Date.current))}", class: "button" %>
     <% end %>
     <p class="hint">Crée la facture dans l'admin et avance l'échéance d'un <%= @contract.period == "annuel" ? "an" : "mois" %>.</p>
   </div>

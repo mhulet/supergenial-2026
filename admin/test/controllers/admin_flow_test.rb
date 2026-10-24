@@ -14,7 +14,9 @@ class AdminFlowTest < ActionDispatch::IntegrationTest
       projects_path, project_path(projects(:platform)), new_project_path, time_entries_path, new_time_entry_path,
       edit_time_entry_path(time_entries(:visio)), pack_path(packs(:silvea_10h)), new_pack_path, contracts_path,
       contract_path(contracts(:hosting)), new_contract_path, fixed_costs_path, new_fixed_cost_path,
-      edit_fixed_cost_path(fixed_costs(:anthropic)), invoices_path(year: 2026), new_invoice_path ].each do |path|
+      edit_fixed_cost_path(fixed_costs(:anthropic)), invoices_path(year: 2026), new_invoice_path,
+      plans_path, plan_path(plans(:evolution)), new_plan_path, edit_plan_path(plans(:evolution)), new_contract_path(plan_id: plans(:essentiel).id),
+      contract_path(contracts(:maintenance)) ].each do |path|
       get path
       assert_response :success, path
     end
@@ -69,6 +71,28 @@ class AdminFlowTest < ActionDispatch::IntegrationTest
       post bill_contract_path(contracts(:hosting)), params: { number: "2026-051" }
     end
     assert_equal Date.new(2027, 10, 1), contracts(:hosting).reload.next_billing_on
+  end
+
+  test "create a plan and schedule a new price" do
+    post plans_path, params: { plan: { name: "Croissance", period: "mensuel", active: "1", prices_attributes: [ { amount: "1200", starts_on: "2026-11-01" } ] } }
+    plan = Plan.find_by!(name: "Croissance")
+    assert_redirected_to plan_path(plan)
+
+    post plan_prices_path(plan), params: { plan_price: { amount: "1300", starts_on: "2027-01-01" } }
+    assert_redirected_to plan_path(plan)
+    assert_equal [ 1200, 1300 ], plan.prices.reload.map(&:amount)
+
+    delete plan_price_path(plan, plan.prices.last)
+    delete plan_price_path(plan, plan.prices.first)
+    assert_equal 1, plan.prices.reload.size, "une formule garde au moins un prix"
+  end
+
+  test "link a contract to a plan" do
+    post contracts_path, params: { contract: { client_id: clients(:dici).id, kinds: [ "maintenance" ], plan_id: plans(:essentiel).id,
+                                               label: "Maintenance Dici", amount: "", status: "actif" } }
+    contract = Contract.last
+    assert_redirected_to contract_path(contract)
+    assert_equal 390, contract.current_amount
   end
 
   test "delete a client without invoices, with everything it owns" do
