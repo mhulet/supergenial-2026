@@ -1,5 +1,6 @@
 ethan:
   client: dici
-  name: Ethan
+  first_name: Ethan
+  last_name: Martin
   email: ethan@example.com
   primary: true

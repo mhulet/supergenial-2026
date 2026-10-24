@@ -16,7 +16,7 @@
     <ul class="plain">
       <% @client.contacts.each do |contact| %>
         <li>
-          <strong><%= contact.name %></strong><%= " (#{contact.role})" if contact.role.present? %>
+          <strong><%= contact.full_name %></strong><%= " (#{contact.role})" if contact.role.present? %>
           <%= badge "principal" if contact.primary? %><br>
           <small><%= safe_join([ (mail_to(contact.email) if contact.email.present?), (link_to(contact.phone, "tel:#{contact.phone.delete(' ')}") if contact.phone.present?) ].compact, " · ") %></small>
           <%= link_to "modifier", edit_client_contact_path(@client, contact), class: "muted small" %>

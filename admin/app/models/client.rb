@@ -6,7 +6,7 @@ class Client < ApplicationRecord
   # Les factures comptent dans le chiffre d'affaires : un client facturé ne se supprime pas,
   # il passe en « Ancien client ». Sans facture, il part avec tout ce qui le concerne.
   has_many :invoices, dependent: :restrict_with_error
-  has_many :contacts, -> { order(primary: :desc, name: :asc) }, dependent: :destroy
+  has_many :contacts, -> { order(primary: :desc, first_name: :asc, last_name: :asc) }, dependent: :destroy
   has_many :time_entries, dependent: :destroy
   has_many :projects, dependent: :destroy
   has_many :contracts, dependent: :destroy

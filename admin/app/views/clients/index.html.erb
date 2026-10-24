@@ -17,7 +17,7 @@
         <% contact = client.primary_contact %>
         <tr>
           <td><%= link_to client, client %></td>
-          <td><%= contact ? safe_join([ contact.name, (mail_to(contact.email) if contact.email.present?) ].compact, " · ") : tag.span("–", class: "muted") %></td>
+          <td><%= contact ? safe_join([ contact.full_name, (mail_to(contact.email) if contact.email.present?) ].compact, " · ") : tag.span("–", class: "muted") %></td>
           <td><%= badge client.status_label, client.status %></td>
           <td class="num"><%= hours(client.unbilled_hours) %></td>
         </tr>

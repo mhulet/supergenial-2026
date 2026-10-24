@@ -23,7 +23,8 @@ fr:
         hourly_rate: Taux horaire
         notes: Notes
       contact:
-        name: Nom
+        first_name: Prénom
+        last_name: Nom
         role: Rôle
         email: E-mail
         phone: Téléphone
