@@ -57,3 +57,7 @@ end
 gem "rails-i18n", "~> 8.1"
 
 gem "csv", "~> 3.3"
+
+# Error tracking [https://docs.sentry.io/platforms/ruby/guides/rails/]
+gem "sentry-ruby"
+gem "sentry-rails"
