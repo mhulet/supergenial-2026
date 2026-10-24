@@ -1,0 +1,56 @@
+# Mises à jour automatiques des dépendances.
+#
+# - Ruby/Rails (gems de l'admin) et JS (outil Illustrations) : mises à jour de SÉCURITÉ uniquement
+#   (open-pull-requests-limit: 0 coupe les mises à jour de version ; les alertes de sécurité
+#   ouvrent quand même leur PR, dès qu'une faille est publiée).
+# - Image Docker nginx et actions GitHub : pas d'alertes de sécurité côté GitHub, donc mises à
+#   jour de version, chaque nuit de dimanche à lundi.
+#
+# Les PR patch/minor sont fusionnées toutes seules si la CI passe (voir workflows/ci.yml).
+# Les majeures restent ouvertes pour revue.
+version: 2
+updates:
+  - package-ecosystem: bundler
+    directory: /admin
+    schedule:
+      interval: weekly
+      day: monday
+      time: "02:00"
+      timezone: Europe/Brussels
+    open-pull-requests-limit: 0
+    labels: [dependances, securite]
+    groups:
+      gems-securite:
+        applies-to: security-updates
+        update-types: [patch, minor]
+
+  - package-ecosystem: bun
+    directory: /.claude/skills/Illustrations/Tools
+    schedule:
+      interval: weekly
+      day: monday
+      time: "02:00"
+      timezone: Europe/Brussels
+    open-pull-requests-limit: 0
+    labels: [dependances, securite]
+
+  - package-ecosystem: docker
+    directories: [/, /admin]
+    schedule:
+      interval: weekly
+      day: monday
+      time: "02:00"
+      timezone: Europe/Brussels
+    labels: [dependances]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "02:00"
+      timezone: Europe/Brussels
+    labels: [dependances]
+    groups:
+      actions:
+        update-types: [patch, minor]

@@ -1,0 +1,93 @@
+name: CI
+# Vérifie chaque PR (site + admin Rails), puis fusionne seule une mise à jour de sécurité
+# qui ne change pas de version majeure — uniquement si tous les tests sont verts.
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  site:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Construire l'image Docker du site
+        run: docker build -t site .
+      - name: Le site répond
+        run: |
+          docker run -d --name site -p 8080:80 site
+          for i in $(seq 1 15); do curl -fsS -o /dev/null http://localhost:8080/ && break; sleep 1; done
+          curl -fsS -H 'Host: www.supergenial.be' http://localhost:8080/ | grep -q '</html>'
+          curl -fsS -o /dev/null -H 'Host: www.supergenial.be' http://localhost:8080/tarifs/
+          test "$(curl -s -o /dev/null -w '%{http_code}' -H 'Host: supergenial.be' http://localhost:8080/)" = 301
+
+  admin:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: admin
+    steps:
+      - uses: actions/checkout@v5
+      - id: detect
+        working-directory: .
+        run: echo "present=$([ -f admin/Gemfile.lock ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+      - if: steps.detect.outputs.present == 'true'
+        uses: ruby/setup-ruby@v1
+        with:
+          working-directory: admin
+          bundler-cache: true
+      - name: Tests Rails
+        if: steps.detect.outputs.present == 'true'
+        env:
+          RAILS_ENV: test
+        run: |
+          bin/rails db:prepare
+          bin/rails test
+      - name: Brakeman
+        if: steps.detect.outputs.present == 'true' && hashFiles('admin/bin/brakeman') != ''
+        run: bin/brakeman --no-pager --quiet
+
+  automerge:
+    needs: [site, admin]
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - id: meta
+        if: github.event.pull_request.user.login == 'dependabot[bot]'
+        uses: dependabot/fetch-metadata@v2
+      - name: Fusion automatique (pas de version majeure)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.html_url }}
+          SHA: ${{ github.event.pull_request.head.sha }}
+          AUTHOR: ${{ github.event.pull_request.user.login }}
+          BRANCH: ${{ github.event.pull_request.head.ref }}
+          UPDATE_TYPE: ${{ steps.meta.outputs.update-type }}
+          LABELS: ${{ join(github.event.pull_request.labels.*.name, ',') }}
+        run: |
+          ok=false
+          if [ "$AUTHOR" = "dependabot[bot]" ]; then
+            case "$UPDATE_TYPE" in
+              version-update:semver-patch|version-update:semver-minor) ok=true ;;
+            esac
+          # PR de la routine hebdomadaire Claude : elle pose ce label seulement sans saut de majeure.
+          elif [[ "$BRANCH" == claude/* && ",$LABELS," == *",securite:auto-merge,"* ]]; then
+            ok=true
+          fi
+          if [ "$ok" != true ]; then
+            echo "Pas de fusion automatique ($AUTHOR, ${UPDATE_TYPE:-sans type}) : revue manuelle."
+            exit 0
+          fi
+          # --match-head-commit : ne fusionne que le commit qui vient d'être testé.
+          gh pr merge "$PR" --squash --delete-branch --match-head-commit "$SHA"

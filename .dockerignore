@@ -4,7 +4,9 @@
 .claude
 Plans
 tools
-deploy
+# deploy/ : seule la config nginx entre (copiée hors du site, voir Dockerfile).
+deploy/*
+!deploy/nginx.conf
 Dockerfile
 .dockerignore
 .tool-versions
