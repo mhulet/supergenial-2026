@@ -1,12 +1,14 @@
 class Contact < ApplicationRecord
   belongs_to :client
 
-  validates :name, presence: true
+  validates :first_name, presence: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, allow_blank: true
 
   after_save :demote_other_contacts, if: -> { primary? && saved_change_to_primary? }
 
-  def to_s = name
+  def full_name = [ first_name, last_name ].compact_blank.join(" ")
+
+  def to_s = full_name
 
   private
     # Un seul contact principal par client.

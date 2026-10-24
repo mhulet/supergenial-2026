@@ -41,6 +41,6 @@ class ContactsController < ApplicationController
     end
 
     def contact_params
-      params.expect(contact: %i[ name role email phone primary ])
+      params.expect(contact: %i[ first_name last_name role email phone primary ])
     end
 end
