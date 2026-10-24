@@ -97,3 +97,12 @@
 <% if @client.notes.present? %>
   <div class="card"><h2>Notes</h2><%= simple_format(@client.notes) %></div>
 <% end %>
+
+<% if @client.invoices.any? %>
+  <p class="muted small">Ce client a des factures : il ne peut pas être supprimé. Passe-le en « Ancien client ».</p>
+<% else %>
+  <% linked = { "contact" => @client.contacts.size, "projet" => @client.projects.size, "contrat" => @client.contracts.size,
+                "pack" => @client.packs.size, "prestation" => @client.time_entries.size }.select { |_, count| count.positive? } %>
+  <p><%= link_to "Supprimer ce client", @client, class: "danger", data: { turbo_method: :delete,
+        turbo_confirm: "Supprimer #{@client} ?#{" Seront aussi supprimés : #{linked.map { |name, count| pluralize(count, name) }.to_sentence}." if linked.any?} C'est définitif." } %></p>
+<% end %>

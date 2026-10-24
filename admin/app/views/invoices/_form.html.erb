@@ -16,7 +16,7 @@
     <%= f.submit "Enregistrer", class: "button" %>
     <%= link_to "Annuler", invoices_path, class: "button button--ghost" %>
     <% if invoice.persisted? %>
-      <%= link_to "Supprimer", invoice, data: { turbo_method: :delete, turbo_confirm: "Supprimer cette facture ? Les heures liées repassent « à facturer » manuellement." }, class: "danger" %>
+      <%= link_to "Supprimer", invoice, data: { turbo_method: :delete, turbo_confirm: "Supprimer cette facture ? Les heures liées repassent « à facturer »." }, class: "danger" %>
     <% end %>
   </div>
 <% end %>

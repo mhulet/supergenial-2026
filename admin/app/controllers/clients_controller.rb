@@ -36,8 +36,13 @@ class ClientsController < ApplicationController
   end
 
   def destroy
-    @client.destroy
-    redirect_to clients_path, notice: "Client supprimé.", status: :see_other
+    if @client.destroy
+      redirect_to clients_path, notice: "#{@client} supprimé.", status: :see_other
+    else
+      redirect_to @client, status: :see_other,
+        alert: "Impossible de supprimer #{@client} : #{helpers.pluralize(@client.invoices.count, "facture")} y #{@client.invoices.many? ? "sont liées" : "est liée"}. " \
+               "Passe-le en « Ancien client », ou supprime d'abord ses factures."
+    end
   end
 
   private
