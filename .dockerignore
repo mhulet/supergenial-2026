@@ -10,7 +10,6 @@ deploy/*
 Dockerfile
 .dockerignore
 .tool-versions
-CNAME
 todoset-repos.png
 **/*.ts
 **/*.md

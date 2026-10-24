@@ -27,4 +27,4 @@ Pour changer le lien « Réserver un call », modifier `BOOKING` dans `tools/sit
 
 ## Déploiement sur le serveur Semisto (Coolify)
 
-`Dockerfile` + `deploy/nginx.conf` : nginx sert les fichiers du dépôt tels quels (aucune étape de build, les pages sont commitées). `.dockerignore` écarte les sources (`*.ts`, `_drafts`, `tools/`, notes). L'apex `supergenial.be` redirige en 301 vers `www.supergenial.be` ; tout autre hôte (sous-domaine d'essai) est servi tel quel. Tant que le DNS pointe vers GitHub Pages, `CNAME` reste nécessaire.
+`Dockerfile` + `deploy/nginx.conf` : nginx sert les fichiers du dépôt tels quels (aucune étape de build, les pages sont commitées). `.dockerignore` écarte les sources (`*.ts`, `_drafts`, `tools/`, notes). L'apex `supergenial.be` redirige en 301 vers `www.supergenial.be` ; tout autre hôte (sous-domaine d'essai) est servi tel quel. En ligne depuis le 24/10/2026 : app Coolify sur dash.semisto.org (build pack Dockerfile, **port 80**), déployée à chaque push sur `main`. DNS chez Cloudflare (`@` et `www` en A proxifiés vers le VPS, SSL/TLS Full) ; le pare-feu du VPS n'accepte que Cloudflare, donc un `curl` direct sur l'IP expire.
