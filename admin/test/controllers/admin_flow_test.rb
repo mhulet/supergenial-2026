@@ -52,6 +52,18 @@ class AdminFlowTest < ActionDispatch::IntegrationTest
     assert time_entries(:visio).reload.a_facturer?
   end
 
+  test "create a contract with several kinds and filter by kind" do
+    post contracts_path, params: { contract: { client_id: clients(:dici).id, kinds: [ "", "hebergement", "maintenance" ],
+                                               label: "Site Dici", amount: 50, period: "mensuel", status: "actif" } }
+    contract = Contract.last
+    assert_redirected_to contract_path(contract)
+    assert_equal %w[ maintenance hebergement ], contract.kinds
+
+    get contracts_path(kind: "maintenance")
+    assert_select "td", text: /Maintenance \+ Hébergement/
+    assert_select "a", text: "Hébergement Rewards Manager", count: 0
+  end
+
   test "bill a contract" do
     assert_difference -> { Invoice.count } do
       post bill_contract_path(contracts(:hosting)), params: { number: "2026-051" }

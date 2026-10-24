@@ -136,8 +136,8 @@ class SheetImport
     end
 
     def domain_contract(domain)
-      Contract.nom_de_domaine.find_by(label: domain) ||
-        Contract.new(kind: "nom_de_domaine", label: domain, period: "annuel", client: unassigned_client)
+      Contract.of_kind("nom_de_domaine").find_by(label: domain) ||
+        Contract.new(kinds: [ "nom_de_domaine" ], label: domain, period: "annuel", client: unassigned_client)
     end
 
     # Revenus : Libellé | Facturé | Coûts | Marge % | Marge € | Statut | Notes, en sections
@@ -174,7 +174,7 @@ class SheetImport
       client = find_or_create_client(client_name_from(label))
       label = "Hébergement #{label}" if normalize(label) == normalize(client.name)
       contract = client.contracts.find_or_initialize_by(label:)
-      contract.assign_attributes(kind: "hebergement", period: "annuel", amount: amount(invoiced), cost: amount(cost).nonzero?,
+      contract.assign_attributes(kinds: [ "hebergement" ], period: "annuel", amount: amount(invoiced), cost: amount(cost).nonzero?,
                                  next_billing_on: next_billing_from(notes) || contract.next_billing_on,
                                  notes: [ status, notes ].compact_blank.join(" · ").presence)
       contract.save!
@@ -201,7 +201,8 @@ class SheetImport
           next
         end
         next unless client
-        contract = client.contracts.find_or_initialize_by(label: label.strip, kind: "refacturation")
+        contract = client.contracts.of_kind("refacturation").find_or_initialize_by(label: label.strip)
+        contract.kinds = [ "refacturation" ]
         period = monthly.present? ? "mensuel" : "annuel"
         contract.assign_attributes(period:, amount: amount(period == "mensuel" ? monthly : yearly), notes: notes.presence)
         contract.save!
