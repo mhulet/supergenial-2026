@@ -3,7 +3,7 @@
 <% end %>
 
 <nav class="filters">
-  <%= link_to "En cours et devis", projects_path, class: ("is-active" unless @status) %>
+  <%= link_to "Actifs", projects_path, class: ("is-active" unless @status) %>
   <% Project::STATUSES.each do |key, label| %>
     <%= link_to label, projects_path(status: key), class: ("is-active" if @status == key) %>
   <% end %>
