@@ -4,7 +4,7 @@ class ContractsController < ApplicationController
   def index
     @kind = params[:kind].presence_in(Contract::KINDS.keys)
     @contracts = Contract.includes(:client).by_due_date
-    @contracts = @kind ? @contracts.where(kind: @kind) : @contracts
+    @contracts = @kind ? @contracts.of_kind(@kind) : @contracts
     @contracts = params[:all] ? @contracts : @contracts.actif
   end
 
@@ -12,7 +12,7 @@ class ContractsController < ApplicationController
   end
 
   def new
-    @contract = Contract.new(client_id: preselected_client_id, kind: params[:kind] || "hebergement",
+    @contract = Contract.new(client_id: preselected_client_id, kinds: [ params[:kind].presence_in(Contract::KINDS.keys) || "hebergement" ],
                              starts_on: Date.current, next_billing_on: Date.current)
   end
 
@@ -52,7 +52,7 @@ class ContractsController < ApplicationController
     end
 
     def contract_params
-      params.expect(contract: %i[ client_id project_id fixed_cost_id kind plan label amount cost period
-                                  starts_on next_billing_on status registrar notes ])
+      params.expect(contract: [ :client_id, :project_id, :fixed_cost_id, :plan, :label, :amount, :cost, :period,
+                                  :starts_on, :next_billing_on, :status, :registrar, :notes, kinds: [] ])
     end
 end

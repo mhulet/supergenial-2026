@@ -2,15 +2,29 @@ require "test_helper"
 
 class ContractTest < ActiveSupport::TestCase
   test "a maintenance plan sets the monthly price" do
-    contract = Contract.create!(client: clients(:dici), kind: "maintenance", plan: "evolution", label: "Maintenance")
+    contract = Contract.create!(client: clients(:dici), kinds: [ "maintenance" ], plan: "evolution", label: "Maintenance")
     assert_equal 890, contract.amount
     assert_equal "mensuel", contract.period
     assert_equal 890 * 12, contract.yearly_amount
   end
 
   test "plan is cleared for other kinds" do
-    contract = Contract.create!(client: clients(:dici), kind: "hebergement", plan: "essentiel", label: "Hébergement", amount: 100)
+    contract = Contract.create!(client: clients(:dici), kinds: [ "hebergement" ], plan: "essentiel", label: "Hébergement", amount: 100)
     assert_nil contract.plan
+  end
+
+  test "a contract can cover several kinds" do
+    contract = Contract.create!(client: clients(:dici), kinds: [ "", "maintenance", "hebergement" ], plan: "essentiel", label: "Site Dici")
+    assert_equal %w[ maintenance hebergement ], contract.kinds
+    assert_equal "Maintenance + Hébergement", contract.kinds_label
+    assert_equal 390, contract.amount
+    assert_equal [ contract ], Contract.of_kind("maintenance").to_a
+    assert_includes Contract.of_kind("hebergement"), contract
+  end
+
+  test "at least one known kind is required" do
+    assert_not Contract.new(client: clients(:dici), kinds: [], label: "Vide").valid?
+    assert_not Contract.new(client: clients(:dici), kinds: [ "inconnu" ], label: "Inconnu").valid?
   end
 
   test "margin" do

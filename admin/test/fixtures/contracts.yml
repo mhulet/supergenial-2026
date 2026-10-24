@@ -1,6 +1,6 @@
 hosting:
   client: dici
-  kind: hebergement
+  kinds: ["hebergement"]
   label: Hébergement Rewards Manager
   amount: 180
   cost: 144

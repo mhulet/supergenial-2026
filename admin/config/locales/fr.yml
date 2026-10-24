@@ -59,7 +59,7 @@ fr:
         client: Client
         project: Projet
         fixed_cost: Frais fixe lié
-        kind: Type
+        kinds: Types
         plan: Palier
         label: Libellé
         amount: Prix

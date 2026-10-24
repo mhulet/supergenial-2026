@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_24_193000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_24_200000) do
   create_table "clients", force: :cascade do |t|
     t.string "name", null: false
     t.string "kind", default: "organisation", null: false
@@ -40,7 +40,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_24_193000) do
     t.integer "client_id", null: false
     t.integer "project_id"
     t.integer "fixed_cost_id"
-    t.string "kind", default: "hebergement", null: false
     t.string "plan"
     t.string "label", null: false
     t.decimal "amount", precision: 10, scale: 2, default: "0.0", null: false
@@ -54,6 +53,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_24_193000) do
     t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.json "kinds", default: [], null: false
     t.index ["client_id"], name: "index_contracts_on_client_id"
     t.index ["fixed_cost_id"], name: "index_contracts_on_fixed_cost_id"
     t.index ["next_billing_on"], name: "index_contracts_on_next_billing_on"

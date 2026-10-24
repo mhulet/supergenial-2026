@@ -1,8 +1,16 @@
 <%= form_with model: contract do |f| %>
   <%= render "shared/errors", object: contract %>
+  <div class="field <%= 'field--error' if contract.errors[:kinds].any? %>">
+    <%= f.label :kinds %>
+    <div class="checks">
+      <%= f.collection_check_boxes :kinds, Contract.kind_options, :last, :first do |b| %>
+        <%= b.label { b.check_box + " " + b.text } %>
+      <% end %>
+    </div>
+    <% contract.errors.full_messages_for(:kinds).each do |message| %><small class="error"><%= message %></small><% end %>
+  </div>
   <div class="row">
     <%= field f, :client_id, :select, client_options, include_blank: "Choisir…", required: true %>
-    <%= field f, :kind, :select, Contract.kind_options %>
     <%= field f, :plan, :select, Contract.plan_options, include_blank: "–", hint: "Maintenance : #{Contract::PLAN_PRICES.map { |k, v| "#{Contract::PLANS[k]} #{v} €" }.join(' · ')} / mois" %>
   </div>
   <%= field f, :label, required: true, placeholder: "Hébergement Notranet Namur, petitkiwi.be…" %>

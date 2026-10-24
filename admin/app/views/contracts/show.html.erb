@@ -3,7 +3,7 @@
 <% end %>
 
 <p class="lead">
-  <%= link_to @contract.client, @contract.client %> · <%= @contract.kind_label %><%= " · #{@contract.plan_label}" if @contract.plan %>
+  <%= link_to @contract.client, @contract.client %> · <%= @contract.kinds_label %><%= " · #{@contract.plan_label}" if @contract.plan %>
   <%= badge @contract.status_label, @contract.status %>
 </p>
 
