@@ -1,0 +1,61 @@
+require "test_helper"
+
+class AdminFlowTest < ActionDispatch::IntegrationTest
+  setup { sign_in_as users(:one) }
+
+  test "requires authentication" do
+    sign_out
+    get root_path
+    assert_redirected_to new_session_path
+  end
+
+  test "every page renders" do
+    [ root_path, clients_path, client_path(clients(:dici)), new_client_path, new_client_contact_path(clients(:dici)),
+      projects_path, project_path(projects(:platform)), new_project_path, time_entries_path, new_time_entry_path,
+      edit_time_entry_path(time_entries(:visio)), pack_path(packs(:silvea_10h)), new_pack_path, contracts_path,
+      contract_path(contracts(:hosting)), new_contract_path, fixed_costs_path, new_fixed_cost_path,
+      edit_fixed_cost_path(fixed_costs(:anthropic)), invoices_path(year: 2026), new_invoice_path ].each do |path|
+      get path
+      assert_response :success, path
+    end
+  end
+
+  test "create a client with validation errors" do
+    post clients_path, params: { client: { name: "" } }
+    assert_response :unprocessable_entity
+    post clients_path, params: { client: { name: "Upcyclinarium", kind: "organisation", status: "actif" } }
+    assert_redirected_to client_path(Client.find_by!(name: "Upcyclinarium"))
+  end
+
+  test "quick time entry" do
+    assert_difference -> { clients(:dici).time_entries.count } do
+      post time_entries_path, params: { time_entry: { client_id: clients(:dici).id, performed_on: "2026-10-24", hours: "1.5", description: "Visio" } }
+    end
+    assert_redirected_to time_entries_path
+  end
+
+  test "bill selected time entries into one invoice" do
+    entries = [ time_entries(:visio), time_entries(:dashboard) ]
+    post bill_time_entries_path, params: { ids: entries.map(&:id), number: "2026-050", issued_on: "2026-10-24" }
+
+    invoice = Invoice.find_by!(number: "2026-050")
+    assert_equal 300, invoice.amount
+    assert entries.all? { |entry| entry.reload.facture? && entry.invoice == invoice }
+  end
+
+  test "billing refuses entries from several clients" do
+    other = clients(:silvea).time_entries.create!(performed_on: Date.current, hours: 1)
+    assert_no_difference -> { Invoice.count } do
+      post bill_time_entries_path, params: { ids: [ time_entries(:visio).id, other.id ] }
+    end
+    assert_redirected_to time_entries_path
+    assert time_entries(:visio).reload.a_facturer?
+  end
+
+  test "bill a contract" do
+    assert_difference -> { Invoice.count } do
+      post bill_contract_path(contracts(:hosting)), params: { number: "2026-051" }
+    end
+    assert_equal Date.new(2027, 10, 1), contracts(:hosting).reload.next_billing_on
+  end
+end

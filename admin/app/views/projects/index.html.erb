@@ -1,0 +1,29 @@
+<%= page_header "Projets" do %>
+  <%= link_to "+ Projet", new_project_path, class: "button" %>
+<% end %>
+
+<nav class="filters">
+  <%= link_to "En cours et devis", projects_path, class: ("is-active" unless @status) %>
+  <% Project::STATUSES.each do |key, label| %>
+    <%= link_to label, projects_path(status: key), class: ("is-active" if @status == key) %>
+  <% end %>
+</nav>
+
+<div class="card">
+  <table>
+    <thead><tr><th>Projet</th><th>Client</th><th>Type</th><th>Facturation</th><th>Statut</th><th class="num">Montant</th></tr></thead>
+    <tbody>
+      <% @projects.each do |project| %>
+        <tr>
+          <td><%= link_to project, project %></td>
+          <td><%= link_to project.client, project.client %></td>
+          <td><%= project.kind_label %></td>
+          <td><%= project.billing_mode_label %></td>
+          <td><%= badge project.status_label, project.status %></td>
+          <td class="num"><%= project.fixed_price ? eur(project.fixed_price) : "–" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <% if @projects.empty? %><p class="muted">Aucun projet.</p><% end %>
+</div>

@@ -1,0 +1,93 @@
+fr:
+  date:
+    formats:
+      short: "%d/%m"
+      month: "%B %Y"
+  activerecord:
+    models:
+      client: Client
+      contact: Contact
+      project: Projet
+      time_entry: Prestation
+      pack: Pack
+      contract: Contrat
+      fixed_cost: Frais fixe
+      invoice: Facture
+    attributes:
+      client:
+        name: Nom
+        kind: Type
+        status: Statut
+        vat_number: N° de TVA
+        address: Adresse
+        hourly_rate: Taux horaire
+        notes: Notes
+      contact:
+        name: Nom
+        role: Rôle
+        email: E-mail
+        phone: Téléphone
+        primary: Contact principal
+      project:
+        client: Client
+        name: Nom
+        kind: Type
+        billing_mode: Mode de facturation
+        status: Statut
+        fixed_price: Montant du forfait
+        hourly_rate: Taux horaire
+        started_on: Début
+        ended_on: Fin
+        notes: Notes
+      time_entry:
+        client: Client
+        project: Projet
+        pack: Pack
+        performed_on: Date
+        description: Tâche
+        hours: Heures
+        km: Km
+        location: Lieu
+        status: Statut
+      pack:
+        client: Client
+        label: Libellé
+        hours: Heures achetées
+        hourly_rate: Taux horaire
+        purchased_on: Acheté le
+      contract:
+        client: Client
+        project: Projet
+        fixed_cost: Frais fixe lié
+        kind: Type
+        plan: Palier
+        label: Libellé
+        amount: Prix
+        cost: Coût
+        period: Périodicité
+        starts_on: Début
+        next_billing_on: Prochaine échéance
+        last_billed_on: Dernière facturation
+        status: Statut
+        registrar: Registrar
+        notes: Notes
+      fixed_cost:
+        name: Nom
+        category: Catégorie
+        amount: Montant
+        period: Périodicité
+        forecast_amount: Montant prévisionnel
+        renews_on: Renouvellement
+        action: Action prévue
+        billing_url: Lien de facturation
+        active: Actif
+        notes: Notes
+      invoice:
+        client: Client
+        project: Projet
+        number: N° OkiOki
+        label: Libellé
+        issued_on: Date
+        amount: Montant HTVA
+        paid_on: Payée le
+        notes: Notes

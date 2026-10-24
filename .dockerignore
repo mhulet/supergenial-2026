@@ -14,3 +14,5 @@ todoset-repos.png
 **/*.md
 **/_drafts
 ressources/_css.txt
+# L'admin (app Rails) a sa propre image : voir admin/README.md.
+admin

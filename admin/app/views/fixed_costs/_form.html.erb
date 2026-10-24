@@ -1,0 +1,26 @@
+<%= form_with model: fixed_cost do |f| %>
+  <%= render "shared/errors", object: fixed_cost %>
+  <div class="row">
+    <%= field f, :name, required: true, autofocus: true %>
+    <%= field f, :category, :select, FixedCost.category_options %>
+  </div>
+  <div class="row">
+    <%= field f, :amount, :number_field, step: "0.01", required: true %>
+    <%= field f, :period, :select, period_options %>
+    <%= field f, :forecast_amount, :number_field, step: "0.01", hint: "Vide = inchangé · 0 = supprimé" %>
+  </div>
+  <div class="row">
+    <%= field f, :renews_on, :date_field %>
+    <%= field f, :action, placeholder: "Passer à Coolify, passer en annuel…" %>
+  </div>
+  <%= field f, :billing_url, :url_field %>
+  <%= field f, :notes, :text_area, rows: 2 %>
+  <%= field f, :active, :check_box %>
+  <div class="form-actions">
+    <%= f.submit "Enregistrer", class: "button" %>
+    <%= link_to "Annuler", fixed_costs_path, class: "button button--ghost" %>
+    <% if fixed_cost.persisted? %>
+      <%= link_to "Supprimer", fixed_cost, data: { turbo_method: :delete, turbo_confirm: "Supprimer #{fixed_cost} ?" }, class: "danger" %>
+    <% end %>
+  </div>
+<% end %>

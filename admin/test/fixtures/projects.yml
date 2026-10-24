@@ -1,0 +1,6 @@
+platform:
+  client: dici
+  name: Plateforme sourceurs
+  kind: application
+  billing_mode: regie
+  hourly_rate: 90

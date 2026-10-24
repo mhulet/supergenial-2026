@@ -1,0 +1,25 @@
+<%= form_with model: project do |f| %>
+  <%= render "shared/errors", object: project %>
+  <div class="row">
+    <%= field f, :client_id, :select, client_options, include_blank: "Choisir…", required: true %>
+    <%= field f, :name, required: true %>
+  </div>
+  <div class="row">
+    <%= field f, :kind, :select, Project.kind_options %>
+    <%= field f, :billing_mode, :select, Project.billing_mode_options %>
+    <%= field f, :status, :select, Project.status_options %>
+  </div>
+  <div class="row">
+    <%= field f, :fixed_price, :number_field, step: "0.01", hint: "Pour un forfait" %>
+    <%= field f, :hourly_rate, :number_field, step: "0.01", hint: "Vide = taux du client" %>
+  </div>
+  <div class="row">
+    <%= field f, :started_on, :date_field %>
+    <%= field f, :ended_on, :date_field %>
+  </div>
+  <%= field f, :notes, :text_area, rows: 3 %>
+  <div class="form-actions">
+    <%= f.submit "Enregistrer", class: "button" %>
+    <%= link_to "Annuler", project.persisted? ? project : projects_path, class: "button button--ghost" %>
+  </div>
+<% end %>

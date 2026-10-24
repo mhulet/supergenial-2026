@@ -1,0 +1,19 @@
+anthropic:
+  name: Anthropic
+  category: ia
+  amount: 90
+  period: mensuel
+  forecast_amount: 180
+
+password_manager:
+  name: 1Password
+  category: outils
+  amount: 48
+  period: annuel
+
+hatchbox:
+  name: Hatchbox
+  category: hebergement
+  amount: 10
+  period: mensuel
+  forecast_amount: 0

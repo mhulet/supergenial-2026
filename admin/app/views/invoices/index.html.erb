@@ -1,0 +1,27 @@
+<%= page_header "Factures #{@year}" do %>
+  <%= link_to "← #{@year - 1}", invoices_path(year: @year - 1), class: "button button--ghost" %>
+  <% if @year < Date.current.year %><%= link_to "#{@year + 1} →", invoices_path(year: @year + 1), class: "button button--ghost" %><% end %>
+  <%= link_to "+ Facture", new_invoice_path, class: "button" %>
+<% end %>
+
+<p class="hint">Les factures sont émises dans OkiOki ; ici, on les référence pour suivre le chiffre d'affaires.</p>
+
+<div class="card">
+  <table>
+    <thead><tr><th>Date</th><th>N°</th><th>Client</th><th>Libellé</th><th class="num">HTVA</th><th>Paiement</th></tr></thead>
+    <tbody>
+      <% @invoices.each do |invoice| %>
+        <tr>
+          <td class="nowrap"><%= date(invoice.issued_on) %></td>
+          <td><%= invoice.number %></td>
+          <td><%= link_to invoice.client, invoice.client %></td>
+          <td><%= link_to invoice.label, edit_invoice_path(invoice) %></td>
+          <td class="num"><%= eur(invoice.amount) %></td>
+          <td><%= invoice.paid? ? badge("payée le #{l(invoice.paid_on, format: :short)}", "facture") : badge("à encaisser", "a_facturer") %></td>
+        </tr>
+      <% end %>
+    </tbody>
+    <tfoot><tr><th colspan="4">Total</th><th class="num"><%= eur(@invoices.sum(&:amount)) %></th><th></th></tr></tfoot>
+  </table>
+  <% if @invoices.empty? %><p class="muted">Aucune facture en <%= @year %>.</p><% end %>
+</div>

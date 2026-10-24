@@ -1,0 +1,22 @@
+visio:
+  client: dici
+  performed_on: 2026-10-13
+  description: Visio avec Ethan
+  hours: 1.5
+  status: a_facturer
+
+dashboard:
+  client: dici
+  project: platform
+  performed_on: 2026-10-15
+  description: Dashboard BIV
+  hours: 2
+  status: a_facturer
+
+seo:
+  client: silvea
+  pack: silvea_10h
+  performed_on: 2026-07-08
+  description: SEO
+  hours: 9
+  status: au_pack

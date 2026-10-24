@@ -1,0 +1,20 @@
+<p class="muted">Client : <%= link_to @client, @client %></p>
+<%= form_with model: [ @client, contact ] do |f| %>
+  <%= render "shared/errors", object: contact %>
+  <div class="row">
+    <%= field f, :name, autofocus: true, required: true %>
+    <%= field f, :role %>
+  </div>
+  <div class="row">
+    <%= field f, :email, :email_field %>
+    <%= field f, :phone, :telephone_field %>
+  </div>
+  <%= field f, :primary, :check_box %>
+  <div class="form-actions">
+    <%= f.submit "Enregistrer", class: "button" %>
+    <%= link_to "Annuler", @client, class: "button button--ghost" %>
+    <% if contact.persisted? %>
+      <%= link_to "Supprimer", client_contact_path(@client, contact), data: { turbo_method: :delete, turbo_confirm: "Supprimer #{contact} ?" }, class: "danger" %>
+    <% end %>
+  </div>
+<% end %>

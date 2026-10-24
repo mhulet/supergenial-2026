@@ -1,0 +1,49 @@
+# Les chiffres de l'onglet « Revenus » de l'ancienne Google Sheet, calculés.
+class Dashboard
+  attr_reader :year
+
+  def initialize(year: Date.current.year)
+    @year = year
+  end
+
+  def target = Rails.configuration.x.annual_target
+
+  def invoiced = @invoiced ||= Invoice.in_year(year).sum(:amount)
+
+  def target_progress = target.zero? ? 0 : (invoiced / target * 100).round
+
+  def unpaid_invoices = Invoice.unpaid.includes(:client).recent
+
+  def fixed_costs = @fixed_costs ||= FixedCost.active.to_a
+
+  def monthly_costs = fixed_costs.sum(&:monthly_amount)
+
+  def monthly_forecast_costs = fixed_costs.sum(&:monthly_forecast)
+
+  # Comme dans la Sheet : la marge se calcule sur les frais prévisionnels.
+  def yearly_costs = monthly_forecast_costs * 12
+
+  def gross_margin = invoiced - yearly_costs
+
+  def monthly_salary = gross_margin / 12
+
+  def recurring_revenue = Contract.actif.sum(&:yearly_amount)
+
+  def unbilled_by_client
+    TimeEntry.a_facturer.includes(:client, :project).group_by(&:client)
+      .map { |client, entries| { client:, hours: entries.sum(&:hours), amount: entries.sum(&:amount), since: entries.map(&:performed_on).min } }
+      .sort_by { |row| -row[:amount] }
+  end
+
+  def due_contracts(horizon = 30.days)
+    Contract.due_by(Date.current + horizon).includes(:client).by_due_date
+  end
+
+  def low_packs
+    Pack.includes(:client, :time_entries).select { |pack| pack.time_entries.any? && pack.remaining_hours < 2 }
+  end
+
+  def renewals(horizon = 60.days)
+    FixedCost.active.where(renews_on: Date.current..(Date.current + horizon)).order(:renews_on)
+  end
+end

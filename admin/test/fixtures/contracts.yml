@@ -1,0 +1,9 @@
+hosting:
+  client: dici
+  kind: hebergement
+  label: Hébergement Rewards Manager
+  amount: 180
+  cost: 144
+  period: annuel
+  next_billing_on: 2026-10-01
+  status: actif

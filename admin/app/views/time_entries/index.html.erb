@@ -1,0 +1,35 @@
+<%= page_header "Heures prestées" %>
+
+<div class="card">
+  <h2>Ajouter</h2>
+  <%= form_with model: @time_entry, class: "quick-entry" do |f| %>
+    <%= f.date_field :performed_on, required: true, "aria-label": "Date" %>
+    <%= f.select :client_id, client_options, { include_blank: "Client…" }, required: true, "aria-label": "Client" %>
+    <%= f.text_field :description, placeholder: "Tâche", "aria-label": "Tâche", class: "grow" %>
+    <%= f.number_field :hours, step: "0.25", min: "0.25", placeholder: "h", required: true, "aria-label": "Heures", class: "narrow" %>
+    <%= f.number_field :km, placeholder: "km", "aria-label": "Km", class: "narrow" %>
+    <%= f.submit "Ajouter", class: "button" %>
+  <% end %>
+  <p class="hint">Projet, pack ou lieu : <%= link_to "formulaire complet", new_time_entry_path(client_id: @filters[:client_id]) %>.</p>
+</div>
+
+<%= form_with url: time_entries_path, method: :get, class: "filters filters--form", data: { controller: "autosubmit" } do |f| %>
+  <%= f.select :client_id, client_options, { include_blank: "Tous les clients", selected: @filters[:client_id] }, data: { action: "change->autosubmit#submit" } %>
+  <%= f.select :status, TimeEntry.status_options, { include_blank: "Tous les statuts", selected: @filters[:status] }, data: { action: "change->autosubmit#submit" } %>
+<% end %>
+
+<div class="card">
+  <%= render "time_entries/table", time_entries: @time_entries, selectable: true %>
+
+  <% unbilled = @time_entries.select(&:a_facturer?) %>
+  <% if unbilled.any? %>
+    <footer class="card-footer">
+      <span>À facturer ici : <strong><%= hours(unbilled.sum(&:hours)) %></strong> soit <strong><%= eur(unbilled.sum(&:amount)) %></strong></span>
+      <%= form_with url: bill_time_entries_path, id: "bill-form", class: "inline-form" do |f| %>
+        <%= f.text_field :number, placeholder: "N° OkiOki", "aria-label": "Numéro de facture OkiOki" %>
+        <%= f.date_field :issued_on, value: Date.current, "aria-label": "Date de facture" %>
+        <%= f.submit "Facturer la sélection", class: "button" %>
+      <% end %>
+    </footer>
+  <% end %>
+</div>

@@ -1,0 +1,33 @@
+<%= page_header "Contrats" do %>
+  <%= link_to "+ Contrat", new_contract_path(kind: @kind), class: "button" %>
+<% end %>
+
+<nav class="filters">
+  <%= link_to "Tous", contracts_path, class: ("is-active" unless @kind) %>
+  <% Contract::KINDS.each do |key, label| %>
+    <%= link_to label, contracts_path(kind: key), class: ("is-active" if @kind == key) %>
+  <% end %>
+  <%= link_to params[:all] ? "Actifs seulement" : "Inclure les terminés", contracts_path(kind: @kind, all: (params[:all] ? nil : 1)) %>
+</nav>
+
+<div class="card">
+  <table>
+    <thead><tr><th>Contrat</th><th>Client</th><th class="num">Prix</th><th class="num">Par an</th><th class="num">Marge</th><th>Échéance</th><th></th></tr></thead>
+    <tbody>
+      <% @contracts.each do |contract| %>
+        <tr class="<%= 'is-late' if contract.due? %>">
+          <td><%= link_to contract, contract %><br><small class="muted"><%= contract.kind_label %><%= " · #{contract.plan_label}" if contract.plan %><%= " · #{contract.registrar}" if contract.registrar.present? %></small></td>
+          <td><%= link_to contract.client, contract.client %></td>
+          <td class="num"><%= eur(contract.amount) %><br><small class="muted"><%= contract.period_label %></small></td>
+          <td class="num"><%= eur(contract.yearly_amount) %></td>
+          <td class="num"><%= contract.cost ? percent(contract.margin_rate) : "–" %></td>
+          <td><%= contract.actif? ? date(contract.next_billing_on) : badge(contract.status_label, contract.status) %></td>
+          <td><% if contract.due? %><%= button_to "Facturé", bill_contract_path(contract), class: "button button--small", form: { data: { turbo_confirm: "Enregistrer la facture de #{contract} ?" } } %><% end %></td>
+        </tr>
+      <% end %>
+    </tbody>
+    <tfoot>
+      <tr><th colspan="3">Total annuel</th><th class="num"><%= eur(@contracts.sum(&:yearly_amount)) %></th><th colspan="3"></th></tr>
+    </tfoot>
+  </table>
+</div>

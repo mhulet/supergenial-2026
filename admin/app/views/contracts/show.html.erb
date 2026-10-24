@@ -1,0 +1,38 @@
+<%= page_header @contract.label do %>
+  <%= link_to "Modifier", edit_contract_path(@contract), class: "button button--ghost" %>
+<% end %>
+
+<p class="lead">
+  <%= link_to @contract.client, @contract.client %> · <%= @contract.kind_label %><%= " · #{@contract.plan_label}" if @contract.plan %>
+  <%= badge @contract.status_label, @contract.status %>
+</p>
+
+<section class="stats">
+  <div class="stat"><span class="stat__label">Prix</span><strong class="stat__value"><%= eur(@contract.amount) %></strong><span class="stat__hint"><%= @contract.period_label %></span></div>
+  <div class="stat"><span class="stat__label">Par an</span><strong class="stat__value"><%= eur(@contract.yearly_amount) %></strong>
+    <span class="stat__hint"><%= "Coût #{eur(@contract.yearly_cost)} · marge #{percent(@contract.margin_rate)}" if @contract.cost %></span></div>
+  <div class="stat"><span class="stat__label">Prochaine échéance</span><strong class="stat__value <%= 'is-late' if @contract.due? %>"><%= date(@contract.next_billing_on) %></strong>
+    <span class="stat__hint">Dernière : <%= date(@contract.last_billed_on) %></span></div>
+</section>
+
+<% if @contract.actif? %>
+  <div class="card">
+    <h2>Enregistrer la facture de l'échéance</h2>
+    <%= form_with url: bill_contract_path(@contract), class: "inline-form" do |f| %>
+      <%= f.text_field :number, placeholder: "N° OkiOki", "aria-label": "Numéro de facture OkiOki" %>
+      <%= f.date_field :issued_on, value: Date.current, "aria-label": "Date de facture" %>
+      <%= f.submit "Facturé #{eur(@contract.amount)}", class: "button" %>
+    <% end %>
+    <p class="hint">Crée la facture dans l'admin et avance l'échéance d'un <%= @contract.period == "annuel" ? "an" : "mois" %>.</p>
+  </div>
+<% end %>
+
+<dl class="card details">
+  <dt>Début</dt><dd><%= date(@contract.starts_on) %></dd>
+  <% if @contract.project %><dt>Projet</dt><dd><%= link_to @contract.project, @contract.project %></dd><% end %>
+  <% if @contract.fixed_cost %><dt>Frais fixe lié</dt><dd><%= link_to @contract.fixed_cost, edit_fixed_cost_path(@contract.fixed_cost) %></dd><% end %>
+  <% if @contract.registrar.present? %><dt>Registrar</dt><dd><%= @contract.registrar %></dd><% end %>
+  <% if @contract.notes.present? %><dt>Notes</dt><dd><%= simple_format(@contract.notes) %></dd><% end %>
+</dl>
+
+<p><%= link_to "Supprimer ce contrat", @contract, data: { turbo_method: :delete, turbo_confirm: "Supprimer #{@contract} ?" }, class: "danger" %></p>
