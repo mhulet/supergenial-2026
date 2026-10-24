@@ -256,8 +256,9 @@ class SheetImport
 
     def project_status(status)
       case status.to_s.downcase
-      when /termin|factur|pay/ then "termine"
-      when /abandon/ then "abandonne"
+      when /termin|factur|pay|abandon/ then "termine"
+      when /maintenance/ then "maintenance"
+      when /devis/ then "devis"
       else "en_cours"
       end
     end

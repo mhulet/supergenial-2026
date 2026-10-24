@@ -16,7 +16,7 @@ module ApplicationHelper
   BADGE_TONES = {
     "a_facturer" => "warn", "facture" => "ok", "au_pack" => "info", "offert" => "muted",
     "actif" => "ok", "prospect" => "info", "ancien" => "muted", "suspendu" => "warn", "termine" => "muted",
-    "en_cours" => "ok", "abandonne" => "muted"
+    "devis" => "info", "en_cours" => "ok", "maintenance" => "warn"
   }.freeze
 
   def badge(label, value = nil)

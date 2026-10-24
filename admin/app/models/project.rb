@@ -9,11 +9,11 @@ class Project < ApplicationRecord
   choices :kind, application: "Application", site: "Site web", mise_a_jour: "Mise à jour",
                  prestation: "Prestation", autre: "Autre"
   choices :billing_mode, forfait: "Forfait", regie: "Régie", pack: "Pack d'heures"
-  choices :status, prospect: "Devis", en_cours: "En cours", termine: "Terminé", abandonne: "Abandonné"
+  choices :status, devis: "Devis", en_cours: "En cours", maintenance: "Maintenance", termine: "Terminé"
 
   validates :name, presence: true
 
-  scope :ongoing, -> { where(status: %w[prospect en_cours]) }
+  scope :ongoing, -> { where.not(status: "termine") }
 
   def rate = hourly_rate || client.rate
 
