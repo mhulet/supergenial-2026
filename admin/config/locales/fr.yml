@@ -13,7 +13,19 @@ fr:
       contract: Contrat
       fixed_cost: Frais fixe
       invoice: Facture
+      plan: Formule
+      plan_price: Prix
     attributes:
+      plan:
+        name: Nom
+        description: Description
+        period: Périodicité
+        position: Ordre
+        active: Proposée aux nouveaux contrats
+        prices: Prix
+      plan_price:
+        amount: Prix
+        starts_on: Date d'activation
       client:
         name: Nom
         kind: Type
@@ -60,7 +72,8 @@ fr:
         project: Projet
         fixed_cost: Frais fixe lié
         kinds: Types
-        plan: Palier
+        plan: Formule
+        plan_id: Formule
         label: Libellé
         amount: Prix
         cost: Coût

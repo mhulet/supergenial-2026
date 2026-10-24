@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   resources :contracts do
     post :bill, on: :member
   end
+  resources :plans do
+    resources :prices, only: %i[ create destroy ], controller: "plan_prices"
+  end
   resources :fixed_costs, except: :show
   resources :invoices, except: :show
 

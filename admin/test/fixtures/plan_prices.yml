@@ -1,0 +1,14 @@
+essentiel_2026:
+  plan: essentiel
+  amount: 390
+  starts_on: 2026-01-01
+
+evolution_2026:
+  plan: evolution
+  amount: 890
+  starts_on: 2026-01-01
+
+evolution_2027:
+  plan: evolution
+  amount: 950
+  starts_on: 2027-01-01

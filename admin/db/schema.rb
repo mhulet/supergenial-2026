@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_24_200000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_24_210000) do
   create_table "clients", force: :cascade do |t|
     t.string "name", null: false
     t.string "kind", default: "organisation", null: false
@@ -40,9 +40,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_24_200000) do
     t.integer "client_id", null: false
     t.integer "project_id"
     t.integer "fixed_cost_id"
-    t.string "plan"
     t.string "label", null: false
-    t.decimal "amount", precision: 10, scale: 2, default: "0.0", null: false
+    t.decimal "amount", precision: 10, scale: 2
     t.decimal "cost", precision: 10, scale: 2
     t.string "period", default: "annuel", null: false
     t.date "starts_on"
@@ -54,9 +53,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_24_200000) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.json "kinds", default: [], null: false
+    t.integer "plan_id"
     t.index ["client_id"], name: "index_contracts_on_client_id"
     t.index ["fixed_cost_id"], name: "index_contracts_on_fixed_cost_id"
     t.index ["next_billing_on"], name: "index_contracts_on_next_billing_on"
+    t.index ["plan_id"], name: "index_contracts_on_plan_id"
     t.index ["project_id"], name: "index_contracts_on_project_id"
   end
 
@@ -102,6 +103,27 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_24_200000) do
     t.datetime "updated_at", null: false
     t.index ["client_id"], name: "index_packs_on_client_id"
     t.index ["invoice_id"], name: "index_packs_on_invoice_id"
+  end
+
+  create_table "plan_prices", force: :cascade do |t|
+    t.integer "plan_id", null: false
+    t.decimal "amount", precision: 10, scale: 2, null: false
+    t.date "starts_on", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["plan_id", "starts_on"], name: "index_plan_prices_on_plan_id_and_starts_on", unique: true
+    t.index ["plan_id"], name: "index_plan_prices_on_plan_id"
+  end
+
+  create_table "plans", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description"
+    t.string "period", default: "mensuel", null: false
+    t.integer "position", default: 0, null: false
+    t.boolean "active", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_plans_on_name", unique: true
   end
 
   create_table "projects", force: :cascade do |t|
@@ -160,11 +182,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_24_200000) do
   add_foreign_key "contacts", "clients"
   add_foreign_key "contracts", "clients"
   add_foreign_key "contracts", "fixed_costs"
+  add_foreign_key "contracts", "plans"
   add_foreign_key "contracts", "projects"
   add_foreign_key "invoices", "clients"
   add_foreign_key "invoices", "projects"
   add_foreign_key "packs", "clients"
   add_foreign_key "packs", "invoices"
+  add_foreign_key "plan_prices", "plans"
   add_foreign_key "projects", "clients"
   add_foreign_key "sessions", "users"
   add_foreign_key "time_entries", "clients"

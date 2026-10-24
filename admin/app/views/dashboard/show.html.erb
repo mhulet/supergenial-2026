@@ -23,7 +23,8 @@
   <div class="stat">
     <span class="stat__label">Salaire / mois</span>
     <strong class="stat__value"><%= eur(@dashboard.monthly_salary, precision: 0) %></strong>
-    <span class="stat__hint">Récurrent : <%= eur(@dashboard.recurring_revenue, precision: 0) %> / an</span>
+    <span class="stat__hint">Récurrent : <%= eur(@dashboard.recurring_revenue, precision: 0) %> / an<% if @dashboard.recurring_revenue_next_year != @dashboard.recurring_revenue %>
+      · <%= eur(@dashboard.recurring_revenue_next_year, precision: 0) %> sur 12 mois avec les nouveaux prix<% end %></span>
   </div>
 </section>
 
@@ -63,7 +64,7 @@
             <tr class="<%= 'is-late' if contract.next_billing_on < Date.current %>">
               <td><%= link_to contract, contract %><br><small class="muted"><%= contract.client %></small></td>
               <td><%= date(contract.next_billing_on) %></td>
-              <td class="num"><%= eur(contract.amount) %></td>
+              <td class="num"><%= eur(contract.amount_on(contract.next_billing_on)) %></td>
               <td><%= button_to "Facturé", bill_contract_path(contract), class: "button button--small", form: { data: { turbo_confirm: "Enregistrer la facture de #{contract} ?" } } %></td>
             </tr>
           <% end %>

@@ -33,8 +33,8 @@
       <tbody>
         <% @client.contracts.by_due_date.each do |contract| %>
           <tr>
-            <td><%= link_to contract, contract %><br><small class="muted"><%= contract.kinds_label %><%= " · #{contract.plan_label}" if contract.plan %></small></td>
-            <td class="num"><%= eur(contract.amount) %> <small class="muted"><%= contract.period_label %></small></td>
+            <td><%= link_to contract, contract %><br><small class="muted"><%= contract.kinds_label %><%= " · #{contract.plan}" if contract.plan %></small></td>
+            <td class="num"><%= eur(contract.current_amount) %> <small class="muted"><%= contract.period_label %></small></td>
             <td><%= contract.actif? ? date(contract.next_billing_on) : badge(contract.status_label, contract.status) %></td>
           </tr>
         <% end %>

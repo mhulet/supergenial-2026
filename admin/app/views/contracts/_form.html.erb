@@ -11,11 +11,11 @@
   </div>
   <div class="row">
     <%= field f, :client_id, :select, client_options, include_blank: "Choisir…", required: true %>
-    <%= field f, :plan, :select, Contract.plan_options, include_blank: "–", hint: "Maintenance : #{Contract::PLAN_PRICES.map { |k, v| "#{Contract::PLANS[k]} #{v} €" }.join(' · ')} / mois" %>
+    <%= field f, :plan_id, :select, plan_options(contract.plan_id), include_blank: "Aucune", hint: link_to("Gérer les abonnements", plans_path) %>
   </div>
   <%= field f, :label, required: true, placeholder: "Hébergement Notranet Namur, petitkiwi.be…" %>
   <div class="row">
-    <%= field f, :amount, :number_field, step: "0.01", required: true %>
+    <%= field f, :amount, :number_field, step: "0.01", hint: "Avec une formule : vide = prix du catalogue" %>
     <%= field f, :cost, :number_field, step: "0.01", hint: "Ce que ça te coûte, même période" %>
     <%= field f, :period, :select, period_options %>
   </div>

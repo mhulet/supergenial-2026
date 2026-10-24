@@ -3,24 +3,23 @@ class Contract < ApplicationRecord
   include Choices
   include Periodic
 
-  PLAN_PRICES = { "essentiel" => 390, "evolution" => 890, "partenaire" => 1890 }.freeze
-
   belongs_to :client
   belongs_to :project, optional: true
   belongs_to :fixed_cost, optional: true
+  belongs_to :plan, optional: true
 
   KINDS = { "maintenance" => "Maintenance", "hebergement" => "Hébergement", "nom_de_domaine" => "Nom de domaine",
             "abonnement" => "Abonnement", "refacturation" => "Refacturation", "autre" => "Autre" }.freeze
 
-  choices :plan, validate: { allow_nil: true }, essentiel: "Essentiel", evolution: "Évolution", partenaire: "Partenaire"
   choices :status, actif: "Actif", suspendu: "Suspendu", termine: "Terminé"
 
   validates :label, presence: true
   validates :kinds, presence: { message: "choisir au moins un type" }
   validate :kinds_are_known
-  validates :amount, numericality: { greater_than_or_equal_to: 0 }
+  validates :amount, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
+  validates :amount, presence: true, unless: :plan
 
-  before_validation :apply_plan
+  before_validation :follow_plan_period
 
   # Un contrat a un ou plusieurs types, stockés en liste JSON.
   scope :of_kind, ->(kind) { where("EXISTS (SELECT 1 FROM json_each(contracts.kinds) WHERE value = ?)", kind) }
@@ -41,9 +40,25 @@ class Contract < ApplicationRecord
 
   def kinds_label = kinds.map { |kind| KINDS[kind] }.join(" + ")
 
-  def monthly_amount = monthly(amount)
+  # Relié à une formule, le contrat suit son prix du moment, sauf prix négocié (amount).
+  def amount_on(date = Date.current) = amount || plan&.price_on(date) || 0
 
-  def yearly_amount = yearly(amount)
+  def current_amount = amount_on(Date.current)
+
+  def negotiated? = plan.present? && amount.present?
+
+  # Le prochain changement de prix de la formule qui touche ce contrat.
+  def next_plan_price = (plan&.next_price unless negotiated?)
+
+  def monthly_amount = monthly(current_amount)
+
+  def yearly_amount = yearly(current_amount)
+
+  # Ce que le contrat rapporte sur les 12 prochains mois, hausses de prix programmées comprises.
+  def revenue_over_next_year(from = Date.current)
+    return yearly_amount if period == "annuel"
+    12.times.sum { |month| amount_on(from + month.months) }
+  end
 
   def yearly_cost = yearly(cost)
 
@@ -60,7 +75,7 @@ class Contract < ApplicationRecord
   def bill!(on: Date.current, number: nil)
     base = next_billing_on || on
     transaction do
-      invoice = client.invoices.create!(project:, number:, issued_on: on, amount:,
+      invoice = client.invoices.create!(project:, number:, issued_on: on, amount: amount_on(base),
                                         label: "#{label} (#{I18n.l(base, format: :month)})")
       update!(last_billed_on: on, next_billing_on: period == "annuel" ? base.next_year : base.next_month)
       invoice
@@ -74,11 +89,8 @@ class Contract < ApplicationRecord
       errors.add(:kinds, "contient un type inconnu") if (kinds - KINDS.keys).any?
     end
 
-    # Un palier de maintenance fixe le prix mensuel s'il n'a pas été saisi.
-    def apply_plan
-      return self.plan = nil unless maintenance?
-      return unless plan && amount.to_d.zero?
-      self.amount = PLAN_PRICES[plan]
-      self.period = "mensuel"
+    # Au prix du catalogue, la périodicité est celle de la formule ; un prix négocié garde la sienne.
+    def follow_plan_period
+      self.period = plan.period if plan && amount.nil?
     end
 end

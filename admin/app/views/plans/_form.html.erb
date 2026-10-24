@@ -1,0 +1,22 @@
+<%= form_with model: plan do |f| %>
+  <%= render "shared/errors", object: plan %>
+  <div class="row">
+    <%= field f, :name, required: true, autofocus: true, placeholder: "Essentiel, Évolution…" %>
+    <%= field f, :period, :select, period_options %>
+    <%= field f, :position, :number_field, hint: "Ordre d'affichage" %>
+  </div>
+  <%= field f, :description, :text_area, rows: 2 %>
+  <% if plan.new_record? %>
+    <%= f.fields_for :prices do |p| %>
+      <div class="row">
+        <%= field p, :amount, :number_field, step: "0.01", required: true %>
+        <%= field p, :starts_on, :date_field, required: true %>
+      </div>
+    <% end %>
+  <% end %>
+  <%= field f, :active, :check_box %>
+  <div class="form-actions">
+    <%= f.submit "Enregistrer", class: "button" %>
+    <%= link_to "Annuler", plan.persisted? ? plan : plans_path, class: "button button--ghost" %>
+  </div>
+<% end %>
